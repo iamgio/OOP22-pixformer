@@ -1,6 +1,9 @@
 package pixformer;
 
-public class Main {
+/**
+ * The main class.
+ */
+public class Pixformer {
 
     public static void main(String[] args) {
 

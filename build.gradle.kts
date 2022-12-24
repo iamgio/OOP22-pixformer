@@ -56,9 +56,7 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-/*
 application {
     // Define the main class for the application
-    mainClass.set("it.unibo.samplejavafx.App")
+    mainClass.set("pixformer.Pixformer")
 }
-*/
