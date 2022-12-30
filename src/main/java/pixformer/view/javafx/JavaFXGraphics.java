@@ -1,8 +1,11 @@
 package pixformer.view.javafx;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import pixformer.view.Graphics;
 import pixformer.view.Renderer;
+
+import java.util.Objects;
 
 /**
  * Canvas graphics for JavaFX.
@@ -32,5 +35,14 @@ public class JavaFXGraphics implements Graphics {
     @Override
     public void draw(final Renderer renderer, final double x, final double y) {
         renderer.render(0, this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        Canvas canvas = Objects.requireNonNull(this.graphics.getCanvas());
+        this.graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 }

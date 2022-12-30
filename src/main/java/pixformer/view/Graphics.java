@@ -12,4 +12,9 @@ public interface Graphics {
      * @param y Y coordinate
      */
     void draw(final Renderer renderer, final double x, final double y);
+
+    /**
+     * Clears what was previously rendered.
+     */
+    void clear();
 }

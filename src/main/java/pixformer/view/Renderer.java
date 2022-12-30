@@ -11,4 +11,12 @@ public interface Renderer {
      * @param graphics graphics (canvas) to draw on
      */
     void render(final double dt, final Graphics graphics);
+
+    /**
+     * Renders some content
+     * @param graphics graphics (canvas) to draw on
+     */
+    default void render(final Graphics graphics) {
+        this.render(0, graphics);
+    }
 }
