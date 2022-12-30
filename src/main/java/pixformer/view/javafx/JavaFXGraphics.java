@@ -45,4 +45,15 @@ public class JavaFXGraphics implements Graphics {
         Canvas canvas = Objects.requireNonNull(this.graphics.getCanvas());
         this.graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
+
+    /**
+     *
+     * @param graphics generic graphics
+     * @return the given graphics as JavaFX graphics, if compatible
+     * @throws AssertionError if the given graphics are not {@link JavaFXGraphics}
+     */
+    public static JavaFXGraphics requireJFXGraphics(final Graphics graphics) throws AssertionError {
+        assert graphics instanceof JavaFXGraphics;
+        return (JavaFXGraphics) graphics;
+    }
 }

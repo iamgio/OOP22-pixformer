@@ -38,7 +38,6 @@ public class JavaFXImageRenderer implements Renderer {
      */
     @Override
     public void render(final double dt, final Graphics graphics) {
-        assert graphics instanceof JavaFXGraphics;
-        ((JavaFXGraphics) graphics).getGraphics().drawImage(image, this.x, this.y);
+        JavaFXGraphics.requireJFXGraphics(graphics).getGraphics().drawImage(image, this.x, this.y);
     }
 }
