@@ -44,7 +44,7 @@ public abstract class PositionableRenderer implements Renderer {
      * @param y Y coordinate to set
      * @return this for fluent concatenation
      */
-    public PositionableRenderer at(final int x, final int y) {
+    public PositionableRenderer at(final double x, final double y) {
         this.x = x;
         this.y = y;
         return this;
