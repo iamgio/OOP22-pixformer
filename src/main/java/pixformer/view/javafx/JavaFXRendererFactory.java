@@ -27,6 +27,14 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
+    public PositionableRenderer newRectangle(double width, double height, Color color) {
+        return new JavaFXRectangleRenderer(width, height, color.toJFX());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Renderer newSolidBackground(Color color) {
         return new JavaFXSolidBackgroundRenderer(color.toJFX());
     }

@@ -22,6 +22,14 @@ public interface RendererFactory {
     PositionableRenderer newText(final String text);
 
     /**
+     * @param width rectangle width
+     * @param height rectangle height
+     * @return a new rectangle renderer
+     * @param color fill color
+     */
+    PositionableRenderer newRectangle(final double width, final double height, final Color color);
+
+    /**
      * @param color background color
      * @return a new solid background renderer
      */

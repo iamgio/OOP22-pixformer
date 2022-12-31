@@ -22,6 +22,7 @@ public class RenderingTest extends Application {
         scene.getRenderer().add(factory.newSolidBackground(new Color(.4, .3, .6)));
         scene.getRenderer().add(new JavaFXImageRenderer(new Image("https://dev.java/assets/images/java-logo-vert-blk.png"))); // TODO add to factory
         scene.getRenderer().add(new TextBuilder("Test").withColor(Color.WHITE).withFamily("Monospaced").build(factory).at(100, 100));
+        scene.getRenderer().add(factory.newRectangle(300, 200, new Color(.8, .5, .5)).at(400, 400));
         scene.render();
 
         primaryStage.setScene(scene.getScene());
