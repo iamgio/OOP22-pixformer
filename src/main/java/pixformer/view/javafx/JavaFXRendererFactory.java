@@ -1,9 +1,6 @@
 package pixformer.view.javafx;
 
-import pixformer.view.Color;
-import pixformer.view.PositionableRenderer;
-import pixformer.view.Renderer;
-import pixformer.view.RendererFactory;
+import pixformer.view.*;
 
 /**
  * A provider of JavaFX scene components.
@@ -14,8 +11,16 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
+    public PositionableRenderer newText(String text, Color color, String family, double size) {
+        return new JavaFXTextRenderer(text, color.toJFX(), family, size);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public PositionableRenderer newText(final String text) {
-        return new JavaFXTextRenderer(text);
+        return newText(text, Color.BLACK, null, TextBuilder.DEFAULT_FONT_SIZE);
     }
 
     /**
