@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import pixformer.view.GameScene;
 import pixformer.view.Graphics;
+import pixformer.view.RendererFactory;
 import pixformer.view.SceneRenderer;
 
 /**
@@ -15,6 +16,7 @@ public class JavaFXScene implements GameScene {
     private final Scene scene;
     private final SceneRenderer renderer;
     private final Graphics graphics;
+    private final RendererFactory rendererFactory;
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -26,6 +28,7 @@ public class JavaFXScene implements GameScene {
         this.scene = new Scene(root);
         this.renderer = new SceneRenderer();
         this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
+        this.rendererFactory = new JavaFXRendererFactory();
 
         // Makes the canvas resizable by resizing the window
 
@@ -53,6 +56,14 @@ public class JavaFXScene implements GameScene {
      * {@inheritDoc}
      */
     @Override
+    public SceneRenderer getRenderer() {
+        return this.renderer;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Graphics getGraphics() {
         return this.graphics;
     }
@@ -61,7 +72,7 @@ public class JavaFXScene implements GameScene {
      * {@inheritDoc}
      */
     @Override
-    public SceneRenderer getRenderer() {
-        return this.renderer;
+    public RendererFactory getRendererFactory() {
+        return this.rendererFactory;
     }
 }

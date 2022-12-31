@@ -16,6 +16,11 @@ public interface GameScene {
     Graphics getGraphics();
 
     /**
+     * @return a provider of components for this scene
+     */
+    RendererFactory getRendererFactory();
+
+    /**
      * Renders the content of this scene.
      * @see Renderer#render(Graphics)
      */
