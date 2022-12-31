@@ -2,35 +2,21 @@ package pixformer.view.javafx;
 
 import javafx.scene.image.Image;
 import pixformer.view.Graphics;
-import pixformer.view.Renderer;
+import pixformer.view.PositionableRenderer;
 
 /**
  * A static image renderer for JavaFX.
  */
-public class JavaFXImageRenderer implements Renderer {
+public class JavaFXImageRenderer extends PositionableRenderer {
 
     private final Image image;
-    private final int x;
-    private final int y;
-
-    /**
-     * Creates a static image renderer for JavaFX
-     * @param image image to render
-     * @param x X coordinate
-     * @param y Y coordinate
-     */
-    public JavaFXImageRenderer(final Image image, final int x, final int y) {
-        this.image = image;
-        this.x = x;
-        this.y = y;
-    }
 
     /**
      * Creates a static image renderer for JavaFX
      * @param image image to render
      */
     public JavaFXImageRenderer(final Image image) {
-        this(image, 0, 0);
+        this.image = image;
     }
 
     /**
@@ -38,6 +24,6 @@ public class JavaFXImageRenderer implements Renderer {
      */
     @Override
     public void render(final double dt, final Graphics graphics) {
-        JavaFXGraphics.requireJFXGraphics(graphics).getGraphics().drawImage(image, this.x, this.y);
+        JavaFXGraphics.requireJFXGraphics(graphics).getGraphics().drawImage(image, super.getX(), super.getY());
     }
 }
