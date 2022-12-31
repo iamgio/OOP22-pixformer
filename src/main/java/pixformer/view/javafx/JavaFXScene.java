@@ -20,10 +20,14 @@ public class JavaFXScene extends GameScene {
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
+     * @param width initial scene width
+     * @param height initial scene height
      */
-    public JavaFXScene() {
+    public JavaFXScene(final double width, final double height) {
         Canvas canvas = new Canvas();
         AnchorPane root = new AnchorPane(canvas);
+        canvas.setWidth(width);
+        canvas.setHeight(height);
 
         this.scene = new Scene(root);
         this.renderer = new SceneRenderer();

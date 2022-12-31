@@ -16,7 +16,7 @@ public class RenderingTest extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        JavaFXScene scene = new JavaFXScene();
+        JavaFXScene scene = new JavaFXScene(600, 500);
         RendererFactory factory = scene.getRendererFactory();
 
         scene.add(factory.newSolidBackground(new Color(.4, .3, .6)));
