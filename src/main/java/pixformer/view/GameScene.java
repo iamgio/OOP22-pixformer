@@ -3,28 +3,46 @@ package pixformer.view;
 /**
  * A scene of the game that contains its drawable content.
  */
-public interface GameScene {
+public abstract class GameScene {
 
     /**
      * @return the component responsible for rendering this scene
      */
-    SceneRenderer getRenderer();
+    public abstract SceneRenderer getRenderer();
 
     /**
      * @return the graphics (canvas) to draw on
      */
-    Graphics getGraphics();
+    public abstract Graphics getGraphics();
 
     /**
      * @return a provider of components for this scene
      */
-    RendererFactory getRendererFactory();
+    public abstract RendererFactory getRendererFactory();
 
     /**
      * Renders the content of this scene.
      * @see Renderer#render(Graphics)
      */
-    default void render() {
+    public final void render() {
         this.getRenderer().render(this.getGraphics());
+    }
+
+    /**
+     * Adds a new renderer to the scene
+     * @param renderer renderer to append
+     * @see SceneRenderer#add(Renderer) 
+     */
+    public void add(final Renderer renderer) {
+        this.getRenderer().add(renderer);
+    }
+
+    /**
+     * Removes a renderer from the scene
+     * @param renderer renderer to remove
+     * @see SceneRenderer#remove(Renderer) 
+     */
+    public void remove(final Renderer renderer) {
+        this.getRenderer().remove(renderer);
     }
 }

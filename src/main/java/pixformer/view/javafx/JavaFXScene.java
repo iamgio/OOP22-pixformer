@@ -11,7 +11,7 @@ import pixformer.view.SceneRenderer;
 /**
  * A JavaFX scene of the game.
  */
-public class JavaFXScene implements GameScene {
+public class JavaFXScene extends GameScene {
 
     private final Scene scene;
     private final SceneRenderer renderer;
