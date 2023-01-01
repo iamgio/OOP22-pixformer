@@ -3,7 +3,6 @@ package pixformer.view.engine.javafx;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
@@ -11,20 +10,17 @@ import pixformer.view.engine.ViewLauncher;
 /**
  * JavaFX application launcher.
  */
-public class JavaFXViewLauncher extends Application implements ViewLauncher {
-
-    private static final double INITIAL_WIDTH = 1200;
-    private static final double INITIAL_HEIGHT = 600;
+public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
     private JavaFXScene scene;
     private GameLoop loop;
 
     @Override
     public void start(final Stage primaryStage) {
-        this.scene = new JavaFXScene(INITIAL_WIDTH, INITIAL_HEIGHT);
-        this.loop = new DefaultGameLoop(this.scene);
+        this.scene = (JavaFXScene) this.createScene();
+        this.loop = this.createGameLoop();
         this.startLoop();
-        primaryStage.setTitle("Pixformer");
+        primaryStage.setTitle(this.getTitle());
         primaryStage.setScene(this.scene.getScene());
         primaryStage.show();
     }
@@ -34,7 +30,7 @@ public class JavaFXViewLauncher extends Application implements ViewLauncher {
      */
     @Override
     public void launch() {
-        Application.launch();
+        Application.launch(getAppClass());
     }
 
     /**
@@ -60,4 +56,15 @@ public class JavaFXViewLauncher extends Application implements ViewLauncher {
             }
         }.start();
     }
+
+    /**
+     * @return the application title
+     */
+    protected abstract String getTitle();
+
+    /**
+     * @return the JavaFX application to run
+     */
+    protected abstract Class<? extends Application> getAppClass();
+    // This is because JavaFX is unable to detect inheritance in terms of Applications
 }

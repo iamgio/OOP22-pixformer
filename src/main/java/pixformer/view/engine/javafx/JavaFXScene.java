@@ -47,6 +47,9 @@ public class JavaFXScene extends GameScene {
             canvas.setHeight(root.getHeight());
             this.render();
         });
+
+        // Implementation-specific
+        this.handleInput();
     }
 
     /**
@@ -79,4 +82,10 @@ public class JavaFXScene extends GameScene {
     public RendererFactory getRendererFactory() {
         return this.rendererFactory;
     }
+
+    /**
+     * Handles keyboard and mouse input.
+     * It does nothing by default and hence is implementation-specific.
+     */
+    public void handleInput() {}
 }

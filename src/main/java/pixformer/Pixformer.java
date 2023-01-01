@@ -1,7 +1,7 @@
 package pixformer;
 
 import pixformer.view.engine.ViewLauncher;
-import pixformer.view.engine.javafx.JavaFXViewLauncher;
+import pixformer.view.javafx.PixformerJavaFXViewLauncher;
 
 /**
  * The main class.
@@ -9,7 +9,7 @@ import pixformer.view.engine.javafx.JavaFXViewLauncher;
 public class Pixformer {
 
     public static void main(String[] args) {
-        ViewLauncher launcher = new JavaFXViewLauncher();
+        ViewLauncher launcher = new PixformerJavaFXViewLauncher();
         launcher.launch();
     }
 }
