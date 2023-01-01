@@ -1,6 +1,6 @@
 package pixformer.view.javafx;
 
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import pixformer.controller.InputType;
 import pixformer.view.engine.InputMapper;
 
@@ -9,15 +9,15 @@ import java.util.Optional;
 /**
  * Default input mapper for the game.
  */
-public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> {
+public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<InputType> map(final KeyCode input) {
+    public Optional<InputType> map(final MouseButton input) {
         return Optional.ofNullable(switch (input) {
-            case SPACE -> InputType.P1_JUMP;
+            case PRIMARY -> InputType.P1_JUMP;
             default -> null;
         });
     }

@@ -35,6 +35,11 @@ public abstract class GameScene {
     protected abstract InputMapper<?> getKeyboardInputMapper();
 
     /**
+     * @return the mouse input mapping system for this scene
+     */
+    protected abstract InputMapper<?> getMouseInputMapper();
+
+    /**
      * Handles keyboard and mouse input.
      */
     protected abstract void handleInput();

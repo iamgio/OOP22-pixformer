@@ -2,6 +2,8 @@ package pixformer.view.engine.javafx;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import pixformer.controller.InputType;
 import pixformer.view.engine.*;
@@ -100,7 +102,15 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
-    protected InputMapper<?> getKeyboardInputMapper() {
+    protected InputMapper<KeyCode> getKeyboardInputMapper() {
+        return input -> Optional.empty();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected InputMapper<MouseButton> getMouseInputMapper() {
         return input -> Optional.empty();
     }
 
@@ -109,5 +119,12 @@ public class JavaFXScene extends GameScene {
      * It does nothing by default and hence is implementation-specific.
      */
     @Override
-    protected void handleInput() {}
+    public void handleInput() {
+        // Keyboard
+        this.scene.setOnKeyPressed(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(getInputs()::add));
+        this.scene.setOnKeyReleased(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(getInputs()::remove));
+        // Mouse
+        this.scene.setOnMousePressed(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(getInputs()::add));
+        this.scene.setOnMouseReleased(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(getInputs()::remove));
+    }
 }
