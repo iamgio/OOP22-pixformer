@@ -1,5 +1,6 @@
 package pixformer.view.javafx;
 
+import javafx.scene.input.KeyCode;
 import pixformer.view.engine.InputMapper;
 import pixformer.view.engine.javafx.JavaFXScene;
 
@@ -19,9 +20,8 @@ public class PixformerJavaFXScene extends JavaFXScene {
      * {@inheritDoc}
      */
     @Override
-    protected InputMapper<?> getInputMapper() {
-        // TODO
-        return super.getInputMapper();
+    protected InputMapper<KeyCode> getInputMapper() {
+        return new PixformerJavaFXInputMapper();
     }
 
     /**
@@ -29,11 +29,7 @@ public class PixformerJavaFXScene extends JavaFXScene {
      */
     @Override
     public void handleInput() {
-        super.getScene().setOnKeyPressed(e -> {
-            // TODO
-        });
-        super.getScene().setOnKeyReleased(e -> {
-            // TODO
-        });
+        super.getScene().setOnKeyPressed(e -> this.getInputMapper().get(e.getCode()).ifPresent(input -> getInputs().add(input)));
+        super.getScene().setOnKeyReleased(e -> this.getInputMapper().get(e.getCode()).ifPresent(input -> getInputs().remove(input)));
     }
 }

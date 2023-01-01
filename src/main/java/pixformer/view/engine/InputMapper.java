@@ -16,7 +16,7 @@ public class InputMapper<T> {
      * Creates an input mapper with given bindings.
      * @param controls input bindings
      */
-    public InputMapper(Map<T, InputType> controls) {
+    public InputMapper(final Map<T, InputType> controls) {
         this.controls = controls;
     }
 
@@ -24,7 +24,7 @@ public class InputMapper<T> {
      * @param input raw input
      * @return associated input type, if it exists
      */
-    public Optional<InputType> get(T input) {
+    public Optional<InputType> get(final T input) {
         return Optional.ofNullable(this.controls.get(input));
     }
 }
