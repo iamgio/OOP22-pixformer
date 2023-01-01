@@ -30,9 +30,9 @@ public abstract class GameScene {
     public abstract Set<InputType> getInputs();
 
     /**
-     * @return the input mapping system for this scene
+     * @return the keyboard input mapping system for this scene
      */
-    protected abstract InputMapper<?> getInputMapper();
+    protected abstract InputMapper<?> getKeyboardInputMapper();
 
     /**
      * Handles keyboard and mouse input.

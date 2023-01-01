@@ -6,8 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import pixformer.controller.InputType;
 import pixformer.view.engine.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -100,8 +100,8 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
-    protected InputMapper<?> getInputMapper() {
-        return new InputMapper<>(new HashMap<>());
+    protected InputMapper<?> getKeyboardInputMapper() {
+        return input -> Optional.empty();
     }
 
     /**
