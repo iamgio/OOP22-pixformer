@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 /**
  * Responsible for launching a kind of view.

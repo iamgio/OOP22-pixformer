@@ -1,9 +1,9 @@
 package pixformer.controller;
 
-import pixformer.view.Color;
-import pixformer.view.GameScene;
-import pixformer.view.RendererFactory;
-import pixformer.view.TextBuilder;
+import pixformer.view.engine.Color;
+import pixformer.view.engine.GameScene;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.TextBuilder;
 
 /**
  * The default game loop.

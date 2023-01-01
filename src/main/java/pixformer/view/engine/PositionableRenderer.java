@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 /**
  * A renderer at a specified 2D position.

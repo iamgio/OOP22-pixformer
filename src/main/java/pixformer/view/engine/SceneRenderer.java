@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 import java.util.LinkedList;
 import java.util.List;

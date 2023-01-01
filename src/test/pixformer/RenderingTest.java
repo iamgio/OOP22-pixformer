@@ -3,11 +3,11 @@ package pixformer;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import pixformer.view.Color;
-import pixformer.view.RendererFactory;
-import pixformer.view.TextBuilder;
-import pixformer.view.javafx.JavaFXImageRenderer;
-import pixformer.view.javafx.JavaFXScene;
+import pixformer.view.engine.Color;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.TextBuilder;
+import pixformer.view.engine.javafx.JavaFXImageRenderer;
+import pixformer.view.engine.javafx.JavaFXScene;
 
 /**
  * Test for the rendering architecture.

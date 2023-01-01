@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 /**
  * Allows drawing on a canvas.

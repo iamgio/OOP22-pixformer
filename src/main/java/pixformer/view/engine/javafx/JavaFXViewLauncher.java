@@ -1,12 +1,12 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
-import pixformer.view.GameScene;
-import pixformer.view.ViewLauncher;
+import pixformer.view.engine.GameScene;
+import pixformer.view.engine.ViewLauncher;
 
 /**
  * JavaFX application launcher.

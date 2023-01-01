@@ -1,8 +1,8 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
 import javafx.scene.image.Image;
-import pixformer.view.Graphics;
-import pixformer.view.PositionableRenderer;
+import pixformer.view.engine.Graphics;
+import pixformer.view.engine.PositionableRenderer;
 
 /**
  * A static image renderer for JavaFX.

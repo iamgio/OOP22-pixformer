@@ -1,6 +1,6 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
-import pixformer.view.*;
+import pixformer.view.engine.*;
 
 /**
  * A provider of JavaFX scene components.

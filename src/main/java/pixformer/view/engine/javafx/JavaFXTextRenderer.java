@@ -1,10 +1,10 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import pixformer.view.Graphics;
-import pixformer.view.PositionableRenderer;
+import pixformer.view.engine.Graphics;
+import pixformer.view.engine.PositionableRenderer;
 
 /**
  * A text renderer for JavaFX.

@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 /**
  * A provider of scene components.

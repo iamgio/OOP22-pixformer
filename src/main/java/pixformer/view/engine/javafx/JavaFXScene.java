@@ -1,12 +1,12 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
-import pixformer.view.GameScene;
-import pixformer.view.Graphics;
-import pixformer.view.RendererFactory;
-import pixformer.view.SceneRenderer;
+import pixformer.view.engine.GameScene;
+import pixformer.view.engine.Graphics;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.SceneRenderer;
 
 /**
  * A JavaFX scene of the game.

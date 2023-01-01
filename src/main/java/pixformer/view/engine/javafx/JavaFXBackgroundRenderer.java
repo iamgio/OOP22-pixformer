@@ -1,9 +1,9 @@
-package pixformer.view.javafx;
+package pixformer.view.engine.javafx;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import pixformer.view.Graphics;
-import pixformer.view.Renderer;
+import pixformer.view.engine.Graphics;
+import pixformer.view.engine.Renderer;
 
 import java.util.Objects;
 

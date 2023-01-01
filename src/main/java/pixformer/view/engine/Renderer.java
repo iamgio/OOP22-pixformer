@@ -1,4 +1,4 @@
-package pixformer.view;
+package pixformer.view.engine;
 
 /**
  * Responsible for rendering content on some graphics (canvas)
