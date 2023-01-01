@@ -1,5 +1,9 @@
 package pixformer.view.engine;
 
+import pixformer.controller.InputType;
+
+import java.util.Set;
+
 /**
  * A scene of the game that contains its drawable content.
  */
@@ -19,6 +23,21 @@ public abstract class GameScene {
      * @return a provider of components for this scene
      */
     public abstract RendererFactory getRendererFactory();
+
+    /**
+     * @return currently active inputs
+     */
+    public abstract Set<InputType> getInputs();
+
+    /**
+     * @return the input mapping system for this scene
+     */
+    protected abstract InputMapper<?> getInputMapper();
+
+    /**
+     * Handles keyboard and mouse input.
+     */
+    protected abstract void handleInput();
 
     /**
      * Renders the content of this scene.

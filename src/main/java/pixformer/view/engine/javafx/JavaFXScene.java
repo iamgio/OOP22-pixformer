@@ -3,10 +3,12 @@ package pixformer.view.engine.javafx;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
-import pixformer.view.engine.GameScene;
-import pixformer.view.engine.Graphics;
-import pixformer.view.engine.RendererFactory;
-import pixformer.view.engine.SceneRenderer;
+import pixformer.controller.InputType;
+import pixformer.view.engine.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A JavaFX scene of the game.
@@ -17,6 +19,7 @@ public class JavaFXScene extends GameScene {
     private final SceneRenderer renderer;
     private final Graphics graphics;
     private final RendererFactory rendererFactory;
+    private final Set<InputType> inputs;
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -33,6 +36,7 @@ public class JavaFXScene extends GameScene {
         this.renderer = new SceneRenderer();
         this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
         this.rendererFactory = new JavaFXRendererFactory();
+        this.inputs = new HashSet<>();
 
         // Makes the canvas resizable by resizing the window
 
@@ -84,8 +88,26 @@ public class JavaFXScene extends GameScene {
     }
 
     /**
-     * Handles keyboard and mouse input.
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<InputType> getInputs() {
+        return this.inputs;
+    }
+
+    /**
+     * Implementation-specific input mapping, empty by default.
+     * {@inheritDoc}
+     */
+    @Override
+    protected InputMapper<?> getInputMapper() {
+        return new InputMapper<>(new HashMap<>());
+    }
+
+    /**
+     * {@inheritDoc}
      * It does nothing by default and hence is implementation-specific.
      */
-    public void handleInput() {}
+    @Override
+    protected void handleInput() {}
 }

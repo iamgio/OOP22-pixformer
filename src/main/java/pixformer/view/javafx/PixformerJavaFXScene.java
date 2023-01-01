@@ -1,5 +1,6 @@
 package pixformer.view.javafx;
 
+import pixformer.view.engine.InputMapper;
 import pixformer.view.engine.javafx.JavaFXScene;
 
 /**
@@ -18,7 +19,21 @@ public class PixformerJavaFXScene extends JavaFXScene {
      * {@inheritDoc}
      */
     @Override
-    public void handleInput() {
+    protected InputMapper<?> getInputMapper() {
+        // TODO
+        return super.getInputMapper();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handleInput() {
+        super.getScene().setOnKeyPressed(e -> {
+            // TODO
+        });
+        super.getScene().setOnKeyReleased(e -> {
+            // TODO
+        });
     }
 }
