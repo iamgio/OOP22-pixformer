@@ -12,14 +12,14 @@ public abstract class PositionableRenderer implements Renderer {
      * @return X coordinate
      */
     public double getX() {
-        return x;
+        return this.x;
     }
 
     /**
      * Sets the X coordinate
      * @param x X coordinate to set
      */
-    public void setX(double x) {
+    public void setX(final double x) {
         this.x = x;
     }
 
@@ -27,14 +27,14 @@ public abstract class PositionableRenderer implements Renderer {
      * @return Y coordinate
      */
     public double getY() {
-        return y;
+        return this.y;
     }
 
     /**
      * Sets the Y coordinate
      * @param y Y coordinate to set
      */
-    public void setY(double y) {
+    public void setY(final double y) {
         this.y = y;
     }
 
