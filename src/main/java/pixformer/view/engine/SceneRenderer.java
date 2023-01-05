@@ -55,6 +55,7 @@ public class SceneRenderer implements Renderer {
      */
     @Override
     public void render(double dt, Graphics graphics) {
+        graphics.clear();
         this.renderers.forEach(renderer -> renderer.render(dt, graphics));
     }
 }

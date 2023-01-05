@@ -11,16 +11,8 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
-    public PositionableRenderer newText(String text, Color color, String family, double size) {
-        return new JavaFXTextRenderer(text, color.toJFX(), family, size);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public PositionableRenderer newText(final String text) {
-        return newText(text, Color.BLACK, null, TextBuilder.DEFAULT_FONT_SIZE);
+    public TextRenderer newText(final String text) {
+        return new JavaFXTextRenderer(text);
     }
 
     /**

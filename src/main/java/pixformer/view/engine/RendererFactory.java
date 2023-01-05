@@ -7,19 +7,9 @@ public interface RendererFactory {
 
     /**
      * @param text text to display
-     * @param color text color
-     * @param family font family
-     * @param size font size
-     * @return a new text renderer
-     * @see TextBuilder
-     */
-    PositionableRenderer newText(final String text, final Color color, final String family, final double size);
-
-    /**
-     * @param text text to display
      * @return a new text renderer
      */
-    PositionableRenderer newText(final String text);
+    TextRenderer newText(final String text);
 
     /**
      * @param width rectangle width
