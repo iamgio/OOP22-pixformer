@@ -1,7 +1,7 @@
 package pixformer.view.engine;
 
 /**
- * The renderer of some text.
+ * The renderer of a solid rectangle.
  */
 public abstract class RectangleRenderer extends PositionableRenderer {
 
