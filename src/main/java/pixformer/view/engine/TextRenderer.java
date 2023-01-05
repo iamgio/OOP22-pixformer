@@ -10,7 +10,6 @@ public abstract class TextRenderer extends PositionableRenderer {
     private String fontFamily;
     private double fontSize;
 
-
     /**
      * Creates a text renderer
      * @param text text to display

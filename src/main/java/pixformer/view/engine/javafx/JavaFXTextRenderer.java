@@ -25,12 +25,18 @@ public class JavaFXTextRenderer extends TextRenderer {
         super.setFontSize(DEFAULT_FONT_SIZE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontFamily(String fontFamily) {
         super.setFontFamily(fontFamily);
         this.font = Font.font(fontFamily, super.getFontSize());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontSize(double fontSize) {
         super.setFontSize(fontSize);

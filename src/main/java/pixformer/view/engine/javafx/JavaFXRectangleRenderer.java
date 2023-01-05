@@ -1,29 +1,21 @@
 package pixformer.view.engine.javafx;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import pixformer.view.engine.Graphics;
-import pixformer.view.engine.PositionableRenderer;
+import pixformer.view.engine.RectangleRenderer;
 
 /**
  * A rectangle renderer for JavaFX.
  */
-public class JavaFXRectangleRenderer extends PositionableRenderer {
-
-    private final double width;
-    private final double height;
-    private final Color color;
+public class JavaFXRectangleRenderer extends RectangleRenderer {
 
     /**
      * Creates a rectangle renderer for JavaFX
      * @param width rectangle width
      * @param height rectangle height
-     * @param color fill color
      */
-    public JavaFXRectangleRenderer(final double width, final double height, final Color color) {
-        this.width = width;
-        this.height = height;
-        this.color = color;
+    public JavaFXRectangleRenderer(final double width, final double height) {
+        super(width, height);
     }
 
     /**
@@ -32,7 +24,7 @@ public class JavaFXRectangleRenderer extends PositionableRenderer {
     @Override
     public void render(final double dt, final Graphics graphics) {
         GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
-        g.setFill(this.color);
-        g.fillRect(super.getX(), super.getY(), this.width, this.height);
+        g.setFill(super.getColor().toJFX());
+        g.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
     }
 }

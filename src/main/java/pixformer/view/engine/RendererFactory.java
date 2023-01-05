@@ -15,9 +15,8 @@ public interface RendererFactory {
      * @param width rectangle width
      * @param height rectangle height
      * @return a new rectangle renderer
-     * @param color fill color
      */
-    PositionableRenderer newRectangle(final double width, final double height, final Color color);
+    RectangleRenderer newRectangle(final double width, final double height);
 
     /**
      * @param color background color

@@ -19,8 +19,8 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
-    public PositionableRenderer newRectangle(double width, double height, Color color) {
-        return new JavaFXRectangleRenderer(width, height, color.toJFX());
+    public RectangleRenderer newRectangle(double width, double height) {
+        return new JavaFXRectangleRenderer(width, height);
     }
 
     /**
