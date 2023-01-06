@@ -3,6 +3,7 @@ package pixformer.view.javafx;
 import javafx.application.Application;
 import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
+import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
 
@@ -32,7 +33,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     protected String getTitle() {
-        return "Pixformer";
+        return Lang.getInstance().get("title");
     }
 
     /**
