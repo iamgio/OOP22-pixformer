@@ -3,6 +3,7 @@ package pixformer.view.javafx;
 import javafx.application.Application;
 import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
+import pixformer.view.ViewImpl;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
@@ -25,7 +26,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameLoop createGameLoop() {
-        return new DefaultGameLoop(super.getScene());
+        return new DefaultGameLoop(new ViewImpl(super.getScene()));
     }
 
     /**

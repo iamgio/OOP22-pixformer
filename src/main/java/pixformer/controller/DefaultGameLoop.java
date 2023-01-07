@@ -1,35 +1,21 @@
 package pixformer.controller;
 
-import pixformer.view.engine.Color;
-import pixformer.view.engine.GameScene;
-import pixformer.view.engine.RendererFactory;
-import pixformer.view.engine.TextRenderer;
+import pixformer.view.View;
 
 /**
  * The default game loop.
  */
 public class DefaultGameLoop implements GameLoop {
 
-    private final GameScene scene;
-
-    private final TextRenderer text;
+    private final View view;
 
     /**
      * Creates the default game loop that relies on a visual renderable scene.
-     * @param scene active game scene
+     * @param view active game view
      */
-    public DefaultGameLoop(GameScene scene) {
-        this.scene = scene;
-
-        // This is a test: graphics shouldn't be here, but somewhere in the view.
-        RendererFactory rendererFactory = scene.getRendererFactory();
-
-        scene.add(rendererFactory.newSolidBackground(Color.BLACK));
-
-        this.text = rendererFactory.newText("");
-        text.setColor(new Color(1, .8, 0));
-        text.setFontSize(30);
-        scene.add(text.at(100, 100));
+    public DefaultGameLoop(View view) {
+        this.view = view;
+        this.view.setup();
     }
 
     /**
@@ -37,10 +23,6 @@ public class DefaultGameLoop implements GameLoop {
      */
     @Override
     public void loop(long now) {
-        // Debug view
-
-        text.setText("Now:\n" + (now / 1000) + "\nInputs: " + scene.getInputs().toString());
-
-        scene.render();
+        this.view.update(0 /* TODO delta time */);
     }
 }
