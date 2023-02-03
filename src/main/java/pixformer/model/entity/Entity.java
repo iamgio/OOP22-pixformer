@@ -14,4 +14,18 @@ public interface Entity {
     // Point2D<T> getPoint2D();
 
     // TODO : other methods that are needed
+
+    // TODO : brainstorming with Luca
+    // Interface Entity
+    // - Position
+    // - Dimension
+    // -> Drawable Entity
+    // - Graphics Component
+    // - Movement Component [STATIC, FIXED, CONTROLLED]
+    // right, left, up, down
+    // HORIZONTAL [RIGHT, LEFT]
+    // JUMPABLE [UP]
+    // CROUCHABLE [DOWN]
+    // The app can choose what movement components are needed
+    // Controller -> input -> [1, 2, 3] -> ent.apply(input)
 }
