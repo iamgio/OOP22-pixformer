@@ -1,19 +1,18 @@
 package pixformer.common;
 
 /**
- * Generic 2D point
- * @param <T> type
+ * Double 2D Point.
  */
-public interface Point2D<T extends Number> {
+public interface Point2D {
 
     /**
      * @return the X component
      */
-    T getX();
+    double getX();
 
     /**
      * @return the Y component
      */
-    T getY();
+    double getY();
 
 }

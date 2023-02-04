@@ -1,24 +1,23 @@
 package pixformer.common;
 
 /**
- * Generic 2D Vector
- * @param <T> type
+ * Double 2D Vector.
  */
-public interface Vector2D<T extends Number> {
+public interface Vector2D {
 
     /**
-     * Append a new Vector2D at the end of this Vector
+     * Append a new Vector2D at the end of this Vector.
      * @param v Vector2D to append
      */
-    void add(Vector2D<T> v);
+    void add(Vector2D v);
 
     /**
      * @return the X component
      */
-    T getX();
+    double getX();
 
     /**
      * @return the Y component
      */
-    T getY();
+    double getY();
 }
