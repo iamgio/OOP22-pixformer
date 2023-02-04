@@ -11,10 +11,10 @@ public abstract class TextRenderer extends PositionableRenderer {
     private double fontSize;
 
     /**
-     * Creates a text renderer
+     * Creates a text renderer.
      * @param text text to display
      */
-    public TextRenderer(String text) {
+    public TextRenderer(final String text) {
         this.text = text;
     }
 
@@ -41,7 +41,7 @@ public abstract class TextRenderer extends PositionableRenderer {
     }
 
     /**
-     * Sets the text color
+     * Sets the text color.
      * @param color text color
      */
     public void setColor(final Color color) {
@@ -56,7 +56,7 @@ public abstract class TextRenderer extends PositionableRenderer {
     }
 
     /**
-     * Sets the font family
+     * Sets the font family.
      * @param fontFamily font family
      */
     public void setFontFamily(final String fontFamily) {
@@ -71,7 +71,7 @@ public abstract class TextRenderer extends PositionableRenderer {
     }
 
     /**
-     * Sets the font size
+     * Sets the font size.
      * @param fontSize font size
      */
     public void setFontSize(final double fontSize) {

@@ -10,7 +10,7 @@ import pixformer.view.engine.RectangleRenderer;
 public class JavaFXRectangleRenderer extends RectangleRenderer {
 
     /**
-     * Creates a rectangle renderer for JavaFX
+     * Creates a rectangle renderer for JavaFX.
      * @param width rectangle width
      * @param height rectangle height
      */

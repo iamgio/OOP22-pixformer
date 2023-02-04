@@ -16,9 +16,11 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
      */
     @Override
     public Optional<InputType> map(final MouseButton input) {
-        return Optional.ofNullable(switch (input) {
-            case PRIMARY -> InputType.P1_JUMP;
-            default -> null;
-        });
+        return Optional.ofNullable(
+                switch (input) {
+                    case PRIMARY -> InputType.P1_JUMP;
+                    default -> null;
+                }
+        );
     }
 }

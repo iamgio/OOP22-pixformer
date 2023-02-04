@@ -16,9 +16,11 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
      */
     @Override
     public Optional<InputType> map(final KeyCode input) {
-        return Optional.ofNullable(switch (input) {
-            case SPACE -> InputType.P1_JUMP;
-            default -> null;
-        });
+        return Optional.ofNullable(
+                switch (input) {
+                    case SPACE -> InputType.P1_JUMP;
+                    default -> null;
+                }
+        );
     }
 }

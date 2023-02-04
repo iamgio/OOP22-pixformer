@@ -19,7 +19,7 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
-    public RectangleRenderer newRectangle(double width, double height) {
+    public RectangleRenderer newRectangle(final double width, final double height) {
         return new JavaFXRectangleRenderer(width, height);
     }
 
@@ -27,7 +27,7 @@ public class JavaFXRendererFactory implements RendererFactory {
      * {@inheritDoc}
      */
     @Override
-    public Renderer newSolidBackground(Color color) {
+    public Renderer newSolidBackground(final Color color) {
         return new JavaFXSolidBackgroundRenderer(color.toJFX());
     }
 }

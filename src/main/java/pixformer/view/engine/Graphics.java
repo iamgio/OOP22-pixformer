@@ -11,7 +11,7 @@ public interface Graphics {
      * @param x X coordinate
      * @param y Y coordinate
      */
-    void draw(final Renderer renderer, final double x, final double y);
+    void draw(Renderer renderer, double x, double y);
 
     /**
      * Clears what was previously rendered.

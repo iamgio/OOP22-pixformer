@@ -53,7 +53,7 @@ public abstract class GameScene {
     }
 
     /**
-     * Adds a new renderer to the scene
+     * Adds a new renderer to the scene.
      * @param renderer renderer to append
      * @see SceneRenderer#add(Renderer) 
      */
@@ -62,7 +62,7 @@ public abstract class GameScene {
     }
 
     /**
-     * Removes a renderer from the scene
+     * Removes a renderer from the scene.
      * @param renderer renderer to remove
      * @see SceneRenderer#remove(Renderer) 
      */

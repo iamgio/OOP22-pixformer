@@ -18,7 +18,8 @@ public class JavaFXTextRenderer extends TextRenderer {
     private Font font;
 
     /**
-     * Creates a text renderer for JavaFX
+     * Creates a text renderer for JavaFX.
+     * @param text text to display
      */
     public JavaFXTextRenderer(final String text) {
         super(text);
@@ -29,7 +30,7 @@ public class JavaFXTextRenderer extends TextRenderer {
      * {@inheritDoc}
      */
     @Override
-    public void setFontFamily(String fontFamily) {
+    public void setFontFamily(final String fontFamily) {
         super.setFontFamily(fontFamily);
         this.font = Font.font(fontFamily, super.getFontSize());
     }
@@ -38,7 +39,7 @@ public class JavaFXTextRenderer extends TextRenderer {
      * {@inheritDoc}
      */
     @Override
-    public void setFontSize(double fontSize) {
+    public void setFontSize(final double fontSize) {
         super.setFontSize(fontSize);
         this.font = Font.font(super.getFontFamily(), fontSize);
     }

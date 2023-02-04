@@ -9,7 +9,7 @@ import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
 
 /**
- * The default game view launcher for JavaFX
+ * The default game view launcher for JavaFX.
  */
 public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
 

@@ -28,5 +28,5 @@ public abstract class JavaFXBackgroundRenderer implements Renderer {
      * @param width canvas width
      * @param height canvas height
      */
-    abstract void drawBackground(final GraphicsContext graphics, final double width, final double height);
+    abstract void drawBackground(GraphicsContext graphics, double width, double height);
 }

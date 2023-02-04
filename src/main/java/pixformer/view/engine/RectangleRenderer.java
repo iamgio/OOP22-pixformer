@@ -10,7 +10,7 @@ public abstract class RectangleRenderer extends PositionableRenderer {
     private Color color = Color.BLACK;
 
     /**
-     * Creates a rectangle renderer
+     * Creates a rectangle renderer.
      * @param width rectangle width
      * @param height rectangle height
      */
@@ -23,7 +23,7 @@ public abstract class RectangleRenderer extends PositionableRenderer {
      * @return rectangle width
      */
     public double getWidth() {
-        return width;
+        return this.width;
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class RectangleRenderer extends PositionableRenderer {
     }
 
     /**
-     * Sets the height
+     * Sets the height.
      * @param height rectangle height
      */
     public void setHeight(final double height) {
@@ -57,7 +57,7 @@ public abstract class RectangleRenderer extends PositionableRenderer {
     }
 
     /**
-     * Sets the fill color
+     * Sets the fill color.
      * @param color fill color
      */
     public void setColor(final Color color) {

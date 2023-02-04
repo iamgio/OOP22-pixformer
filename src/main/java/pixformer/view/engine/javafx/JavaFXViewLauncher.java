@@ -15,6 +15,9 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     private JavaFXScene scene;
     private GameLoop loop;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(final Stage primaryStage) {
         this.scene = (JavaFXScene) this.createScene();
@@ -51,7 +54,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
         new AnimationTimer() {
             @Override
-            public void handle(long now) {
+            public void handle(final long now) {
                 loop.loop(now);
             }
         }.start();

@@ -1,7 +1,7 @@
 package pixformer.view.engine;
 
 /**
- * Responsible for rendering content on some graphics (canvas)
+ * Responsible for rendering content on some graphics (canvas).
  */
 public interface Renderer {
 
@@ -10,13 +10,13 @@ public interface Renderer {
      * @param dt delta time
      * @param graphics graphics (canvas) to draw on
      */
-    void render(final double dt, final Graphics graphics);
+    void render(double dt, Graphics graphics);
 
     /**
-     * Renders some content
+     * Renders some content.
      * @param graphics graphics (canvas) to draw on
      */
-    default void render(final Graphics graphics) {
+    default void render(Graphics graphics) {
         this.render(0, graphics);
     }
 }

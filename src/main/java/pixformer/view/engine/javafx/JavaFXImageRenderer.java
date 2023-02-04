@@ -16,14 +16,18 @@ public class JavaFXImageRenderer extends PositionableRenderer {
     private final double sourceY;
 
     /**
-     * Creates a static image renderer for JavaFX
+     * Creates a static image renderer for JavaFX.
      * @param image image to render
      * @param width image width
      * @param height image height
      * @param sourceX starting X coordinate of the image
      * @param sourceY starting Y coordinate of the image
      */
-    public JavaFXImageRenderer(final Image image, final double width, final double height, final double sourceX, final double sourceY) {
+    public JavaFXImageRenderer(
+            final Image image,
+            final double width, final double height,
+            final double sourceX, final double sourceY
+    ) {
         this.image = image;
         this.width = width;
         this.height = height;
@@ -32,7 +36,7 @@ public class JavaFXImageRenderer extends PositionableRenderer {
     }
 
     /**
-     * Creates a static image renderer for JavaFX
+     * Creates a static image renderer for JavaFX.
      * @param image image to render
      */
     public JavaFXImageRenderer(final Image image) {

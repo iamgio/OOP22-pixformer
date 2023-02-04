@@ -18,6 +18,10 @@ public class ViewImpl implements View {
 
     private TextRenderer text;
 
+    /**
+     * Initializes the default view.
+     * @param scene current game scene
+     */
     public ViewImpl(final GameScene scene) {
         this.scene = scene;
     }
@@ -32,8 +36,7 @@ public class ViewImpl implements View {
         scene.add(rendererFactory.newSolidBackground(Color.BLACK));
 
         this.text = rendererFactory.newText("");
-        text.setColor(new Color(1, .8, 0));
-        text.setFontSize(30);
+        text.setColor(new Color(1, 0, 0));
         scene.add(text.at(100, 100));
     }
 

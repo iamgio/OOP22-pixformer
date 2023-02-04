@@ -33,7 +33,7 @@ public class SceneRenderer implements Renderer {
     }
 
     /**
-     * Adds a new renderer to the scene
+     * Adds a new renderer to the scene.
      * @param renderer renderer to append
      */
     public void add(final Renderer renderer) {
@@ -41,7 +41,7 @@ public class SceneRenderer implements Renderer {
     }
 
     /**
-     * Removes a renderer from the scene
+     * Removes a renderer from the scene.
      * @param renderer renderer to remove
      */
     public void remove(final Renderer renderer) {
@@ -54,7 +54,7 @@ public class SceneRenderer implements Renderer {
      * @param graphics graphics (canvas) to draw on
      */
     @Override
-    public void render(double dt, Graphics graphics) {
+    public void render(final double dt, final Graphics graphics) {
         graphics.clear();
         this.renderers.forEach(renderer -> renderer.render(dt, graphics));
     }

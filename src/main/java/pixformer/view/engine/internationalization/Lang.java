@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 /**
  * Single-instance utility that handles internationalization of strings via resource bundles.
  */
-public class Lang {
+public final class Lang {
 
     private static final String BUNDLE_PATH = "lang/lang";
     private static final Lang INSTANCE = new Lang();

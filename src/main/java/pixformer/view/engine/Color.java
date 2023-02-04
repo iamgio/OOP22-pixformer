@@ -15,7 +15,14 @@ public final class Color {
      */
     private static final int AWT_COMPONENT_UPPER_BOUND = 255;
 
+    /**
+     * The black color.
+     */
     public static final Color BLACK = new Color(0, 0, 0);
+
+    /**
+     * The white color.
+     */
     public static final Color WHITE = new Color(COMPONENT_UPPER_BOUND, COMPONENT_UPPER_BOUND, COMPONENT_UPPER_BOUND);
 
     private final double red;

@@ -16,7 +16,7 @@ public abstract class PositionableRenderer implements Renderer {
     }
 
     /**
-     * Sets the X coordinate
+     * Sets the X coordinate.
      * @param x X coordinate to set
      */
     public void setX(final double x) {
@@ -31,7 +31,7 @@ public abstract class PositionableRenderer implements Renderer {
     }
 
     /**
-     * Sets the Y coordinate
+     * Sets the Y coordinate.
      * @param y Y coordinate to set
      */
     public void setY(final double y) {

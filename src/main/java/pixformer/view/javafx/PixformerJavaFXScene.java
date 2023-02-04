@@ -13,6 +13,9 @@ public class PixformerJavaFXScene extends JavaFXScene {
     private static final double INITIAL_WIDTH = 1200;
     private static final double INITIAL_HEIGHT = 600;
 
+    /**
+     * Initializes the default game scene.
+     */
     public PixformerJavaFXScene() {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
     }

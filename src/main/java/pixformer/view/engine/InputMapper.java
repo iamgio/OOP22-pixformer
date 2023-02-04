@@ -15,5 +15,5 @@ public interface InputMapper<T> {
      * @param input raw input
      * @return associated input type, if it exists
      */
-    Optional<InputType> map(final T input);
+    Optional<InputType> map(T input);
 }
