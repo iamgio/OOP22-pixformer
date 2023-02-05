@@ -1,13 +1,13 @@
 package pixformer.view;
 
 import pixformer.controller.InputType;
+import pixformer.controller.ObservableInputPolling;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.TextRenderer;
 
 import java.util.Date;
-import java.util.Set;
 
 /**
  * Implementation of the standard game view.
@@ -38,14 +38,17 @@ public class ViewImpl implements View {
         this.text = rendererFactory.newText("");
         text.setColor(new Color(1, 0, 0));
         scene.add(text.at(100, 100));
+
+        // Test
+        scene.getInputPolling().addAction(InputType.P1_JUMP, () -> this.text.setText("Jumping"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<InputType> getInputs() {
-        return this.scene.getInputs();
+    public ObservableInputPolling getInputPolling() {
+        return this.scene.getInputPolling();
     }
 
     /**
@@ -53,7 +56,9 @@ public class ViewImpl implements View {
      */
     @Override
     public void update(final double dt) {
-        this.text.setText("Now:\n" + new Date() + "\nInputs: " + scene.getInputs().toString());
+        this.text.setText("Now:\n" + new Date());
+
+        this.getInputPolling().update(dt);
         this.scene.render();
     }
 }

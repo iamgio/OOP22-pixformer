@@ -5,12 +5,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import pixformer.controller.InputType;
+import pixformer.controller.ObservableInputPolling;
+import pixformer.controller.ObservableInputPollingImpl;
 import pixformer.view.engine.*;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * A JavaFX scene of the game.
@@ -21,7 +20,7 @@ public class JavaFXScene extends GameScene {
     private final SceneRenderer renderer;
     private final Graphics graphics;
     private final RendererFactory rendererFactory;
-    private final Set<InputType> inputs;
+    private final ObservableInputPolling inputPolling;
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -38,7 +37,7 @@ public class JavaFXScene extends GameScene {
         this.renderer = new SceneRenderer();
         this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
         this.rendererFactory = new JavaFXRendererFactory();
-        this.inputs = new HashSet<>();
+        this.inputPolling = new ObservableInputPollingImpl();
 
         // Makes the canvas resizable by resizing the window
 
@@ -93,8 +92,8 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
-    public Set<InputType> getInputs() {
-        return this.inputs;
+    public ObservableInputPolling getInputPolling() {
+        return this.inputPolling;
     }
 
     /**
@@ -116,15 +115,14 @@ public class JavaFXScene extends GameScene {
 
     /**
      * {@inheritDoc}
-     * It does nothing by default and hence is implementation-specific.
      */
     @Override
     public void handleInput() {
         // Keyboard
-        this.scene.setOnKeyPressed(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(getInputs()::add));
-        this.scene.setOnKeyReleased(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(getInputs()::remove));
+        this.scene.setOnKeyPressed(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(inputPolling::add));
+        this.scene.setOnKeyReleased(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(inputPolling::remove));
         // Mouse
-        this.scene.setOnMousePressed(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(getInputs()::add));
-        this.scene.setOnMouseReleased(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(getInputs()::remove));
+        this.scene.setOnMousePressed(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(inputPolling::add));
+        this.scene.setOnMouseReleased(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(inputPolling::remove));
     }
 }
