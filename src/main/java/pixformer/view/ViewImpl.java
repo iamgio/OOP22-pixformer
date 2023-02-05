@@ -1,7 +1,7 @@
 package pixformer.view;
 
-import pixformer.controller.InputType;
-import pixformer.controller.ObservableInputPolling;
+import pixformer.controller.input.InputType;
+import pixformer.controller.input.ObservableInputPolling;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;

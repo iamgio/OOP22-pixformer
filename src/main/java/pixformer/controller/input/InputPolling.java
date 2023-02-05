@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.input;
 
 /**
  * A container for currently active user inputs.

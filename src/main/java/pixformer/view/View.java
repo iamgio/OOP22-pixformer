@@ -1,7 +1,7 @@
 package pixformer.view;
 
 import pixformer.common.Updatable;
-import pixformer.controller.ObservableInputPolling;
+import pixformer.controller.input.ObservableInputPolling;
 
 /**
  * The view of the game.

@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.controller.InputType;
+import pixformer.controller.input.InputType;
 
 import java.util.Optional;
 

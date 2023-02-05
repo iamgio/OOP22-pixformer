@@ -1,6 +1,10 @@
-package pixformer.controller;
+package pixformer.controller.input;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * The standard implementation of an {@link ObservableInputPolling}.

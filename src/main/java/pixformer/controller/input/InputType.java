@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.input;
 
 /**
  * Types of input bindable to keyboard, mouse or another input device.

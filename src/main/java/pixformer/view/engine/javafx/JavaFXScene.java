@@ -5,9 +5,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import pixformer.controller.ObservableInputPolling;
-import pixformer.controller.ObservableInputPollingImpl;
-import pixformer.view.engine.*;
+import pixformer.controller.input.ObservableInputPolling;
+import pixformer.controller.input.ObservableInputPollingImpl;
+import pixformer.view.engine.GameScene;
+import pixformer.view.engine.Graphics;
+import pixformer.view.engine.InputMapper;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.SceneRenderer;
 
 import java.util.Optional;
 

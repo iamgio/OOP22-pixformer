@@ -1,7 +1,7 @@
 package pixformer.view.javafx;
 
 import javafx.scene.input.KeyCode;
-import pixformer.controller.InputType;
+import pixformer.controller.input.InputType;
 import pixformer.view.engine.InputMapper;
 
 import java.util.Optional;

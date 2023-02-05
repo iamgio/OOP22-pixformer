@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.controller.ObservableInputPolling;
+import pixformer.controller.input.ObservableInputPolling;
 
 /**
  * A scene of the game that contains its drawable content.

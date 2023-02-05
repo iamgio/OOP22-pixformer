@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.input;
 
 import pixformer.common.Updatable;
 

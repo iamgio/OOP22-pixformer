@@ -1,6 +1,10 @@
 package pixformer.view.engine.javafx;
 
-import pixformer.view.engine.*;
+import pixformer.view.engine.Color;
+import pixformer.view.engine.RectangleRenderer;
+import pixformer.view.engine.Renderer;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.TextRenderer;
 
 /**
  * A provider of JavaFX scene components.
