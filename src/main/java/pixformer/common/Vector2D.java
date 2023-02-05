@@ -12,7 +12,7 @@ public interface Vector2D extends Point2D {
      * @return a new Vector2D whose components are the sum of the components of
      *         {@code this} and {@code other}.
      */
-    Vector2D sum(final Vector2D other);
+    Vector2D sum(Vector2D other);
 
     /**
      * Product between a vector and a scalar value.
@@ -21,6 +21,6 @@ public interface Vector2D extends Point2D {
      * @return a new Vector2D whose components are the product of the components of
      *         {@code this} and {@code k}.
      */
-    Vector2D scale(final double k);
+    Vector2D scale(double k);
 
 }
