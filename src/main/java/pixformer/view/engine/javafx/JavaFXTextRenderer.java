@@ -49,7 +49,7 @@ public class JavaFXTextRenderer extends TextRenderer {
      */
     @Override
     public void render(final double dt, final Graphics graphics) {
-        GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
+        final GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
         g.setFill(super.getColor().toJFX());
         if (this.font != null) {
             g.setFont(this.font);

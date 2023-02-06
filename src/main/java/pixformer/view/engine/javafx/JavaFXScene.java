@@ -1,5 +1,6 @@
 package pixformer.view.engine.javafx;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -32,8 +33,8 @@ public class JavaFXScene extends GameScene {
      * @param height initial scene height
      */
     public JavaFXScene(final double width, final double height) {
-        Canvas canvas = new Canvas();
-        AnchorPane root = new AnchorPane(canvas);
+        final Canvas canvas = new Canvas();
+        final AnchorPane root = new AnchorPane(canvas);
         canvas.setWidth(width);
         canvas.setHeight(height);
 
@@ -57,8 +58,7 @@ public class JavaFXScene extends GameScene {
             this.render();
         });
 
-        // Implementation-specific
-        this.handleInput();
+        Platform.runLater(this::handleInput);
     }
 
     /**
