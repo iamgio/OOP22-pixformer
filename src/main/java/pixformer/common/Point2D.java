@@ -1,18 +1,11 @@
 package pixformer.common;
 
 /**
- * Double 2D Point.
+ * An immutable two-dimensional point.
+ *
+ * @param x X coordinate
+ * @param y Y coordinate
  */
-public interface Point2D {
-
-    /**
-     * @return the X component
-     */
-    double getX();
-
-    /**
-     * @return the Y component
-     */
-    double getY();
+public record Point2D(double x, double y) {
 
 }
