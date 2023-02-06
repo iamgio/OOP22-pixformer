@@ -17,8 +17,8 @@ public abstract class JavaFXBackgroundRenderer implements Renderer {
      */
     @Override
     public void render(final double dt, final Graphics graphics) {
-        GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
-        Canvas canvas = Objects.requireNonNull(g.getCanvas());
+        final GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
+        final Canvas canvas = Objects.requireNonNull(g.getCanvas());
         this.drawBackground(g, canvas.getWidth(), canvas.getHeight());
     }
 

@@ -42,7 +42,7 @@ public class JavaFXGraphics implements Graphics {
      */
     @Override
     public void clear() {
-        Canvas canvas = Objects.requireNonNull(this.graphics.getCanvas());
+        final Canvas canvas = Objects.requireNonNull(this.graphics.getCanvas());
         this.graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
