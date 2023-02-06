@@ -23,7 +23,7 @@ public interface LevelManager {
     /**
      * Stops an ongoing level.
      * @param level level to end
-     * @throws IllegalArgumentException if the given level isn't active and/or cannot be stopped
+     * @throws java.lang.IllegalArgumentException if the given level isn't active and/or cannot be stopped
      */
-    void end(Level level) throws IllegalArgumentException;
+    void end(Level level);
 }
