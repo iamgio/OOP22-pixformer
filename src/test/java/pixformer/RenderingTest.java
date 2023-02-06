@@ -30,19 +30,19 @@ public final class RenderingTest extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
-        JavaFXScene scene = new JavaFXScene(SCENE_WIDTH, SCENE_HEIGHT);
-        RendererFactory factory = scene.getRendererFactory();
+        final JavaFXScene scene = new JavaFXScene(SCENE_WIDTH, SCENE_HEIGHT);
+        final RendererFactory factory = scene.getRendererFactory();
 
         scene.add(factory.newSolidBackground(BG_COLOR));
         scene.add(new JavaFXImageRenderer(new Image("https://dev.java/assets/images/java-logo-vert-blk.png")));
         // TODO add images to renderer factor
 
-        TextRenderer text = factory.newText("Test");
+        final TextRenderer text = factory.newText("Test");
         text.setColor(Color.WHITE);
         text.setFontFamily("Monospaced");
         scene.add(text.at(TEXT_X, TEXT_Y));
 
-        RectangleRenderer rectangle = factory.newRectangle(RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+        final RectangleRenderer rectangle = factory.newRectangle(RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
         rectangle.setColor(RECTANGLE_COLOR);
         scene.add(rectangle.at(RECTANGLE_X, RECTANGLE_Y));
         scene.render();
