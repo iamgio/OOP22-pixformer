@@ -13,7 +13,7 @@ public class DefaultGameLoop implements GameLoop {
      * Creates the default game loop that relies on a visual renderable scene.
      * @param view active game view
      */
-    public DefaultGameLoop(View view) {
+    public DefaultGameLoop(final View view) {
         this.view = view;
         this.view.setup();
     }
@@ -22,7 +22,7 @@ public class DefaultGameLoop implements GameLoop {
      * {@inheritDoc}
      */
     @Override
-    public void loop(long now) {
+    public void loop(final long now) {
         this.view.update(0 /* TODO delta time */);
     }
 }

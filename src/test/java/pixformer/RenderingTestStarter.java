@@ -3,10 +3,19 @@ package pixformer;
 import javafx.application.Application;
 
 /**
- *
+ * Test class.
  */
-public class RenderingTestStarter {
-    public static void main(String[] args) {
+public final class RenderingTestStarter {
+
+    private RenderingTestStarter() {
+
+    }
+
+    /**
+     * Main method to launch the test.
+     * @param args
+     */
+    public static void main(final String[] args) {
         Application.launch(RenderingTest.class, args);
     }
 }

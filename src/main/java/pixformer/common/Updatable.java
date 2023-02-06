@@ -9,5 +9,5 @@ public interface Updatable {
      * Updates the status.
      * @param dt delta time
      */
-    void update(final double dt);
+    void update(double dt);
 }
