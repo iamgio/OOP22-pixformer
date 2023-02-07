@@ -5,4 +5,6 @@ package pixformer.model.entity;
  */
 public interface DrawableEntity extends Entity {
 
+    // GraphicsComponent getGraphicsComponent();
+
 }
