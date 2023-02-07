@@ -14,10 +14,10 @@ public final class Pixformer {
 
     /**
      * Main method to launch the application.
-     * @param args
+     * @param args program arguments
      */
     public static void main(final String[] args) {
-        ViewLauncher launcher = new PixformerJavaFXViewLauncher();
+        final ViewLauncher launcher = new PixformerJavaFXViewLauncher();
         launcher.launch();
     }
 }

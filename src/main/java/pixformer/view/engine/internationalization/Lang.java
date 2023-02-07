@@ -1,7 +1,6 @@
 package pixformer.view.engine.internationalization;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -55,9 +54,8 @@ public final class Lang {
     /**
      * @param key key from the resource bundle
      * @return value associated to the key, if it exists.
-     * @throws MissingResourceException if the key does not exist
      */
-    public String get(final String key) throws MissingResourceException {
+    public String get(final String key) {
         return this.bundle.getString(key);
     }
 }

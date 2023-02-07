@@ -2,25 +2,29 @@ package pixformer.common;
 
 /**
  * An immutable two-dimensional vector.
+ *
+ * @param x X component
+ * @param y Y component
  */
-public interface Vector2D extends Point2D {
+public record Vector2D(double x, double y) {
 
     /**
-     * Sum of two vectors.
-     * 
-     * @param other
+     * Sums two vectors.
+     * @param other vector to add
      * @return a new Vector2D whose components are the sum of the components of
-     *         {@code this} and {@code other}.
+     * {@code this} and {@code other}.
      */
-    Vector2D sum(Vector2D other);
+    public Vector2D sum(final Vector2D other) {
+        return new Vector2D(this.x + other.x, this.y + other.y);
+    }
 
     /**
-     * Product between a vector and a scalar value.
-     * 
+     * Multiplies a vector by a scalar value.
      * @param k the scalar value
      * @return a new Vector2D whose components are the product of the components of
-     *         {@code this} and {@code k}.
+     * {@code this} and {@code k}.
      */
-    Vector2D scale(double k);
-
+    public Vector2D scale(final double k) {
+        return new Vector2D(this.x * k, this.y * k);
+    }
 }

@@ -42,14 +42,14 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     @Override
     public GameScene getScene() {
         if (scene == null) {
-            throw new NullPointerException("JavaFX scene is initialized only after launch.");
+            throw new IllegalStateException("JavaFX scene is initialized only after launch.");
         }
         return this.scene;
     }
 
-    private void startLoop() throws NullPointerException {
+    private void startLoop() {
         if (this.loop == null) {
-            throw new NullPointerException("Could not start game loop.");
+            throw new IllegalStateException("Could not start game loop.");
         }
 
         new AnimationTimer() {

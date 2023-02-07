@@ -31,7 +31,7 @@ public class ViewImpl implements View {
      */
     @Override
     public void setup() {
-        RendererFactory rendererFactory = scene.getRendererFactory();
+        final RendererFactory rendererFactory = scene.getRendererFactory();
 
         scene.add(rendererFactory.newSolidBackground(Color.BLACK));
 

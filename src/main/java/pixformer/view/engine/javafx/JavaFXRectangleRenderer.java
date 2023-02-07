@@ -23,7 +23,7 @@ public class JavaFXRectangleRenderer extends RectangleRenderer {
      */
     @Override
     public void render(final double dt, final Graphics graphics) {
-        GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
+        final GraphicsContext g = JavaFXGraphics.requireJFXGraphics(graphics).getGraphics();
         g.setFill(super.getColor().toJFX());
         g.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
     }
