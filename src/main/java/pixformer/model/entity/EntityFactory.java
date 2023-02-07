@@ -21,14 +21,14 @@ public interface EntityFactory {
     DrawableEntity createSurpriseBlock();
 
     /**
-     * @return a gumba entity
+     * @return a goomba entity
      */
-    DrawableEntity createGumba();
+    DrawableEntity createGoomba();
 
     /**
-     * @return a turtle entity
+     * @return a koopa entity
      */
-    DrawableEntity createTurtle();
+    DrawableEntity createKoopa();
 
     /**
      * @return a main character
