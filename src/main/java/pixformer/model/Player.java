@@ -15,17 +15,35 @@ public interface Player {
     /**
      * The player moves left.
      */
-    void left();
+    void goLeft();
+
+    /**
+     * Adds an action to be executed when the player goes left.
+     * @param action action to execute
+     */
+    void addOnGoLeft(Runnable action);
 
     /**
      * The player moves right.
      */
-    void right();
+    void goRight();
+
+    /**
+     * Adds an action to be executed when the player goes right.
+     * @param action action to execute
+     */
+    void addOnGoRight(Runnable action);
 
     /**
      * The player jumps.
      */
     void jump();
+
+    /**
+     * Adds an action to be executed when the player jumps.
+     * @param action action to execute
+     */
+    void addOnJump(Runnable action);
 
     // run, fire, ...
 }
