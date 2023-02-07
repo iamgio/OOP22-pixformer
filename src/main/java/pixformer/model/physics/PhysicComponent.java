@@ -1,7 +1,7 @@
 package pixformer.model.physics;
 
 /**
- * PhysicComponent of a Entity.
+ * PhysicComponent of an Entity.
  */
 public interface PhysicComponent {
 
@@ -12,7 +12,8 @@ public interface PhysicComponent {
 
     /**
      * Set the gravity of the component.
+     * @param value intensity of the gravity
      */
-    void setGravity();
+    void setGravity(double value);
 
 }

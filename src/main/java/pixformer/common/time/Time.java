@@ -1,7 +1,7 @@
 package pixformer.common.time;
 
 /**
- * Time class for entities/levels.
+ * Time class to represent a timespan.
  */
 public interface Time {
 

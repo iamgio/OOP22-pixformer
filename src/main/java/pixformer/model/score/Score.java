@@ -1,7 +1,7 @@
 package pixformer.model.score;
 
 /**
- * Score class.
+ * Score class to manage the in-game score of the user.
  */
 public interface Score {
 
