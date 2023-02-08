@@ -4,7 +4,6 @@ import javafx.application.Application;
 import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
 import pixformer.model.ModelMock;
-import pixformer.view.View;
 import pixformer.view.ViewImpl;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
