@@ -17,8 +17,8 @@ public interface Time {
     long end();
 
     /**
-     * @return if the entity has ended the time
+     * @return a bool representing if the timer has ended or not
      */
-    boolean hasEnded();
+    boolean hasTimeLeft();
 
 }
