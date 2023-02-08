@@ -5,7 +5,8 @@ import java.util.Optional;
 import pixformer.model.joystick.CompleteJoystick;
 
 /**
- * It is the interface which the input-responsible component of the will see.
+ * It is the interface which the input-responsible component of the controller
+ * will see.
  */
 public interface ViewInputComponent {
 
