@@ -68,7 +68,7 @@ public final class ViewImpl implements View, ViewInputComponent {
 
     @Override
     public Optional<Command<CompleteJoystick>> popInput() {
-        var tmp = Optional.ofNullable(command.orElseGet(() -> null));
+        final var tmp = Optional.ofNullable(command.orElseGet(() -> null));
         command = Optional.empty();
         return tmp;
     }
