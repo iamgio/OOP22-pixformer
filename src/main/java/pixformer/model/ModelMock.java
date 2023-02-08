@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import pixformer.model.joystick.CompleteJoystick;
 
-public class ModelMock implements ModelInputComponent {
+public final class ModelMock implements ModelInputComponent {
 
     private class MockJoystick implements CompleteJoystick {
 
@@ -36,7 +36,7 @@ public class ModelMock implements ModelInputComponent {
     }
 
     @Override
-    public void acceptMarioInput(Consumer<CompleteJoystick> input) {
+    public void acceptMarioInput(final Consumer<CompleteJoystick> input) {
         var mockJoystick = new MockJoystick();
         input.accept(mockJoystick);
     }
