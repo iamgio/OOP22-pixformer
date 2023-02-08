@@ -15,22 +15,22 @@ public final class ModelMock implements ModelInputComponent {
 
         @Override
         public void right() {
-            System.out.println("Mario right");            
+            System.out.println("Mario right");
         }
 
         @Override
         public void fire() {
-            System.out.println("Mario fire");            
+            System.out.println("Mario fire");
         }
 
         @Override
         public void jump() {
-            System.out.println("Mario jump");            
+            System.out.println("Mario jump");
         }
 
         @Override
         public void crouch() {
-            System.out.println("Mario crouch");            
+            System.out.println("Mario crouch");
         }
 
     }
@@ -40,5 +40,5 @@ public final class ModelMock implements ModelInputComponent {
         var mockJoystick = new MockJoystick();
         input.accept(mockJoystick);
     }
-    
+
 }
