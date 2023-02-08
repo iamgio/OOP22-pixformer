@@ -21,7 +21,7 @@ public class DefaultGameLoop implements GameLoop {
         new ControllerInputComponent<CompleteJoystick>() {
 
             @Override
-            public void acceptGameInput(Consumer<CompleteJoystick> input) {
+            public void acceptGameInput(final Consumer<CompleteJoystick> input) {
                 model.acceptMarioInput(input);
             }
 
