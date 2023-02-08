@@ -16,29 +16,34 @@ public final class ModelMock implements ModelInputComponent {
 
     private class MockJoystick implements CompleteJoystick {
 
+        /*
+         * The reason of the following suppression is because this is just a mock for
+         * explanatory purposes.
+         */
+
         @Override
         public void left() {
-            System.out.println("Mario left");
+            System.out.println("Mario left"); // NOPMD see above
         }
 
         @Override
         public void right() {
-            System.out.println("Mario right");
+            System.out.println("Mario right"); // NOPMD see above
         }
 
         @Override
         public void fire() {
-            System.out.println("Mario fire");
+            System.out.println("Mario fire"); // NOPMD see above
         }
 
         @Override
         public void jump() {
-            System.out.println("Mario jump");
+            System.out.println("Mario jump"); // NOPMD see above
         }
 
         @Override
         public void crouch() {
-            System.out.println("Mario crouch");
+            System.out.println("Mario crouch"); // NOPMD see above
         }
 
     }
