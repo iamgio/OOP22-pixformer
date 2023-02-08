@@ -17,7 +17,7 @@ public final class ModelMock implements ModelInputComponent {
     private static class MockJoystick implements CompleteJoystick {
 
         /*
-         * The reason of the following suppression is because this is just a mock for
+         * The reason of the following suppressions is because this is just a mock for
          * explanatory purposes.
          */
 
