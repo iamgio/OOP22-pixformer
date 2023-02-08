@@ -17,29 +17,32 @@ public class DefaultGameLoop implements GameLoop {
     private final View view;
     private final ModelInputComponent model;
     private boolean isRunning = true;
-    private final ControllerInputComponent<CompleteJoystick> mockInputComponent = new ControllerInputComponent<CompleteJoystick>() {
+    private final ControllerInputComponent<CompleteJoystick> mockInputComponent = 
+        new ControllerInputComponent<CompleteJoystick>() {
 
-        @Override
-        public void acceptGameInput(Consumer<CompleteJoystick> input) {
-            model.acceptMarioInput(input);
-        }
+            @Override
+            public void acceptGameInput(Consumer<CompleteJoystick> input) {
+                model.acceptMarioInput(input);
+            }
 
-        @Override
-        public void pause() {
-            isRunning = false;
-        }
+            @Override
+            public void pause() {
+                isRunning = false;
+            }
 
-        @Override
-        public void unpause() {
-            isRunning = true;
-        }
+            @Override
+            public void unpause() {
+                isRunning = true;
+            }
 
-    };
+        };
 
     /**
      * Creates the default game loop that relies on a visual renderable scene.
      * 
-     * @param view active game view
+     * @param viewComp the ViewInputComponent which will collect the user input.
+     * @param model    of the application
+     * @param view     active game view.
      */
     public DefaultGameLoop(final ViewInputComponent viewComp, final ModelInputComponent model, final View view) {
         this.viewInput = viewComp;
