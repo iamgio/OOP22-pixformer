@@ -14,7 +14,7 @@ import pixformer.model.joystick.CompleteJoystick;
 @Deprecated
 public final class ModelMock implements ModelInputComponent {
 
-    private class MockJoystick implements CompleteJoystick {
+    private static class MockJoystick implements CompleteJoystick {
 
         /*
          * The reason of the following suppression is because this is just a mock for
