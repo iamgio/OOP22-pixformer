@@ -1,5 +1,7 @@
 package pixformer.model.entity;
 
+import pixformer.common.Vector2D;
+
 /**
  * A factory for entities.
  */
@@ -8,30 +10,30 @@ public interface EntityFactory {
     /**
      * @return a grass block
      */
-    DrawableEntity createGrassBlock();
+    DrawableEntity createGrassBlock(Vector2D position);
 
     /**
      * @return a brick block
      */
-    DrawableEntity createBrickBlock();
+    DrawableEntity createBrickBlock(Vector2D position);
 
     /**
      * @return a surprise block
      */
-    DrawableEntity createSurpriseBlock();
+    DrawableEntity createSurpriseBlock(Vector2D position);
 
     /**
      * @return a goomba entity
      */
-    DrawableEntity createGoomba();
+    DrawableEntity createGoomba(Vector2D position);
 
     /**
      * @return a koopa entity
      */
-    DrawableEntity createKoopa();
+    DrawableEntity createKoopa(Vector2D position);
 
     /**
      * @return a main character
      */
-    DrawableEntity createMainCharacter();
+    DrawableEntity createMainCharacter(Vector2D position);
 }
