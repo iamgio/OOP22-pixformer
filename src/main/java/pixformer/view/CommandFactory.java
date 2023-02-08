@@ -18,11 +18,11 @@ public final class CommandFactory {
      * @return a new Command containing the call for a joystick inticated by
      *         {@code input}.
      */
-    private Command<CompleteJoystick> gameInput(Consumer<CompleteJoystick> input) {
+    private Command<CompleteJoystick> gameInput(final Consumer<CompleteJoystick> input) {
         return new Command<CompleteJoystick>() {
 
             @Override
-            public void accept(ControllerInputComponent<CompleteJoystick> arg0) {
+            public void accept(final ControllerInputComponent<CompleteJoystick> arg0) {
                 arg0.acceptGameInput(input);
             }
 
