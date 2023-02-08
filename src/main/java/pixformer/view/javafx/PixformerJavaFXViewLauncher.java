@@ -27,7 +27,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameLoop createGameLoop() {
-        ViewImpl view = new ViewImpl(super.getScene());
+        final ViewImpl view = new ViewImpl(super.getScene());
         return new DefaultGameLoop(view, new ModelMock(), view);
     }
 
