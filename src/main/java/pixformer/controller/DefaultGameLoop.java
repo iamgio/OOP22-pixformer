@@ -59,7 +59,9 @@ public class DefaultGameLoop implements GameLoop {
         final var optional = viewInput.popInput();
         if (optional.isPresent()) {
             final var input = optional.get();
-            input.accept(mockInputComponent);
+            if (isRunning) {
+                input.accept(mockInputComponent);
+            }
         }
         this.view.update(0 /* TODO delta time */);
     }
