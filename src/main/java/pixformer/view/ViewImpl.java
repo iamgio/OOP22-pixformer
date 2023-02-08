@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Implementation of the standard game view.
  */
-public class ViewImpl implements View, ViewInputComponent {
+public final class ViewImpl implements View, ViewInputComponent {
 
     private final GameScene scene;
 

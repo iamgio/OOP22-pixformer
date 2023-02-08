@@ -4,6 +4,14 @@ import java.util.function.Consumer;
 
 import pixformer.model.joystick.CompleteJoystick;
 
+/**
+ * A mock of a ModelInputComponent whose only goal is to explain how the MVC
+ * architecture works.
+ * 
+ * @deprecated it will be removed as soon as its goal is achieved (or I accept
+ *             the other architecture ☹).
+ */
+@Deprecated
 public final class ModelMock implements ModelInputComponent {
 
     private class MockJoystick implements CompleteJoystick {
