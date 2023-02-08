@@ -8,7 +8,7 @@ import pixformer.model.joystick.CompleteJoystick;
 /**
  * A factory for making the creation of Command easier.
  */
-public class CommandFactory {
+public final class CommandFactory {
 
     /**
      * Create a Command containing a call to a Joystick, in other words the Command
