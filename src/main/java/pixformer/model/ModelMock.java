@@ -50,7 +50,7 @@ public final class ModelMock implements ModelInputComponent {
 
     @Override
     public void acceptMarioInput(final Consumer<CompleteJoystick> input) {
-        var mockJoystick = new MockJoystick();
+        final var mockJoystick = new MockJoystick();
         input.accept(mockJoystick);
     }
 
