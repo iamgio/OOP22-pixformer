@@ -18,9 +18,15 @@ public interface World extends Updatable {
     Set<Entity> getEntities();
 
     /**
-     * @return the active players that may control entities
+     * @return immutable list of the active players that may control entities
      */
     List<Player> getPlayers();
+
+    /**
+     * Adds a new player to the world.
+     * @param player player to add
+     */
+    void addPlayer(Player player);
 
     /**
      * @param index index of the player, starting from {@code 0}
