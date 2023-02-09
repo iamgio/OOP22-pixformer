@@ -1,8 +1,8 @@
 package pixformer.controller.input;
 
+
 /**
- * A tagging interface which represents a command to the controller.
- * All commands to the controller shall extend this interface.
+ * A tagging interface for the interfaces whose methods represent commands to the controller.
  */
 public interface ControllerInput {
 
