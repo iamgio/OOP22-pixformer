@@ -1,7 +1,5 @@
 package pixformer.model;
 
-import java.util.function.Consumer;
-
 import pixformer.model.modelInput.CompleteModelInput;
 
 /**
@@ -12,46 +10,37 @@ import pixformer.model.modelInput.CompleteModelInput;
  *             the other architecture ☹).
  */
 @Deprecated
-public final class ModelMock implements ModelInputComponent {
+public final class ModelMock implements CompleteModelInput {
 
-    private static class MockModelInput implements CompleteModelInput {
+    /*
+        * The reason of the following suppressions is because this is just a mock for
+        * explanatory purposes.
+        */
 
-        /*
-         * The reason of the following suppressions is because this is just a mock for
-         * explanatory purposes.
-         */
-
-        @Override
-        public void left() {
-            System.out.println("Mario left"); // NOPMD see above
-        }
-
-        @Override
-        public void right() {
-            System.out.println("Mario right"); // NOPMD see above
-        }
-
-        @Override
-        public void fire() {
-            System.out.println("Mario fire"); // NOPMD see above
-        }
-
-        @Override
-        public void jump() {
-            System.out.println("Mario jump"); // NOPMD see above
-        }
-
-        @Override
-        public void crouch() {
-            System.out.println("Mario crouch"); // NOPMD see above
-        }
-
+    @Override
+    public void left() {
+        System.out.println("Mario left"); // NOPMD see above
     }
 
     @Override
-    public void acceptMarioInput(final Consumer<CompleteModelInput> input) {
-        final var mockModelInput = new MockModelInput();
-        input.accept(mockModelInput);
+    public void right() {
+        System.out.println("Mario right"); // NOPMD see above
+    }
+
+    @Override
+    public void fire() {
+        System.out.println("Mario fire"); // NOPMD see above
+    }
+
+    @Override
+    public void jump() {
+        System.out.println("Mario jump"); // NOPMD see above
+    }
+
+    @Override
+    public void crouch() {
+        System.out.println("Mario crouch"); // NOPMD see above
     }
 
 }
+
