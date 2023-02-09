@@ -1,11 +1,9 @@
 package pixformer.view;
 
-import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.InputType;
 import pixformer.controller.input.ObservableInputPolling;
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelInput.CompleteModelInput;
-import pixformer.model.modelInput.ModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -25,7 +23,7 @@ public final class ViewImpl implements View, ControllerCommandProducer<PauseCont
 
     private TextRenderer text;
     private Optional<Consumer<CompleteModelInput>> gameCommand = Optional.empty();
-    private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
+    private Optional<Consumer<PauseControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
 
     /**
@@ -53,6 +51,8 @@ public final class ViewImpl implements View, ControllerCommandProducer<PauseCont
         // Test
         scene.getInputPolling().addAction(InputType.P1_JUMP,
                 () -> gameCommand = Optional.of(CompleteModelInput::jump));
+        scene.getInputPolling().addAction(InputType.PAUSE,
+                () -> controllerCommand = Optional.of(PauseControllerInput::pause));
     }
 
     /**
@@ -83,7 +83,8 @@ public final class ViewImpl implements View, ControllerCommandProducer<PauseCont
 
     @Override
     public Optional<Consumer<PauseControllerInput>> popControllerCommand() {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+        final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
+        controllerCommand = Optional.empty();
+        return tmp;
     }
 }
