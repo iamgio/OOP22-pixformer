@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInputComponent;
 import pixformer.model.ModelInputComponent;
-import pixformer.model.joystick.CompleteJoystick;
+import pixformer.model.modelInput.CompleteModelInput;
 import pixformer.view.View;
 import pixformer.view.ViewInputComponent;
 
@@ -17,11 +17,11 @@ public class DefaultGameLoop implements GameLoop {
     private final View view;
     private final ModelInputComponent model;
     private boolean isRunning = true;
-    private final ControllerInputComponent<CompleteJoystick> mockInputComponent = 
-        new ControllerInputComponent<CompleteJoystick>() {
+    private final ControllerInputComponent<CompleteModelInput> mockInputComponent = 
+        new ControllerInputComponent<CompleteModelInput>() {
 
             @Override
-            public void acceptGameInput(final Consumer<CompleteJoystick> input) {
+            public void acceptGameInput(final Consumer<CompleteModelInput> input) {
                 model.acceptMarioInput(input);
             }
 

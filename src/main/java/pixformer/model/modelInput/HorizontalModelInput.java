@@ -1,9 +1,9 @@
-package pixformer.model.joystick;
+package pixformer.model.modelInput;
 
 /**
- * A Joystick whose movements are left and right.
+ * A ModelInput whose movements are left and right.
  */
-public interface HorizontalJoystick extends Joystick {
+public interface HorizontalModelInput extends ModelInput {
 
     /**
      * Represents a left movement.

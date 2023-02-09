@@ -2,7 +2,7 @@ package pixformer.model;
 
 import java.util.function.Consumer;
 
-import pixformer.model.joystick.CompleteJoystick;
+import pixformer.model.modelInput.CompleteModelInput;
 
 /**
  * An interface responsible of accepting input for the model.
@@ -17,5 +17,5 @@ public interface ModelInputComponent {
      * @param input a call to a joystick indicating the action which shall be
      *              performed by the entity.
      */
-    void acceptMarioInput(Consumer<CompleteJoystick> input);
+    void acceptMarioInput(Consumer<CompleteModelInput> input);
 }

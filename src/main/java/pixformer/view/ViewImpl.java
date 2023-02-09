@@ -2,7 +2,7 @@ package pixformer.view;
 
 import pixformer.controller.input.InputType;
 import pixformer.controller.input.ObservableInputPolling;
-import pixformer.model.joystick.CompleteJoystick;
+import pixformer.model.modelInput.CompleteModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -19,7 +19,7 @@ public final class ViewImpl implements View, ViewInputComponent {
     private final GameScene scene;
 
     private TextRenderer text;
-    private Optional<Command<CompleteJoystick>> command = Optional.empty();
+    private Optional<Command<CompleteModelInput>> command = Optional.empty();
     private final CommandFactory commandFactory = new CommandFactory();
 
     /**
@@ -67,7 +67,7 @@ public final class ViewImpl implements View, ViewInputComponent {
     }
 
     @Override
-    public Optional<Command<CompleteJoystick>> popInput() {
+    public Optional<Command<CompleteModelInput>> popInput() {
         final var tmp = Optional.ofNullable(command.orElseGet(() -> null));
         command = Optional.empty();
         return tmp;

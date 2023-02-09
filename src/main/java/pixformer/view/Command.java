@@ -3,7 +3,7 @@ package pixformer.view;
 import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInputComponent;
-import pixformer.model.joystick.Joystick;
+import pixformer.model.modelInput.ModelInput;
 
 /**
  * It's an abstraction of command produced by a {@link pixformer.view.Command}
@@ -11,6 +11,6 @@ import pixformer.model.joystick.Joystick;
  * 
  * @param <J> the joystick which will might receive the the command.
  */
-public interface Command<J extends Joystick> extends Consumer<ControllerInputComponent<J>> {
+public interface Command<J extends ModelInput> extends Consumer<ControllerInputComponent<J>> {
 
 }

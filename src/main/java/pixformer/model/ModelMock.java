@@ -2,7 +2,7 @@ package pixformer.model;
 
 import java.util.function.Consumer;
 
-import pixformer.model.joystick.CompleteJoystick;
+import pixformer.model.modelInput.CompleteModelInput;
 
 /**
  * A mock of a ModelInputComponent whose only goal is to explain how the MVC
@@ -14,7 +14,7 @@ import pixformer.model.joystick.CompleteJoystick;
 @Deprecated
 public final class ModelMock implements ModelInputComponent {
 
-    private static class MockJoystick implements CompleteJoystick {
+    private static class MockModelInput implements CompleteModelInput {
 
         /*
          * The reason of the following suppressions is because this is just a mock for
@@ -49,9 +49,9 @@ public final class ModelMock implements ModelInputComponent {
     }
 
     @Override
-    public void acceptMarioInput(final Consumer<CompleteJoystick> input) {
-        final var mockJoystick = new MockJoystick();
-        input.accept(mockJoystick);
+    public void acceptMarioInput(final Consumer<CompleteModelInput> input) {
+        final var mockModelInput = new MockModelInput();
+        input.accept(mockModelInput);
     }
 
 }

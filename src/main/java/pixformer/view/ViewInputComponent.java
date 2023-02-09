@@ -2,7 +2,7 @@ package pixformer.view;
 
 import java.util.Optional;
 
-import pixformer.model.joystick.CompleteJoystick;
+import pixformer.model.modelInput.CompleteModelInput;
 
 /**
  * It is the interface which the input-responsible component of the controller
@@ -18,5 +18,5 @@ public interface ViewInputComponent {
      *           return {@code Optional.empty()} if the view hasn't received another
      *           input in the meanwhile.
      */
-    Optional<Command<CompleteJoystick>> popInput();
+    Optional<Command<CompleteModelInput>> popInput();
 }

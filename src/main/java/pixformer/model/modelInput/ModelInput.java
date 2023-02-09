@@ -1,8 +1,8 @@
-package pixformer.model.joystick;
+package pixformer.model.modelInput;
 
 /**
  * A tagging interface that all joystick interfaces must extend.
  */
-public interface Joystick {
+public interface ModelInput {
 
 }
