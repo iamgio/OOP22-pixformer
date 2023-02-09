@@ -19,6 +19,7 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
         return Optional.ofNullable(
                 switch (input) {
                     case SPACE -> InputType.P1_JUMP;
+                    case P -> InputType.PAUSE;
                     default -> null;
                 }
         );

@@ -1,8 +1,11 @@
 package pixformer.view;
 
+import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.InputType;
 import pixformer.controller.input.ObservableInputPolling;
+import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelInput.ModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -10,20 +13,24 @@ import pixformer.view.engine.TextRenderer;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ViewInputComponent {
+public final class ViewImpl implements View, ControllerCommandProducer<PauseControllerInput>,
+        GameCommandProducer<CompleteModelInput> {
 
     private final GameScene scene;
 
     private TextRenderer text;
-    private Optional<Command<CompleteModelInput>> command = Optional.empty();
-    private final CommandFactory commandFactory = new CommandFactory();
+    private Optional<Consumer<CompleteModelInput>> gameCommand = Optional.empty();
+    private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
+    // private final CommandFactory commandFactory = new CommandFactory();
 
     /**
      * Initializes the default view.
+     * 
      * @param scene current game scene
      */
     public ViewImpl(final GameScene scene) {
@@ -44,7 +51,8 @@ public final class ViewImpl implements View, ViewInputComponent {
         scene.add(text.at(100, 100));
 
         // Test
-        scene.getInputPolling().addAction(InputType.P1_JUMP, () -> command = Optional.of(commandFactory.jump()));
+        scene.getInputPolling().addAction(InputType.P1_JUMP,
+                () -> gameCommand = Optional.of(CompleteModelInput::jump));
     }
 
     /**
@@ -67,9 +75,15 @@ public final class ViewImpl implements View, ViewInputComponent {
     }
 
     @Override
-    public Optional<Command<CompleteModelInput>> popInput() {
-        final var tmp = Optional.ofNullable(command.orElseGet(() -> null));
-        command = Optional.empty();
+    public Optional<Consumer<CompleteModelInput>> popCommand() {
+        final var tmp = Optional.ofNullable(gameCommand.orElseGet(() -> null));
+        gameCommand = Optional.empty();
         return tmp;
+    }
+
+    @Override
+    public Optional<Consumer<PauseControllerInput>> popControllerCommand() {
+        // TODO Auto-generated method stub
+        return Optional.empty();
     }
 }
