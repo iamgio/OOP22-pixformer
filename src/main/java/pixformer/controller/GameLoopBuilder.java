@@ -20,6 +20,7 @@ public class GameLoopBuilder {
 
     public GameLoopBuilder(final View view) {
         this.view = view;
+        this.view.setup();
     }
 
     public GameLoopBuilder addControllerInput(final ControllerCommandProducer<PauseControllerInput> controllerInput) {
