@@ -7,9 +7,11 @@ import pixformer.controller.input.ControllerInput;
 
 /**
  * It represents something which can produce commands for the controller.
+ * 
+ * @param <C> the controller input which this interface will produce.
  */
 public interface ControllerCommandProducer<C extends ControllerInput> {
-    
+
     /**
      * It pops the possibly-collected command.
      * 
