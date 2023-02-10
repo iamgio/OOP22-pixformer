@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInputComponent;
 import pixformer.model.ModelInputComponent;
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.View;
 import pixformer.view.ViewInputComponent;
 

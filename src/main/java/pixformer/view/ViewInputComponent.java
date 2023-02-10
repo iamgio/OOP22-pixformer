@@ -2,7 +2,7 @@ package pixformer.view;
 
 import java.util.Optional;
 
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * It is the interface which the input-responsible component of the controller

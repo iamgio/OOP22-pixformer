@@ -3,7 +3,7 @@ package pixformer.view;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import pixformer.model.modelInput.ModelInput;
+import pixformer.model.modelinput.ModelInput;
 
 /**
  * It represents a component which can produce a command for the game.

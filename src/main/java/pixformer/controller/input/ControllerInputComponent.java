@@ -2,7 +2,7 @@ package pixformer.controller.input;
 
 import java.util.function.Consumer;
 
-import pixformer.model.modelInput.ModelInput;
+import pixformer.model.modelinput.ModelInput;
 
 /**
  * An interface which represents a component of the controller which will

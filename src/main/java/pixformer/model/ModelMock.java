@@ -1,6 +1,6 @@
 package pixformer.model;
 
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * A mock of a ModelInputComponent whose only goal is to explain how the MVC

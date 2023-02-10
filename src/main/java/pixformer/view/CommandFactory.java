@@ -3,7 +3,7 @@ package pixformer.view;
 import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInputComponent;
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * A factory for making the creation of Command easier.

@@ -3,7 +3,7 @@ package pixformer.view;
 import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInputComponent;
-import pixformer.model.modelInput.ModelInput;
+import pixformer.model.modelinput.ModelInput;
 
 /**
  * It's an abstraction of command produced by a {@link pixformer.view.Command}

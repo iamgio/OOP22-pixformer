@@ -3,7 +3,7 @@ package pixformer.view;
 import pixformer.controller.input.InputType;
 import pixformer.controller.input.ObservableInputPolling;
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;

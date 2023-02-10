@@ -2,7 +2,7 @@ package pixformer.model;
 
 import java.util.function.Consumer;
 
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * An interface responsible of accepting input for the model.

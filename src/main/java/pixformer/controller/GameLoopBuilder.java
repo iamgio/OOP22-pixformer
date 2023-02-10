@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelInput.CompleteModelInput;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.ControllerCommandProducer;
 import pixformer.view.GameCommandProducer;
 import pixformer.view.View;
