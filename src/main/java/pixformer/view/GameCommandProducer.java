@@ -7,6 +7,8 @@ import pixformer.model.modelInput.ModelInput;
 
 /**
  * It represents a component which can produce a command for the game.
+ * 
+ * @param <M> the ModelInput which will be produced.
  */
 public interface GameCommandProducer<M extends ModelInput> {
 
