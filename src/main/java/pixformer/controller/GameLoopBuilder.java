@@ -11,31 +11,57 @@ import pixformer.view.ControllerCommandProducer;
 import pixformer.view.GameCommandProducer;
 import pixformer.view.View;
 
+/**
+ * A builder for easing creating controllers with multiple
+ * {@link ControllerCommandProducer} and multiple players.
+ */
 public class GameLoopBuilder {
-    
+
     private final View view;
     private final Set<ControllerCommandProducer<PauseControllerInput>> controllerInputs = new HashSet<>();
-    private final Map<GameCommandProducer<CompleteModelInput>, CompleteModelInput> players = 
-        new HashMap<>();
+    private final Map<GameCommandProducer<CompleteModelInput>, CompleteModelInput> players = new HashMap<>();
 
+    /**
+     * Construct a builder and setup the view.
+     * 
+     * @param view responsible for the output.
+     */
     public GameLoopBuilder(final View view) {
         this.view = view;
         this.view.setup();
     }
 
+    /**
+     * Add a {@link ControllerCommandProducer} to the building controller.
+     * 
+     * @param controllerInput to be added
+     * @return itself.
+     */
     public GameLoopBuilder addControllerInput(final ControllerCommandProducer<PauseControllerInput> controllerInput) {
         controllerInputs.add(controllerInput);
         return this;
     }
 
+    /**
+     * Add a player to the controller, which means adding a pair of
+     * {@link GameCommandProducer} and {@link ModelInput}.
+     * 
+     * @param view
+     * @param model
+     * @return itself.
+     */
     public GameLoopBuilder addPlayer(
-        final GameCommandProducer<CompleteModelInput> view,
-        final CompleteModelInput model
-    ) {
+            final GameCommandProducer<CompleteModelInput> view,
+            final CompleteModelInput model) {
         players.put(view, model);
         return this;
     }
 
+    /**
+     * Builds a new controller.
+     * 
+     * @return the new controller.
+     */
     public GameLoop build() {
         return new GameLoop() {
 
@@ -57,19 +83,19 @@ public class GameLoopBuilder {
             @Override
             public void loop(final long now) {
                 controllerInputs.stream()
-                    .flatMap(i -> i.popControllerCommand().stream())
-                    .forEach(i -> i.accept(mockController));
-                
+                        .flatMap(i -> i.popControllerCommand().stream())
+                        .forEach(i -> i.accept(mockController));
+
                 if (isRunning) {
                     players.entrySet().stream()
-                        .map(e -> Map.entry(e.getKey().popCommand(), e.getValue()))
-                        .filter(e -> e.getKey().isPresent())
-                        .map(e -> Map.entry(e.getKey().get(), e.getValue()))
-                        .forEach(e -> e.getKey().accept(e.getValue()));
+                            .map(e -> Map.entry(e.getKey().popCommand(), e.getValue()))
+                            .filter(e -> e.getKey().isPresent())
+                            .map(e -> Map.entry(e.getKey().get(), e.getValue()))
+                            .forEach(e -> e.getKey().accept(e.getValue()));
                 }
                 view.update(0 /* TODO delta time */);
             }
-            
+
         };
     }
 
