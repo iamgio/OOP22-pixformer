@@ -1,7 +1,6 @@
 package pixformer.view.javafx;
 
 import javafx.application.Application;
-import pixformer.controller.DefaultGameLoop;
 import pixformer.controller.GameLoop;
 import pixformer.controller.GameLoopBuilder;
 import pixformer.model.ModelMock;
