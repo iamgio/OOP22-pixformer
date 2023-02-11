@@ -8,6 +8,11 @@ import pixformer.common.Vector2D;
 public interface EntityFactory {
 
     /**
+     * @return a tile block
+     */
+    DrawableEntity createTileBlock(Vector2D position);
+
+    /**
      * @return a grass block
      */
     DrawableEntity createGrassBlock(Vector2D position);

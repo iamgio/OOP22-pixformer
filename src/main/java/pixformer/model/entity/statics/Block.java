@@ -1,22 +1,26 @@
 package pixformer.model.entity.statics;
 
+import pixformer.model.entity.GraphicsComponent;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.DrawableEntity;
 
 /**
  * {@inheritDoc}
- * Grass block, which is the base for the level.
+ * Standard block in the world.
  */
-public class Grass implements DrawableEntity {
-    private double width;
-    private double height;
-    private Vector2D position;
-    // private final GraphicComponent graphComponent
+public class Block implements DrawableEntity {
 
-    public Grass (final Vector2D position, final double width, final double height) {
+    private final double width;
+    private final double height;
+    private final Vector2D position;
+    private final GraphicsComponent graphicsComponent;
+
+    public Block(final Vector2D position, final double width, final double height,
+                 final GraphicsComponent graphicsComponent) {
         this.width = width;
         this.height = height;
         this.position = position;
+        this.graphicsComponent = graphicsComponent;
     }
 
     /**
@@ -51,4 +55,11 @@ public class Grass implements DrawableEntity {
         return this.height;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent getGraphicsComponent() {
+        return this.graphicsComponent;
+    }
 }
