@@ -10,7 +10,7 @@ import pixformer.model.modelinput.ModelInput;
  * 
  * @param <M> the ModelInput which will be produced.
  */
-public interface GameCommandProducer<M extends ModelInput> {
+public interface ModelCommandSupplier<M extends ModelInput> {
 
     /**
      * It pops the possibly-collected command.

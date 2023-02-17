@@ -8,7 +8,7 @@ import java.util.Set;
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.ControllerCommandSupplier;
-import pixformer.view.GameCommandProducer;
+import pixformer.view.ModelCommandSupplier;
 import pixformer.view.View;
 
 /**
@@ -19,7 +19,7 @@ public class GameLoopBuilder {
 
     private final View view;
     private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
-    private final Map<GameCommandProducer<CompleteModelInput>, CompleteModelInput> players = new HashMap<>();
+    private final Map<ModelCommandSupplier<CompleteModelInput>, CompleteModelInput> players = new HashMap<>();
 
     /**
      * Construct a builder and setup the view.
@@ -44,14 +44,14 @@ public class GameLoopBuilder {
 
     /**
      * Add a player to the controller, which means adding a pair of
-     * {@link GameCommandProducer} and {@link ModelInput}.
+     * {@link ModelCommandSupplier} and {@link ModelInput}.
      * 
      * @param view
      * @param model
      * @return itself.
      */
     public GameLoopBuilder addPlayer(
-            final GameCommandProducer<CompleteModelInput> view,
+            final ModelCommandSupplier<CompleteModelInput> view,
             final CompleteModelInput model) {
         players.put(view, model);
         return this;
