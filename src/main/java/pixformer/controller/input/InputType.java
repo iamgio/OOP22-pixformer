@@ -8,5 +8,9 @@ public enum InputType {
     /**
      * Player 1 should perform a jump.
      */
-    P1_JUMP
+    P1_JUMP,
+    /**
+     * Pause the game.
+     */
+    PAUSE
 }
