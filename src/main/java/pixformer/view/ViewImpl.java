@@ -82,7 +82,7 @@ public final class ViewImpl implements View, ControllerCommandProducer<PauseCont
     }
 
     @Override
-    public Optional<Consumer<PauseControllerInput>> popControllerCommand() {
+    public Optional<Consumer<PauseControllerInput>> supplyControllerCommand() {
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;

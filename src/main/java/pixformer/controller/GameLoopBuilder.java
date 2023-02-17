@@ -83,7 +83,7 @@ public class GameLoopBuilder {
             @Override
             public void loop(final long now) {
                 controllerInputs.stream()
-                        .flatMap(i -> i.popControllerCommand().stream())
+                        .flatMap(i -> i.supplyControllerCommand().stream())
                         .forEach(i -> i.accept(mockController));
 
                 if (isRunning) {
