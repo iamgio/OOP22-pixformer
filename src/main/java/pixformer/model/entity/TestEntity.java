@@ -10,15 +10,23 @@ import java.util.Optional;
  */
 public class TestEntity implements Entity {
 
-    private static final double POS = 10;
     private static final double SIZE = 1; // Test values
+
+    private final double x;
+
+    /**
+     * @param x X coordinate
+     */
+    public TestEntity(final double x) {
+        this.x = x;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public double getX() {
-        return POS;
+        return this.x;
     }
 
     /**
@@ -26,7 +34,7 @@ public class TestEntity implements Entity {
      */
     @Override
     public double getY() {
-        return POS;
+        return 0;
     }
 
     /**

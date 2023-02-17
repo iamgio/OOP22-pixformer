@@ -21,4 +21,12 @@ public interface Graphics {
      * @param scale scale factor
      */
     void setScale(double scale);
+
+    /**
+     * Sets the new coordinates to use as the origin point to draw.
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @implNote the default translation is (0,0)
+     */
+    void setTranslate(double x, double y);
 }

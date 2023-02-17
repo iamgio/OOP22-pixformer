@@ -76,6 +76,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     @Override
     public void update(final double dt) {
+        this.scene.getGraphics().setTranslate(0, 0);
+
         this.text.setText("Now:\n" + new Date());
 
         this.getInputPolling().update(dt);

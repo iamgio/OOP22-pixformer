@@ -14,6 +14,9 @@ public class JavaFXGraphics implements Graphics {
 
     private final GraphicsContext graphics;
 
+    private double translationX;
+    private double translationY;
+
     /**
      * Creates a wrapper for JavaFX graphics.
      * @param graphics graphics to draw on
@@ -50,8 +53,18 @@ public class JavaFXGraphics implements Graphics {
      * {@inheritDoc}
      */
     @Override
-    public void setScale(double scale) {
+    public void setScale(final double scale) {
         this.graphics.scale(scale, scale);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTranslate(final double x, final double y) {
+        this.graphics.translate(x - this.translationX, y - this.translationY);
+        this.translationX = x;
+        this.translationY = y;
     }
 
     /**
