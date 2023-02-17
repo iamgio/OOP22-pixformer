@@ -13,7 +13,7 @@ import pixformer.model.modelinput.ModelInput;
 public interface ModelCommandSupplier<M extends ModelInput> {
 
     /**
-     * It pops the possibly-collected command.
+     * It supply the possibly-collected command.
      * 
      * @return the command.
      * @implNote when this method is called, a following call of this method should
