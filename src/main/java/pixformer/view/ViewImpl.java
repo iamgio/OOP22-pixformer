@@ -67,6 +67,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      * {@inheritDoc}
      */
     @Override
+    public GameScene getScene() {
+        return this.scene;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update(final double dt) {
         this.text.setText("Now:\n" + new Date());
 

@@ -33,7 +33,7 @@ public class JavaFXGraphics implements Graphics {
      * {@inheritDoc}
      */
     @Override
-    public void draw(final Renderer renderer, final double x, final double y) {
+    public void draw(final Renderer renderer) {
         renderer.render(0, this);
     }
 

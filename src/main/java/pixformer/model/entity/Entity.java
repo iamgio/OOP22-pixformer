@@ -1,5 +1,9 @@
 package pixformer.model.entity;
 
+import pixformer.view.entity.GraphicsComponent;
+
+import java.util.Optional;
+
 /**
  * In-Game entity.
  */
@@ -25,4 +29,8 @@ public interface Entity {
      */
     double getHeight();
 
+    /**
+     * @return the component responsible for drawing this entity on screen
+     */
+    Optional<GraphicsComponent> getGraphicsComponent();
 }
