@@ -7,18 +7,18 @@ import java.util.Set;
 
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelinput.CompleteModelInput;
-import pixformer.view.ControllerCommandProducer;
+import pixformer.view.ControllerCommandSupplier;
 import pixformer.view.GameCommandProducer;
 import pixformer.view.View;
 
 /**
  * A builder for easing creating controllers with multiple
- * {@link ControllerCommandProducer} and multiple players.
+ * {@link ControllerCommandSupplier} and multiple players.
  */
 public class GameLoopBuilder {
 
     private final View view;
-    private final Set<ControllerCommandProducer<PauseControllerInput>> controllerInputs = new HashSet<>();
+    private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
     private final Map<GameCommandProducer<CompleteModelInput>, CompleteModelInput> players = new HashMap<>();
 
     /**
@@ -32,12 +32,12 @@ public class GameLoopBuilder {
     }
 
     /**
-     * Add a {@link ControllerCommandProducer} to the building controller.
+     * Add a {@link ControllerCommandSupplier} to the building controller.
      * 
      * @param controllerInput to be added
      * @return itself.
      */
-    public GameLoopBuilder addControllerInput(final ControllerCommandProducer<PauseControllerInput> controllerInput) {
+    public GameLoopBuilder addControllerInput(final ControllerCommandSupplier<PauseControllerInput> controllerInput) {
         controllerInputs.add(controllerInput);
         return this;
     }

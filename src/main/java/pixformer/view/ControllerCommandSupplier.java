@@ -11,7 +11,7 @@ import pixformer.controller.input.ControllerInput;
  * 
  * @param <C> the controller input which this interface will produce.
  */
-public interface ControllerCommandProducer<C extends ControllerInput> {
+public interface ControllerCommandSupplier<C extends ControllerInput> {
 
     /**
      * It supply the possibly-collected command.

@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ControllerCommandProducer<PauseControllerInput>,
+public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput>,
         GameCommandProducer<CompleteModelInput> {
 
     private final GameScene scene;
