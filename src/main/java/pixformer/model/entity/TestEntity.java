@@ -10,8 +10,8 @@ import java.util.Optional;
  */
 public class TestEntity implements Entity {
 
-    private static final double POS = 300;
-    private static final double SIZE = 100; // Test values
+    private static final double POS = 10;
+    private static final double SIZE = 1; // Test values
 
     /**
      * {@inheritDoc}

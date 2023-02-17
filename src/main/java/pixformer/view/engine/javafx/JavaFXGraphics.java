@@ -47,6 +47,14 @@ public class JavaFXGraphics implements Graphics {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScale(double scale) {
+        this.graphics.scale(scale, scale);
+    }
+
+    /**
      *
      * @param graphics generic graphics
      * @return the given graphics as JavaFX graphics, if compatible

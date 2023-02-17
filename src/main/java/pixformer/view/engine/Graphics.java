@@ -15,4 +15,10 @@ public interface Graphics {
      * Clears what was previously rendered.
      */
     void clear();
+
+    /**
+     * Sets a scale factor for the next renders.
+     * @param scale scale factor
+     */
+    void setScale(double scale);
 }
