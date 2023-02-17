@@ -88,7 +88,7 @@ public class GameLoopBuilder {
 
                 if (isRunning) {
                     players.entrySet().stream()
-                            .map(e -> Map.entry(e.getKey().popCommand(), e.getValue()))
+                            .map(e -> Map.entry(e.getKey().supplyModelCommand(), e.getValue()))
                             .filter(e -> e.getKey().isPresent())
                             .map(e -> Map.entry(e.getKey().get(), e.getValue()))
                             .forEach(e -> e.getKey().accept(e.getValue()));

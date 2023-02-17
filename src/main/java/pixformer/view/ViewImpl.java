@@ -75,7 +75,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
     }
 
     @Override
-    public Optional<Consumer<CompleteModelInput>> popCommand() {
+    public Optional<Consumer<CompleteModelInput>> supplyModelCommand() {
         final var tmp = Optional.ofNullable(gameCommand.orElseGet(() -> null));
         gameCommand = Optional.empty();
         return tmp;

@@ -20,5 +20,5 @@ public interface GameCommandProducer<M extends ModelInput> {
      *           return {@code Optional.empty()} if the view hasn't received another
      *           input in the meanwhile.
      */
-    Optional<Consumer<M>> popCommand();
+    Optional<Consumer<M>> supplyModelCommand();
 }
