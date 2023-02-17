@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import pixformer.controller.input.ControllerInput;
 
+
 /**
  * It represents something which can produce commands for the controller.
  * 
