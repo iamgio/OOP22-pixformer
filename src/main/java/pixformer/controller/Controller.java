@@ -1,5 +1,6 @@
 package pixformer.controller;
 
+import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
 
 /**

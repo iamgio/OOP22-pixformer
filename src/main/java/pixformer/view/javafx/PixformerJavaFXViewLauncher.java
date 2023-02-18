@@ -1,8 +1,8 @@
 package pixformer.view.javafx;
 
 import javafx.application.Application;
-import pixformer.controller.GameLoop;
-import pixformer.controller.GameLoopBuilder;
+import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.gameloop.GameLoopBuilder;
 import pixformer.model.ModelMock;
 import pixformer.model.WorldImpl;
 import pixformer.view.ViewImpl;
