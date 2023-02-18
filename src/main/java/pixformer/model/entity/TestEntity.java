@@ -14,11 +14,14 @@ public class TestEntity implements Entity {
 
     private final double x;
 
+    private final GraphicsComponent graphicsComponent;
+
     /**
      * @param x X coordinate
      */
     public TestEntity(final double x) {
         this.x = x;
+        this.graphicsComponent = new TestGraphicsComponent(this);
     }
 
     /**
@@ -58,6 +61,6 @@ public class TestEntity implements Entity {
      */
     @Override
     public Optional<GraphicsComponent> getGraphicsComponent() {
-        return Optional.of(new TestGraphicsComponent(this));
+        return Optional.of(this.graphicsComponent);
     }
 }
