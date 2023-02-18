@@ -1,16 +1,16 @@
 package pixformer.model.entity.statics;
 
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.common.Vector2D;
 
 /**
- * {@inheritDoc}
  * Surprise block, which contains a power-up.
  */
-public class Surprise extends Block {
+public class Surprise extends AbstractEntity {
 
-    public Surprise(final Vector2D position, final double width, final double height,
-                    final GraphicsComponent graphicsComponent) {
-        super(position, width, height, graphicsComponent);
+    public Surprise(final double x, final double y, final double width, final double height) {
+        super(x, y, width, height);
     }
+
 }
