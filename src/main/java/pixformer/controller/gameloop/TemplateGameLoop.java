@@ -32,7 +32,7 @@ public abstract class TemplateGameLoop implements GameLoop {
     abstract void render();
 
     @Override
-    public void loop(final long now) {
+    public final void loop(final long now) {
         final double elapsed = now - previous;
         processInput();
         update(elapsed);
