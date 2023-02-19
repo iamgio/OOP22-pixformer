@@ -41,7 +41,7 @@ public class GenericGameLoop implements GameLoop {
     }
 
     @Override
-    public void loop(final long now) {
+    public final void loop(final long now) {
         final long elapsed = isFirstIteration ? 0 : now - previous;
         loopRoutine(elapsed);
         isFirstIteration = false;
