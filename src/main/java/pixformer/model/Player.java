@@ -1,11 +1,12 @@
 package pixformer.model;
 
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.model.score.Score;
 
 /**
  * Abstraction of a user playing the game.
  */
-public interface Player {
+public interface Player extends CompleteModelInput {
 
     /**
      * @return the player's score
@@ -15,7 +16,8 @@ public interface Player {
     /**
      * The player moves left.
      */
-    void goLeft();
+    @Override
+    void left();
 
     /**
      * Adds an action to be executed when the player goes left.
@@ -26,7 +28,8 @@ public interface Player {
     /**
      * The player moves right.
      */
-    void goRight();
+    @Override
+    void right();
 
     /**
      * Adds an action to be executed when the player goes right.
@@ -37,6 +40,7 @@ public interface Player {
     /**
      * The player jumps.
      */
+    @Override
     void jump();
 
     /**
@@ -45,5 +49,5 @@ public interface Player {
      */
     void addOnJump(Runnable action);
 
-    // run, fire, ...
+    // run, fire, ... added thanks to CompleteModelInput
 }
