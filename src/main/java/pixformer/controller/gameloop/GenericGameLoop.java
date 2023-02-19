@@ -14,6 +14,13 @@ public class GenericGameLoop implements GameLoop {
     private final Runnable render;
     private final LongConsumer sleep;
 
+    /**
+     * Construct a new GenericGameLoop.
+     * @param processInput the action to be performed to collect inputs
+     * @param update the action for updating the model
+     * @param render the action for updating the view
+     * @param sleep the action which can make the game loop thread sleep.
+     */
     public GenericGameLoop(
         final Runnable processInput,
         final LongConsumer update,
