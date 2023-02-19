@@ -73,12 +73,12 @@ public class PlayerImpl implements Player {
     @Override
     public void fire() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void crouch() {
         // TODO Auto-generated method stub
-        
+
     }
 }
