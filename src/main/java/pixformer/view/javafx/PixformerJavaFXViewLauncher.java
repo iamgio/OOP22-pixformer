@@ -2,8 +2,10 @@ package pixformer.view.javafx;
 
 import javafx.application.Application;
 import pixformer.controller.gameloop.GameLoop;
-import pixformer.controller.gameloop.GameLoopBuilder;
-import pixformer.model.ModelMock;
+import pixformer.controller.gameloop.GenericGameLoop;
+import pixformer.controller.gameloop.InputCollector;
+import pixformer.controller.gameloop.InputCollectorBuilder;
+import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.view.ViewImpl;
 import pixformer.view.engine.internationalization.Lang;
@@ -29,11 +31,25 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     @Override
     public GameLoop createGameLoop() {
         final ViewImpl view = new ViewImpl(super.getScene());
-        // return new DefaultGameLoop(view, new ModelMock(), view);
-        return new GameLoopBuilder(view)
+        final World level = new WorldImpl();
+        final InputCollector inputCollector = new InputCollectorBuilder()
             .addControllerInput(view)
-            .addPlayer(view, new ModelMock())
+            .addPlayer(view, level.getPlayer(0).get())
             .build();
+        return new GenericGameLoop(
+            inputCollector::execute, 
+            level::update,
+            () -> {
+                
+            },
+            dt -> {
+                final long period = 17;
+                if (dt < period) {
+                    try {
+                        Thread.sleep(period - dt);
+                    } catch (final InterruptedException ex) { }
+                }
+            });
     }
 
     /**
