@@ -1,12 +1,11 @@
 package pixformer.model.input;
 
-import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 
 /**
  * Represents an input source for an {@link Entity}.
  */
-public abstract class InputComponent implements Updatable {
+public abstract class InputComponent {
 
     private final Entity entity;
 

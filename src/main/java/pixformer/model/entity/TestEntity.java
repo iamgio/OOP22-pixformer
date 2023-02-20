@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.input.InputComponent;
 import pixformer.view.entity.GraphicsComponent;
 import pixformer.view.entity.TestGraphicsComponent;
 
@@ -12,8 +13,10 @@ public class TestEntity implements Entity {
 
     private static final double SIZE = 1; // Test values
 
-    private final double x;
+    // Il campo X andrà in Entity (classe astratta)
+    private double x;
 
+    private final InputComponent inputComponent;
     private final GraphicsComponent graphicsComponent;
 
     /**
@@ -21,6 +24,7 @@ public class TestEntity implements Entity {
      */
     public TestEntity(final double x) {
         this.x = x;
+        this.inputComponent = new TestInputComponent(this);
         this.graphicsComponent = new TestGraphicsComponent(this);
     }
 
@@ -33,11 +37,19 @@ public class TestEntity implements Entity {
     }
 
     /**
+     * Sets the X coordinate.
+     * @param x X coordinate
+     */
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public double getY() {
-        return 0;
+        return 15;
     }
 
     /**
@@ -54,6 +66,11 @@ public class TestEntity implements Entity {
     @Override
     public double getHeight() {
         return SIZE;
+    }
+
+    @Override
+    public Optional<InputComponent> getInputComponent() {
+        return Optional.of(inputComponent);
     }
 
     /**

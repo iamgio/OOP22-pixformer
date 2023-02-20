@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.input.InputComponent;
 import pixformer.view.entity.GraphicsComponent;
 
 import java.util.Optional;
@@ -28,6 +29,11 @@ public interface Entity {
      * @return the height of the entity
      */
     double getHeight();
+
+    /**
+     * @return the component responsible for handling this entity's input
+     */
+    Optional<InputComponent> getInputComponent();
 
     /**
      * @return the component responsible for drawing this entity on screen
