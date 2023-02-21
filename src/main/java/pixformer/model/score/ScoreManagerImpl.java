@@ -1,5 +1,8 @@
 package pixformer.model.score;
 
+/**
+ * {@inheritDoc}
+ */
 public class ScoreManagerImpl implements ScoreManager{
     private final Score score;
 
@@ -11,7 +14,7 @@ public class ScoreManagerImpl implements ScoreManager{
     }
 
     /**
-     * @return the score of the player
+     * {@inheritDoc}
      */
     @Override
     public int getScore() {
