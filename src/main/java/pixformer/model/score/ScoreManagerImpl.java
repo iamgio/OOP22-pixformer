@@ -1,11 +1,14 @@
 package pixformer.model.score;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
-public class ScoreManagerImpl implements ScoreManager{
+public class ScoreManagerImpl implements ScoreManager {
     private final Score score;
 
+    /**
+     * Costructor for the class.
+     */
     public ScoreManagerImpl() {
         this.score = new ScoreImpl();
         // TODO

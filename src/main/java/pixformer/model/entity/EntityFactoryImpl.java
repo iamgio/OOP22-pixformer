@@ -1,14 +1,11 @@
 package pixformer.model.entity;
 
 import pixformer.common.Vector2D;
-import pixformer.model.entity.statics.Block;
-import pixformer.model.entity.statics.Brick;
-import pixformer.model.entity.statics.Surprise;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
-public class EntityFactoryImpl implements EntityFactory{
+public class EntityFactoryImpl implements EntityFactory {
 
     /**
      * {@inheritDoc}

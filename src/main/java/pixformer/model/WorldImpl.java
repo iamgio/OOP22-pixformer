@@ -21,7 +21,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Entity> getEntities() {
-        return this.entities;
+        return Set.copyOf(this.entities);
     }
 
     /**

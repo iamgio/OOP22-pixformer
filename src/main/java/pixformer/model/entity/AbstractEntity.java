@@ -3,12 +3,19 @@ package pixformer.model.entity;
 /**
  * Abstract class for an entity.
  */
-public class AbstractEntity implements Entity{
-    private double x;
-    private double y;
-    private double width;
-    private double height;
+public class AbstractEntity implements Entity {
+    private final double x;
+    private final double y;
+    private final double width;
+    private final double height;
 
+    /**
+     * Constructor for the Entity.
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param width width of the entity
+     * @param height height of the entity
+     */
     protected AbstractEntity(final double x, final double y, final double width, final double height) {
         this.x = x;
         this.y = y;

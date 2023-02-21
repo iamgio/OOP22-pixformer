@@ -1,11 +1,14 @@
 package pixformer.model.score;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
 public class ScoreImpl implements Score {
     private int points;
 
+    /**
+     * Constructor for the class.
+     */
     public ScoreImpl() {
         this.points = 0;
     }
