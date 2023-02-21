@@ -29,8 +29,9 @@ public interface InputCollectorBuilder {
      * @return itself.
      */
     InputCollectorBuilder addPlayer(
-            ModelCommandSupplier<CompleteModelInput> view,
-            CompleteModelInput model);
+                CompleteModelInput model,
+            ModelCommandSupplier<CompleteModelInput> view
+            );
 
     /**
      * Builds a new input collector.

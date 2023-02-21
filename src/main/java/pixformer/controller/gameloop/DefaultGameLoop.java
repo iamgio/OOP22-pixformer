@@ -1,12 +1,13 @@
 package pixformer.controller.gameloop;
 
-import java.util.function.Consumer;
-
 import pixformer.controller.input.ControllerInputComponent;
 import pixformer.model.ModelInputComponent;
+import pixformer.model.World;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.View;
 import pixformer.view.ViewInputComponent;
+
+import java.util.function.Consumer;
 
 /**
  * The default game loop.
@@ -18,7 +19,7 @@ public class DefaultGameLoop implements GameLoop {
     private final ModelInputComponent model;
     private boolean isRunning = true;
     private final ControllerInputComponent<CompleteModelInput> mockInputComponent = 
-        new ControllerInputComponent<CompleteModelInput>() {
+        new ControllerInputComponent<>() {
 
             @Override
             public void acceptGameInput(final Consumer<CompleteModelInput> input) {
@@ -44,7 +45,7 @@ public class DefaultGameLoop implements GameLoop {
      * @param model    of the application
      * @param view     active game view.
      */
-    public DefaultGameLoop(final ViewInputComponent viewComp, final ModelInputComponent model, final View view) {
+    public DefaultGameLoop(final World world, final ViewInputComponent viewComp, final ModelInputComponent model, final View view) {
         this.viewInput = viewComp;
         this.model = model;
         this.view = view;

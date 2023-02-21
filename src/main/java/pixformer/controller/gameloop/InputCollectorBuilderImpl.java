@@ -1,14 +1,14 @@
 package pixformer.controller.gameloop;
 
-import java.util.HashMap;
+import pixformer.controller.input.PauseControllerInput;
+import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.modelinput.ModelInput;
+import pixformer.view.ControllerCommandSupplier;
+import pixformer.view.ModelCommandSupplier;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.CompleteModelInput;
-import pixformer.view.ControllerCommandSupplier;
-import pixformer.view.ModelCommandSupplier;
 
 /**
  * A builder for easing creating collectors of inputs with multiple
@@ -17,7 +17,7 @@ import pixformer.view.ModelCommandSupplier;
 public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
     private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
-    private final Map<ModelCommandSupplier<CompleteModelInput>, CompleteModelInput> players = new HashMap<>();
+    private final Set<Map.Entry<CompleteModelInput, ModelCommandSupplier<CompleteModelInput>>> players = new HashSet<>();
 
     /**
      * Add a {@link ControllerCommandSupplier} to the building controller.
@@ -36,15 +36,13 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
      * Add a player to the controller, which means adding a pair of
      * {@link ModelCommandSupplier} and {@link ModelInput}.
      * 
-     * @param view
      * @param model
      * @return itself.
      */
-    @Override
     public InputCollectorBuilder addPlayer(
-            final ModelCommandSupplier<CompleteModelInput> view,
-            final CompleteModelInput model) {
-        players.put(view, model);
+            final CompleteModelInput model,
+            final ModelCommandSupplier<CompleteModelInput> supplier) {
+        players.add(Map.entry(model, supplier));
         return this;
     }
 
@@ -74,16 +72,17 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
             @Override
             public void execute() {
+                if (!isRunning) {
+                    return;
+                }
+
                 controllerInputs.stream()
                         .flatMap(i -> i.supplyControllerCommand().stream())
                         .forEach(i -> i.accept(mockController));
 
-                if (isRunning) {
-                    players.entrySet().stream()
-                            .map(e -> Map.entry(e.getKey().supplyModelCommand(), e.getValue()))
-                            .filter(e -> e.getKey().isPresent())
-                            .map(e -> Map.entry(e.getKey().get(), e.getValue()))
-                            .forEach(e -> e.getKey().accept(e.getValue()));
+                for (var entry : players) {
+                    var command = entry.getValue().supplyModelCommand();
+                    command.ifPresent(cmd -> cmd.accept(entry.getKey()));
                 }
             }
 
