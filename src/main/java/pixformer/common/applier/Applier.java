@@ -1,6 +1,7 @@
 package pixformer.common.applier;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Generic applier for a specific consumer.
@@ -11,16 +12,16 @@ public interface Applier {
      * Factory method for the applier.
      * 
      * @param <A>      type of the item
-     * @param consumer consumer
+     * @param supplier supplier
      * @param item     item to consume
      * @return a new Applier
      */
-    static <A> Applier of(Consumer<A> consumer, A item) {
+    static <A> Applier of(Supplier<Consumer<A>> supplier, A item) {
         return new Applier() {
 
             @Override
             public void apply() {
-                consumer.accept(item);
+                supplier.get().accept(item);
             }
         };
     }
