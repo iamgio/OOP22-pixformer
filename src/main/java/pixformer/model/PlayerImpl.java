@@ -26,7 +26,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void left() {
+    public void goLeft() {
         this.onGoLeft.forEach(Runnable::run);
     }
 
@@ -42,7 +42,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void right() {
+    public void goRight() {
         this.onGoRight.forEach(Runnable::run);
     }
 
@@ -68,17 +68,5 @@ public class PlayerImpl implements Player {
     @Override
     public void addOnJump(final Runnable action) {
         this.onJump.add(action);
-    }
-
-    @Override
-    public void fire() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void crouch() {
-        // TODO Auto-generated method stub
-
     }
 }
