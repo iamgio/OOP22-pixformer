@@ -26,7 +26,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void goLeft() {
+    public void left() {
         this.onGoLeft.forEach(Runnable::run);
     }
 
@@ -42,7 +42,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void goRight() {
+    public void right() {
         this.onGoRight.forEach(Runnable::run);
     }
 
@@ -68,5 +68,17 @@ public class PlayerImpl implements Player {
     @Override
     public void addOnJump(final Runnable action) {
         this.onJump.add(action);
+    }
+
+    @Override
+    public void fire() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fire'");
+    }
+
+    @Override
+    public void crouch() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'crouch'");
     }
 }
