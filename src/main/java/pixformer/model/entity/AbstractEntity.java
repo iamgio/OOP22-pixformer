@@ -11,9 +11,10 @@ public class AbstractEntity implements Entity {
 
     /**
      * Constructor for the Entity.
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @param width width of the entity
+     * 
+     * @param x      X coordinate
+     * @param y      Y coordinate
+     * @param width  width of the entity
      * @param height height of the entity
      */
     protected AbstractEntity(final double x, final double y, final double width, final double height) {
