@@ -5,7 +5,7 @@ import java.util.function.LongConsumer;
 /**
  * Strategy pattern solution for creating a game loop.
  */
-public class GenericGameLoop implements GameLoop {
+public class GeneralGameLoop implements GameLoop {
 
     private long previous;
     private boolean isFirstIteration = true;
@@ -21,7 +21,7 @@ public class GenericGameLoop implements GameLoop {
      * @param render the action for updating the view
      * @param sleep the action which can make the game loop thread sleep.
      */
-    public GenericGameLoop(
+    public GeneralGameLoop(
         final Runnable processInput,
         final LongConsumer update,
         final Runnable render,

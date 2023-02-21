@@ -2,7 +2,7 @@ package pixformer.view.javafx;
 
 import javafx.application.Application;
 import pixformer.controller.gameloop.GameLoop;
-import pixformer.controller.gameloop.GenericGameLoop;
+import pixformer.controller.gameloop.GeneralGameLoop;
 import pixformer.controller.gameloop.InputCollector;
 import pixformer.controller.gameloop.InputCollectorBuilder;
 import pixformer.controller.gameloop.InputCollectorBuilderImpl;
@@ -37,7 +37,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
             .addControllerInput(view)
             .addPlayer(view, level.getPlayer(0).get())
             .build();
-        return new GenericGameLoop(
+        return new GeneralGameLoop(
             inputCollector::execute, 
             level::update,
             () -> {
