@@ -27,7 +27,7 @@ public interface Applier {
     }
 
     /**
-     * Apply the consumer to the item
+     * Apply the consumer to the item.
      */
     void apply();
 
