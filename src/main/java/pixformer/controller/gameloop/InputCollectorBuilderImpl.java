@@ -72,13 +72,13 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
             @Override
             public void execute() {
+                controllerInputs.stream()
+                    .flatMap(i -> i.supplyControllerCommand().stream())
+                    .forEach(i -> i.accept(mockController));
+                
                 if (!isRunning) {
                     return;
                 }
-
-                controllerInputs.stream()
-                        .flatMap(i -> i.supplyControllerCommand().stream())
-                        .forEach(i -> i.accept(mockController));
 
                 for (var entry : players) {
                     var command = entry.getValue().supplyModelCommand();
