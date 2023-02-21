@@ -19,8 +19,8 @@ public class UserInputComponent extends InputComponent {
         // e.g.: player.addOnJump(entity::jump)
     }
 
-    @Override
+    /* @Override
     public void update(final double dt) {
         // Empty
-    }
+    } */
 }

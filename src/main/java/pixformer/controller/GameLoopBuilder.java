@@ -2,7 +2,6 @@ package pixformer.controller;
 
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.World;
-import pixformer.model.entity.TestEntity;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.model.modelinput.ModelInput;
 import pixformer.view.ControllerCommandSupplier;
@@ -21,19 +20,17 @@ public class GameLoopBuilder {
 
     private final World world;
     private final View view;
-    private final ModelCommandSupplier<CompleteModelInput> modelCommandSupplier;
     private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
-    private final Set<CompleteModelInput> players = new HashSet<>();
+    private final Set<Map.Entry<CompleteModelInput, ModelCommandSupplier<CompleteModelInput>>> players = new HashSet<>();
 
     /**
      * Construct a builder and setup the view.
      * 
      * @param view responsible for the output.
      */
-    public GameLoopBuilder(final World world, final View view, final ModelCommandSupplier<CompleteModelInput> modelCommandSupplier) {
+    public GameLoopBuilder(final World world, final View view) {
         this.world = world;
         this.view = view;
-        this.modelCommandSupplier = modelCommandSupplier;
         this.view.setup();
     }
 
@@ -56,9 +53,9 @@ public class GameLoopBuilder {
      * @return itself.
      */
     public GameLoopBuilder addPlayer(
-            //final ModelCommandSupplier<CompleteModelInput> view,
-            final CompleteModelInput model) {
-        players.add(model);
+            final CompleteModelInput model,
+            final ModelCommandSupplier<CompleteModelInput> supplier) {
+        players.add(Map.entry(model, supplier));
         return this;
     }
 
@@ -68,14 +65,6 @@ public class GameLoopBuilder {
      * @return the new controller.
      */
     public GameLoop build() {
-        this.view.getScene().getGraphics().setScale(15); // test
-
-        var test = new TestEntity(5);
-        this.world.getEntities().add(test);
-        this.players.add((CompleteModelInput) test.getInputComponent().get());
-        // questo è un test, un'idea sarebbe fare world.addOnEntityAdd
-        // e controllare che l'input component sia instanceof CompleteModelInput
-
         return new GameLoop() {
 
             private boolean isRunning = true;
@@ -103,11 +92,10 @@ public class GameLoopBuilder {
                         .flatMap(i -> i.supplyControllerCommand().stream())
                         .forEach(i -> i.accept(mockController));
 
-                players.stream()
-                        .map(p -> Map.entry(p, modelCommandSupplier.supplyModelCommand()))
-                        .filter(e -> e.getValue().isPresent())
-                        .map(e -> Map.entry(e.getKey(), e.getValue().get()))
-                        .forEach(e -> e.getValue().accept(e.getKey()));
+                for (var entry : players) {
+                    var command = entry.getValue().supplyModelCommand();
+                    command.ifPresent(cmd -> cmd.accept(entry.getKey()));
+                }
 
                 view.update(0 /* TODO delta time */);
 
