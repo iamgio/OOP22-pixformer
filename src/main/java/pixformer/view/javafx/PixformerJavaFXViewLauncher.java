@@ -42,7 +42,10 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
             inputCollector::execute, 
             level::update,
             () -> {
-                
+                world.getEntities().forEach(entity -> {
+                    view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
+                    entity.getGraphicsComponent().ifPresent(graphics -> graphics.update(view.getScene()));
+                });
             },
             dt -> {
                 final long period = 17;
