@@ -1,6 +1,7 @@
 package pixformer.model;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.dynamics.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;

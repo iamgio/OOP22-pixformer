@@ -2,6 +2,7 @@ package pixformer.model;
 
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.dynamics.Player;
 
 import java.util.List;
 import java.util.Optional;

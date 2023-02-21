@@ -28,7 +28,7 @@ public final class ModelMock implements CompleteModelInput {
     }
 
     @Override
-    public void fire() {
+    public void ability() {
         System.out.println("Mario fire"); // NOPMD see above
     }
 
