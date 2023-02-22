@@ -6,7 +6,7 @@ import pixformer.model.entity.Entity;
 /**
  * A user-controlled input component.
  */
-public class UserInputComponent extends InputComponent {
+public abstract class UserInputComponent extends InputComponent {
 
     /**
      * Instantiates a user-controlled input component.
