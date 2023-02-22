@@ -24,6 +24,7 @@ public interface InputCollectorBuilder {
          * Add a player to the controller, which means adding a pair of
          * {@link ModelCommandSupplier} and {@link ModelInput}.
          * 
+         * @param <M> the type of the model which will receive the commands
          * @param view
          * @param model
          * @return itself.
