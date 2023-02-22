@@ -1,13 +1,12 @@
 package pixformer.model.entity;
 
 import pixformer.model.input.InputComponent;
-import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * Input component for the test entity.
  * @deprecated test
  */
-public class TestInputComponent extends InputComponent implements CompleteModelInput {
+public class TestInputComponent extends InputComponent {
 
     private final TestEntity testEntity;
 
