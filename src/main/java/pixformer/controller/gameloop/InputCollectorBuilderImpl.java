@@ -41,7 +41,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
      */
     @Override
     public <M extends ModelInput> InputCollectorBuilder addPlayer(final M model, final ModelCommandSupplier<M> view) {
-        playersHandlers.add(() -> view.supplyModelCommand().ifPresent(m -> m.accept(model)));
+        playersHandlers.add(() -> view.supplyModelCommand().ifPresent(s -> s.accept(model)));
         return this;
     }
     
