@@ -28,12 +28,12 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
 
 
     //Max duration of a jump
-    static final double MAXJUMPDURATION = 5.0;
-    static final double JUMPFORCE = 1.0;
+    static final double MAX_JUMP_DURATION = 5.0;
+    static final double JUMP_FORCE = 1.0;
 
 
     //Current jump state
-    private double jumpTimeCounter = MAXJUMPDURATION;
+    private double jumpTimeCounter = MAX_JUMP_DURATION;
 
 
     // Variables to manage player input
@@ -181,7 +181,7 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
         //Manage jumping
         if (this.isGrounded) {
             //Reset jumpTimeCounter
-            this.jumpTimeCounter = MAXJUMPDURATION;
+            this.jumpTimeCounter = MAX_JUMP_DURATION;
         } else {
             this.jumpTimeCounter -= dt;
         }
@@ -199,7 +199,7 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
 
         //Player is jumping (moving up)
         if (this.isJumping) {
-            this.position.sum(new Vector2D(0, JUMPFORCE * dt));
+            this.position.sum(new Vector2D(0, JUMP_FORCE * dt));
         }
 
 
