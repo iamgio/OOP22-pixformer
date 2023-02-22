@@ -1,13 +1,11 @@
 package pixformer.controller.gameloop;
 
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.model.modelinput.ModelInput;
 import pixformer.view.ControllerCommandSupplier;
 import pixformer.view.ModelCommandSupplier;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
