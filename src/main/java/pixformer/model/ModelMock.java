@@ -14,6 +14,10 @@ public final class ModelMock implements CompleteModelInput {
 
     private final String name;
 
+    /**
+     * Construct a model.
+     * @param name which will be used printing.
+     */
     public ModelMock(final String name) {
         this.name = name;
     }
