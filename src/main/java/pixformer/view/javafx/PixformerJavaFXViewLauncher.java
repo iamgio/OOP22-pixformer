@@ -5,6 +5,7 @@ import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GeneralGameLoop;
 import pixformer.controller.gameloop.InputCollector;
 import pixformer.controller.gameloop.InputCollectorBuilderImpl;
+import pixformer.model.ModelMock;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.entity.TestEntity;
@@ -33,15 +34,18 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     public GameLoop createGameLoop() {
         final World world = new WorldImpl();
         final ViewImpl view = new ViewImpl(super.getScene());
+        view.setup();
         final World level = new WorldImpl();
         final InputCollector inputCollector = new InputCollectorBuilderImpl()
             .addControllerInput(view)
-            .addPlayer(level.getPlayer(0).get(), view)
+            // .addPlayer(level.getPlayer(0).get(), view)
+            .addPlayer(new ModelMock(), view)
             .build();
         return new GeneralGameLoop(
             inputCollector::execute, 
             level::update,
             () -> {
+                view.update(0);
                 world.getEntities().forEach(entity -> {
                     view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                     entity.getGraphicsComponent().ifPresent(graphics -> graphics.update(view.getScene()));
