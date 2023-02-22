@@ -11,33 +11,32 @@ import pixformer.view.ModelCommandSupplier;
  */
 public interface InputCollectorBuilder {
 
-    /**
-     * Add a {@link ControllerCommandSupplier} to the building controller.
-     * 
-     * @param controllerInput to be added
-     * @return itself.
-     */
-    InputCollectorBuilder addControllerInput(
-            ControllerCommandSupplier<PauseControllerInput> controllerInput);
+        /**
+         * Add a {@link ControllerCommandSupplier} to the building controller.
+         * 
+         * @param controllerInput to be added
+         * @return itself.
+         */
+        InputCollectorBuilder addControllerInput(
+                        ControllerCommandSupplier<PauseControllerInput> controllerInput);
 
-    /**
-     * Add a player to the controller, which means adding a pair of
-     * {@link ModelCommandSupplier} and {@link ModelInput}.
-     * 
-     * @param view
-     * @param model
-     * @return itself.
-     */
-    <M extends ModelInput> InputCollectorBuilder addPlayer(
-            M model,
-            ModelCommandSupplier<M> view
-    );
+        /**
+         * Add a player to the controller, which means adding a pair of
+         * {@link ModelCommandSupplier} and {@link ModelInput}.
+         * 
+         * @param view
+         * @param model
+         * @return itself.
+         */
+        <M extends ModelInput> InputCollectorBuilder addPlayer(
+                        M model,
+                        ModelCommandSupplier<M> view);
 
-    /**
-     * Builds a new input collector.
-     * 
-     * @return the new input collector.
-     */
-    InputCollector build();
+        /**
+         * Builds a new input collector.
+         * 
+         * @return the new input collector.
+         */
+        InputCollector build();
 
 }
