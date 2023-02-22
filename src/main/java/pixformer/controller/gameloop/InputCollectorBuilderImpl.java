@@ -44,8 +44,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
         inputClearers.add(view::clear);
         return this;
     }
-    
-    
+
     /**
      * Builds a new input collector.
      * 
@@ -86,6 +85,5 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
         };
     }
-
 
 }
