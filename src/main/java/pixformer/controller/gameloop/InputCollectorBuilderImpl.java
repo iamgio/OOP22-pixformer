@@ -18,6 +18,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
     private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
     private final Set<Runnable> playersHandlers = new HashSet<>();
+    private final Set<Runnable> inputClearers = new HashSet<>();
 
     /**
      * Add a {@link ControllerCommandSupplier} to the building controller.
@@ -42,6 +43,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
     @Override
     public <M extends ModelInput> InputCollectorBuilder addPlayer(final M model, final ModelCommandSupplier<M> view) {
         playersHandlers.add(() -> view.supplyModelCommand().ifPresent(s -> s.accept(model)));
+        inputClearers.add(view::clear);
         return this;
     }
     
@@ -81,6 +83,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
                 }
 
                 playersHandlers.forEach(Runnable::run);
+                inputClearers.forEach(Runnable::run);
             }
 
         };
