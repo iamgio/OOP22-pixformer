@@ -84,6 +84,9 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
                     var command = entry.getValue().supplyModelCommand();
                     command.ifPresent(cmd -> cmd.accept(entry.getKey()));
                 }
+                for (var entry : players) {
+                    entry.getValue().clear();
+                }
             }
 
         };
