@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * The standard implementation of a player.
  */
-public class PlayerImpl implements Player {
+public final class PlayerImpl implements Player {
 
     private final Set<Runnable> onGoLeft = new HashSet<>();
     private final Set<Runnable> onGoRight = new HashSet<>();
