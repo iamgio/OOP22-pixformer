@@ -17,7 +17,7 @@ import java.util.Set;
 public class InputCollectorBuilderImpl implements InputCollectorBuilder {
 
     private final Set<ControllerCommandSupplier<PauseControllerInput>> controllerInputs = new HashSet<>();
-    private final Set<Map.Entry<CompleteModelInput, ModelCommandSupplier<CompleteModelInput>>> players = new HashSet<>();
+    private final Set<Runnable> playersHandlers = new HashSet<>();
 
     /**
      * Add a {@link ControllerCommandSupplier} to the building controller.
@@ -39,13 +39,13 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
      * @param model
      * @return itself.
      */
-    public InputCollectorBuilder addPlayer(
-            final CompleteModelInput model,
-            final ModelCommandSupplier<CompleteModelInput> supplier) {
-        players.add(Map.entry(model, supplier));
+    @Override
+    public <M extends ModelInput> InputCollectorBuilder addPlayer(final M model, final ModelCommandSupplier<M> view) {
+        playersHandlers.add(() -> view.supplyModelCommand().ifPresent(m -> m.accept(model)));
         return this;
     }
-
+    
+    
     /**
      * Builds a new input collector.
      * 
@@ -80,13 +80,11 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
                     return;
                 }
 
-                for (var entry : players) {
-                    var command = entry.getValue().supplyModelCommand();
-                    command.ifPresent(cmd -> cmd.accept(entry.getKey()));
-                }
+                playersHandlers.forEach(Runnable::run);
             }
 
         };
     }
+
 
 }

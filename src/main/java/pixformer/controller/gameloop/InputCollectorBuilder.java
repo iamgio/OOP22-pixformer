@@ -1,7 +1,7 @@
 package pixformer.controller.gameloop;
 
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.modelinput.ModelInput;
 import pixformer.view.ControllerCommandSupplier;
 import pixformer.view.ModelCommandSupplier;
 
@@ -28,10 +28,10 @@ public interface InputCollectorBuilder {
      * @param model
      * @return itself.
      */
-    InputCollectorBuilder addPlayer(
-                CompleteModelInput model,
-            ModelCommandSupplier<CompleteModelInput> view
-            );
+    <M extends ModelInput> InputCollectorBuilder addPlayer(
+            M model,
+            ModelCommandSupplier<M> view
+    );
 
     /**
      * Builds a new input collector.
