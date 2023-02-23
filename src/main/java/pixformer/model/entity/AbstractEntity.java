@@ -4,10 +4,10 @@ package pixformer.model.entity;
  * Abstract class for an entity.
  */
 public class AbstractEntity implements Entity {
-    private final double x;
-    private final double y;
-    private final double width;
-    private final double height;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
 
     /**
      * Constructor for the Entity.
@@ -54,5 +54,41 @@ public class AbstractEntity implements Entity {
     @Override
     public double getHeight() {
         return this.height;
+    }
+
+    /**
+     * Set the X coordinate of the entity.
+     * 
+     * @param x the new X coordinate
+     */
+    protected void setX(final double x) {
+        this.x = x;
+    }
+
+    /**
+     * Set the Y coordinate of the entity.
+     * 
+     * @param y the new Y coordinate
+     */
+    public void setY(final double y) {
+        this.y = y;
+    }
+
+    /**
+     * Set the widthof the entity.
+     * 
+     * @param width the new width
+     */
+    public void setWidth(final double width) {
+        this.width = width;
+    }
+
+    /**
+     * Set the height of the entity.
+     * 
+     * @param height the new height
+     */
+    public void setHeight(final double height) {
+        this.height = height;
     }
 }
