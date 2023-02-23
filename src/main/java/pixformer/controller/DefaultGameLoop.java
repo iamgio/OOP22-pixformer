@@ -1,37 +1,54 @@
 package pixformer.controller;
 
-import pixformer.controller.input.InputType;
-import pixformer.controller.input.ObservableInputPolling;
-import pixformer.model.Player;
-import pixformer.model.World;
+import java.util.function.Consumer;
+
+import pixformer.controller.input.ControllerInputComponent;
+import pixformer.model.ModelInputComponent;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.View;
+import pixformer.view.ViewInputComponent;
 
 /**
  * The default game loop.
  */
 public class DefaultGameLoop implements GameLoop {
 
-    private final World world;
+    private final ViewInputComponent viewInput;
     private final View view;
+    private final ModelInputComponent model;
+    private boolean isRunning = true;
+    private final ControllerInputComponent<CompleteModelInput> mockInputComponent = 
+        new ControllerInputComponent<CompleteModelInput>() {
+
+            @Override
+            public void acceptGameInput(final Consumer<CompleteModelInput> input) {
+                model.acceptMarioInput(input);
+            }
+
+            @Override
+            public void pause() {
+                isRunning = false;
+            }
+
+            @Override
+            public void unpause() {
+                isRunning = true;
+            }
+
+        };
 
     /**
      * Creates the default game loop that relies on a visual renderable scene.
-     * @param world active game world
-     * @param view active game view
+     * 
+     * @param viewComp the ViewInputComponent which will collect the user input.
+     * @param model    of the application
+     * @param view     active game view.
      */
-    public DefaultGameLoop(final World world, final View view) {
-        this.world = world;
+    public DefaultGameLoop(final ViewInputComponent viewComp, final ModelInputComponent model, final View view) {
+        this.viewInput = viewComp;
+        this.model = model;
         this.view = view;
-        this.view.setup();
-        this.setupInputHooks();
-    }
-
-    /**
-     * Translates raw input to actions.
-     */
-    private void setupInputHooks() {
-        final ObservableInputPolling input = this.view.getInputPolling();
-        input.addAction(InputType.P1_JUMP, () -> this.world.getPlayer1().ifPresent(Player::jump));
+        view.setup();
     }
 
     /**
@@ -39,6 +56,13 @@ public class DefaultGameLoop implements GameLoop {
      */
     @Override
     public void loop(final long now) {
+        final var optional = viewInput.popInput();
+        if (optional.isPresent()) {
+            final var input = optional.get();
+            if (isRunning) {
+                input.accept(mockInputComponent);
+            }
+        }
         this.view.update(0 /* TODO delta time */);
     }
 }
