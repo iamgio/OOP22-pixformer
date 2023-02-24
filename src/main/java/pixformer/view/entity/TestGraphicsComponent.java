@@ -1,5 +1,6 @@
 package pixformer.view.entity;
 
+import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.TestEntity;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
@@ -8,6 +9,7 @@ import pixformer.view.engine.RectangleRenderer;
 /**
  * @deprecated test
  */
+@Deprecated
 public class TestGraphicsComponent implements GraphicsComponent {
 
     private final TestEntity entity;

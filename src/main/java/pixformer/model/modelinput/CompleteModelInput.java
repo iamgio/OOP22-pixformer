@@ -5,7 +5,7 @@ package pixformer.model.modelinput;
  */
 public interface CompleteModelInput extends
         HorizontalModelInput,
-        FireModelInput,
+        AbilityModelInput,
         JumpModelInput,
         CrouchModelInput {
 

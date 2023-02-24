@@ -8,11 +8,11 @@ public interface Score {
     /**
      * @return the score of the user
      */
-    int getScore();
+    int getPoints();
 
     /**
      * Method to update the score adding a new value.
      * @param points points to add
      */
-    void updateScore(int points);
+    void addPoints(int points);
 }

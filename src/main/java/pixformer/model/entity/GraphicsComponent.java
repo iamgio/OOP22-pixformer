@@ -1,4 +1,4 @@
-package pixformer.view.entity;
+package pixformer.model.entity;
 
 import pixformer.view.engine.GameScene;
 

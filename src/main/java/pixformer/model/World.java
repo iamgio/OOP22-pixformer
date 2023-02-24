@@ -1,7 +1,8 @@
 package pixformer.model;
 
 import pixformer.common.Updatable;
-import pixformer.model.entity.Entity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.dynamics.Player;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public interface World extends Updatable {
     /**
      * @return the entities living within this world
      */
-    Set<Entity> getEntities();
+    Set<DrawableEntity> getEntities();
 
     /**
      * @return immutable list of the active players that may control entities
