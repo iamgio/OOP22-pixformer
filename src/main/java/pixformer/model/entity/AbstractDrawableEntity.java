@@ -1,19 +1,23 @@
 package pixformer.model.entity;
 
+import pixformer.common.Vector2D;
+
 /**
  * Abstract class for a drawable entity.
  */
-public class AbstractDrawableEntity implements DrawableEntity{ 
-    
-    public enum Direction{
+public class AbstractDrawableEntity implements DrawableEntity { 
+
+    /**
+     * Current moving direction of the entity.
+     */
+    public enum Direction {
         LEFT,
         RIGHT
     }
 
     protected Direction direction;
 
-    protected double x;
-    protected double y;
+    protected Vector2D position;
     protected double width;
     protected double height;
 
@@ -25,8 +29,7 @@ public class AbstractDrawableEntity implements DrawableEntity{
      * @param height height of the entity
      */
     protected AbstractDrawableEntity(final double x, final double y, final double width, final double height) {
-        this.x = x;
-        this.y = y;
+        this.position = new Vector2D(x, y);
         this.width = width;
         this.height = height;
     }
@@ -36,7 +39,7 @@ public class AbstractDrawableEntity implements DrawableEntity{
      */
     @Override
     public double getX() {
-        return this.x;
+        return this.position.x();
     }
 
     /**
@@ -44,7 +47,7 @@ public class AbstractDrawableEntity implements DrawableEntity{
      */
     @Override
     public double getY() {
-        return this.y;
+        return this.position.y();
     }
 
     /**
@@ -63,6 +66,9 @@ public class AbstractDrawableEntity implements DrawableEntity{
         return this.height;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GraphicsComponent getGraphicsComponent() {
         // TODO Auto-generated method stub
