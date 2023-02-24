@@ -37,7 +37,7 @@ public final class ModelInputViewBridge implements CompleteModelInput {
      * {@inheritDoc}
      */
     @Override
-    public void fire() {
+    public void ability() {
         // TODO
     }
 
