@@ -6,15 +6,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import pixformer.controller.input.ObservableInputPolling;
-import pixformer.controller.input.ObservableInputPollingImpl;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.Graphics;
-import pixformer.view.engine.InputMapper;
 import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.SceneRenderer;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A JavaFX scene of the game.
@@ -25,7 +26,6 @@ public class JavaFXScene extends GameScene {
     private final SceneRenderer renderer;
     private final Graphics graphics;
     private final RendererFactory rendererFactory;
-    private final ObservableInputPolling inputPolling;
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -42,7 +42,6 @@ public class JavaFXScene extends GameScene {
         this.renderer = new SceneRenderer();
         this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
         this.rendererFactory = new JavaFXRendererFactory();
-        this.inputPolling = new ObservableInputPollingImpl();
 
         // Makes the canvas resizable by resizing the window
 
@@ -96,25 +95,11 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
-    public ObservableInputPolling getInputPolling() {
-        return this.inputPolling;
-    }
-
-    /**
-     * Implementation-specific input mapping, empty by default.
-     * {@inheritDoc}
-     */
-    @Override
-    protected InputMapper<KeyCode> getKeyboardInputMapper() {
-        return input -> Optional.empty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected InputMapper<MouseButton> getMouseInputMapper() {
-        return input -> Optional.empty();
+    public Set<SceneInput<?>> getInputs() {
+        return Stream.of(this.getKeyboardInput(), this.getMouseInput())
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -123,10 +108,30 @@ public class JavaFXScene extends GameScene {
     @Override
     public void handleInput() {
         // Keyboard
-        this.scene.setOnKeyPressed(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(inputPolling::add));
-        this.scene.setOnKeyReleased(e -> this.getKeyboardInputMapper().map(e.getCode()).ifPresent(inputPolling::remove));
+        this.getKeyboardInput().ifPresent(keyboardInput -> {
+            this.scene.setOnKeyPressed(e -> keyboardInput.addInput(e.getCode()));
+            this.scene.setOnKeyReleased(e -> keyboardInput.removeInput(e.getCode()));
+        });
         // Mouse
-        this.scene.setOnMousePressed(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(inputPolling::add));
-        this.scene.setOnMouseReleased(e -> this.getMouseInputMapper().map(e.getButton()).ifPresent(inputPolling::remove));
+        this.getMouseInput().ifPresent(mouseInput -> {
+            this.scene.setOnMousePressed(e -> mouseInput.addInput(e.getButton()));
+            this.scene.setOnMouseReleased(e -> mouseInput.removeInput(e.getButton()));
+        });
+    }
+
+    /**
+     * @return keyboard input source
+     * @implNote bindings are implementation-specific and don't exist by default
+     */
+    public Optional<SceneInput<KeyCode>> getKeyboardInput() {
+        return Optional.empty();
+    }
+
+    /**
+     * @return mouse input source
+     * @implNote bindings are implementation-specific and don't exist by default
+     */
+    public Optional<SceneInput<MouseButton>> getMouseInput() {
+        return Optional.empty();
     }
 }

@@ -1,12 +1,11 @@
 package pixformer.view;
 
-import pixformer.controller.input.InputType;
-import pixformer.controller.input.ObservableInputPolling;
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.modelinput.ModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.TextRenderer;
 
 import java.util.Date;
@@ -17,12 +16,12 @@ import java.util.function.Consumer;
  * Implementation of the standard game view.
  */
 public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput>,
-        ModelCommandSupplier<CompleteModelInput> {
+        ModelCommandSupplier<ModelInput> {
 
     private final GameScene scene;
 
     private TextRenderer text;
-    private Optional<Consumer<CompleteModelInput>> gameCommand = Optional.empty();
+    private Optional<Consumer<ModelInput>> gameCommand = Optional.empty();
     private Optional<Consumer<PauseControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
 
@@ -47,20 +46,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
         this.text = rendererFactory.newText("");
         text.setColor(new Color(1, 0, 0));
         scene.add(text.at(100, 100));
-
-        // Test
-        scene.getInputPolling().addAction(InputType.P1_JUMP,
-                () -> gameCommand = Optional.of(CompleteModelInput::jump));
-        scene.getInputPolling().addAction(InputType.PAUSE,
-                () -> controllerCommand = Optional.of(PauseControllerInput::pause));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ObservableInputPolling getInputPolling() {
-        return this.scene.getInputPolling();
     }
 
     /**
@@ -80,13 +65,17 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
 
         this.text.setText("Now:\n" + new Date());
 
-        this.getInputPolling().update(dt);
+        scene.getInputs().stream()
+                .map(SceneInput::getMappedPolling)
+                .forEach(actions -> actions.forEach(action -> this.gameCommand = Optional.of(action)));
+        // TODO gameCommand dovrebbe essere un set, la riga di sopra non ha senso per adesso
+
         this.scene.render();
     }
 
     @Override
-    public Optional<Consumer<CompleteModelInput>> supplyModelCommand() {
-        return gameCommand;
+    public Optional<Consumer<ModelInput>> supplyModelCommand() {
+        return this.gameCommand;
     }
 
     @Override
