@@ -1,7 +1,6 @@
 package pixformer.model.entity;
 
-import pixformer.model.input.InputComponent;
-import pixformer.view.entity.GraphicsComponent;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.entity.TestGraphicsComponent;
 
 import java.util.Optional;
@@ -9,14 +8,15 @@ import java.util.Optional;
 /**
  * @deprecated test
  */
-public class TestEntity implements Entity {
+@Deprecated
+public class TestEntity implements DrawableEntity {
 
     private static final double SIZE = 1; // Test values
 
     // Il campo X andrà in Entity (classe astratta)
     private double x;
 
-    private final InputComponent inputComponent;
+    private final CompleteModelInput inputComponent;
     private final GraphicsComponent graphicsComponent;
 
     /**
@@ -68,8 +68,7 @@ public class TestEntity implements Entity {
         return SIZE;
     }
 
-    @Override
-    public Optional<InputComponent> getInputComponent() {
+    public Optional<CompleteModelInput> getInputComponent() {
         return Optional.of(inputComponent);
     }
 
@@ -77,7 +76,7 @@ public class TestEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public Optional<GraphicsComponent> getGraphicsComponent() {
-        return Optional.of(this.graphicsComponent);
+    public GraphicsComponent getGraphicsComponent() {
+        return this.graphicsComponent;
     }
 }
