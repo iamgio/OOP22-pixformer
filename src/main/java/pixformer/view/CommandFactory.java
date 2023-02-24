@@ -55,7 +55,7 @@ public final class CommandFactory {
      * @return command for firing.
      */
     public Command<CompleteModelInput> fire() {
-        return gameInput(CompleteModelInput::fire);
+        return gameInput(CompleteModelInput::ability);
     }
 
     /**

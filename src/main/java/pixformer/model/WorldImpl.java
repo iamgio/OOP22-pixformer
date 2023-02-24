@@ -1,6 +1,7 @@
 package pixformer.model;
 
-import pixformer.model.entity.Entity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.dynamics.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,15 +14,23 @@ import java.util.Set;
  */
 public class WorldImpl implements World {
 
-    private final Set<Entity> entities = new HashSet<>();
+    private final Set<DrawableEntity> entities;
     private final List<Player> players = new ArrayList<>();
+
+    /**
+     * Create a new World with the given entities.
+     * @param entities
+     */
+    public WorldImpl(final Set<DrawableEntity> entities) {
+        this.entities = new HashSet<>(entities);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<Entity> getEntities() {
-        return this.entities;
+    public Set<DrawableEntity> getEntities() {
+        return Set.copyOf(this.entities);
     }
 
     /**
