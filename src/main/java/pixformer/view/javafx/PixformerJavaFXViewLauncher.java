@@ -1,5 +1,7 @@
 package pixformer.view.javafx;
 
+import java.util.Set;
+
 import javafx.application.Application;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GeneralGameLoop;
@@ -32,11 +34,9 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameLoop createGameLoop() {
-        final World world = new WorldImpl();
-        final ViewImpl view = new ViewImpl(super.getScene());
-
         var test = new TestEntity(5);
-        world.getEntities().add(test);
+        final World world = new WorldImpl(Set.of(test));
+        final ViewImpl view = new ViewImpl(super.getScene());
 
         view.setup();
         view.getScene().getGraphics().setScale(15); // test
@@ -55,7 +55,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
                 view.update(0);
                 world.getEntities().forEach(entity -> {
                     view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
-                    entity.getGraphicsComponent().ifPresent(graphics -> graphics.update(view.getScene()));
+                    entity.getGraphicsComponent().update(view.getScene());
                 });
             },
             dt -> {
