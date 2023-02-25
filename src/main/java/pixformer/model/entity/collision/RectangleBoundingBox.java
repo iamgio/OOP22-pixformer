@@ -26,7 +26,7 @@ public class RectangleBoundingBox implements BoundingBox {
             return x1 < x2 + rectangle.width
                     && x1 + this.width > x2
                     && y1 < y2 + rectangle.height
-                    && y1 + this.height < y2;
+                    && y1 + this.height > y2;
         }
         return false;
     }

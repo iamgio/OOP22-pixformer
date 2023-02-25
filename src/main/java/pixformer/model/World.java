@@ -2,6 +2,7 @@ package pixformer.model;
 
 import pixformer.common.Updatable;
 import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.dynamics.Player;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public interface World extends Updatable {
      * @return the entities living within this world
      */
     Set<DrawableEntity> getEntities();
+
+    /**
+     * @return the handler of entity collisions for this world
+     */
+    EntityCollisionManager getCollisionManager();
 
     /**
      * @return immutable list of the active players that may control entities
