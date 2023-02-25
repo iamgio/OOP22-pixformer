@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.entity.TestGraphicsComponent;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
  * @deprecated test
  */
 @Deprecated
-public class TestEntity implements DrawableEntity {
+public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private static final double SIZE = 1; // Test values
 
