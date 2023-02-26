@@ -23,7 +23,7 @@ public class WorldImpl implements World {
     /**
      * Create a new World with the given entities.
      * 
-     * @param entities
+     * @param entities set of entities
      */
     public WorldImpl(final Set<DrawableEntity> entities) {
         this.entities = new HashSet<>(entities);
@@ -36,6 +36,15 @@ public class WorldImpl implements World {
     @Override
     public Set<DrawableEntity> getEntities() {
         return Set.copyOf(this.entities);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void spawnEntity(final DrawableEntity entity) {
+        this.entities.add(entity);
+        entity.onSpawn(this);
     }
 
     /**
