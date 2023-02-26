@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
- * {@inheritDoc}
+ * The default implementation of an {@link EntityCollisionManager}.
  */
 public class EntityCollisionManagerImpl implements EntityCollisionManager {
 
@@ -27,7 +27,9 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
     }
 
     /**
-     * {@inheritDoc}
+     * @param entity1 first entity to check collisions with
+     * @param entity2 second entity to check collisions with
+     * @return whether the two entities collide with each other
      */
     private boolean isCollision(final Entity entity1, final Entity entity2) {
         return entity1.getBoundingBox().collidesWith(
@@ -53,9 +55,12 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
     @Override
     public Set<Consumer<Entity>> getOnCollideCallbacksFor(final Entity entity) {
         final var callbacks = this.onCollide.get(entity);
-        return callbacks != null ? Collections.unmodifiableSet(callbacks) : Set.of();
+        return callbacks != null ? Collections.unmodifiableSet(callbacks) : Collections.emptySet();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addOnCollide(final Entity entity, final Consumer<Entity> action) {
         this.onCollide.computeIfAbsent(entity, e -> new HashSet<>()).add(action);
