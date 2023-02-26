@@ -1,14 +1,11 @@
 package pixformer.model.entity.powerups;
 
-import java.util.Optional;
-
-import pixformer.model.entity.dynamics.Player;
-
-public class FireFlower implements PowerUp{
+public class FireFlower implements PowerupBehaviour{
 
     @Override
-    public void ability(Optional<Player> p) {
-
+    public void ability() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ability'");
     }
     
 }

@@ -1,13 +1,9 @@
 package pixformer.model.entity.powerups;
 
-import java.util.Optional;
-
-import pixformer.model.entity.dynamics.Player;
-
-public class Mushroom implements PowerUp {
+public class Mushroom implements PowerupBehaviour {
 
     @Override
-    public void ability(Optional<Player> p) {
+    public void ability() {
         return;
     }
     

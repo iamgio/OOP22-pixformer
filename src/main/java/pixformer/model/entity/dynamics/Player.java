@@ -4,14 +4,17 @@ import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractDrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.powerups.Powerup;
 import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractDrawableEntity implements Updatable, CompleteModelInput {
+public class Player<T extends Powerup> extends AbstractDrawableEntity implements Updatable, CompleteModelInput {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
+
+    Optional<Powerup> powerup;
 
     //Current Player position
     private Vector2D position;

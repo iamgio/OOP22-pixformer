@@ -4,6 +4,15 @@ import java.util.Optional;
 
 import pixformer.model.entity.dynamics.Player;
 
-public interface PowerUp {
-    void ability(Optional<Player> p);    
+public abstract class Powerup {
+
+    protected PowerupBehaviour behaviour;
+
+    public Powerup(PowerupBehaviour behaviour) {
+        this.behaviour = behaviour;
+    }
+
+    void useAbility(Optional<Player> p) {
+        behaviour.ability();
+    }
 }
