@@ -16,9 +16,11 @@ public interface ModelCommandSupplier<M extends ModelInput> {
      * It supply the possibly-collected command.
      * 
      * @return the command.
-     * @implNote when this method is called, a following call of this method should
-     *           return {@code Optional.empty()} if the view hasn't received another
-     *           input in the meanwhile.
      */
     Optional<Consumer<M>> supplyModelCommand();
+
+    /**
+     * Set the returning value of {@code supplyModelCommand} to Optional.empty().
+     */
+    void clear();
 }

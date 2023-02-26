@@ -1,7 +1,8 @@
 package pixformer.model;
 
 import pixformer.common.Updatable;
-import pixformer.model.entity.Entity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.dynamics.Player;
 
 import java.util.List;
@@ -16,7 +17,19 @@ public interface World extends Updatable {
     /**
      * @return the entities living within this world
      */
-    Set<Entity> getEntities();
+    Set<DrawableEntity> getEntities();
+
+    /**
+     * Adds an entity to the game world.
+     * 
+     * @param entity entity to add
+     */
+    void spawnEntity(DrawableEntity entity);
+
+    /**
+     * @return the handler of entity collisions for this world
+     */
+    EntityCollisionManager getCollisionManager();
 
     /**
      * @return immutable list of the active players that may control entities
@@ -25,13 +38,15 @@ public interface World extends Updatable {
 
     /**
      * Adds a new player to the world.
+     * 
      * @param player player to add
      */
     void addPlayer(Player player);
 
     /**
      * @param index index of the player, starting from {@code 0}
-     * @return player at the given index if it exists, or an empty {@link Optional} otherwise
+     * @return player at the given index if it exists, or an empty {@link Optional}
+     *         otherwise
      */
     default Optional<Player> getPlayer(final int index) {
         return index < this.getPlayers().size()

@@ -1,20 +1,23 @@
 package pixformer.model.entity.statics;
 
 import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+
 /**
  * Standard block in the world.
  */
-public class Block extends AbstractEntity {
+public class Block extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
+
+    private static final double WIDTH = 1;
+    private static final double HEIGHT = 1;
 
     /**
      * Constructor of the Block.
      * @param x X coordinate
      * @param y Y coordinate
-     * @param width width of the block
-     * @param height height of the block
      */
-    public Block(final double x, final double y, final double width, final double height) {
-        super(x, y, width, height);
+    public Block(final double x, final double y) {
+        super(x, y, WIDTH, HEIGHT);
     }
 
 }

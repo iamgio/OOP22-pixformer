@@ -3,7 +3,7 @@ package pixformer.model.entity;
 /**
  * Abstract class for an entity.
  */
-public class AbstractEntity implements Entity {
+public abstract class AbstractEntity implements Entity {
     private double x;
     private double y;
     private double width;
@@ -11,7 +11,7 @@ public class AbstractEntity implements Entity {
 
     /**
      * Constructor for the Entity.
-     * 
+     *
      * @param x      X coordinate
      * @param y      Y coordinate
      * @param width  width of the entity
@@ -58,7 +58,7 @@ public class AbstractEntity implements Entity {
 
     /**
      * Set the X coordinate of the entity.
-     * 
+     *
      * @param x the new X coordinate
      */
     protected void setX(final double x) {
@@ -67,7 +67,7 @@ public class AbstractEntity implements Entity {
 
     /**
      * Set the Y coordinate of the entity.
-     * 
+     *
      * @param y the new Y coordinate
      */
     protected void setY(final double y) {
@@ -75,8 +75,8 @@ public class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the widthof the entity.
-     * 
+     * Set the width of the entity.
+     *
      * @param width the new width
      */
     protected void setWidth(final double width) {
@@ -85,7 +85,7 @@ public class AbstractEntity implements Entity {
 
     /**
      * Set the height of the entity.
-     * 
+     *
      * @param height the new height
      */
     protected void setHeight(final double height) {

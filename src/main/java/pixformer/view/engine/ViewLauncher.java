@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.controller.GameLoop;
+import pixformer.controller.gameloop.GameLoop;
 
 /**
  * Responsible for launching a kind of view.
