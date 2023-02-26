@@ -1,5 +1,11 @@
 package pixformer.model.entity.powerups;
 
-public interface PoweupBehaviour {
-    public void ability();
+/**
+ * Interface for a generic powerup.
+ */
+public interface PowerupBehaviour {
+    /**
+     * Behaviour of a powerup activation.
+     */
+    void ability();
 }

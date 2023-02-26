@@ -1,5 +1,7 @@
 package pixformer.model.entity.dynamics;
 
+import java.util.Optional;
+
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractDrawableEntity;
@@ -13,8 +15,6 @@ import pixformer.model.modelinput.CompleteModelInput;
 public class Player<T extends Powerup> extends AbstractDrawableEntity implements Updatable, CompleteModelInput {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
-
-    Optional<Powerup> powerup;
 
     //Current Player position
     private Vector2D position;
@@ -41,6 +41,9 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
     private boolean rightKey;
     /*private boolean abilityKey;*/
     private boolean jumpingKey;
+
+    //Current powerup
+    Optional<Powerup> powerup;
 
     /**
      * @param position Initial player position

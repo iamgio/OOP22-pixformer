@@ -11,13 +11,23 @@ public class AbstractDrawableEntity implements DrawableEntity {
      * Current moving direction of the entity.
      */
     public enum Direction {
+        /**
+         * Entity is going left.
+         */
         LEFT,
+        /**
+         * Entity is going right.
+         */
         RIGHT
     }
 
+    //Current entity direction.
     protected Direction direction;
 
+    //Current entity position.
     protected Vector2D position;
+
+    //Current entity sizes.
     protected double width;
     protected double height;
 
@@ -64,6 +74,14 @@ public class AbstractDrawableEntity implements DrawableEntity {
     @Override
     public double getHeight() {
         return this.height;
+    }
+
+    /**
+     * 
+     * @return Current entity moving direction.
+     */
+    public Direction getDirection(){
+        return this.direction;
     }
 
     /**

@@ -1,18 +1,42 @@
 package pixformer.model.entity.powerups;
 
-import java.util.Optional;
+/**
+ * Class defining the powerup object.
+ */
+public class Powerup {
 
-import pixformer.model.entity.dynamics.Player;
+    //Current powerup ability power
+    private PowerupBehaviour behaviour;
 
-public abstract class Powerup {
+    /*
+     * Priority among powerups (if player current powerup is lower than the new one the new powerup is set, 
+     * otherwhise the previous powerup will be kept)
+     */
+    private int priority = 0;
 
-    protected PowerupBehaviour behaviour;
-
-    public Powerup(PowerupBehaviour behaviour) {
+    /**
+     * 
+     * @param behaviour current powerup behaviour.
+     */
+    public Powerup(final PowerupBehaviour behaviour, final int priority) {
         this.behaviour = behaviour;
+        this.priority = priority;
     }
 
-    void useAbility(Optional<Player> p) {
-        behaviour.ability();
+    /**
+     * Get powerup priority.
+     * @return powerup priority.
+     */
+    public int getPriority() {
+        return priority;
     }
+
+    /**
+     * Get powerup behaviour.
+     * @return powerup behaviour.
+     */
+    public PowerupBehaviour getBehaviour() {
+        return behaviour;
+    }
+
 }
