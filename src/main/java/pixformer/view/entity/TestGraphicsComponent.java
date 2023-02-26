@@ -28,7 +28,7 @@ public class TestGraphicsComponent implements GraphicsComponent {
     @Override
     public void update(final GameScene scene) {
         final RectangleRenderer rect = scene.getRendererFactory().newRectangle(entity.getWidth(), entity.getHeight());
-        rect.setColor(new Color(1, 0, 0));
+        rect.setColor(new Color(1, entity.hasCollided() ? 1 : 0, 0));
         scene.getGraphics().draw(rect);
     }
 }

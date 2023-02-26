@@ -15,8 +15,6 @@ import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
 
-import java.util.Set;
-
 /**
  * The default game view launcher for JavaFX.
  */
@@ -35,13 +33,14 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameLoop createGameLoop() {
-        var test1 = new TestEntity(5);
-        var test2 = new TestEntity(10);
-        final World world = new WorldImpl(Set.of(test1, test2));
+        final World world = new WorldImpl();
         final ViewImpl view = new ViewImpl(super.getScene());
 
-        // test
-        world.getCollisionManager().addOnCollide(test1, other -> System.out.println("Collision detected"));
+        var test1 = new TestEntity(5);
+        var test2 = new TestEntity(10);
+
+        world.spawnEntity(test1);
+        world.spawnEntity(test2);
 
         view.setup();
         view.getScene().getGraphics().setScale(15); // test
