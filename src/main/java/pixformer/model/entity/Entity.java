@@ -1,5 +1,7 @@
 package pixformer.model.entity;
 
+import pixformer.model.entity.collision.BoundingBox;
+
 /**
  * In-Game entity.
  */
@@ -25,4 +27,8 @@ public interface Entity {
      */
     double getHeight();
 
+    /**
+     * @return the bounding box of the entity
+     */
+    BoundingBox getBoundingBox();
 }

@@ -3,7 +3,7 @@ package pixformer.model.entity;
 /**
  * Abstract class for an entity.
  */
-public class AbstractEntity implements Entity {
+public abstract class AbstractEntity implements Entity {
     private double x;
     private double y;
     private double width;

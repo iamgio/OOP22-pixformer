@@ -5,10 +5,11 @@ import pixformer.model.entity.Entity;
 /**
  * A user-controlled input component.
  */
-public class UserInputComponent extends InputComponent {
+public abstract class UserInputComponent extends InputComponent {
 
     /**
      * Instantiates a user-controlled input component.
+     * 
      * @param entity target entity
      */
     public UserInputComponent(final Entity entity) {
@@ -17,8 +18,10 @@ public class UserInputComponent extends InputComponent {
         // e.g.: player.addOnJump(entity::jump)
     }
 
-    @Override
-    public void update(final double dt) {
-        // Empty
-    }
+    /*
+     * @Override
+     * public void update(final double dt) {
+     * // Empty
+     * }
+     */
 }

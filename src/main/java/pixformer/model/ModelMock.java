@@ -12,6 +12,16 @@ import pixformer.model.modelinput.CompleteModelInput;
 @Deprecated
 public final class ModelMock implements CompleteModelInput {
 
+    private final String name;
+
+    /**
+     * Construct a model.
+     * @param name which will be used printing.
+     */
+    public ModelMock(final String name) {
+        this.name = name;
+    }
+
     /*
         * The reason of the following suppressions is because this is just a mock for
         * explanatory purposes.
@@ -19,27 +29,27 @@ public final class ModelMock implements CompleteModelInput {
 
     @Override
     public void left() {
-        System.out.println("Mario left"); // NOPMD see above
+        System.out.println(name + " left"); // NOPMD see above
     }
 
     @Override
     public void right() {
-        System.out.println("Mario right"); // NOPMD see above
+        System.out.println(name + " right"); // NOPMD see above
     }
 
     @Override
-    public void fire() {
-        System.out.println("Mario fire"); // NOPMD see above
+    public void ability() {
+        System.out.println(name + " fire"); // NOPMD see above
     }
 
     @Override
     public void jump() {
-        System.out.println("Mario jump"); // NOPMD see above
+        System.out.println(name + " jump"); // NOPMD see above
     }
 
     @Override
     public void crouch() {
-        System.out.println("Mario crouch"); // NOPMD see above
+        System.out.println(name + " crouch"); // NOPMD see above
     }
 
 }

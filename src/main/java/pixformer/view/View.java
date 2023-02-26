@@ -1,7 +1,7 @@
 package pixformer.view;
 
 import pixformer.common.Updatable;
-import pixformer.controller.input.ObservableInputPolling;
+import pixformer.view.engine.GameScene;
 
 /**
  * The view of the game.
@@ -14,8 +14,7 @@ public interface View extends Updatable {
     void setup();
 
     /**
-     * @return currently active inputs
-     * @see pixformer.view.engine.GameScene#getInputPolling()
+     * @return the active game scene
      */
-    ObservableInputPolling getInputPolling();
+    GameScene getScene();
 }
