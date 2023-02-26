@@ -1,14 +1,17 @@
 package pixformer.model.entity;
 
+import pixformer.view.engine.GameScene;
+
 /**
- * Class for an entity graphics component, which describe how the entity should be represented
- * in the view.
+ * An entity's component responsible for its rendering on screen, or another
+ * output.
  */
 public interface GraphicsComponent {
 
     /**
-     * Draw the component.
+     * Updates the game scene with the content to draw.
+     * 
+     * @param scene game scene to draw on
      */
-    void draw();
-
+    void update(GameScene scene);
 }

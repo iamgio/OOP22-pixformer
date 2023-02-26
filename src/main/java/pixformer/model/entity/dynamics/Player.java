@@ -1,12 +1,9 @@
 package pixformer.model.entity.dynamics;
 
-import java.util.Optional;
-
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
-import pixformer.model.entity.AbstractDrawableEntity;
+import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.powerups.Powerup;
 import pixformer.model.modelinput.CompleteModelInput;
 
 /**
@@ -26,8 +23,10 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
     private boolean isCrouching;
     private boolean isJumping;
 
+
     //State variable to check if player is touching ground
     private boolean isGrounded = true;
+
 
     //Max duration of a jump
     static final double MAX_JUMP_DURATION = 5.0;
@@ -48,10 +47,10 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
     /**
      * @param position Initial player position
      */
-    public Player(final double x, final double y, final double width, final double height) {
-        super(x, y, width, height);
+    public Player(final Vector2D position) {
+        this.position = position;
         //this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
-    }    
+    }
 
     /**
      * {@inheritDoc}

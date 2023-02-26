@@ -3,7 +3,7 @@ package pixformer.view.engine.javafx;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pixformer.controller.GameLoop;
+import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
 

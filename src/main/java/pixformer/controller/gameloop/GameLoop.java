@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.gameloop;
 
 /**
  * The game clock.

@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.controller.input.ObservableInputPolling;
+import java.util.Set;
 
 /**
  * A scene of the game that contains its drawable content.
@@ -23,19 +23,9 @@ public abstract class GameScene {
     public abstract RendererFactory getRendererFactory();
 
     /**
-     * @return currently active inputs
+     * @return currently active input sources
      */
-    public abstract ObservableInputPolling getInputPolling();
-
-    /**
-     * @return the keyboard input mapping system for this scene
-     */
-    protected abstract InputMapper<?> getKeyboardInputMapper();
-
-    /**
-     * @return the mouse input mapping system for this scene
-     */
-    protected abstract InputMapper<?> getMouseInputMapper();
+    public abstract Set<SceneInput<?>> getInputs();
 
     /**
      * Handles keyboard and mouse input.
