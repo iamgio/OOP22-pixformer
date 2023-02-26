@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
 
 /**
@@ -31,4 +32,12 @@ public interface Entity {
      * @return the bounding box of the entity
      */
     BoundingBox getBoundingBox();
+
+    /**
+     * Called when this entity is added onto a game world.
+     * @param world game world the entity spawned on
+     */
+    default void onSpawn(World world) {
+
+    }
 }
