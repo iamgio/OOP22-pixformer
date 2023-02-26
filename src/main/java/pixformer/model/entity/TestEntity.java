@@ -32,8 +32,11 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
         this.graphicsComponent = new TestGraphicsComponent(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void onSpawn(World world) {
+    public void onSpawn(final World world) {
         world.getCollisionManager().addOnCollide(this, other -> hasCollided = true);
     }
 
@@ -49,7 +52,7 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
      * Sets the X coordinate.
      * @param x X coordinate
      */
-    public void setX(double x) {
+    public void setX(final double x) {
         this.x = x;
     }
 

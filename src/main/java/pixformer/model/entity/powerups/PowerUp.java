@@ -17,6 +17,7 @@ public class Powerup {
     /**
      * 
      * @param behaviour current powerup behaviour.
+     * @param priority The priority of current powerup
      */
     public Powerup(final PowerupBehaviour behaviour, final int priority) {
         this.behaviour = behaviour;

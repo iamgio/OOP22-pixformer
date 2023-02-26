@@ -14,8 +14,8 @@ import pixformer.model.entity.powerups.Powerup;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements Updatable, CompleteModelInput, DrawableEntity, DefaultRectangleBoundingBoxEntity
-{
+public class Player extends AbstractEntity implements Updatable, CompleteModelInput,
+ DrawableEntity, DefaultRectangleBoundingBoxEntity {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
 
@@ -42,10 +42,14 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
     private boolean jumpingKey;
 
     //Current powerup
-    Optional<Powerup> powerup;
+    private Optional<Powerup> powerup;
 
     /**
-     * @param position Initial player position
+     * 
+     * @param x X position of the player.
+     * @param y Y position of the player.
+     * @param width Width of the player.
+     * @param height Height of the player.
      */
     public Player(final double x, final double y, final double width, final double height) {
         super(x, y, width, height);
@@ -130,6 +134,15 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent getGraphicsComponent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update(final double dt) {
         //Manage movement
         int movement = 0;
@@ -192,11 +205,5 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
         this.rightKey = false;
         this.jumpingKey = false;
         /*this.abilityKey = false;*/
-    }
-
-    @Override
-    public GraphicsComponent getGraphicsComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
-    }
+    } 
 }

@@ -12,6 +12,23 @@ public abstract class AbstractEntity implements Entity {
     private double height;
 
     /**
+     * Current moving direction of the entity.
+     */
+    public enum Direction {
+        /**
+         * Entity is going left.
+         */
+        LEFT,
+        /**
+         * Entity is going right.
+         */
+        RIGHT
+    }
+
+    //Current entity direction.
+    private Direction direction;
+
+    /**
      * Constructor for the Entity.
      *
      * @param x      X coordinate
@@ -93,23 +110,6 @@ public abstract class AbstractEntity implements Entity {
     protected void setHeight(final double height) {
         this.height = height;
     }
-    
-    /**
-     * Current moving direction of the entity.
-     */
-    public enum Direction {
-        /**
-         * Entity is going left.
-         */
-        LEFT,
-        /**
-         * Entity is going right.
-         */
-        RIGHT
-    }
-
-    //Current entity direction.
-    protected Direction direction;
 
     /**
      * Return current entity direction.
@@ -118,14 +118,22 @@ public abstract class AbstractEntity implements Entity {
     public Direction getDirection() {
         return direction; 
     }
-    
+
+    /**
+     * Set current entity direction.
+     * @param direction New direction.
+     */
+    protected void setDirection(final Direction direction) {
+        this.direction = direction;
+    }
+
     /**
      * Function to update player position with vectors.
      * @param newForce New vector force applied to the player.
      * @param dt delta-time passed.
      */
     protected void updatePos(final Vector2D newForce, final double dt) {
-        
+
         Vector2D newPos = new Vector2D(getX(), getY());
         newPos.sum(new Vector2D(newForce.x() * dt, newForce.y() * dt));
 
