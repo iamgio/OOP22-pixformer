@@ -21,12 +21,10 @@ public class WorldImpl implements World {
     private final List<Player> players = new ArrayList<>();
 
     /**
-     * Create a new World with the given entities.
-     * 
-     * @param entities set of entities
+     * Create a new World.
      */
-    public WorldImpl(final Set<DrawableEntity> entities) {
-        this.entities = new HashSet<>(entities);
+    public WorldImpl() {
+        this.entities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
     }
 
@@ -35,7 +33,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<DrawableEntity> getEntities() {
-        return Set.copyOf(this.entities);
+        return Collections.unmodifiableSet(this.entities);
     }
 
     /**
