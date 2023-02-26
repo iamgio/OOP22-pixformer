@@ -1,23 +1,23 @@
 package pixformer.model.entity.dynamics;
 
+import java.util.Optional;
+
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.entity.powerups.Powerup;
 
 /**
  * The class manages the character used by the player.
  */
-public class Player<T extends Powerup> extends AbstractDrawableEntity implements Updatable, CompleteModelInput {
+public class Player extends AbstractEntity implements Updatable, CompleteModelInput, DrawableEntity, DefaultRectangleBoundingBoxEntity
+{
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
-
-    //Current Player position
-    private Vector2D position;
-
-    //Direction in which the player is directed
-    private Direction direction;
 
     //State variables to check if player is jumping or crouching
     private boolean isCrouching;
@@ -47,25 +47,9 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
     /**
      * @param position Initial player position
      */
-    public Player(final Vector2D position) {
-        this.position = position;
+    public Player(final double x, final double y, final double width, final double height) {
+        super(x, y, width, height);
         //this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getX() {
-        return position.x();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getY() {
-        return position.y();
     }
 
     /**
@@ -146,15 +130,6 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent getGraphicsComponent() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void update(final double dt) {
         //Manage movement
         int movement = 0;
@@ -169,7 +144,7 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
             movement++;
         }
 
-        this.position = this.position.sum(new Vector2D(SPEED * dt * movement, 0));
+        updatePos(new Vector2D(SPEED * movement, 0), dt);
 
         //Manage jumping
         if (this.isGrounded) {
@@ -189,12 +164,12 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
 
         //Player is jumping (moving up)
         if (this.isJumping) {
-            this.position.sum(new Vector2D(0, JUMP_FORCE * dt));
+            updatePos(new Vector2D(0, JUMP_FORCE), dt);
         }
 
         //Player is falling down
         if (!this.isGrounded && !this.isJumping) {
-            this.position.sum(new Vector2D(0, -GRAVITY * dt));
+            updatePos(new Vector2D(0, -GRAVITY), dt);
         }
 
         //Manage abilities
@@ -217,5 +192,11 @@ public class Player<T extends Powerup> extends AbstractDrawableEntity implements
         this.rightKey = false;
         this.jumpingKey = false;
         /*this.abilityKey = false;*/
+    }
+
+    @Override
+    public GraphicsComponent getGraphicsComponent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
     }
 }
