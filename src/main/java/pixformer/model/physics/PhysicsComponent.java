@@ -5,7 +5,7 @@ import pixformer.common.Vector2D;
 /**
  * PhysicComponent of an Entity.
  */
-public interface PhysicComponent {
+public interface PhysicsComponent {
 
     /**
      * @return the gravity
@@ -14,6 +14,7 @@ public interface PhysicComponent {
 
     /**
      * Set the gravity of the component.
+     * 
      * @param vector intensity of the gravity
      */
     void setGravity(Vector2D vector);
