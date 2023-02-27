@@ -1,5 +1,7 @@
 package pixformer.model.physics;
 
+import pixformer.common.Vector2D;
+
 /**
  * PhysicComponent of an Entity.
  */
@@ -8,12 +10,12 @@ public interface PhysicComponent {
     /**
      * @return the gravity
      */
-    double getGravity();
+    Vector2D getGravity();
 
     /**
      * Set the gravity of the component.
-     * @param value intensity of the gravity
+     * @param vector intensity of the gravity
      */
-    void setGravity(double value);
+    void setGravity(Vector2D vector);
 
 }
