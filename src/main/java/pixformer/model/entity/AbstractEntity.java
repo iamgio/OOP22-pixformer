@@ -10,7 +10,7 @@ public abstract class AbstractEntity implements Entity {
     private double height;
 
     /**
-     * Constructor for the Entity.
+     * Constructor for the AbstractEntity.
      *
      * @param x      X coordinate
      * @param y      Y coordinate

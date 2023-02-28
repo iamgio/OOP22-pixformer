@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.World;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.entity.TestGraphicsComponent;
@@ -17,6 +18,8 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
     // Il campo X andrà in Entity (classe astratta)
     private double x;
 
+    private boolean hasCollided = false;
+
     private final CompleteModelInput inputComponent;
     private final GraphicsComponent graphicsComponent;
 
@@ -33,6 +36,14 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
      * {@inheritDoc}
      */
     @Override
+    public void onSpawn(final World world) {
+        world.getCollisionManager().addOnCollide(this, other -> hasCollided = true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public double getX() {
         return this.x;
     }
@@ -41,7 +52,7 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
      * Sets the X coordinate.
      * @param x X coordinate
      */
-    public void setX(double x) {
+    public void setX(final double x) {
         this.x = x;
     }
 
@@ -79,5 +90,12 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
     @Override
     public GraphicsComponent getGraphicsComponent() {
         return this.graphicsComponent;
+    }
+
+    /**
+     * @return whether this entity has collided with another entity
+     */
+    public boolean hasCollided() {
+        return this.hasCollided;
     }
 }

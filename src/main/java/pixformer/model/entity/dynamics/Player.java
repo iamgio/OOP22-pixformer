@@ -1,22 +1,23 @@
 package pixformer.model.entity.dynamics;
 
+import java.util.Optional;
+
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
+import pixformer.model.entity.MovableAbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.entity.powerups.Powerup;
 
 /**
  * The class manages the character used by the player.
  */
-public class Player implements DrawableEntity, Updatable, CompleteModelInput {
+public class Player extends MovableAbstractEntity implements Updatable, CompleteModelInput,
+ DrawableEntity, DefaultRectangleBoundingBoxEntity {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
-
-
-    //Current Player position
-    private Vector2D position;
-
 
     //State variables to check if player is jumping or crouching
     private boolean isCrouching;
@@ -31,46 +32,28 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
     static final double MAX_JUMP_DURATION = 5.0;
     static final double JUMP_FORCE = 1.0;
 
-
     //Current jump state
     private double jumpTimeCounter = MAX_JUMP_DURATION;
 
-
-    // Variables to manage player input
-
-
-    //True if in the last timeslot has been pressed a movement key
+    // Variables to manage player input, True if in the last timeslot has been pressed a movement key, False otherwise
     private boolean leftKey;
     private boolean rightKey;
-
-    //True if in the last timeslot has been pressed the ability key (to activate player ability, if possible)
     /*private boolean abilityKey;*/
-    //True if in the last timeslot has been pressed the jump key (to continue the jump of fall down)
     private boolean jumpingKey;
 
+    //Current powerup
+    private Optional<Powerup> powerup;
 
     /**
-     * @param position Initial player position
+     * 
+     * @param x X position of the player.
+     * @param y Y position of the player.
+     * @param width Width of the player.
+     * @param height Height of the player.
      */
-    public Player(final Vector2D position) {
-        this.position = position;
+    public Player(final double x, final double y, final double width, final double height) {
+        super(x, y, width, height);
         //this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getX() {
-        return position.x();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getY() {
-        return position.y();
     }
 
     /**
@@ -153,7 +136,7 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
     @Override
     public GraphicsComponent getGraphicsComponent() {
         // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
     }
 
     /**
@@ -174,9 +157,7 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
             movement++;
         }
 
-
-        this.position = this.position.sum(new Vector2D(SPEED * dt * movement, 0));
-
+        updatePos(new Vector2D(SPEED * movement, 0), dt);
 
         //Manage jumping
         if (this.isGrounded) {
@@ -186,28 +167,23 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
             this.jumpTimeCounter -= dt;
         }
 
-
         if (!this.jumpingKey) {
             this.jumpTimeCounter = 0;
         }
-
 
         if (this.jumpTimeCounter <= 0) {
             this.isJumping = false;
         }
 
-
         //Player is jumping (moving up)
         if (this.isJumping) {
-            this.position.sum(new Vector2D(0, JUMP_FORCE * dt));
+            updatePos(new Vector2D(0, JUMP_FORCE), dt);
         }
-
 
         //Player is falling down
         if (!this.isGrounded && !this.isJumping) {
-            this.position.sum(new Vector2D(0, -GRAVITY * dt));
+            updatePos(new Vector2D(0, -GRAVITY), dt);
         }
-
 
         //Manage abilities
         /*
@@ -215,7 +191,6 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
             //NEED TO IMPLEMENT UPGRADES
         }
         */
-
 
         /*
             Manage collisions     !!!
@@ -225,11 +200,10 @@ public class Player implements DrawableEntity, Updatable, CompleteModelInput {
         //else
         this.isGrounded = false;
 
-
         //reset keys variables
         this.leftKey = false;
         this.rightKey = false;
         this.jumpingKey = false;
         /*this.abilityKey = false;*/
-    }
+    } 
 }
