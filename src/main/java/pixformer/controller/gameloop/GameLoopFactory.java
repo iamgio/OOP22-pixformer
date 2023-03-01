@@ -6,10 +6,15 @@ import pixformer.model.entity.TestEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.view.ViewImpl;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Factory of available game loops.
  */
 public final class GameLoopFactory {
+
+    private static final int SECONDS_TO_MILLIS = 1_000;
+    private static final int FPS = 30;
 
     private final World world;
     private final ViewImpl view; // TODO cambiare da ViewImpl a View
@@ -61,7 +66,7 @@ public final class GameLoopFactory {
                     });
                 },
                 dt -> {
-                    final long period = 17;
+                    final long period = (SECONDS_TO_MILLIS / FPS);
                     if (dt < period) {
                         try {
                             Thread.sleep(period - dt);

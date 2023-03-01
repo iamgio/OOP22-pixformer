@@ -7,6 +7,8 @@ import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * JavaFX application launcher.
  */
@@ -55,7 +57,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
         new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                loop.loop(now);
+                loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
             }
         }.start();
     }
