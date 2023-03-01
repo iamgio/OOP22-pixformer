@@ -7,6 +7,8 @@ import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
 
+import java.util.Objects;
+
 /**
  * JavaFX application launcher.
  */
@@ -14,17 +16,17 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
     private JavaFXScene scene;
     private GameLoop loop;
+    private Stage stage;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start(final Stage primaryStage) {
-        this.scene = (JavaFXScene) this.createScene();
+        this.stage = primaryStage;
+        this.setScene(this.createInitialScene());
         this.loop = this.createGameLoop();
-        this.startLoop();
         primaryStage.setTitle(this.getTitle());
-        primaryStage.setScene(this.scene.getScene());
         primaryStage.show();
     }
 
@@ -47,9 +49,28 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
         return this.scene;
     }
 
-    private void startLoop() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScene(final GameScene scene) {
+        if (!(scene instanceof JavaFXScene)) {
+            throw new IllegalArgumentException("Expected a JavaFX scene.");
+        }
+
+        this.scene = (JavaFXScene) Objects.requireNonNull(scene);
+        this.stage.setScene(this.scene.getScene());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startGameLoop() {
+        this.loop = this.createGameLoop();
+
         if (this.loop == null) {
-            throw new IllegalStateException("Could not start game loop.");
+            return;
         }
 
         new AnimationTimer() {

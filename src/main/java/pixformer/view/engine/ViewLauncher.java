@@ -18,12 +18,24 @@ public interface ViewLauncher {
     GameScene getScene();
 
     /**
-     * @return a new game scene instance
+     * Sets a new game scene as the active one.
+     * @param scene new game scene
      */
-    GameScene createScene();
+    void setScene(GameScene scene);
+
+    /**
+     * @return the initial new game scene instance
+     */
+    GameScene createInitialScene();
 
     /**
      * @return a new game loop instance
      */
     GameLoop createGameLoop();
+
+    /**
+     * Starts the game loop.
+     * @see ViewLauncher#createGameLoop()
+     */
+    void startGameLoop();
 }

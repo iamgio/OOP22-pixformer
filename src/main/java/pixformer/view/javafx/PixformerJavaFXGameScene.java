@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * The default game scene for JavaFX.
  */
-public class PixformerJavaFXScene extends JavaFXScene {
+public class PixformerJavaFXGameScene extends JavaFXScene {
 
     private static final double INITIAL_WIDTH = 1200;
     private static final double INITIAL_HEIGHT = 600;
@@ -22,7 +22,7 @@ public class PixformerJavaFXScene extends JavaFXScene {
     /**
      * Initializes the default game scene.
      */
-    public PixformerJavaFXScene() {
+    public PixformerJavaFXGameScene() {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
         this.keyboardInput = new SceneInputImpl<>(new PixformerJavaFXKeyboardInputMapper());
         this.mouseInput = new SceneInputImpl<>(new PixformerJavaFXMouseInputMapper());

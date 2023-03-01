@@ -19,8 +19,15 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      * {@inheritDoc}
      */
     @Override
-    public JavaFXScene createScene() {
-        return new PixformerJavaFXScene();
+    public JavaFXScene createInitialScene() {
+        var menu = new PixformerJavaFXMainMenuScene();
+        menu.addOnLevelSelect(level -> {
+            // TODO pass level
+            this.setScene(new PixformerJavaFXGameScene());
+            this.startGameLoop();
+        });
+
+        return menu;
     }
 
     /**
