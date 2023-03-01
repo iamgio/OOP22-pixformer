@@ -3,7 +3,6 @@ package pixformer.controller.gameloop;
 import pixformer.model.ModelMock;
 import pixformer.model.World;
 import pixformer.model.entity.TestEntity;
-import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.view.ViewImpl;
 
 /**
@@ -50,12 +49,7 @@ public final class GameLoopFactory {
                 () -> {
                     view.update(0);
 
-                    final EntityCollisionManager collisionManager = world.getCollisionManager();
-
                     world.getEntities().forEach(entity -> {
-                        collisionManager.findCollisionsFor(entity).forEach(other -> {
-                            collisionManager.getOnCollideCallbacksFor(entity).forEach(callback -> callback.accept(other));
-                        });
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                         entity.getGraphicsComponent().update(view.getScene());
                     });
