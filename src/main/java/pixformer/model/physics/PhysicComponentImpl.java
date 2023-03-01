@@ -5,7 +5,7 @@ import pixformer.common.Vector2D;
 /**
  * {@inheritDoc}
  */
-public class PhysicsComponentImpl implements PhysicsComponent {
+public class PhysicComponentImpl implements PhysicComponent {
     private Vector2D gravity;
 
     /**
@@ -13,7 +13,7 @@ public class PhysicsComponentImpl implements PhysicsComponent {
      * 
      * @param vector
      */
-    public PhysicsComponentImpl(final Vector2D vector) {
+    public PhysicComponentImpl(final Vector2D vector) {
         this.gravity = vector;
     }
 

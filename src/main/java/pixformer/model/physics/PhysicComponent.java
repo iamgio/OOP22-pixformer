@@ -5,7 +5,7 @@ import pixformer.common.Vector2D;
 /**
  * PhysicComponent of an Entity.
  */
-public interface PhysicsComponent {
+public interface PhysicComponent {
 
     /**
      * @return the gravity
