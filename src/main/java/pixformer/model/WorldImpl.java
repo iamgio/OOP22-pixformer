@@ -3,7 +3,7 @@ package pixformer.model;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamics.Player;
+import pixformer.model.entity.dynamic.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
