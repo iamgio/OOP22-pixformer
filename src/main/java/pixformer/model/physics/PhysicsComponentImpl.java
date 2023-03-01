@@ -3,13 +3,13 @@ package pixformer.model.physics;
 import pixformer.common.Vector2D;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
 public class PhysicsComponentImpl implements PhysicsComponent {
     private Vector2D gravity;
 
     /**
-     * Constructor for the PhysicComponent
+     * Constructor for the PhysicComponent.
      * 
      * @param vector
      */

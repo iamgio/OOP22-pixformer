@@ -5,8 +5,6 @@ import pixformer.model.World;
 import pixformer.model.entity.TestEntity;
 import pixformer.view.ViewImpl;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Factory of available game loops.
  */
