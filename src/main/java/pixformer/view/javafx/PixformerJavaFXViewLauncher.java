@@ -1,8 +1,11 @@
 package pixformer.view.javafx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GameLoopFactory;
+import pixformer.model.Level;
+import pixformer.model.LevelMock;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.view.ViewImpl;
@@ -20,14 +23,20 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public JavaFXScene createInitialScene() {
+        // Commentare la riga sotto per far comparire il menu principale (togliere prima della consegna)
+        Platform.runLater(() -> this.switchToGameScene(new LevelMock()));
+
         var menu = new PixformerJavaFXMainMenuScene();
-        menu.addOnLevelSelect(level -> {
-            // TODO pass level
-            this.setScene(new PixformerJavaFXGameScene());
-            this.startGameLoop();
-        });
+        menu.addOnLevelSelect(this::switchToGameScene);
 
         return menu;
+    }
+
+    private void switchToGameScene(final Level level) {
+        // TODO use level
+        // TODO use LevelManager instead of Level to not break MVC
+        this.setScene(new PixformerJavaFXGameScene());
+        this.startGameLoop();
     }
 
     /**
