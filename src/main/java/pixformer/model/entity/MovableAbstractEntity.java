@@ -8,22 +8,8 @@ import pixformer.model.entity.collision.BoundingBox;
  */
 public class MovableAbstractEntity extends AbstractEntity {
 
-    /**
-     * Current moving direction of the entity.
-     */
-    public enum Direction {
-        /**
-         * Entity is going left.
-         */
-        LEFT,
-        /**
-         * Entity is going right.
-         */
-        RIGHT
-    }
-
-    //Current entity direction.
-    private Direction direction;
+    //Forza a cui è attualmente soggetta l'entità
+    private Vector2D movingForce = new Vector2D(0,0);
 
     /**
      * Constructor for the MovableAbstractEntity.
@@ -48,19 +34,17 @@ public class MovableAbstractEntity extends AbstractEntity {
     }
 
     /**
-     * Return current entity direction.
-     * @return entity direction.
+     * @return Current force applied to entity 
      */
-    public Direction getDirection() {
-        return direction; 
+    public Vector2D getForce(){
+        return this.movingForce;
     }
 
     /**
-     * Set current entity direction.
-     * @param direction New direction.
+     * @return the width of the entity
      */
-    protected void setDirection(final Direction direction) {
-        this.direction = direction;
+    protected void setForce(final Vector2D force){
+        this.movingForce = force;
     }
 
     /**
@@ -69,12 +53,8 @@ public class MovableAbstractEntity extends AbstractEntity {
      * @param dt delta-time passed.
      */
     protected void updatePos(final Vector2D newForce, final double dt) {
-
-        Vector2D newPos = new Vector2D(getX(), getY());
-        newPos.sum(new Vector2D(newForce.x() * dt, newForce.y() * dt));
-
-        this.setX(newPos.x());
-        this.setY(newPos.y());
+        this.setX(this.getX() + newForce.x() * dt);
+        this.setY(this.getY() + newForce.y() * dt);
     }
 
 }

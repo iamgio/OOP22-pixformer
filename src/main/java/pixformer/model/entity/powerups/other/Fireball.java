@@ -1,7 +1,6 @@
 package pixformer.model.entity.powerups.other;
 
 import pixformer.common.Updatable;
-import pixformer.common.Vector2D;
 import pixformer.model.entity.MovableAbstractEntity;
 import pixformer.model.entity.collision.BoundingBox;
 
@@ -20,9 +19,8 @@ public class Fireball extends MovableAbstractEntity implements Updatable {
      * @param height Height.
      * @param direction Start direction.
      */
-    public Fireball(final double x, final double y, final double width, final double height, final Direction direction) {
+    public Fireball(final double x, final double y, final double width, final double height) {
         super(x, y, width, height);
-        this.setDirection(direction);
     }
 
     /**
@@ -30,7 +28,7 @@ public class Fireball extends MovableAbstractEntity implements Updatable {
      */
     @Override
     public void update(final double dt) {
-        updatePos(new Vector2D(SPEED * dt * (this.getDirection() == Direction.LEFT ? -1 : 1), 0), dt);
+        //updatePos(new Vector2D(SPEED * dt * (this.getDirection() == Direction.LEFT ? -1 : 1), 0), dt);
     }
 
     /**
