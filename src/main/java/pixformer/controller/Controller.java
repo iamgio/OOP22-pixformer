@@ -9,11 +9,6 @@ import pixformer.model.GameSettings;
 public interface Controller {
 
     /**
-     * @return the core loop of the game
-     */
-    GameLoop getGameLoop();
-
-    /**
      * @return current game mechanics settings
      */
     GameSettings getSettings();
@@ -22,4 +17,15 @@ public interface Controller {
      * @return the handler for playable levels
      */
     LevelManager getLevelManager();
+
+    /**
+     * @return the core loop of the game
+     */
+    GameLoop getGameLoop();
+
+    /**
+     * Sets the current game loop.
+     * @param gameLoop new game loop
+     */
+    void setGameLoop(GameLoop gameLoop);
 }

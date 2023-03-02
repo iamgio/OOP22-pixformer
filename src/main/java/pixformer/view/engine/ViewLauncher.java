@@ -1,5 +1,6 @@
 package pixformer.view.engine;
 
+import pixformer.controller.Controller;
 import pixformer.controller.gameloop.GameLoop;
 
 /**
@@ -11,6 +12,11 @@ public interface ViewLauncher {
      * Launches the view.
      */
     void launch();
+
+    /**
+     * @return the controller for model interactions
+     */
+    Controller getController();
 
     /**
      * @return the active game scene

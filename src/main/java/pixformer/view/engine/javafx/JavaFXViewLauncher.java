@@ -3,6 +3,8 @@ package pixformer.view.engine.javafx;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pixformer.controller.Controller;
+import pixformer.controller.ControllerImpl;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
@@ -15,8 +17,8 @@ import java.util.Objects;
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
     private JavaFXScene scene;
-    private GameLoop loop;
     private Stage stage;
+    private Controller controller;
 
     /**
      * {@inheritDoc}
@@ -24,8 +26,9 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     @Override
     public void start(final Stage primaryStage) {
         this.stage = primaryStage;
+        this.controller = new ControllerImpl();
         this.setScene(this.createInitialScene());
-        this.loop = this.createGameLoop();
+
         primaryStage.setTitle(this.getTitle());
         primaryStage.show();
     }
@@ -36,6 +39,14 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     @Override
     public void launch() {
         Application.launch(getAppClass());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Controller getController() {
+        return this.controller;
     }
 
     /**
@@ -67,16 +78,18 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public void startGameLoop() {
-        this.loop = this.createGameLoop();
+        final GameLoop gameLoop = this.createGameLoop();
 
-        if (this.loop == null) {
+        this.controller.setGameLoop(gameLoop);
+
+        if (gameLoop == null) {
             return;
         }
 
         new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                loop.loop(now);
+                gameLoop.loop(now);
             }
         }.start();
     }

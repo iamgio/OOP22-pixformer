@@ -2,6 +2,8 @@ package pixformer.view.javafx;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import pixformer.model.Level;
@@ -31,6 +33,8 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
 
         Scene scene = super.getScene();
         Pane root = (Pane) scene.getRoot();
+
+        root.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
 
         var label = new Label("Click to start");
         label.setTextFill(Color.WHITE);
