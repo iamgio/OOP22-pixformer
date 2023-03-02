@@ -20,13 +20,13 @@ public interface Controller {
     LevelManager getLevelManager();
 
     /**
+     * @return the handler for game loop cycles
+     */
+    GameLoopManager getGameLoopManager();
+
+    /**
      * @param view view to output to
      * @return a new game loop instance
      */
     GameLoop createGameLoop(ViewImpl view); // TODO change to View
-
-    /**
-     * Starts running the current game loop.
-     */
-    void startGameLoop();
 }

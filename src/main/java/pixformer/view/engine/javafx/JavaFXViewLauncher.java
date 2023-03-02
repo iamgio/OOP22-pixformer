@@ -1,14 +1,12 @@
 package pixformer.view.engine.javafx;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pixformer.controller.AbstractController;
 import pixformer.controller.Controller;
-import pixformer.controller.gameloop.GameLoop;
-import pixformer.view.ViewImpl;
+import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
+import pixformer.view.javafx.JavaFXGameLoopManager;
 
 import java.util.Objects;
 
@@ -32,6 +30,10 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
         primaryStage.setTitle(this.getTitle());
         primaryStage.show();
+    }
+
+    private Controller createController() {
+        return new ControllerImpl(new JavaFXGameLoopManager(this));
     }
 
     /**
@@ -72,34 +74,6 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
         this.scene = (JavaFXScene) Objects.requireNonNull(scene);
         this.stage.setScene(this.scene.getScene());
-    }
-
-    private Controller createController() {
-        return new AbstractController() {
-
-            private AnimationTimer currentTimer;
-
-            @Override
-            public void startGameLoop() {
-                final GameLoop loop = createGameLoop(new ViewImpl(getScene()));
-
-                if (currentTimer != null) {
-                    currentTimer.stop();
-                }
-
-                if (loop != null) {
-                    currentTimer = new AnimationTimer() {
-                        @Override
-                        public void handle(final long now) {
-                            loop.loop(now);
-                        }
-                    };
-                    currentTimer.start();
-                } else {
-                    currentTimer = null;
-                }
-            }
-        };
     }
 
     /**

@@ -40,10 +40,11 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
         LevelManager levelManager = this.getController().getLevelManager();
         levelManager.addOnLevelStart(level -> {
             this.setScene(this.createGameScene());
-            this.getController().startGameLoop();
+            this.getController().getGameLoopManager().start();
         });
         levelManager.addOnLevelEnd(level -> {
             this.setScene(this.createMenuScene());
+            this.getController().getGameLoopManager().stop();
         });
 
         // Commentare la riga sotto per far comparire il menu principale (togliere prima della consegna)
