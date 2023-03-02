@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import pixformer.controller.AbstractController;
 import pixformer.controller.Controller;
 import pixformer.controller.gameloop.GameLoop;
+import pixformer.view.ViewImpl;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
 
@@ -77,9 +78,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
         return new AbstractController() {
             @Override
             public void startGameLoop() {
-                final GameLoop loop = createGameLoop();
-
-                this.setGameLoop(loop);
+                final GameLoop loop = createGameLoop(new ViewImpl(getScene()));
 
                 if (loop != null) {
                     new AnimationTimer() {

@@ -2,6 +2,7 @@ package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
+import pixformer.view.ViewImpl;
 
 /**
  * The controller that acts as a bridge between model and view.
@@ -19,15 +20,10 @@ public interface Controller {
     LevelManager getLevelManager();
 
     /**
-     * @return the core loop of the game
+     * @param view view to output to
+     * @return a new game loop instance
      */
-    GameLoop getGameLoop();
-
-    /**
-     * Sets the current game loop.
-     * @param gameLoop new game loop
-     */
-    void setGameLoop(GameLoop gameLoop);
+    GameLoop createGameLoop(ViewImpl view); // TODO change to View
 
     /**
      * Starts running the current game loop.

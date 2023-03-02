@@ -1,7 +1,12 @@
 package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.gameloop.GameLoopFactory;
 import pixformer.model.GameSettings;
+import pixformer.model.Level;
+import pixformer.view.ViewImpl;
+
+import java.util.Optional;
 
 /**
  * The default implementation of a {@link Controller},
@@ -11,8 +16,6 @@ public abstract class AbstractController implements Controller {
 
     private final GameSettings settings;
     private final LevelManager levelManager;
-
-    private GameLoop gameLoop;
 
     /**
      * @param settings game settings
@@ -51,15 +54,11 @@ public abstract class AbstractController implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public GameLoop getGameLoop() {
-        return this.gameLoop;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setGameLoop(final GameLoop gameLoop) {
-        this.gameLoop = gameLoop;
+    public GameLoop createGameLoop(final ViewImpl view) {
+        Optional<Level> currentLevel = this.levelManager.getCurrentLevel();
+        if (currentLevel.isEmpty()) {
+            throw new IllegalStateException("Current level is not set.");
+        }
+        return new GameLoopFactory(currentLevel.get().getWorld(), view).defaultLoop();
     }
 }

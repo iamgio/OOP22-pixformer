@@ -2,13 +2,8 @@ package pixformer.view.javafx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import pixformer.controller.gameloop.GameLoop;
-import pixformer.controller.gameloop.GameLoopFactory;
 import pixformer.model.Level;
 import pixformer.model.LevelMock;
-import pixformer.model.World;
-import pixformer.model.WorldImpl;
-import pixformer.view.ViewImpl;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
@@ -33,21 +28,9 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     }
 
     private void switchToGameScene(final Level level) {
-        // TODO use level
-        // TODO use LevelManager instead of Level to not break MVC
         this.setScene(new PixformerJavaFXGameScene());
+        this.getController().getLevelManager().start(level);
         this.getController().startGameLoop();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GameLoop createGameLoop() {
-        final World world = new WorldImpl();
-        final ViewImpl view = new ViewImpl(super.getScene());
-
-        return new GameLoopFactory(world, view).defaultLoop();
     }
 
     /**
