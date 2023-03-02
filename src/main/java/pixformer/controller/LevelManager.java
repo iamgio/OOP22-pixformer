@@ -22,7 +22,7 @@ public interface LevelManager {
     void start(Level level);
 
     /**
-     * Adds a callback to call when a level is started
+     * Adds a callback to call when a level is started.
      * @param action action to run when a level is started
      */
     void addOnLevelStart(Consumer<Level> action);
@@ -34,7 +34,7 @@ public interface LevelManager {
     void endCurrentLevel();
 
     /**
-     * Adds a callback to call when a level is stopped
+     * Adds a callback to call when a level is stopped.
      * @param action action to run when a level is stopped
      */
     void addOnLevelEnd(Consumer<Level> action);

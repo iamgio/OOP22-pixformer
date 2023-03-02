@@ -35,8 +35,11 @@ public class LevelManagerImpl implements LevelManager {
         this.onStart.forEach(action -> action.accept(level));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addOnLevelStart(Consumer<Level> action) {
+    public void addOnLevelStart(final Consumer<Level> action) {
         this.onStart.add(action);
     }
 
@@ -53,8 +56,11 @@ public class LevelManagerImpl implements LevelManager {
         this.level = null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addOnLevelEnd(Consumer<Level> action) {
+    public void addOnLevelEnd(final Consumer<Level> action) {
         this.onEnd.add(action);
     }
 }
