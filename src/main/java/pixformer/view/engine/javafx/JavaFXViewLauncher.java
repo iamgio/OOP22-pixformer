@@ -17,9 +17,10 @@ import java.util.Objects;
  */
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
+    private final Controller controller = this.createController();
+
     private JavaFXScene scene;
     private Stage stage;
-    private Controller controller;
 
     /**
      * {@inheritDoc}
@@ -27,7 +28,6 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     @Override
     public void start(final Stage primaryStage) {
         this.stage = primaryStage;
-        this.controller = this.createController();
         this.setScene(this.createInitialScene());
 
         primaryStage.setTitle(this.getTitle());
@@ -76,17 +76,27 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
     private Controller createController() {
         return new AbstractController() {
+
+            private AnimationTimer currentTimer;
+
             @Override
             public void startGameLoop() {
                 final GameLoop loop = createGameLoop(new ViewImpl(getScene()));
 
+                if (currentTimer != null) {
+                    currentTimer.stop();
+                }
+
                 if (loop != null) {
-                    new AnimationTimer() {
+                    currentTimer = new AnimationTimer() {
                         @Override
                         public void handle(final long now) {
                             loop.loop(now);
                         }
-                    }.start();
+                    };
+                    currentTimer.start();
+                } else {
+                    currentTimer = null;
                 }
             }
         };

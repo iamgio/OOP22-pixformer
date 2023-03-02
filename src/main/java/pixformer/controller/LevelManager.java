@@ -3,6 +3,7 @@ package pixformer.controller;
 import pixformer.model.Level;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Handler of playable levels.
@@ -21,9 +22,20 @@ public interface LevelManager {
     void start(Level level);
 
     /**
-     * Stops an ongoing level.
-     * @param level level to end
-     * @throws java.lang.IllegalArgumentException if the given level isn't active and/or cannot be stopped
+     * Adds a callback to call when a level is started
+     * @param action action to run when a level is started
      */
-    void end(Level level);
+    void addOnLevelStart(Consumer<Level> action);
+
+    /**
+     * Stops the ongoing level.
+     * @throws java.lang.IllegalArgumentException if there isn't a currently active level
+     */
+    void endCurrentLevel();
+
+    /**
+     * Adds a callback to call when a level is stopped
+     * @param action action to run when a level is stopped
+     */
+    void addOnLevelEnd(Consumer<Level> action);
 }

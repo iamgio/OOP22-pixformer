@@ -2,7 +2,9 @@ package pixformer.view.javafx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import pixformer.model.Level;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import pixformer.controller.LevelManager;
 import pixformer.model.LevelMock;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
@@ -13,24 +15,41 @@ import pixformer.view.engine.javafx.JavaFXViewLauncher;
  */
 public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
 
+    private JavaFXScene createGameScene() {
+        var scene = new PixformerJavaFXGameScene();
+        scene.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            // TODO remove
+            if (e.getCode() == KeyCode.ENTER) {
+                this.getController().getLevelManager().endCurrentLevel();
+            }
+        });
+        return scene;
+    }
+
+    private JavaFXScene createMenuScene() {
+        var menu = new PixformerJavaFXMainMenuScene();
+        menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level));
+        return menu;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public JavaFXScene createInitialScene() {
+        LevelManager levelManager = this.getController().getLevelManager();
+        levelManager.addOnLevelStart(level -> {
+            this.setScene(this.createGameScene());
+            this.getController().startGameLoop();
+        });
+        levelManager.addOnLevelEnd(level -> {
+            this.setScene(this.createMenuScene());
+        });
+
         // Commentare la riga sotto per far comparire il menu principale (togliere prima della consegna)
-        Platform.runLater(() -> this.switchToGameScene(new LevelMock()));
+        Platform.runLater(() -> this.getController().getLevelManager().start(new LevelMock()));
 
-        var menu = new PixformerJavaFXMainMenuScene();
-        menu.addOnLevelSelect(this::switchToGameScene);
-
-        return menu;
-    }
-
-    private void switchToGameScene(final Level level) {
-        this.setScene(new PixformerJavaFXGameScene());
-        this.getController().getLevelManager().start(level);
-        this.getController().startGameLoop();
+        return this.createMenuScene();
     }
 
     /**
