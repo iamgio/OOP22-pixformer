@@ -38,10 +38,4 @@ public interface ViewLauncher {
      * @return a new game loop instance
      */
     GameLoop createGameLoop();
-
-    /**
-     * Starts the game loop.
-     * @see ViewLauncher#createGameLoop()
-     */
-    void startGameLoop();
 }

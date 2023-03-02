@@ -36,7 +36,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
         // TODO use level
         // TODO use LevelManager instead of Level to not break MVC
         this.setScene(new PixformerJavaFXGameScene());
-        this.startGameLoop();
+        this.getController().startGameLoop();
     }
 
     /**

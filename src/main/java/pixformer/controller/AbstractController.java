@@ -4,9 +4,10 @@ import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
 
 /**
- * The default implementation of a {@link Controller}.
+ * The default implementation of a {@link Controller},
+ * with room for view-specific features (e.g. {@link Controller#startGameLoop()}).
  */
-public class ControllerImpl implements Controller {
+public abstract class AbstractController implements Controller {
 
     private final GameSettings settings;
     private final LevelManager levelManager;
@@ -17,7 +18,7 @@ public class ControllerImpl implements Controller {
      * @param settings game settings
      * @param levelManager handler of playable levels
      */
-    public ControllerImpl(final GameSettings settings, final LevelManager levelManager) {
+    public AbstractController(final GameSettings settings, final LevelManager levelManager) {
         this.settings = settings;
         this.levelManager = levelManager;
     }
@@ -25,7 +26,7 @@ public class ControllerImpl implements Controller {
     /**
      * Instantiates a new implementation with default values.
      */
-    public ControllerImpl() {
+    public AbstractController() {
         // TODO implement GameSettings
         this(null, new LevelManagerImpl());
     }

@@ -3,8 +3,8 @@ package pixformer.view.engine.javafx;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pixformer.controller.AbstractController;
 import pixformer.controller.Controller;
-import pixformer.controller.ControllerImpl;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
@@ -26,7 +26,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     @Override
     public void start(final Stage primaryStage) {
         this.stage = primaryStage;
-        this.controller = new ControllerImpl();
+        this.controller = this.createController();
         this.setScene(this.createInitialScene());
 
         primaryStage.setTitle(this.getTitle());
@@ -73,25 +73,24 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
         this.stage.setScene(this.scene.getScene());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startGameLoop() {
-        final GameLoop gameLoop = this.createGameLoop();
-
-        this.controller.setGameLoop(gameLoop);
-
-        if (gameLoop == null) {
-            return;
-        }
-
-        new AnimationTimer() {
+    private Controller createController() {
+        return new AbstractController() {
             @Override
-            public void handle(final long now) {
-                gameLoop.loop(now);
+            public void startGameLoop() {
+                final GameLoop loop = createGameLoop();
+
+                this.setGameLoop(loop);
+
+                if (loop != null) {
+                    new AnimationTimer() {
+                        @Override
+                        public void handle(final long now) {
+                            loop.loop(now);
+                        }
+                    }.start();
+                }
             }
-        }.start();
+        };
     }
 
     /**

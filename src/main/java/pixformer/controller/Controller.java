@@ -28,4 +28,9 @@ public interface Controller {
      * @param gameLoop new game loop
      */
     void setGameLoop(GameLoop gameLoop);
+
+    /**
+     * Starts running the current game loop.
+     */
+    void startGameLoop();
 }
