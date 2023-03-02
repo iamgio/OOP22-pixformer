@@ -41,8 +41,10 @@ public class MovableAbstractEntity extends AbstractEntity {
     }
 
     /**
-     * Setter for the force.
-     * @param force force of the vector
+=======
+     * Function to set a force to the entity.
+     * @param force Current force applied to entity
+>>>>>>> master
      */
     protected void setForce(final Vector2D force) {
         this.movingForce = force;

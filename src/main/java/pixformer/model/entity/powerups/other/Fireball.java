@@ -17,7 +17,6 @@ public class Fireball extends MovableAbstractEntity implements Updatable {
      * @param y Starting Y position.
      * @param width Width.
      * @param height Height.
-     * @param direction Start direction.
      */
     public Fireball(final double x, final double y, final double width, final double height) {
         super(x, y, width, height);
