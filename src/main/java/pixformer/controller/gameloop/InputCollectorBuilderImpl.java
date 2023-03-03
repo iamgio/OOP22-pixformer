@@ -35,7 +35,7 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
      * Add a player to the controller, which means adding a pair of
      * {@link ModelCommandSupplier} and {@link ModelInput}.
      * 
-     * @param model
+     * @param model input
      * @return itself.
      */
     @Override
@@ -55,19 +55,20 @@ public class InputCollectorBuilderImpl implements InputCollectorBuilder {
         return new InputCollector() {
 
             private boolean isRunning = true;
-            private final PauseControllerInput mockController = new PauseControllerInput() {
-
-                @Override
-                public void pause() {
-                    isRunning = false;
-                }
-
-                @Override
-                public void unpause() {
-                    isRunning = true;
-                }
-
-            };
+//            private final PauseControllerInput mockController = new PauseControllerInput() {
+//
+//                @Override
+//                public void pause() {
+//                    isRunning = false;
+//                }
+//
+//                @Override
+//                public void unpause() {
+//                    isRunning = true;
+//                }
+//
+//            };
+            private final PauseControllerInput mockController = new PauseControllerInput();
 
             @Override
             public void execute() {

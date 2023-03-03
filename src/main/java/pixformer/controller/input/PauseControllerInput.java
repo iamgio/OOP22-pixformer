@@ -3,15 +3,22 @@ package pixformer.controller.input;
 /**
  * It represents a controller which can pause and unpause the game.
  */
-public interface PauseControllerInput extends ControllerInput {
+public class PauseControllerInput implements ControllerInput {
+
+    private boolean isRunning;
 
     /**
-     * Command for pausing the game.
+     * Constructor for the PauseController
      */
-    void pause();
+    public PauseControllerInput() {
+        this.isRunning = true;
+    }
 
     /**
-     * Command for unpausing the game.
+     * Pause the game.
      */
-    void unpause();
+    @Override
+    public void execute() {
+        this.isRunning = !isRunning;
+    }
 }

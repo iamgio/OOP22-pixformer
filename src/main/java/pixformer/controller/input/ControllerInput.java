@@ -6,4 +6,9 @@ package pixformer.controller.input;
  */
 public interface ControllerInput {
 
+    /**
+     * Execute a specific action.
+     */
+    void execute();
+
 }

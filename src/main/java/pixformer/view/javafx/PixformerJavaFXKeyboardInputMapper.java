@@ -1,7 +1,7 @@
 package pixformer.view.javafx;
 
 import javafx.scene.input.KeyCode;
-import pixformer.common.Either;
+import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ModelInputViewBridge;
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelinput.ModelInput;
@@ -15,8 +15,6 @@ import java.util.function.Consumer;
  */
 public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> {
 
-    Either<Consumer<ModelInput>, Consumer<PauseControllerInput>> a = null;
-
     /**
      * {@inheritDoc}
      */
@@ -29,9 +27,16 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
         return Optional.ofNullable(action);
     }
 
-    // public Either<Consumer<ModelInput>, Consumer<PauseControllerInput>> map(final
-    // KeyCode input) {
-    // return null;
-    // }
+    /**
+     * @param input raw input
+     * @return associated controller action, if it exists
+     */
+    public Optional<ControllerInput> mapController(final KeyCode input) {
+        final ControllerInput command = switch (input) {
+            case P -> new PauseControllerInput();
+            default -> null;
+        };
+        return Optional.ofNullable(command);
+    }
 
 }
