@@ -9,7 +9,7 @@ import pixformer.model.entity.collision.BoundingBox;
 public class MovableAbstractEntity extends AbstractEntity {
 
     //Forza a cui è attualmente soggetta l'entità
-    private Vector2D movingForce = new Vector2D(0,0);
+    private Vector2D movingForce = new Vector2D(0, 0);
 
     /**
      * Constructor for the MovableAbstractEntity.
@@ -36,14 +36,15 @@ public class MovableAbstractEntity extends AbstractEntity {
     /**
      * @return Current force applied to entity 
      */
-    public Vector2D getForce(){
+    public Vector2D getForce() {
         return this.movingForce;
     }
 
     /**
-     * @return the width of the entity
+     * Function to set a force to the entity.
+     * @param force Current force applied to entity
      */
-    protected void setForce(final Vector2D force){
+    protected void setForce(final Vector2D force) {
         this.movingForce = force;
     }
 

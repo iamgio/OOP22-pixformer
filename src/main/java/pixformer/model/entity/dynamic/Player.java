@@ -1,7 +1,6 @@
-package pixformer.model.entity.dynamics;
+package pixformer.model.entity.dynamic;
 
 import java.util.Optional;
-
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.MovableAbstractEntity;
