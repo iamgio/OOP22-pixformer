@@ -2,7 +2,7 @@ package pixformer.model;
 
 import pixformer.model.input.InputComponent;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * A playable level.
@@ -23,7 +23,7 @@ public interface Level {
     /**
      * @return input components of user-controlled entities living within this level's world
      */
-    Set<InputComponent> getPlayerEntityInputComponents();
+    List<InputComponent> getPlayerEntityInputComponents();
 
     /**
      * Sets up the game world.

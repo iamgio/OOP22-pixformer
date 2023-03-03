@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.model.modelinput.ModelInput;
+import pixformer.model.Level;
 
 import java.util.Optional;
 import java.util.Set;
@@ -39,7 +39,7 @@ public interface SceneInput<T> {
     /**
      * @return the active inputs mapped to their actions
      */
-    default Set<Consumer<ModelInput>> getMappedPolling() {
+    default Set<Consumer<Level>> getMappedPolling() {
         return this.getRawPolling().stream()
                 .map(this.getMapper()::map)
                 .filter(Optional::isPresent)

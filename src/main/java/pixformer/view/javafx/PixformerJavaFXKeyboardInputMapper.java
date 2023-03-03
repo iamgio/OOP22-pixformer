@@ -4,7 +4,7 @@ import javafx.scene.input.KeyCode;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ModelInputViewBridge;
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.ModelInput;
+import pixformer.model.Level;
 import pixformer.view.engine.InputMapper;
 
 import java.util.Optional;
@@ -19,9 +19,10 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
      * {@inheritDoc}
      */
     @Override
-    public Optional<Consumer<ModelInput>> map(final KeyCode input) {
-        final Consumer<ModelInput> action = switch (input) {
-            case SPACE -> model -> ModelInputViewBridge.from(model).jump();
+    public Optional<Consumer<Level>> map(final KeyCode input) {
+        final Consumer<Level> action = switch (input) {
+            case SPACE -> level -> ModelInputViewBridge.from(level.getPlayerEntityInputComponents().get(0)).jump();
+            case W -> level -> ModelInputViewBridge.from(level.getPlayerEntityInputComponents().get(1)).jump();
             default -> null;
         };
         return Optional.ofNullable(action);

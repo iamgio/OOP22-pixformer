@@ -31,7 +31,9 @@ public class JavaFXGameLoopManager implements GameLoopManager {
     @Override
     public void start() {
         final GameLoop loop = Objects.requireNonNull(
-                this.viewLauncher.getController().createGameLoop(new ViewImpl(this.viewLauncher.getScene()))
+                this.viewLauncher.getController().createGameLoop(
+                        new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())
+                )
         );
 
         if (currentTimer != null) {

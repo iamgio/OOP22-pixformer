@@ -1,5 +1,6 @@
 package pixformer.view;
 
+import pixformer.controller.Controller;
 import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.modelinput.ModelInput;
 import pixformer.view.engine.Color;
@@ -18,6 +19,7 @@ import java.util.function.Consumer;
 public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput>,
         ModelCommandSupplier<ModelInput> {
 
+    private final Controller controller;
     private final GameScene scene;
 
     private TextRenderer text;
@@ -30,7 +32,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      * 
      * @param scene current game scene
      */
-    public ViewImpl(final GameScene scene) {
+    public ViewImpl(final Controller controller, final GameScene scene) {
+        this.controller = controller;
         this.scene = scene;
     }
 
@@ -67,8 +70,11 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
 
         scene.getInputs().stream()
                 .map(SceneInput::getMappedPolling)
-                .forEach(actions -> actions.forEach(action -> this.gameCommand = Optional.of(action)));
-        // TODO gameCommand dovrebbe essere un set, la riga di sopra non ha senso per adesso
+                .forEach(actions -> {
+                    actions.forEach(action -> {
+                        this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+                    });
+                });
 
         this.scene.render();
     }
