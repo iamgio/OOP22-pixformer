@@ -1,7 +1,6 @@
 package pixformer.controller.gameloop;
 
 import pixformer.model.Level;
-import pixformer.model.ModelMock;
 import pixformer.model.World;
 import pixformer.view.ViewImpl;
 
@@ -35,16 +34,9 @@ public final class GameLoopFactory {
 
         final World world = this.level.getWorld();
 
-        final InputCollectorBuilder inputCollectorBuilder = new InputCollectorBuilderImpl()
+        final InputCollector inputCollector = new InputCollectorBuilderImpl()
                 .addControllerInput(view)
-                .addPlayer(new ModelMock("Mario"), view)
-                .addPlayer(new ModelMock("Luigi"), view);
-
-        this.level.getPlayerEntityInputComponents().forEach(inputComponent -> {
-            inputCollectorBuilder.addPlayer(inputComponent, view);
-        });
-
-        final InputCollector inputCollector = inputCollectorBuilder.build();
+                .build();
 
         return new GeneralGameLoop(
                 inputCollector::execute,

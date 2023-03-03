@@ -2,7 +2,6 @@ package pixformer.view;
 
 import pixformer.controller.Controller;
 import pixformer.controller.input.PauseControllerInput;
-import pixformer.model.modelinput.ModelInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -16,20 +15,19 @@ import java.util.function.Consumer;
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput>,
-        ModelCommandSupplier<ModelInput> {
+public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput> {
 
     private final Controller controller;
     private final GameScene scene;
 
     private TextRenderer text;
-    private Optional<Consumer<ModelInput>> gameCommand = Optional.empty();
     private Optional<Consumer<PauseControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
 
     /**
      * Initializes the default view.
-     * 
+     *
+     * @param controller global controller
      * @param scene current game scene
      */
     public ViewImpl(final Controller controller, final GameScene scene) {
@@ -80,19 +78,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
     }
 
     @Override
-    public Optional<Consumer<ModelInput>> supplyModelCommand() {
-        return this.gameCommand;
-    }
-
-    @Override
     public Optional<Consumer<PauseControllerInput>> supplyControllerCommand() {
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;
-    }
-
-    @Override
-    public void clear() {
-        gameCommand = Optional.empty();
     }
 }
