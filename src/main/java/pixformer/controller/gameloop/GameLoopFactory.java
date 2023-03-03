@@ -33,11 +33,16 @@ public final class GameLoopFactory {
 
         final World world = this.level.getWorld();
 
-        final InputCollector inputCollector = new InputCollectorBuilderImpl()
+        final InputCollectorBuilder inputCollectorBuilder = new InputCollectorBuilderImpl()
                 .addControllerInput(view)
                 .addPlayer(new ModelMock("Mario"), view)
-                .addPlayer(new ModelMock("Luigi"), view)
-                .build();
+                .addPlayer(new ModelMock("Luigi"), view);
+
+        this.level.getPlayerEntityInputComponents().forEach(inputComponent -> {
+            inputCollectorBuilder.addPlayer(inputComponent, view);
+        });
+
+        final InputCollector inputCollector = inputCollectorBuilder.build();
 
         return new GeneralGameLoop(
                 inputCollector::execute,

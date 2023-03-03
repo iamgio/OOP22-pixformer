@@ -2,7 +2,7 @@ package pixformer.model.entity;
 
 import pixformer.model.World;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.input.InputComponent;
 import pixformer.view.entity.TestGraphicsComponent;
 
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
 
     private boolean hasCollided = false;
 
-    private final CompleteModelInput inputComponent;
+    private final InputComponent inputComponent;
     private final GraphicsComponent graphicsComponent;
 
     /**
@@ -80,7 +80,8 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
         return SIZE;
     }
 
-    public Optional<CompleteModelInput> getInputComponent() {
+    @Override
+    public Optional<InputComponent> getInputComponent() {
         return Optional.of(inputComponent);
     }
 

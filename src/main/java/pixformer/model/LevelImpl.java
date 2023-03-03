@@ -1,5 +1,13 @@
 package pixformer.model;
 
+import pixformer.model.entity.Entity;
+import pixformer.model.input.InputComponent;
+import pixformer.model.input.UserInputComponent;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Implementation of a game level.
  */
@@ -37,7 +45,20 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
+    public Set<InputComponent> getPlayerEntityInputComponents() {
+        return this.world.getEntities().stream()
+                .map(Entity::getInputComponent)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(inputComponent -> inputComponent instanceof UserInputComponent)
+                .collect(Collectors.toSet());
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setup() {
+        // TODO
     }
 }

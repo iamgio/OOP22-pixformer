@@ -2,6 +2,9 @@ package pixformer.model.entity;
 
 import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.input.InputComponent;
+
+import java.util.Optional;
 
 /**
  * In-Game entity.
@@ -32,6 +35,13 @@ public interface Entity {
      * @return the bounding box of the entity
      */
     BoundingBox getBoundingBox();
+
+    /**
+     * @return the input component of the entity
+     */
+    default Optional<InputComponent> getInputComponent() {
+        return Optional.empty();
+    }
 
     /**
      * Called when this entity is added onto a game world.

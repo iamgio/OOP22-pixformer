@@ -1,18 +1,18 @@
 package pixformer.model.entity;
 
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.input.UserInputComponent;
 
 /**
  * Input component for the test entity.
  * @deprecated test
  */
 @Deprecated
-public class TestInputComponent implements CompleteModelInput {
+public class TestInputComponent extends UserInputComponent {
 
     private final TestEntity testEntity;
 
     public TestInputComponent(TestEntity testEntity) {
-        // super(testEntity);
+        super(testEntity);
         this.testEntity = testEntity;
         // Si potrebbe non tenere il campo con l'entità specifica,
         // ed usare super.getEntity() appena Entity esporrà setX
