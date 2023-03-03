@@ -1,6 +1,6 @@
 package pixformer.view.engine;
 
-import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.Controller;
 
 /**
  * Responsible for launching a kind of view.
@@ -13,17 +13,23 @@ public interface ViewLauncher {
     void launch();
 
     /**
+     * @return the controller for model interactions
+     */
+    Controller getController();
+
+    /**
      * @return the active game scene
      */
     GameScene getScene();
 
     /**
-     * @return a new game scene instance
+     * Sets a new game scene as the active one.
+     * @param scene new game scene
      */
-    GameScene createScene();
+    void setScene(GameScene scene);
 
     /**
-     * @return a new game loop instance
+     * @return the initial new game scene instance
      */
-    GameLoop createGameLoop();
+    GameScene createInitialScene();
 }

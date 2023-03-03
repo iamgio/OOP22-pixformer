@@ -1,11 +1,11 @@
 package pixformer.view.javafx;
 
 import javafx.application.Application;
-import pixformer.controller.gameloop.GameLoop;
-import pixformer.controller.gameloop.GameLoopFactory;
-import pixformer.model.World;
-import pixformer.model.WorldImpl;
-import pixformer.view.ViewImpl;
+import javafx.application.Platform;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import pixformer.controller.LevelManager;
+import pixformer.model.LevelMock;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
@@ -15,23 +15,42 @@ import pixformer.view.engine.javafx.JavaFXViewLauncher;
  */
 public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JavaFXScene createScene() {
-        return new PixformerJavaFXScene();
+    private JavaFXScene createGameScene() {
+        var scene = new PixformerJavaFXGameScene();
+        scene.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            // TODO remove
+            if (e.getCode() == KeyCode.ENTER) {
+                this.getController().getLevelManager().endCurrentLevel();
+            }
+        });
+        return scene;
+    }
+
+    private JavaFXScene createMenuScene() {
+        var menu = new PixformerJavaFXMainMenuScene();
+        menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level));
+        return menu;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public GameLoop createGameLoop() {
-        final World world = new WorldImpl();
-        final ViewImpl view = new ViewImpl(super.getScene());
+    public JavaFXScene createInitialScene() {
+        LevelManager levelManager = this.getController().getLevelManager();
+        levelManager.addOnLevelStart(level -> {
+            this.setScene(this.createGameScene());
+            this.getController().getGameLoopManager().start();
+        });
+        levelManager.addOnLevelEnd(level -> {
+            this.setScene(this.createMenuScene());
+            this.getController().getGameLoopManager().stop();
+        });
 
-        return new GameLoopFactory(world, view).defaultLoop();
+        // Commentare la riga sotto per far comparire il menu principale (togliere prima della consegna)
+        Platform.runLater(() -> this.getController().getLevelManager().start(new LevelMock()));
+
+        return this.createMenuScene();
     }
 
     /**

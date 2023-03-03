@@ -1,11 +1,14 @@
 package pixformer.view.engine.javafx;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.Controller;
+import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
+import pixformer.view.javafx.JavaFXGameLoopManager;
+
+import java.util.Objects;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,20 +17,25 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
+    private final Controller controller = this.createController();
+
     private JavaFXScene scene;
-    private GameLoop loop;
+    private Stage stage;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start(final Stage primaryStage) {
-        this.scene = (JavaFXScene) this.createScene();
-        this.loop = this.createGameLoop();
-        this.startLoop();
+        this.stage = primaryStage;
+        this.setScene(this.createInitialScene());
+
         primaryStage.setTitle(this.getTitle());
-        primaryStage.setScene(this.scene.getScene());
         primaryStage.show();
+    }
+
+    private Controller createController() {
+        return new ControllerImpl(new JavaFXGameLoopManager(this));
     }
 
     /**
@@ -42,6 +50,14 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      * {@inheritDoc}
      */
     @Override
+    public Controller getController() {
+        return this.controller;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GameScene getScene() {
         if (scene == null) {
             throw new IllegalStateException("JavaFX scene is initialized only after launch.");
@@ -49,17 +65,17 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
         return this.scene;
     }
 
-    private void startLoop() {
-        if (this.loop == null) {
-            throw new IllegalStateException("Could not start game loop.");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScene(final GameScene scene) {
+        if (!(scene instanceof JavaFXScene)) {
+            throw new IllegalArgumentException("Expected a JavaFX scene.");
         }
 
-        new AnimationTimer() {
-            @Override
-            public void handle(final long now) {
-                loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
-            }
-        }.start();
+        this.scene = (JavaFXScene) Objects.requireNonNull(scene);
+        this.stage.setScene(this.scene.getScene());
     }
 
     /**

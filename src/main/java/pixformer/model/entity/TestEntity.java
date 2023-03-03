@@ -2,7 +2,7 @@ package pixformer.model.entity;
 
 import pixformer.model.World;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.input.InputComponent;
 import pixformer.view.entity.TestGraphicsComponent;
 
 import java.util.Optional;
@@ -11,23 +11,20 @@ import java.util.Optional;
  * @deprecated test
  */
 @Deprecated
-public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public class TestEntity extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private static final double SIZE = 1; // Test values
 
-    // Il campo X andrà in Entity (classe astratta)
-    private double x;
-
     private boolean hasCollided = false;
 
-    private final CompleteModelInput inputComponent;
+    private final InputComponent inputComponent;
     private final GraphicsComponent graphicsComponent;
 
     /**
      * @param x X coordinate
      */
     public TestEntity(final double x) {
-        this.x = x;
+        super(x, 15, SIZE, SIZE);
         this.inputComponent = new TestInputComponent(this);
         this.graphicsComponent = new TestGraphicsComponent(this);
     }
@@ -40,47 +37,8 @@ public class TestEntity implements DrawableEntity, DefaultRectangleBoundingBoxEn
         world.getCollisionManager().addOnCollide(this, other -> hasCollided = true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public double getX() {
-        return this.x;
-    }
-
-    /**
-     * Sets the X coordinate.
-     * @param x X coordinate
-     */
-    public void setX(final double x) {
-        this.x = x;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getY() {
-        return 15;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getWidth() {
-        return SIZE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeight() {
-        return SIZE;
-    }
-
-    public Optional<CompleteModelInput> getInputComponent() {
+    public Optional<InputComponent> getInputComponent() {
         return Optional.of(inputComponent);
     }
 
