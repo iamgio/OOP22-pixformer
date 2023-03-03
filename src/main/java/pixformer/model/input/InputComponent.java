@@ -1,12 +1,12 @@
 package pixformer.model.input;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.modelinput.ModelInput;
 
 /**
  * Represents an input source for an {@link Entity}.
  */
-public abstract class InputComponent implements CompleteModelInput {
+public abstract class InputComponent implements ModelInput {
 
     private final Entity entity;
 
