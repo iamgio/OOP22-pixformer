@@ -34,12 +34,8 @@ public final class GameLoopFactory {
 
         final World world = this.level.getWorld();
 
-        final InputCollector inputCollector = new InputCollectorBuilderImpl()
-                .addControllerInput(view)
-                .build();
-
         return new GeneralGameLoop(
-                inputCollector::execute,
+                () -> {},
                 world::update,
                 () -> {
                     view.update(0);
