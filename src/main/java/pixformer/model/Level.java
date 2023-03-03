@@ -15,4 +15,9 @@ public interface Level {
      * @return the world of this level.
      */
     World getWorld();
+
+    /**
+     * Sets up the game world.
+     */
+    void setup();
 }

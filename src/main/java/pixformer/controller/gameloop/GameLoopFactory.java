@@ -1,8 +1,8 @@
 package pixformer.controller.gameloop;
 
+import pixformer.model.Level;
 import pixformer.model.ModelMock;
 import pixformer.model.World;
-import pixformer.model.entity.TestEntity;
 import pixformer.view.ViewImpl;
 
 /**
@@ -10,16 +10,16 @@ import pixformer.view.ViewImpl;
  */
 public final class GameLoopFactory {
 
-    private final World world;
+    private final Level level;
     private final ViewImpl view; // TODO cambiare da ViewImpl a View
 
     /**
      * Instantiates a new game loop factory.
-     * @param world game world
+     * @param level game level
      * @param view game view
      */
-    public GameLoopFactory(final World world, final ViewImpl view) {
-        this.world = world;
+    public GameLoopFactory(final Level level, final ViewImpl view) {
+        this.level = level;
         this.view = view;
     }
 
@@ -27,18 +27,14 @@ public final class GameLoopFactory {
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        final var test1 = new TestEntity(5);
-        final var test2 = new TestEntity(10);
+        this.level.setup();
+        this.view.setup();
+        this.view.getScene().getGraphics().setScale(15); // test
 
-        world.spawnEntity(test1);
-        world.spawnEntity(test2);
-
-        view.setup();
-        view.getScene().getGraphics().setScale(15); // test
+        final World world = this.level.getWorld();
 
         final InputCollector inputCollector = new InputCollectorBuilderImpl()
                 .addControllerInput(view)
-                .addPlayer(test1.getInputComponent().get(), view)
                 .addPlayer(new ModelMock("Mario"), view)
                 .addPlayer(new ModelMock("Luigi"), view)
                 .build();

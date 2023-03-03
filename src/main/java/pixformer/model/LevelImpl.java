@@ -32,4 +32,12 @@ public class LevelImpl implements Level {
     public World getWorld() {
         return this.world;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setup() {
+
+    }
 }
