@@ -14,9 +14,21 @@ public interface Entity {
     double getX();
 
     /**
+     * Set the X coordinate.
+     * @param x coordinate
+     */
+    void setX(double x);
+
+    /**
      * @return Y coordinate
      */
     double getY();
+
+    /**
+     * Set the Y coordinate.
+     * @param y coordinate
+     */
+    void setY(double y);
 
     /**
      * @return the width of the entity

@@ -61,7 +61,7 @@ public abstract class AbstractEntity implements Entity {
      *
      * @param x the new X coordinate
      */
-    protected void setX(final double x) {
+    public void setX(final double x) {
         this.x = x;
     }
 
@@ -70,7 +70,7 @@ public abstract class AbstractEntity implements Entity {
      *
      * @param y the new Y coordinate
      */
-    protected void setY(final double y) {
+    public void setY(final double y) {
         this.y = y;
     }
 
