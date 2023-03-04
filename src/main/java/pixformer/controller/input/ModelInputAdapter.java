@@ -6,13 +6,13 @@ import pixformer.model.modelinput.ModelInput;
 
 /**
  * A bridge that makes view's interactions with the model easier
- *  by treating general {@link ModelInput}s as {@link CompleteModelInput}.
+ *  by treating general {@link ModelInput}s as {@link CompleteModelInput}s.
  */
-public final class ModelInputViewBridge implements CompleteModelInput {
+public final class ModelInputAdapter implements CompleteModelInput {
 
     private final ModelInput input;
 
-    private ModelInputViewBridge(final ModelInput input) {
+    private ModelInputAdapter(final ModelInput input) {
         this.input = input;
     }
 
@@ -21,8 +21,8 @@ public final class ModelInputViewBridge implements CompleteModelInput {
      * @param input model input to generalize
      * @return a new view-model bridge for the given model input
      */
-    public static ModelInputViewBridge from(final ModelInput input) {
-        return new ModelInputViewBridge(input);
+    public static ModelInputAdapter from(final ModelInput input) {
+        return new ModelInputAdapter(input);
     }
 
     /**
