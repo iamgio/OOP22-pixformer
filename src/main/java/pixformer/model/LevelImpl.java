@@ -49,7 +49,7 @@ public class LevelImpl implements Level {
      * @param index player index (starting from 0)
      * @return the corresponding player if it exists
      */
-    private Optional<CompleteModelInput> getPlayer(int index) {
+    private Optional<CompleteModelInput> getPlayer(final int index) {
         return index < this.players.size() ? Optional.of(this.players.get(index)) : Optional.empty();
     }
 
