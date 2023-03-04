@@ -18,6 +18,9 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
 
+    // This playerIndex
+    private int playerIndex;
+
     // State variables to check if player is jumping or crouching
     private boolean isCrouching;
     private boolean isJumping;
@@ -49,8 +52,9 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
      * @param width  Width of the player.
      * @param height Height of the player.
      */
-    public Player(final double x, final double y, final double width, final double height) {
+    public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
+        this.playerIndex = playerIndex;
         // this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
     }
 
