@@ -2,6 +2,7 @@ package pixformer.controller.gameloop;
 
 import pixformer.model.Level;
 import pixformer.model.World;
+import pixformer.model.entity.DrawableEntity;
 import pixformer.view.ViewImpl;
 
 /**
@@ -41,10 +42,12 @@ public final class GameLoopFactory {
             view.update(dt);
             world.update(dt);
 
-            world.getEntities().forEach(entity -> {
-                view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
-                entity.getGraphicsComponent().update(view.getScene());
-            });
+            world.getEntities().stream()
+                    .filter(entity -> entity instanceof DrawableEntity)
+                    .forEach(entity -> {
+                        view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
+                        ((DrawableEntity) entity).getGraphicsComponent().update(view.getScene());
+                    });
 
             final long period = SECONDS_TO_MILLIS / FPS;
             if (dt < period) {

@@ -1,9 +1,10 @@
 package pixformer.model;
 
 import pixformer.common.Updatable;
-import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.dynamic.Player;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -16,14 +17,14 @@ public interface World extends Updatable {
     /**
      * @return the entities living within this world
      */
-    Set<DrawableEntity> getEntities();
+    Set<Entity> getEntities();
 
     /**
      * Adds an entity to the game world.
      * 
      * @param entity entity to add
      */
-    void spawnEntity(DrawableEntity entity);
+    void spawnEntity(Entity entity);
 
     /**
      * @return the handler of entity collisions for this world

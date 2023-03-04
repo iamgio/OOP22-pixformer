@@ -1,6 +1,7 @@
 package pixformer.model;
 
 import pixformer.controller.input.ModelInputAdapter;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.TestEntity;
 import pixformer.model.modelinput.CompleteModelInput;
 
@@ -75,12 +76,20 @@ public class LevelImpl implements Level {
     @Override
     public void setup(final int playersAmount) {
         IntStream.range(0, playersAmount).forEach(i -> {
-            var test = new TestEntity(i * 5); // test
-            this.world.spawnEntity(test);
+            Entity player = this.createPlayer(i);
+            this.world.spawnEntity(player);
 
-            test.getInputComponent().ifPresent(inputComponent -> {
+            player.getInputComponent().ifPresent(inputComponent -> {
                 this.players.add(ModelInputAdapter.from(inputComponent));
             });
         });
+    }
+
+    /**
+     * @param playerIndex index of the player, starting from 0
+     * @return a new player entity
+     */
+    private Entity createPlayer(final int playerIndex) {
+        return new TestEntity(playerIndex * 5);
     }
 }

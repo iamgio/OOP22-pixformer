@@ -1,6 +1,6 @@
 package pixformer.model;
 
-import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.entity.dynamic.Player;
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class WorldImpl implements World {
 
-    private final Set<DrawableEntity> entities;
+    private final Set<Entity> entities;
     private final EntityCollisionManager collisionManager;
     private final List<Player> players = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public Set<DrawableEntity> getEntities() {
+    public Set<Entity> getEntities() {
         return Collections.unmodifiableSet(this.entities);
     }
 
@@ -40,7 +40,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void spawnEntity(final DrawableEntity entity) {
+    public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
     }
