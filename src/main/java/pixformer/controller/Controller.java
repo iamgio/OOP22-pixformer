@@ -38,6 +38,7 @@ public interface Controller {
     /**
      * Sets a new amount of players.
      * @param playersAmount new amount of players
+     * @apiNote min/max boundaries are applied
      * @implNote changes don't affect a game that is already running
      */
     void setPlayersAmount(int playersAmount);
