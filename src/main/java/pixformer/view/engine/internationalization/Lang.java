@@ -18,15 +18,33 @@ public final class Lang {
      * @return the unique instance of this internationalization helper
      */
     public static Lang getInstance() {
-        return INSTANCE;
+        return new Lang(INSTANCE.getLocale(), INSTANCE.bundle);
+    }
+
+    /**
+     * Initializes a custom internationalization.
+     * @param locale target locale
+     * @param bundle resource bundle to use
+     */
+    private Lang(final Locale locale, final ResourceBundle bundle) {
+        this.locale = locale;
+        this.bundle = bundle;
+    }
+
+    /**
+     * Initializes a custom internationalization.
+     * @param locale target locale
+     */
+    private Lang(final Locale locale) {
+        this.locale = Locale.ENGLISH;
+        this.update();
     }
 
     /**
      * Initializes an English internationalization.
      */
     private Lang() {
-        this.setLocale(Locale.ENGLISH);
-        this.update();
+        this(Locale.ENGLISH);
     }
 
     /**
