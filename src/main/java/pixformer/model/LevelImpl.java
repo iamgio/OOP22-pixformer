@@ -1,12 +1,13 @@
 package pixformer.model;
 
-import pixformer.model.entity.Entity;
-import pixformer.model.input.InputComponent;
-import pixformer.model.input.UserInputComponent;
+import pixformer.controller.input.ModelInputAdapter;
+import pixformer.model.entity.TestEntity;
+import pixformer.model.modelinput.CompleteModelInput;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Implementation of a game level.
@@ -16,6 +17,8 @@ public class LevelImpl implements Level {
     private final String name;
     private final World world;
 
+    private final List<CompleteModelInput> players;
+
     /**
      * @param name level name
      * @param world game world of the level
@@ -23,6 +26,7 @@ public class LevelImpl implements Level {
     public LevelImpl(final String name, final World world) {
         this.name = name;
         this.world = world;
+        this.players = new ArrayList<>();
     }
 
     /**
@@ -45,20 +49,22 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
-    public List<InputComponent> getPlayerEntityInputComponents() {
-        return this.world.getEntities().stream()
-                .map(Entity::getInputComponent)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(inputComponent -> inputComponent instanceof UserInputComponent)
-                .collect(Collectors.toList());
+    public List<CompleteModelInput> getPlayers() {
+        return Collections.unmodifiableList(this.players);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
-        // TODO
+    public void setup(final int playersAmount) {
+        IntStream.range(0, playersAmount).forEach(i -> {
+            var test = new TestEntity(i * 5); // test
+            this.world.spawnEntity(test);
+
+            test.getInputComponent().ifPresent(inputComponent -> {
+                this.players.add(ModelInputAdapter.from(inputComponent));
+            });
+        });
     }
 }

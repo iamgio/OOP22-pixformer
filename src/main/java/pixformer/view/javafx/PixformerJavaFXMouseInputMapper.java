@@ -1,7 +1,6 @@
 package pixformer.view.javafx;
 
 import javafx.scene.input.MouseButton;
-import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.Level;
 import pixformer.view.engine.InputMapper;
 
@@ -19,7 +18,7 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
     @Override
     public Optional<Consumer<Level>> map(final MouseButton input) {
         final Consumer<Level> action = switch (input) {
-            case PRIMARY -> level -> ModelInputAdapter.from(level.getPlayerEntityInputComponents().get(0)).jump();
+            case PRIMARY -> level -> level.getPlayers().get(0).jump();
             default -> null;
         };
         return Optional.ofNullable(action);

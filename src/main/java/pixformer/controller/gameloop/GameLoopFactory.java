@@ -13,22 +13,25 @@ public final class GameLoopFactory {
     private static final int FPS = 30;
     private final Level level;
     private final ViewImpl view; // TODO cambiare da ViewImpl a View
+    private final int playersAmount;
 
     /**
      * Instantiates a new game loop factory.
      * @param level game level
      * @param view game view
+     * @param playersAmount amount of players
      */
-    public GameLoopFactory(final Level level, final ViewImpl view) {
+    public GameLoopFactory(final Level level, final ViewImpl view, final int playersAmount) {
         this.level = level;
         this.view = view;
+        this.playersAmount = playersAmount;
     }
 
     /**
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        this.level.setup();
+        this.level.setup(this.playersAmount);
         this.view.setup();
         this.view.getScene().getGraphics().setScale(15); // test
 

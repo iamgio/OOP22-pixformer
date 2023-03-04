@@ -17,6 +17,8 @@ public class ControllerImpl implements Controller {
     private final LevelManager levelManager;
     private final GameLoopManager gameLoopManager;
 
+    private int playersAmount = 3; // TODO set dynamically. This is a testing value
+
     /**
      * @param settings game settings
      * @param levelManager handler of playable levels
@@ -70,6 +72,22 @@ public class ControllerImpl implements Controller {
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
-        return new GameLoopFactory(currentLevel.get(), view).defaultLoop();
+        return new GameLoopFactory(currentLevel.get(), view, this.playersAmount).defaultLoop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getPlayersAmount() {
+        return this.playersAmount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPlayersAmount(final int playersAmount) {
+        this.playersAmount = playersAmount;
     }
 }

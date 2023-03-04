@@ -1,6 +1,6 @@
 package pixformer.model;
 
-import pixformer.model.input.InputComponent;
+import pixformer.model.modelinput.CompleteModelInput;
 
 import java.util.List;
 
@@ -21,12 +21,14 @@ public interface Level {
     World getWorld();
 
     /**
-     * @return input components of user-controlled entities living within this level's world
+     * @return an immutable list of players of the current game
+     * @implNote the list is populated only after calling {@link Level#setup(int)}
      */
-    List<InputComponent> getPlayerEntityInputComponents();
+    List<CompleteModelInput> getPlayers();
 
     /**
      * Sets up the game world.
+     * @param playersAmount amount of players to add to the game world
      */
-    void setup();
+    void setup(int playersAmount);
 }
