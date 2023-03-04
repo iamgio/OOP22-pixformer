@@ -5,8 +5,8 @@ import pixformer.model.entity.TestEntity;
 import pixformer.model.modelinput.CompleteModelInput;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 /**
@@ -46,11 +46,27 @@ public class LevelImpl implements Level {
     }
 
     /**
+     * @param index player index (starting from 0)
+     * @return the corresponding player if it exists
+     */
+    private Optional<CompleteModelInput> getPlayer(int index) {
+        return index < this.players.size() ? Optional.of(this.players.get(index)) : Optional.empty();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public List<CompleteModelInput> getPlayers() {
-        return Collections.unmodifiableList(this.players);
+    public Optional<CompleteModelInput> getPlayer1() {
+        return this.getPlayer(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer2() {
+        return this.getPlayer(1);
     }
 
     /**

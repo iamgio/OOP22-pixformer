@@ -2,7 +2,7 @@ package pixformer.model;
 
 import pixformer.model.modelinput.CompleteModelInput;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * A playable level.
@@ -21,10 +21,14 @@ public interface Level {
     World getWorld();
 
     /**
-     * @return an immutable list of players of the current game
-     * @implNote the list is populated only after calling {@link Level#setup(int)}
+     * @return player 1 if it exists
      */
-    List<CompleteModelInput> getPlayers();
+    Optional<CompleteModelInput> getPlayer1();
+
+    /**
+     * @return player 2 if it exists
+     */
+    Optional<CompleteModelInput> getPlayer2();
 
     /**
      * Sets up the game world.
