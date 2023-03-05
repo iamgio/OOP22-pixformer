@@ -28,7 +28,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      * Initializes the default view.
      *
      * @param controller global controller
-     * @param scene current game scene
+     * @param scene      current game scene
      */
     public ViewImpl(final Controller controller, final GameScene scene) {
         this.controller = controller;
@@ -74,13 +74,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
                     });
                 });
 
-        scene.getInputs().stream()
-                .map(SceneInput::getMappedPolling)
-                .forEach(actions -> {
-                    actions.forEach(action -> {
-                        this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+        if (this.controller.getGameLoopManager().isRunning()) {
+            scene.getInputs().stream()
+                    .map(SceneInput::getMappedPolling)
+                    .forEach(actions -> {
+                        actions.forEach(action -> {
+                            this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+                        });
                     });
-                });
+        }
 
         this.scene.render();
     }

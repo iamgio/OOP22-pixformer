@@ -16,12 +16,14 @@ public class JavaFXGameLoopManager implements GameLoopManager {
 
     private final ViewLauncher viewLauncher;
 
+    private boolean isRunning;
     private AnimationTimer currentTimer;
 
     /**
      * @param viewLauncher view launcher to loop on
      */
     public JavaFXGameLoopManager(final ViewLauncher viewLauncher) {
+        this.isRunning = true;
         this.viewLauncher = viewLauncher;
     }
 
@@ -30,11 +32,10 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void start() {
+        this.isRunning = true;
         final GameLoop loop = Objects.requireNonNull(
                 this.viewLauncher.getController().createGameLoop(
-                        new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())
-                )
-        );
+                        new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())));
 
         if (currentTimer != null) {
             currentTimer.stop();
@@ -54,8 +55,17 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void stop() {
+        this.isRunning = false;
         if (currentTimer != null) {
             currentTimer.stop();
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isRunning() {
+        return this.isRunning;
     }
 }

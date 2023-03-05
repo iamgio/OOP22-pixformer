@@ -7,13 +7,13 @@ import pixformer.controller.GameLoopManager;
  */
 public class PauseControllerInput implements ControllerInput {
 
-    private boolean isRunning;
+    // private boolean isRunning;
 
     /**
      * Constructor for the PauseController
      */
     public PauseControllerInput() {
-        this.isRunning = true;
+        // this.isRunning = true;
     }
 
     /**
@@ -23,12 +23,14 @@ public class PauseControllerInput implements ControllerInput {
      */
     @Override
     public void execute(final GameLoopManager gameLoopManager) {
-        this.isRunning = !isRunning;
-        System.out.println(this.isRunning);
-        if (this.isRunning) {
+        // this.isRunning = !this.isRunning;
+        if (!gameLoopManager.isRunning()) {
             gameLoopManager.start();
+            System.out.println("Run");
         } else {
             gameLoopManager.stop();
+            System.out.println("Stop");
         }
+        System.out.println(gameLoopManager.isRunning());
     }
 }
