@@ -135,6 +135,14 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     }
 
     /**
+     * Return this entity player index
+     * @return playerIndex
+     */
+    public int getIndex() {
+        return this.playerIndex;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
