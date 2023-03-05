@@ -67,6 +67,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
         this.text.setText("Now:\n" + new Date());
 
         scene.getInputs().stream()
+                .map(SceneInput::getMappedCommands)
+                .forEach(commands -> {
+                    commands.forEach(command -> {
+                        command.execute(this.controller.getGameLoopManager());
+                    });
+                });
+
+        scene.getInputs().stream()
                 .map(SceneInput::getMappedPolling)
                 .forEach(actions -> {
                     actions.forEach(action -> {

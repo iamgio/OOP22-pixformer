@@ -1,5 +1,6 @@
 package pixformer.view.engine;
 
+import pixformer.controller.input.ControllerInput;
 import pixformer.model.Level;
 
 import java.util.Optional;
@@ -16,12 +17,14 @@ public interface SceneInput<T> {
 
     /**
      * Adds an input to the polling.
+     * 
      * @param input input to add
      */
     void addInput(T input);
 
     /**
      * Removes an input from the polling.
+     * 
      * @param input input to remove
      */
     void removeInput(T input);
@@ -42,6 +45,18 @@ public interface SceneInput<T> {
     default Set<Consumer<Level>> getMappedPolling() {
         return this.getRawPolling().stream()
                 .map(this.getMapper()::map)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
+
+    }
+
+    /**
+     * @return the controller inputs mapped to their actions
+     */
+    default Set<ControllerInput> getMappedCommands() {
+        return this.getRawPolling().stream()
+                .map(this.getMapper()::mapController)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toSet());
