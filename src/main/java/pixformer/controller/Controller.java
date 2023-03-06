@@ -29,4 +29,17 @@ public interface Controller {
      * @return a new game loop instance
      */
     GameLoop createGameLoop(ViewImpl view); // TODO change to View
+
+    /**
+     * @return the current amount of players
+     */
+    int getPlayersAmount();
+
+    /**
+     * Sets a new amount of players.
+     * @param playersAmount new amount of players
+     * @apiNote min/max boundaries are applied
+     * @implNote changes don't affect a game that is already running
+     */
+    void setPlayersAmount(int playersAmount);
 }

@@ -1,7 +1,5 @@
 package pixformer.model;
 
-import pixformer.model.entity.TestEntity;
-
 /**
  * @deprecated test
  */
@@ -19,13 +17,7 @@ public class LevelMock extends LevelImpl {
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
-        final World world = super.getWorld();
-
-        final var test1 = new TestEntity(5);
-        final var test2 = new TestEntity(10);
-
-        world.spawnEntity(test1);
-        world.spawnEntity(test2);
+    public void setup(final int playersAmount) {
+        super.setup(playersAmount);
     }
 }

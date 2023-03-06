@@ -2,6 +2,7 @@ package pixformer.controller.gameloop;
 
 import pixformer.model.Level;
 import pixformer.model.World;
+import pixformer.model.entity.DrawableEntity;
 import pixformer.view.ViewImpl;
 
 /**
@@ -13,51 +14,49 @@ public final class GameLoopFactory {
     private static final int FPS = 30;
     private final Level level;
     private final ViewImpl view; // TODO cambiare da ViewImpl a View
+    private final int playersAmount;
 
     /**
      * Instantiates a new game loop factory.
      * @param level game level
      * @param view game view
+     * @param playersAmount amount of players
      */
-    public GameLoopFactory(final Level level, final ViewImpl view) {
+    public GameLoopFactory(final Level level, final ViewImpl view, final int playersAmount) {
         this.level = level;
         this.view = view;
+        this.playersAmount = playersAmount;
     }
 
     /**
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        this.level.setup();
+        this.level.setup(this.playersAmount);
         this.view.setup();
         this.view.getScene().getGraphics().setScale(15); // test
 
         final World world = this.level.getWorld();
 
-        final InputCollector inputCollector = new InputCollectorBuilderImpl()
-                .addControllerInput(view)
-                .build();
+        return dt -> {
+            view.update(dt);
+            world.update(dt);
 
-        return new GeneralGameLoop(
-                inputCollector::execute,
-                world::update,
-                () -> {
-                    view.update(0);
-
-                    world.getEntities().forEach(entity -> {
+            world.getEntities().stream()
+                    .filter(entity -> entity instanceof DrawableEntity)
+                    .forEach(entity -> {
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
-                        entity.getGraphicsComponent().update(view.getScene());
+                        ((DrawableEntity) entity).getGraphicsComponent().update(view.getScene());
                     });
-                },
-                dt -> {
-                    final long period = (SECONDS_TO_MILLIS / FPS);
-                    if (dt < period) {
-                        try {
-                            Thread.sleep(period - dt);
-                        } catch (final InterruptedException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                });
+
+            final long period = SECONDS_TO_MILLIS / FPS;
+            if (dt < period) {
+                try {
+                    Thread.sleep(period - dt);
+                } catch (final InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
     }
 }

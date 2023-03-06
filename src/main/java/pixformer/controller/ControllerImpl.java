@@ -13,9 +13,15 @@ import java.util.Optional;
  */
 public class ControllerImpl implements Controller {
 
+    private static final int DEFAULT_PLAYERS_AMOUNT = 1;
+    private static final int MIN_PLAYERS_AMOUNT = 1;
+    private static final int MAX_PLAYERS_AMOUNT = 8;
+
     private final GameSettings settings;
     private final LevelManager levelManager;
     private final GameLoopManager gameLoopManager;
+
+    private int playersAmount = DEFAULT_PLAYERS_AMOUNT;
 
     /**
      * @param settings game settings
@@ -70,6 +76,26 @@ public class ControllerImpl implements Controller {
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
-        return new GameLoopFactory(currentLevel.get(), view).defaultLoop();
+        return new GameLoopFactory(currentLevel.get(), view, this.playersAmount).defaultLoop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getPlayersAmount() {
+        return this.playersAmount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPlayersAmount(final int playersAmount) {
+        if (playersAmount < MIN_PLAYERS_AMOUNT) {
+            this.playersAmount = MIN_PLAYERS_AMOUNT;
+        } else {
+            this.playersAmount = Math.min(playersAmount, MAX_PLAYERS_AMOUNT);
+        }
     }
 }

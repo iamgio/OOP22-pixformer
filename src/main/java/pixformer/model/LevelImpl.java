@@ -1,12 +1,14 @@
 package pixformer.model;
 
+import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.entity.Entity;
-import pixformer.model.input.InputComponent;
-import pixformer.model.input.UserInputComponent;
+import pixformer.model.entity.TestEntity;
+import pixformer.model.modelinput.CompleteModelInput;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Implementation of a game level.
@@ -16,6 +18,8 @@ public class LevelImpl implements Level {
     private final String name;
     private final World world;
 
+    private final List<CompleteModelInput> players;
+
     /**
      * @param name level name
      * @param world game world of the level
@@ -23,6 +27,7 @@ public class LevelImpl implements Level {
     public LevelImpl(final String name, final World world) {
         this.name = name;
         this.world = world;
+        this.players = new ArrayList<>();
     }
 
     /**
@@ -42,23 +47,49 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * {@inheritDoc}
+     * @param index player index (starting from 0)
+     * @return the corresponding player if it exists
      */
-    @Override
-    public List<InputComponent> getPlayerEntityInputComponents() {
-        return this.world.getEntities().stream()
-                .map(Entity::getInputComponent)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(inputComponent -> inputComponent instanceof UserInputComponent)
-                .collect(Collectors.toList());
+    private Optional<CompleteModelInput> getPlayer(final int index) {
+        return index < this.players.size() ? Optional.of(this.players.get(index)) : Optional.empty();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
-        // TODO
+    public Optional<CompleteModelInput> getPlayer1() {
+        return this.getPlayer(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer2() {
+        return this.getPlayer(1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setup(final int playersAmount) {
+        IntStream.range(0, playersAmount).forEach(i -> {
+            Entity player = this.createPlayer(i);
+            this.world.spawnEntity(player);
+
+            player.getInputComponent().ifPresent(inputComponent -> {
+                this.players.add(ModelInputAdapter.from(inputComponent));
+            });
+        });
+    }
+
+    /**
+     * @param playerIndex index of the player, starting from 0
+     * @return a new player entity
+     */
+    private Entity createPlayer(final int playerIndex) {
+        return new TestEntity(playerIndex * 5);
     }
 }

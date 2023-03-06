@@ -4,6 +4,7 @@ import javafx.scene.input.MouseButton;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ModelInputViewBridge;
 import pixformer.model.Level;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.engine.InputMapper;
 
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
     @Override
     public Optional<Consumer<Level>> map(final MouseButton input) {
         final Consumer<Level> action = switch (input) {
-            case PRIMARY -> level -> ModelInputViewBridge.from(level.getPlayerEntityInputComponents().get(0)).jump();
+            case PRIMARY -> level -> level.getPlayer1().ifPresent(CompleteModelInput::jump);
             default -> null;
         };
         return Optional.ofNullable(action);

@@ -23,7 +23,7 @@ public class PauseControllerInput implements ControllerInput {
      */
     @Override
     public void execute(final GameLoopManager gameLoopManager) {
-        // this.isRunning = !this.isRunning;
+        System.out.println(gameLoopManager.isRunning());
         if (!gameLoopManager.isRunning()) {
             gameLoopManager.start();
             System.out.println("Run");
@@ -31,6 +31,5 @@ public class PauseControllerInput implements ControllerInput {
             gameLoopManager.stop();
             System.out.println("Stop");
         }
-        System.out.println(gameLoopManager.isRunning());
     }
 }

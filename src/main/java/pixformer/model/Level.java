@@ -1,8 +1,8 @@
 package pixformer.model;
 
-import pixformer.model.input.InputComponent;
+import pixformer.model.modelinput.CompleteModelInput;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * A playable level.
@@ -21,12 +21,18 @@ public interface Level {
     World getWorld();
 
     /**
-     * @return input components of user-controlled entities living within this level's world
+     * @return player 1 if it exists
      */
-    List<InputComponent> getPlayerEntityInputComponents();
+    Optional<CompleteModelInput> getPlayer1();
+
+    /**
+     * @return player 2 if it exists
+     */
+    Optional<CompleteModelInput> getPlayer2();
 
     /**
      * Sets up the game world.
+     * @param playersAmount amount of players to add to the game world
      */
-    void setup();
+    void setup(int playersAmount);
 }

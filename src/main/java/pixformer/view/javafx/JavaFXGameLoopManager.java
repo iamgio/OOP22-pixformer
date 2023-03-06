@@ -47,6 +47,7 @@ public class JavaFXGameLoopManager implements GameLoopManager {
                 loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
             }
         };
+
         currentTimer.start();
     }
 

@@ -1,5 +1,7 @@
 package pixformer.model.entity;
 
+import pixformer.common.Vector2D;
+
 /**
  * Abstract class for an entity.
  */
@@ -8,6 +10,7 @@ public abstract class AbstractEntity implements Entity {
     private double y;
     private double width;
     private double height;
+    private Vector2D velocity;
 
     /**
      * Constructor for the AbstractEntity.
@@ -17,11 +20,13 @@ public abstract class AbstractEntity implements Entity {
      * @param width  width of the entity
      * @param height height of the entity
      */
-    protected AbstractEntity(final double x, final double y, final double width, final double height) {
+    protected AbstractEntity(final double x, final double y, final double width, final double height,
+            final Vector2D velocity) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.velocity = velocity;
     }
 
     /**
@@ -90,5 +95,19 @@ public abstract class AbstractEntity implements Entity {
      */
     protected void setHeight(final double height) {
         this.height = height;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Vector2D getVelocity() {
+        return new Vector2D(this.velocity.x(), this.velocity.y());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setVelocity(final Vector2D velocity) {
+        this.velocity = velocity;
     }
 }

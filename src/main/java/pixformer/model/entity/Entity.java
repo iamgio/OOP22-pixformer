@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.input.InputComponent;
@@ -18,6 +19,7 @@ public interface Entity {
 
     /**
      * Set the X coordinate.
+     * 
      * @param x coordinate
      */
     void setX(double x);
@@ -29,9 +31,17 @@ public interface Entity {
 
     /**
      * Set the Y coordinate.
+     * 
      * @param y coordinate
      */
     void setY(double y);
+
+    /**
+     * Set the velocity of the entity.
+     * 
+     * @param velocity new vector
+     */
+    void setVelocity(Vector2D velocity);
 
     /**
      * @return the width of the entity
@@ -42,6 +52,11 @@ public interface Entity {
      * @return the height of the entity
      */
     double getHeight();
+
+    /**
+     * @return the velocity vector
+     */
+    Vector2D getVelocity();
 
     /**
      * @return the bounding box of the entity
@@ -57,6 +72,7 @@ public interface Entity {
 
     /**
      * Called when this entity is added onto a game world.
+     * 
      * @param world game world the entity spawned on
      */
     default void onSpawn(World world) {

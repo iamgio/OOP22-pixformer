@@ -1,11 +1,15 @@
 package pixformer.view.javafx;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.LevelMock;
 import pixformer.view.engine.javafx.JavaFXScene;
@@ -23,25 +27,46 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     private static final double INITIAL_WIDTH = 1200;
     private static final double INITIAL_HEIGHT = 600;
 
+    private final Controller controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
+
+    private final IntegerProperty playersAmount = new SimpleIntegerProperty();
 
     /**
      * Instantiates a main menu scene.
+     * @param controller global controller
      */
-    public PixformerJavaFXMainMenuScene() {
+    public PixformerJavaFXMainMenuScene(final Controller controller) {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
+        this.controller = controller;
+        this.setPlayersAmount(controller.getPlayersAmount());
 
         Scene scene = super.getScene();
         Pane root = (Pane) scene.getRoot();
 
         root.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
 
-        var label = new Label("Click to start");
-        label.setTextFill(Color.WHITE);
-        root.getChildren().add(label);
+        var text = new Label();
+        text.textProperty().bind(
+                new SimpleStringProperty("Click to start\nPlayers: ").concat(this.playersAmount.asString())
+        );
+        text.setTextFill(Color.WHITE);
+        root.getChildren().add(text);
 
         // Here the level will be retrieved from a button, or something...
         root.setOnMouseClicked(e -> this.selectLevel(new LevelMock()));
+
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case UP -> this.setPlayersAmount(controller.getPlayersAmount() + 1);
+                case DOWN -> this.setPlayersAmount(controller.getPlayersAmount() - 1);
+            }
+        });
+    }
+
+    private void setPlayersAmount(final int playersAmount) {
+        this.controller.setPlayersAmount(playersAmount);
+        this.playersAmount.set(this.controller.getPlayersAmount());
     }
 
     private void selectLevel(final Level level) {
