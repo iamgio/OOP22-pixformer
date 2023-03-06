@@ -27,7 +27,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     }
 
     private JavaFXScene createMenuScene() {
-        var menu = new PixformerJavaFXMainMenuScene();
+        var menu = new PixformerJavaFXMainMenuScene(this.getController());
         menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level));
         return menu;
     }

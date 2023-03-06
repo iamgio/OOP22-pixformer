@@ -49,11 +49,6 @@ public interface Entity {
     BoundingBox getBoundingBox();
 
     /**
-     * @return the world in which the Entity lives.
-     */
-    World getWorld();
-
-    /**
      * @return the input component of the entity
      */
     default Optional<InputComponent> getInputComponent() {
