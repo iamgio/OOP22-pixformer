@@ -3,13 +3,8 @@ package pixformer.model.entity.collision;
 import pixformer.model.World;
 import pixformer.model.entity.Entity;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -18,7 +13,6 @@ import java.util.stream.Collectors;
 public class EntityCollisionManagerImpl implements EntityCollisionManager {
 
     private final World world;
-    private final Map<Entity, Set<Consumer<Collision>>> onCollide = new HashMap<>();
 
     /**
      * @param world world to handle collisions in
@@ -51,22 +45,5 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
                 .flatMap(Optional::stream)
                 .map(side -> new Collision(entity, side))
                 .collect(Collectors.toUnmodifiableSet());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Set<Consumer<Collision>> getOnCollideCallbacksFor(final Entity entity) {
-        final var callbacks = this.onCollide.get(entity);
-        return callbacks != null ? Collections.unmodifiableSet(callbacks) : Collections.emptySet();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addOnCollide(final Entity entity, final Consumer<Collision> action) {
-        this.onCollide.computeIfAbsent(entity, e -> new HashSet<>()).add(action);
     }
 }
