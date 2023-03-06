@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 /**
  * The default implementation of an {@link EntityCollisionManager}.
@@ -44,12 +44,13 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
      * {@inheritDoc}
      */
     @Override
-    public Stream<Collision> findCollisionsFor(final Entity entity) {
+    public Set<Collision> findCollisionsFor(final Entity entity) {
         return this.world.getEntities().stream()
                 .filter(other -> entity != other)
                 .map(other -> this.getCollision(entity, other))
                 .flatMap(Optional::stream)
-                .map(side -> new Collision(entity, side));
+                .map(side -> new Collision(entity, side))
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**

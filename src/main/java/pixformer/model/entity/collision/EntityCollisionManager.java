@@ -4,7 +4,6 @@ import pixformer.model.entity.Entity;
 
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 /**
  * Handler for entity-entity collisions.
@@ -16,7 +15,7 @@ public interface EntityCollisionManager {
      * @param entity entity to check collisions for
      * @return the group of collisions involving the given entity
      */
-    Stream<Collision> findCollisionsFor(Entity entity);
+    Set<Collision> findCollisionsFor(Entity entity);
 
     /**
      * @param entity entity to get collision callbacks for

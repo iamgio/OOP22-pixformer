@@ -75,8 +75,8 @@ public class WorldImpl implements World {
     @Override
     public void update(final double dt) {
         this.getEntities().forEach(entity -> {
-            this.collisionManager.findCollisionsFor(entity).forEach(other -> {
-                collisionManager.getOnCollideCallbacksFor(entity).forEach(callback -> callback.accept(other));
+            entity.getCollisionComponent().ifPresent(collisionComponent -> {
+                collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
         });
     }

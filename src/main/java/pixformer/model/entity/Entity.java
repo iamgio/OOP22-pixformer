@@ -3,6 +3,7 @@ package pixformer.model.entity;
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
 
 import java.util.Optional;
@@ -67,6 +68,13 @@ public interface Entity {
      * @return the input component of the entity
      */
     default Optional<InputComponent> getInputComponent() {
+        return Optional.empty();
+    }
+
+    /**
+     * @return the collision component of the entity
+     */
+    default Optional<CollisionComponent> getCollisionComponent() {
         return Optional.empty();
     }
 
