@@ -10,8 +10,6 @@ import pixformer.view.javafx.JavaFXGameLoopManager;
 
 import java.util.Objects;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * JavaFX application launcher.
  */
@@ -87,5 +85,6 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      * @return the JavaFX application to run
      */
     protected abstract Class<? extends Application> getAppClass();
-    // This is because JavaFX is unable to detect inheritance in terms of Applications
+    // This is because JavaFX is unable to detect inheritance in terms of
+    // Applications
 }

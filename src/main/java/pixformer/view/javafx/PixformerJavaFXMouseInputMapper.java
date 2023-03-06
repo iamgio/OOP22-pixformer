@@ -1,6 +1,8 @@
 package pixformer.view.javafx;
 
 import javafx.scene.input.MouseButton;
+import pixformer.controller.input.ControllerInput;
+import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.Level;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.engine.InputMapper;
@@ -23,5 +25,13 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
             default -> null;
         };
         return Optional.ofNullable(action);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<ControllerInput> mapController(MouseButton input) {
+        return Optional.empty();
     }
 }
