@@ -1,12 +1,12 @@
 package pixformer.model.input;
 
-import pixformer.common.Updatable;
+import pixformer.model.World;
 import pixformer.model.entity.Entity;
 
 /**
  * A tagging abstract class which represents AI-controlled input component.
  */
-public abstract class AIInputComponent extends InputComponent implements Updatable {
+public abstract class AIInputComponent extends InputComponent {
 
     /**
      * Instantiates an AI-controlled input component.
@@ -15,4 +15,6 @@ public abstract class AIInputComponent extends InputComponent implements Updatab
     protected AIInputComponent(final Entity entity) {
         super(entity);
     }
+
+    public abstract void update(World world);
 }
