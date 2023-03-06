@@ -19,4 +19,8 @@ public interface GameLoopManager {
      * @return if the gameloop is running
      */
     boolean isRunning();
+
+    void pause();
+
+    void resume();
 }

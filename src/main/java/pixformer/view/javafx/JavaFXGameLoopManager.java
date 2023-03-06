@@ -32,7 +32,6 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void start() {
-        this.isRunning = true;
         final GameLoop loop = Objects.requireNonNull(
                 this.viewLauncher.getController().createGameLoop(
                         new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())));
@@ -44,9 +43,7 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                // if (isRunning) {
                 loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
-                // }
             }
         };
 
@@ -58,7 +55,6 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void stop() {
-        this.isRunning = false;
         if (currentTimer != null) {
             currentTimer.stop();
         }
@@ -70,5 +66,15 @@ public class JavaFXGameLoopManager implements GameLoopManager {
     @Override
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    @Override
+    public void pause() {
+        this.isRunning = false;
+    }
+
+    @Override
+    public void resume() {
+        this.isRunning = true;
     }
 }
