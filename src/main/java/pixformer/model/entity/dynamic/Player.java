@@ -55,7 +55,6 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
         this.playerIndex = playerIndex;
-        // this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
     }
 
     /**
@@ -102,36 +101,11 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
         isCrouching = true;
     }
 
-    /*
-     * @Override
-     * public Vector2D getPosition() {
-     * return this.position;
-     * }
-     */
-
     /**
      * @return True if is crouching.
      */
     public boolean isCrouching() {
         return isCrouching;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getWidth() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeight() {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     /**
