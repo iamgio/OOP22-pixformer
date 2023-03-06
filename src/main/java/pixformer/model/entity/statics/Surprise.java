@@ -1,5 +1,6 @@
 package pixformer.model.entity.statics;
 
+import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 
@@ -13,6 +14,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
 
     /**
      * Constructor of the Surprise block.
+     * 
      * @param x X coordinate
      * @param y Y coordinate
      */
