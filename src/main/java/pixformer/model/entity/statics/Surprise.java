@@ -19,7 +19,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
      * @param y Y coordinate
      */
     public Surprise(final double x, final double y) {
-        super(x, y, WIDTH, HEIGHT, new Vector2D(0, 0));
+        super(x, y, WIDTH, HEIGHT);
     }
 
 }

@@ -20,13 +20,12 @@ public abstract class AbstractEntity implements Entity {
      * @param width  width of the entity
      * @param height height of the entity
      */
-    protected AbstractEntity(final double x, final double y, final double width, final double height,
-            final Vector2D velocity) {
+    protected AbstractEntity(final double x, final double y, final double width, final double height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.velocity = velocity;
+        this.velocity = new Vector2D(0, 0);
     }
 
     /**

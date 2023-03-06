@@ -19,7 +19,7 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      * @param y Y coordinate
      */
     public Brick(final double x, final double y) {
-        super(x, y, WIDTH, HEIGHT, new Vector2D(0, 0));
+        super(x, y, WIDTH, HEIGHT);
     }
 
 }

@@ -44,7 +44,9 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
+                // if (isRunning) {
                 loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
+                // }
             }
         };
 

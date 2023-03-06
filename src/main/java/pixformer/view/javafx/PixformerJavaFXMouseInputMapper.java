@@ -2,7 +2,7 @@ package pixformer.view.javafx;
 
 import javafx.scene.input.MouseButton;
 import pixformer.controller.input.ControllerInput;
-import pixformer.controller.input.ModelInputViewBridge;
+import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.Level;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.engine.InputMapper;

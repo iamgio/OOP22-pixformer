@@ -19,9 +19,8 @@ public class MovableAbstractEntity extends AbstractEntity {
      * @param width  Entity Width
      * @param height Entity Height
      */
-    protected MovableAbstractEntity(final double x, final double y, final double width, final double height,
-            final Vector2D velocity) {
-        super(x, y, width, height, velocity);
+    protected MovableAbstractEntity(final double x, final double y, final double width, final double height) {
+        super(x, y, width, height);
         // TODO Auto-generated constructor stub
     }
 
