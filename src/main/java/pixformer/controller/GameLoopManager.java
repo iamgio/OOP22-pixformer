@@ -14,4 +14,9 @@ public interface GameLoopManager {
      * Ends the current game loop.
      */
     void stop();
+
+    /**
+     * @return if the gameloop is running
+     */
+    boolean isRunning();
 }

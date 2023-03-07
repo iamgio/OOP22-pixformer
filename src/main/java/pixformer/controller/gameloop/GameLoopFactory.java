@@ -18,8 +18,9 @@ public final class GameLoopFactory {
 
     /**
      * Instantiates a new game loop factory.
-     * @param level game level
-     * @param view game view
+     * 
+     * @param level         game level
+     * @param view          game view
      * @param playersAmount amount of players
      */
     public GameLoopFactory(final Level level, final ViewImpl view, final int playersAmount) {

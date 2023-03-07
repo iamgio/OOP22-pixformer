@@ -1,5 +1,6 @@
 package pixformer.view.engine;
 
+import pixformer.controller.input.ControllerInput;
 import pixformer.model.Level;
 
 import java.util.Optional;
@@ -17,4 +18,10 @@ public interface InputMapper<T> {
      * @return associated model action, if it exists
      */
     Optional<Consumer<Level>> map(T input);
+
+    /**
+     * @param input raw input
+     * @return associated controller action, if it exists
+     */
+    Optional<ControllerInput> mapController(T input);
 }

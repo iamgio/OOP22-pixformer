@@ -1,5 +1,7 @@
 package pixformer.model.entity.collision;
 
+import java.util.Optional;
+
 /**
  * A rectangle-shaped bounding box defined by width and height.
  */
@@ -21,13 +23,25 @@ public class RectangleBoundingBox implements BoundingBox {
      * {@inheritDoc}
      */
     @Override
-    public boolean collidesWith(final BoundingBox other, final double x1, final double y1, final double x2, final double y2) {
+    public Optional<CollisionSide> getCollisionSide(final BoundingBox other,
+                                                    final double x1, final double y1,
+                                                    final double x2, final double y2) {
         if (other instanceof RectangleBoundingBox rectangle) {
-            return x1 < x2 + rectangle.width
-                    && x1 + this.width > x2
-                    && y1 < y2 + rectangle.height
-                    && y1 + this.height > y2;
+            double dx = (x1 + this.width / 2) - (x2 + rectangle.width / 2);
+            double dy = (y1 + this.height / 2) - (y2 + rectangle.height / 2);
+            double width = (this.width + rectangle.width) / 2;
+            double height = (this.height + rectangle.height) / 2;
+            double crossWidth = width * dy;
+            double crossHeight = height * dx;
+
+            if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
+                if (crossWidth > crossHeight) {
+                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.BOTTOM : CollisionSide.LEFT);
+                } else {
+                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.RIGHT : CollisionSide.TOP);
+                }
+            }
         }
-        return false;
+        return Optional.empty();
     }
 }
