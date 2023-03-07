@@ -87,7 +87,7 @@ public class WorldImpl implements World {
         });
     }
 
-    private void updatePosition(final double dt, Entity entity) {
+    private void updatePosition(final double dt, final Entity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
