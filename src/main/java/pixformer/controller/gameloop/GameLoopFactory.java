@@ -1,9 +1,11 @@
 package pixformer.controller.gameloop;
 
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
-import pixformer.view.ViewImpl;
+import pixformer.view.View;
 
 /**
  * Factory of available game loops.
@@ -12,8 +14,10 @@ public final class GameLoopFactory {
 
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
-    private final Level level;
-    private final ViewImpl view; // TODO cambiare da ViewImpl a View
+
+    private final Wrapper<Level> level;
+    private final Wrapper<View> view;
+
     private final int playersAmount;
 
     /**
@@ -23,9 +27,9 @@ public final class GameLoopFactory {
      * @param view          game view
      * @param playersAmount amount of players
      */
-    public GameLoopFactory(final Level level, final ViewImpl view, final int playersAmount) {
-        this.level = level;
-        this.view = view;
+    public GameLoopFactory(final Level level, final View view, final int playersAmount) {
+        this.level = new SimpleWrapper<>(level);
+        this.view = new SimpleWrapper<>(view);
         this.playersAmount = playersAmount;
     }
 
@@ -33,11 +37,14 @@ public final class GameLoopFactory {
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        this.level.setup(this.playersAmount);
-        this.view.setup();
-        this.view.getScene().getGraphics().setScale(15); // test
+        final Level level = this.level.get();
+        final View view = this.view.get();
 
-        final World world = this.level.getWorld();
+        level.setup(this.playersAmount);
+        view.setup();
+        view.getScene().getGraphics().setScale(15); // test
+
+        final World world = this.level.get().getWorld();
 
         return dt -> {
             view.update(dt);
