@@ -51,10 +51,11 @@ public final class GameLoopFactory {
             world.update(dt);
 
             world.getEntities().stream()
-                    .filter(entity -> entity instanceof DrawableEntity)
+                    .filter(DrawableEntity.class::isInstance)
+                    .map(DrawableEntity.class::cast)
                     .forEach(entity -> {
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
-                        ((DrawableEntity) entity).getGraphicsComponent().update(view.getScene());
+                        entity.getGraphicsComponent().update(view.getScene());
                     });
 
             final long period = SECONDS_TO_MILLIS / FPS;
