@@ -31,6 +31,9 @@ public class GoombaAITest {
         world.update(1);
         assertEquals(1, goomba.getX());
         assertEquals(0, goomba.getY());
+        world.update(1);
+        assertEquals(2, goomba.getX());
+        assertEquals(0, goomba.getY());
     }
 
     @Test
