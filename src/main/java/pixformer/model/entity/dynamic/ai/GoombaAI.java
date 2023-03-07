@@ -9,6 +9,7 @@ import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
+import pixformer.model.entity.collision.Collision;
 
 public class GoombaAI extends AIInputComponent {
 
@@ -25,6 +26,7 @@ public class GoombaAI extends AIInputComponent {
         Entity goomba = super.getEntity();
         final Optional<?> collidingBlock =
             collisionManager.findCollisionsFor(goomba).stream()
+                .map(Collision::entity)
                 .filter(Block.class::isInstance)
                 .findFirst();
         if (collidingBlock.isPresent()) {
