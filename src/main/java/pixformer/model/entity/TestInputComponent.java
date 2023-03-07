@@ -10,18 +10,15 @@ import pixformer.model.modelinput.CompleteModelInput;
 @Deprecated
 public class TestInputComponent extends UserInputComponent implements CompleteModelInput {
 
-    private final TestEntity testEntity;
-
-    public TestInputComponent(TestEntity testEntity) {
+    public TestInputComponent(Entity testEntity) {
         super(testEntity);
-        this.testEntity = testEntity;
         // Si potrebbe non tenere il campo con l'entità specifica,
         // ed usare super.getEntity() appena Entity esporrà setX
     }
 
     @Override
     public void jump() {
-        testEntity.setX(testEntity.getX() + 0.1);
+        // testEntity.setX(testEntity.getX() + 0.1);
     }
 
     @Override
