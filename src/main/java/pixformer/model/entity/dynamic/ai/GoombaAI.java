@@ -10,12 +10,13 @@ import pixformer.model.input.AIInputComponent;
 import pixformer.model.entity.collision.Collision;
 
 /**
- * A general AI which makes the entity go left until death. 
+ * A general AI which makes the entity go left until death.
  */
 public class GoombaAI extends AIInputComponent {
 
     /**
      * Create a new GoombaAI.
+     * 
      * @param entity which this AI will control.
      */
     public GoombaAI(final Entity entity) {
@@ -26,13 +27,12 @@ public class GoombaAI extends AIInputComponent {
     public final void update(final World world) {
         final EntityCollisionManager collisionManager = world.getCollisionManager();
         Entity goomba = super.getEntity();
-        final Optional<?> collidingBlock =
-            collisionManager.findCollisionsFor(goomba).stream()
+        final Optional<?> collidingBlock = collisionManager.findCollisionsFor(goomba).stream()
                 .map(Collision::entity)
                 .filter(Block.class::isInstance)
                 .findFirst();
         if (collidingBlock.isPresent()) {
             goomba.setVelocity(goomba.getVelocity().scale(-1));
         }
-    }    
+    }
 }
