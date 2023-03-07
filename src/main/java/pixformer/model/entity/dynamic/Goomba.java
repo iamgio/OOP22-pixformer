@@ -10,8 +10,8 @@ import pixformer.model.input.InputComponent;
 
 public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
 
-    private static int WIDTH = 1;
-    private static int HEIGHT = 1;
+    private static final int WIDTH = 1;
+    private static final int HEIGHT = 1;
     private static final Vector2D INITIAL_VELOCITY = new Vector2D(-0.04, 0);
     private final GoombaAI ai;
 
