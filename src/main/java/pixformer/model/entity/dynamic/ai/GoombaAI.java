@@ -26,7 +26,7 @@ public class GoombaAI extends AIInputComponent {
     @Override
     public final void update(final World world) {
         final EntityCollisionManager collisionManager = world.getCollisionManager();
-        Entity goomba = super.getEntity();
+        final Entity goomba = super.getEntity();
         final Optional<?> collidingBlock = collisionManager.findCollisionsFor(goomba).stream()
                 .map(Collision::entity)
                 .filter(Block.class::isInstance)
