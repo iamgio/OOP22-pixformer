@@ -7,6 +7,7 @@ import pixformer.model.Level;
 import pixformer.view.ViewImpl;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The default implementation of a {@link Controller}.
@@ -21,7 +22,7 @@ public class ControllerImpl implements Controller {
     private final LevelManager levelManager;
     private final GameLoopManager gameLoopManager;
 
-    private int playersAmount = DEFAULT_PLAYERS_AMOUNT;
+    private final AtomicInteger playersAmountCounter = new AtomicInteger(DEFAULT_PLAYERS_AMOUNT);
 
     /**
      * @param settings game settings
@@ -76,15 +77,12 @@ public class ControllerImpl implements Controller {
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
-        return new GameLoopFactory(currentLevel.get(), view, this.playersAmount).defaultLoop();
+        return new GameLoopFactory(currentLevel.get(), view, this.playersAmountCounter.get()).defaultLoop();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getPlayersAmount() {
-        return this.playersAmount;
+        return this.playersAmountCounter.get();
     }
 
     /**
@@ -93,9 +91,9 @@ public class ControllerImpl implements Controller {
     @Override
     public void setPlayersAmount(final int playersAmount) {
         if (playersAmount < MIN_PLAYERS_AMOUNT) {
-            this.playersAmount = MIN_PLAYERS_AMOUNT;
+            this.playersAmountCounter.set(MIN_PLAYERS_AMOUNT);
         } else {
-            this.playersAmount = Math.min(playersAmount, MAX_PLAYERS_AMOUNT);
+            this.playersAmountCounter.set(Math.min(playersAmount, MAX_PLAYERS_AMOUNT));
         }
     }
 }
