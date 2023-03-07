@@ -2,6 +2,10 @@ package pixformer.view.engine.javafx;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.SimpleWritableWrapper;
+import pixformer.common.wrap.Wrapper;
+import pixformer.common.wrap.WritableWrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
@@ -15,17 +19,16 @@ import java.util.Objects;
  */
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
-    private final Controller controller = this.createController();
-
-    private JavaFXScene scene;
-    private Stage stage;
+    private final Wrapper<Controller> controller = new SimpleWrapper<>(this.createController());
+    private final WritableWrapper<JavaFXScene> scene = new SimpleWritableWrapper<>();
+    private final WritableWrapper<Stage> stage = new SimpleWritableWrapper<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start(final Stage primaryStage) {
-        this.stage = primaryStage;
+        this.stage.set(primaryStage);
         this.setScene(this.createInitialScene());
 
         primaryStage.setTitle(this.getTitle());
@@ -49,7 +52,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public Controller getController() {
-        return this.controller;
+        return this.controller.get();
     }
 
     /**
@@ -57,10 +60,11 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public GameScene getScene() {
+        final GameScene scene = this.scene.get();
         if (scene == null) {
             throw new IllegalStateException("JavaFX scene is initialized only after launch.");
         }
-        return this.scene;
+        return scene;
     }
 
     /**
@@ -72,8 +76,9 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
             throw new IllegalArgumentException("Expected a JavaFX scene.");
         }
 
-        this.scene = (JavaFXScene) Objects.requireNonNull(scene);
-        this.stage.setScene(this.scene.getScene());
+        final JavaFXScene javaFXScene = (JavaFXScene) Objects.requireNonNull(scene);
+        this.scene.set(javaFXScene);
+        Objects.requireNonNull(this.stage.get()).setScene(javaFXScene.getScene());
     }
 
     /**

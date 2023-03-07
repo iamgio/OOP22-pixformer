@@ -6,6 +6,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import pixformer.common.wrap.SimpleWritableWrapper;
+import pixformer.common.wrap.WritableWrapper;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.Graphics;
 import pixformer.view.engine.RendererFactory;
@@ -22,7 +24,7 @@ import java.util.stream.Stream;
  */
 public class JavaFXScene extends GameScene {
 
-    private final Scene scene;
+    private final WritableWrapper<Scene> scene = new SimpleWritableWrapper<>();
     private final SceneRenderer renderer;
     private final Graphics graphics;
     private final RendererFactory rendererFactory;
@@ -38,7 +40,7 @@ public class JavaFXScene extends GameScene {
         canvas.setWidth(width);
         canvas.setHeight(height);
 
-        this.scene = new Scene(root);
+        this.scene.set(new Scene(root));
         this.renderer = new SceneRenderer();
         this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
         this.rendererFactory = new JavaFXRendererFactory();
@@ -64,7 +66,7 @@ public class JavaFXScene extends GameScene {
      * @return the wrapped JavaFX scene
      */
     public Scene getScene() {
-        return this.scene;
+        return this.scene.get();
     }
 
     /**
@@ -107,15 +109,16 @@ public class JavaFXScene extends GameScene {
      */
     @Override
     public void handleInput() {
+        final Scene scene = this.scene.get();
         // Keyboard
         this.getKeyboardInput().ifPresent(keyboardInput -> {
-            this.scene.setOnKeyPressed(e -> keyboardInput.addInput(e.getCode()));
-            this.scene.setOnKeyReleased(e -> keyboardInput.removeInput(e.getCode()));
+            scene.setOnKeyPressed(e -> keyboardInput.addInput(e.getCode()));
+            scene.setOnKeyReleased(e -> keyboardInput.removeInput(e.getCode()));
         });
         // Mouse
         this.getMouseInput().ifPresent(mouseInput -> {
-            this.scene.setOnMousePressed(e -> mouseInput.addInput(e.getButton()));
-            this.scene.setOnMouseReleased(e -> mouseInput.removeInput(e.getButton()));
+            scene.setOnMousePressed(e -> mouseInput.addInput(e.getButton()));
+            scene.setOnMouseReleased(e -> mouseInput.removeInput(e.getButton()));
         });
     }
 
