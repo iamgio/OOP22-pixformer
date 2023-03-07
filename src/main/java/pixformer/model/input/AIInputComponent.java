@@ -16,5 +16,9 @@ public abstract class AIInputComponent extends InputComponent {
         super(entity);
     }
 
+    /**
+     * Update the behaviour of the ai according to the current state of the {@code World}.
+     * @param world the current world.
+     */
     public abstract void update(World world);
 }
