@@ -3,7 +3,7 @@ package pixformer.model;
 import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.TestEntity;
-import pixformer.model.entity.dynamic.Player;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.modelinput.CompleteModelInput;
 
 import java.util.ArrayList;

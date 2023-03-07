@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.player;
 
 import java.util.Optional;
 import pixformer.common.Updatable;
@@ -51,6 +51,7 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
      * @param y      Y position of the player.
      * @param width  Width of the player.
      * @param height Height of the player.
+     * @param playerIndex Index of this player istance.
      */
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
@@ -109,7 +110,7 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     }
 
     /**
-     * Return this entity player index
+     * Return this entity player index.
      * @return playerIndex
      */
     public int getIndex() {
