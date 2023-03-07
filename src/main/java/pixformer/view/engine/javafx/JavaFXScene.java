@@ -6,7 +6,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.SimpleWritableWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.common.wrap.WritableWrapper;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.Graphics;
@@ -25,8 +27,8 @@ import java.util.stream.Stream;
 public class JavaFXScene extends GameScene {
 
     private final WritableWrapper<Scene> scene = new SimpleWritableWrapper<>();
-    private final SceneRenderer renderer;
-    private final Graphics graphics;
+    private final Wrapper<SceneRenderer> renderer;
+    private final Wrapper<Graphics> graphics;
     private final RendererFactory rendererFactory;
 
     /**
@@ -41,20 +43,20 @@ public class JavaFXScene extends GameScene {
         canvas.setHeight(height);
 
         this.scene.set(new Scene(root));
-        this.renderer = new SceneRenderer();
-        this.graphics = new JavaFXGraphics(canvas.getGraphicsContext2D());
+        this.renderer = new SimpleWrapper<>(new SceneRenderer());
+        this.graphics = new SimpleWrapper<>(new JavaFXGraphics(canvas.getGraphicsContext2D()));
         this.rendererFactory = new JavaFXRendererFactory();
 
         // Makes the canvas resizable by resizing the window
 
         root.widthProperty().addListener(o -> {
-            graphics.clear();
+            graphics.get().clear();
             canvas.setWidth(root.getWidth());
             this.render();
         });
 
         root.heightProperty().addListener(o -> {
-            graphics.clear();
+            graphics.get().clear();
             canvas.setHeight(root.getHeight());
             this.render();
         });
@@ -74,7 +76,7 @@ public class JavaFXScene extends GameScene {
      */
     @Override
     public SceneRenderer getRenderer() {
-        return this.renderer;
+        return this.renderer.get();
     }
 
     /**
@@ -82,7 +84,7 @@ public class JavaFXScene extends GameScene {
      */
     @Override
     public Graphics getGraphics() {
-        return this.graphics;
+        return this.graphics.get();
     }
 
     /**
