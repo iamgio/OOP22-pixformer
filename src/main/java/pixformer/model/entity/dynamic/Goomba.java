@@ -22,7 +22,7 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
     }
 
     @Override
-    public Optional<InputComponent> getInputComponent() {
+    public final Optional<InputComponent> getInputComponent() {
         return Optional.of(ai);
     }
     
