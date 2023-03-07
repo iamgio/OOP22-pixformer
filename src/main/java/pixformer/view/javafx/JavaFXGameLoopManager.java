@@ -16,7 +16,6 @@ public class JavaFXGameLoopManager implements GameLoopManager {
 
     private final ViewLauncher viewLauncher;
 
-    private long delta;
     private long lastFrameTime;
     private boolean isRunning;
     private AnimationTimer currentTimer;
@@ -29,18 +28,18 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         this.viewLauncher = viewLauncher;
     }
 
-    private long getDelta() {
-        return this.delta;
-    }
-
-    private void setDelta(final long delta) {
-        this.delta = delta;
-    }
-
+    /**
+     * @return the time when javaFX generated our last frame
+     */
     private long getLastFrameTime() {
         return this.lastFrameTime;
     }
 
+    /**
+     * Set the new lastFrameTime.
+     * 
+     * @param lastFrameTime new time
+     */
     private void setLastFrameTime(final long lastFrameTime) {
         this.lastFrameTime = lastFrameTime;
     }
@@ -61,9 +60,9 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                setDelta(now - getLastFrameTime());
+                long delta = now - getLastFrameTime();
                 setLastFrameTime(now);
-                loop.loop(TimeUnit.NANOSECONDS.toMillis(getDelta()));
+                loop.loop(TimeUnit.NANOSECONDS.toMillis(delta));
             }
         };
 
