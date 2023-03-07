@@ -11,10 +11,17 @@ import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.entity.collision.Collision;
 
+/**
+ * A general AI which makes the entity go left until death. 
+ */
 public class GoombaAI extends AIInputComponent {
 
     private final HorizontalModelInput joystick;
 
+    /**
+     * Create a new GoombaAI.
+     * @param entity which this AI will control.
+     */
     public GoombaAI(final Entity entity) {
         super(entity);
         joystick = new TestInputComponent(this.getEntity());
