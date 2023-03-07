@@ -1,23 +1,24 @@
 package pixformer.model.entity.components;
 
-import javax.swing.text.html.parser.Entity;
+import pixformer.model.entity.Entity;
 
 /**
- * Generic component.
+ * Generic component extended by other components.
  */
-public abstract class AbstractComponent {
+public class Component {
+
     private final Entity entity;
 
     /**
      * 
      * @param entity Entity linked to the component.
      */
-    protected AbstractComponent(final Entity entity) {
+    protected Component(final Entity entity) {
         this.entity = entity;
     }
 
     /**
-     * @return the target entity.
+     * @return The target entity.
      */
     public Entity getEntity() {
         return this.entity;
