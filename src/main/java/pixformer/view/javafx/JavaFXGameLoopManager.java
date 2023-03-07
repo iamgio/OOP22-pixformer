@@ -1,12 +1,13 @@
 package pixformer.view.javafx;
 
 import javafx.animation.AnimationTimer;
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.controller.GameLoopManager;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.ViewImpl;
 import pixformer.view.engine.ViewLauncher;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class JavaFXGameLoopManager implements GameLoopManager {
 
-    private final ViewLauncher viewLauncher;
+    private final Wrapper<ViewLauncher> viewLauncher;
 
     private boolean isRunning;
     private AnimationTimer currentTimer;
@@ -24,7 +25,7 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     public JavaFXGameLoopManager(final ViewLauncher viewLauncher) {
         this.isRunning = true;
-        this.viewLauncher = viewLauncher;
+        this.viewLauncher = new SimpleWrapper<>(viewLauncher);
     }
 
     /**
@@ -33,9 +34,9 @@ public class JavaFXGameLoopManager implements GameLoopManager {
     @Override
     public void start() {
         this.isRunning = true;
-        final GameLoop loop = Objects.requireNonNull(
-                this.viewLauncher.getController().createGameLoop(
-                        new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())));
+
+        final ViewLauncher viewLauncher = this.viewLauncher.get();
+        final GameLoop loop = viewLauncher.getController().createGameLoop(new ViewImpl(viewLauncher));
 
         if (currentTimer != null) {
             currentTimer.stop();
