@@ -23,7 +23,7 @@ public class GoombaAI extends AIInputComponent {
     }
 
     @Override
-    public void update(final World world) {
+    public final void update(final World world) {
         final EntityCollisionManager collisionManager = world.getCollisionManager();
         Entity goomba = super.getEntity();
         final Optional<?> collidingBlock =
