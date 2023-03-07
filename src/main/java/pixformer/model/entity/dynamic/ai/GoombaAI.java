@@ -28,6 +28,7 @@ public class GoombaAI extends AIInputComponent {
                 .filter(Block.class::isInstance)
                 .findFirst();
         if (collidingBlock.isPresent()) {
+            goomba.setVelocity(goomba.getVelocity().scale(-1));
         }
     }    
 }
