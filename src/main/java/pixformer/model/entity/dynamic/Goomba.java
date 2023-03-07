@@ -32,5 +32,5 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
     public final Optional<InputComponent> getInputComponent() {
         return Optional.of(ai);
     }
-    
+
 }
