@@ -51,6 +51,8 @@ public final class GameLoopFactory {
                     });
 
             final long period = SECONDS_TO_MILLIS / FPS;
+            System.out.println("Period -> " + period);
+            System.out.println("Delta time -> " + dt);
             if (dt < period) {
                 try {
                     Thread.sleep(period - dt);
