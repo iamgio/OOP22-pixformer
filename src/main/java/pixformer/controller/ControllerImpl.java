@@ -1,5 +1,7 @@
 package pixformer.controller;
 
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GameLoopFactory;
 import pixformer.model.GameSettings;
@@ -19,8 +21,8 @@ public class ControllerImpl implements Controller {
     private static final int MAX_PLAYERS_AMOUNT = 8;
 
     private final GameSettings settings;
-    private final LevelManager levelManager;
-    private final GameLoopManager gameLoopManager;
+    private final Wrapper<LevelManager> levelManager;
+    private final Wrapper<GameLoopManager> gameLoopManager;
 
     private final AtomicInteger playersAmountCounter = new AtomicInteger(DEFAULT_PLAYERS_AMOUNT);
 
@@ -31,8 +33,8 @@ public class ControllerImpl implements Controller {
      */
     public ControllerImpl(final GameSettings settings, final LevelManager levelManager, final GameLoopManager gameLoopManager) {
         this.settings = settings;
-        this.levelManager = levelManager;
-        this.gameLoopManager = gameLoopManager;
+        this.levelManager = new SimpleWrapper<>(levelManager);
+        this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
     }
 
     /**
@@ -57,7 +59,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public LevelManager getLevelManager() {
-        return this.levelManager;
+        return this.levelManager.get();
     }
 
     /**
@@ -65,7 +67,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public GameLoopManager getGameLoopManager() {
-        return this.gameLoopManager;
+        return this.gameLoopManager.get();
     }
 
     /**
@@ -73,13 +75,16 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public GameLoop createGameLoop(final ViewImpl view) {
-        Optional<Level> currentLevel = this.levelManager.getCurrentLevel();
+        Optional<Level> currentLevel = this.levelManager.get().getCurrentLevel();
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
         return new GameLoopFactory(currentLevel.get(), view, this.playersAmountCounter.get()).defaultLoop();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPlayersAmount() {
         return this.playersAmountCounter.get();
