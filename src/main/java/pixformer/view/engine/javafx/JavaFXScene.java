@@ -1,6 +1,5 @@
 package pixformer.view.engine.javafx;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -60,8 +59,6 @@ public class JavaFXScene extends GameScene {
             canvas.setHeight(root.getHeight());
             this.render();
         });
-
-        Platform.runLater(this::handleInput);
     }
 
     /**
