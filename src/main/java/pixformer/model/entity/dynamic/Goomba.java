@@ -1,11 +1,11 @@
 package pixformer.model.entity.dynamic;
 
 import java.util.Optional;
-import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.input.InputComponent;
+import pixformer.model.modelinput.HorizontalModelInput;
 
 /**
  * The default implementation of a goomba.
@@ -14,7 +14,8 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
 
     private static final int WIDTH = 1;
     private static final int HEIGHT = 1;
-    private static final Vector2D INITIAL_VELOCITY = new Vector2D(-0.04, 0);
+    private static final double INITIAL_VELOCITY = 0.04;
+    private final HorizontalModelInput joystick;
     private final GoombaAI ai;
 
     /**
@@ -24,8 +25,9 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
      */
     public Goomba(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
-        setVelocity(INITIAL_VELOCITY);
-        ai = new GoombaAI(this);
+        joystick = new HorizontalModelInputImpl(this, INITIAL_VELOCITY);
+        ai = new GoombaAI(this, joystick);
+        joystick.left();
     }
 
     @Override
