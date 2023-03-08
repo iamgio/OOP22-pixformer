@@ -38,9 +38,9 @@ public class GoombaAI extends AIInputComponent {
                 .ifPresent(c -> {
                     switch (c) {
                         case LEFT:
-                            joystick.right(); break;
-                        case RIGHT:
                             joystick.left(); break;
+                        case RIGHT:
+                            joystick.right(); break;
                         default: break;
                     }
                 });
