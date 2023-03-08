@@ -91,7 +91,7 @@ public class LevelImpl implements Level {
      * @return a new player entity
      */
     private Entity createPlayer(final int playerIndex) {
-        return new TestEntity(playerIndex * 5)
+        return new TestEntity(playerIndex * 5);
         // return new Player(0, 0, 1, 1, playerIndex);
     }
 }
