@@ -41,9 +41,8 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
     public Set<Collision> findCollisionsFor(final Entity entity) {
         return this.world.getEntities().stream()
                 .filter(other -> entity != other)
-                .map(other -> this.getCollision(entity, other))
+                .map(other -> this.getCollision(entity, other).map(side -> new Collision(other, side)))
                 .flatMap(Optional::stream)
-                .map(side -> new Collision(entity, side))
                 .collect(Collectors.toUnmodifiableSet());
     }
 }
