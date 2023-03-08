@@ -1,5 +1,7 @@
 package pixformer.controller;
 
+import pixformer.common.wrap.SimpleWritableWrapper;
+import pixformer.common.wrap.WritableWrapper;
 import pixformer.model.Level;
 
 import java.util.HashSet;
@@ -13,7 +15,7 @@ import java.util.function.Consumer;
  */
 public class LevelManagerImpl implements LevelManager {
 
-    private Level level;
+    private final WritableWrapper<Level> level = new SimpleWritableWrapper<>();
 
     private final Set<Consumer<Level>> onStart = new HashSet<>();
     private final Set<Consumer<Level>> onEnd = new HashSet<>();
@@ -23,7 +25,7 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public Optional<Level> getCurrentLevel() {
-        return Optional.ofNullable(this.level);
+        return Optional.ofNullable(this.level.get());
     }
 
     /**
@@ -31,7 +33,7 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public void start(final Level level) {
-        this.level = Objects.requireNonNull(level);
+        this.level.set(Objects.requireNonNull(level));
         this.onStart.forEach(action -> action.accept(level));
     }
 
@@ -48,12 +50,14 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public void endCurrentLevel() {
-        if (this.level == null) {
+        final Level level = this.level.get();
+
+        if (level == null) {
             throw new IllegalStateException("No level to end.");
         }
 
-        this.onEnd.forEach(action -> action.accept(this.level));
-        this.level = null;
+        this.onEnd.forEach(action -> action.accept(level));
+        this.level.set(null);
     }
 
     /**
