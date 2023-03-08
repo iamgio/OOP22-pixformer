@@ -9,8 +9,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import pixformer.common.wrap.SimpleWrapper;
-import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.LevelMock;
@@ -30,7 +28,7 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     private static final double INITIAL_HEIGHT = 600;
     private static final int DEFAULT_PLAYERS_AMOUNT = 1;
 
-    private final Wrapper<Controller> controller;
+    private final Controller controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
 
     private final IntegerProperty playersAmount = new SimpleIntegerProperty(DEFAULT_PLAYERS_AMOUNT);
@@ -41,7 +39,7 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
      */
     public PixformerJavaFXMainMenuScene(final Controller controller) {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
-        this.controller = new SimpleWrapper<>(controller);
+        this.controller = controller;
 
         Scene scene = super.getScene();
         Pane root = (Pane) scene.getRoot();
@@ -70,7 +68,7 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     }
 
     private void setPlayersAmount(int playersAmount) {
-        this.playersAmount.setValue(controller.get().correctSupportedPlayersAmount(playersAmount));
+        this.playersAmount.setValue(controller.correctSupportedPlayersAmount(playersAmount));
     }
 
     /**

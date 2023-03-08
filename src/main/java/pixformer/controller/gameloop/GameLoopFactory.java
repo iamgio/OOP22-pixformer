@@ -33,7 +33,6 @@ public final class GameLoopFactory {
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        final Level level = this.level.get();
         final View view = this.view.get();
 
         view.setup();

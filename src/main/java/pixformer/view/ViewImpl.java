@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  */
 public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput> {
 
-    private final Wrapper<Controller> controller;
+    private final Controller controller;
     private final Wrapper<GameScene> scene;
 
     private Optional<Consumer<PauseControllerInput>> controllerCommand = Optional.empty();
@@ -31,12 +31,12 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      * @param scene      current game scene
      */
     public ViewImpl(final Controller controller, final GameScene scene) {
-        this.controller = new SimpleWrapper<>(controller);
+        this.controller = controller;
         this.scene = new SimpleWrapper<>(scene);
     }
 
     /**
-     * Initializes the default view
+     * Initializes the default view.
      *
      * @param viewLauncher view launcher used to begin the visual output
      */
@@ -66,7 +66,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     @Override
     public void update(final double dt) {
-        final Controller controller = this.controller.get();
         final GameScene scene = this.scene.get();
 
         scene.getGraphics().setTranslate(0, 0);
