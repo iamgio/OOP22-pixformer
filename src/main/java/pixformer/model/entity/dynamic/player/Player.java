@@ -6,9 +6,12 @@ import pixformer.common.Vector2D;
 import pixformer.model.entity.MovableAbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.physics.PhysicsComponent;
 import pixformer.model.entity.powerups.PowerUp;
+import pixformer.model.input.InputComponent;
 
 /**
  * The class manages the character used by the player.
@@ -44,6 +47,12 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
 
     // Current powerup
     private Optional<PowerUp> powerup;
+
+    // Player components
+    private GraphicsComponent graphicsComponent;
+    private PhysicsComponent physicsComponent;
+    private CollisionComponent collisionComponent;
+    private InputComponent inputComponent;
 
     /**
      * 
@@ -118,12 +127,37 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     }
 
     /**
+     * Set the new inputComponent.
+     * @param inputComponent new Player's inputComponent.
+     */
+    public void setInputComponent(final InputComponent inputComponent) {
+        this.inputComponent = inputComponent;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
+    public Optional<InputComponent> getInputComponent() {
+        return Optional.of(this.inputComponent);
+    }
+
+    @Override
     public GraphicsComponent getGraphicsComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
+        return this.graphicsComponent;
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(this.collisionComponent);
+    }
+
+    /**
+     * Return current physics component.
+     * @return player's physics component.
+     */
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(this.physicsComponent);
     }
 
     /**
