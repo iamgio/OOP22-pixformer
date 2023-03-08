@@ -2,17 +2,17 @@ package pixformer.model.entity.dynamic;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
-import pixformer.model.input.InputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 
 /**
  * An HorizontalInputComponent which make the entity move left or right at the
  * same velocity module.
  */
-public class HorizontalInputComponent extends InputComponent implements HorizontalModelInput {
+public class HorizontalModelInputImpl implements HorizontalModelInput {
 
     private final Vector2D rightVelocity;
     private final Vector2D leftVelocity;
+    private final Entity entity;
 
     /**
      * Create a new HorizontalInputComponent.
@@ -21,8 +21,8 @@ public class HorizontalInputComponent extends InputComponent implements Horizont
      * @param velocity the module of the velocity which will be given to the
      *                 {@code entity}.
      */
-    public HorizontalInputComponent(final Entity entity, final double velocity) {
-        super(entity);
+    public HorizontalModelInputImpl(final Entity entity, final double velocity) {
+        this.entity = entity;
         final double velocityModule = Math.abs(velocity);
         rightVelocity = new Vector2D(velocityModule, 0);
         leftVelocity = new Vector2D(-velocityModule, 0);
@@ -30,12 +30,12 @@ public class HorizontalInputComponent extends InputComponent implements Horizont
 
     @Override
     public void left() {
-        super.getEntity().setVelocity(leftVelocity);
+        entity.setVelocity(leftVelocity);
     }
 
     @Override
     public void right() {
-        super.getEntity().setVelocity(rightVelocity);
+        entity.setVelocity(rightVelocity);
     }
 
 }
