@@ -14,35 +14,38 @@ import pixformer.model.entity.statics.Block;
 
 final class GoombaAITest {
 
+    private static final double DELTA = 0.0001;
     private final World world = new WorldImpl();
     private Goomba goomba;
+    private final double step = -0.002;
+    private final double dt = 1;
 
     @BeforeEach
     void setup() {
         goomba = new Goomba(0, 0);
-        goomba.setVelocity(new Vector2D(1, 0));
-        // world.spawnEntity(new Block(0, 0));
         world.spawnEntity(goomba);
     }
 
     @Test
     void testClearRoad() {
-        world.update(1);
-        assertEquals(1, goomba.getX());
+        world.update(dt);
+        assertEquals(step, goomba.getX());
         assertEquals(0, goomba.getY());
-        world.update(1);
-        assertEquals(2, goomba.getX());
+        world.update(dt);
+        assertEquals(2 * step, goomba.getX());
         assertEquals(0, goomba.getY());
     }
 
     @Test
     void testFindObstacle() {
-        world.spawnEntity(new Block(2, 0)); // x_y
-        world.update(1);    // _xy
-        assertEquals(1, goomba.getX());
-        assertEquals(0, goomba.getY());
-        world.update(1);
-        assertEquals(0, goomba.getX()); // x_y
+        world.spawnEntity(new Block(-2, 0)); // x_y
+        for (double i = 0; i > -1; i += step) {
+            assertEquals(i, goomba.getX());
+            assertEquals(0, goomba.getY());
+            world.update(dt);
+        }
+        world.update(dt);
+        assertEquals(-1 - step, goomba.getX(), DELTA);
         assertEquals(0, goomba.getY());
     }
 }
