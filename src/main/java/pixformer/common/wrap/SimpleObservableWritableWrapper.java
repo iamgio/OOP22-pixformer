@@ -2,6 +2,7 @@ package pixformer.common.wrap;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
  */
 public class SimpleObservableWritableWrapper<T> extends SimpleWritableWrapper<T> implements ObservableWritableWrapper<T> {
 
-    private final Set<Consumer<T>> onChange = new HashSet<>();
+    private final Set<BiConsumer<T, T>> onChange = new HashSet<>();
 
     /**
      * @param value the initial wrapped value
@@ -32,8 +33,9 @@ public class SimpleObservableWritableWrapper<T> extends SimpleWritableWrapper<T>
      */
     @Override
     public void set(final T value) {
+        final T old = this.get();
         super.set(value);
-        this.onChange.forEach(action -> action.accept(value));
+        this.onChange.forEach(action -> action.accept(old, value));
     }
 
     /**
@@ -41,6 +43,14 @@ public class SimpleObservableWritableWrapper<T> extends SimpleWritableWrapper<T>
      */
     @Override
     public void addOnChange(final Consumer<T> onChange) {
+        this.onChange.add((oldValue, newValue) -> onChange.accept(newValue));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addOnChange(final BiConsumer<T, T> onChange) {
         this.onChange.add(onChange);
     }
 }
