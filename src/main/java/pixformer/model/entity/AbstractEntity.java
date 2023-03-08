@@ -3,9 +3,10 @@ package pixformer.model.entity;
 import pixformer.common.Vector2D;
 
 /**
- * Abstract class for an entity.
+ * Abstract class for a mutable entity.
  */
 public abstract class AbstractEntity implements Entity {
+
     private double x;
     private double y;
     private double width;
@@ -37,36 +38,20 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getY() {
-        return this.y;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getWidth() {
-        return this.width;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeight() {
-        return this.height;
-    }
-
-    /**
      * Set the X coordinate of the entity.
      *
      * @param x the new X coordinate
      */
     public void setX(final double x) {
         this.x = x;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getY() {
+        return this.y;
     }
 
     /**
@@ -79,12 +64,28 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return this.width;
+    }
+
+    /**
      * Set the width of the entity.
      *
      * @param width the new width
      */
-    protected void setWidth(final double width) {
+    public void setWidth(final double width) {
         this.width = width;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeight() {
+        return this.height;
     }
 
     /**
@@ -92,7 +93,7 @@ public abstract class AbstractEntity implements Entity {
      *
      * @param height the new height
      */
-    protected void setHeight(final double height) {
+    public void setHeight(final double height) {
         this.height = height;
     }
 
@@ -104,7 +105,9 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * {@inheritDoc}
+     * Set the new velocity of the entity.
+     *
+     * @param velocity the new velocity
      */
     public void setVelocity(final Vector2D velocity) {
         this.velocity = velocity;

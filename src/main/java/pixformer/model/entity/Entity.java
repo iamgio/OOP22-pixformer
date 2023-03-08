@@ -19,30 +19,9 @@ public interface Entity {
     double getX();
 
     /**
-     * Set the X coordinate.
-     * 
-     * @param x coordinate
-     */
-    void setX(double x);
-
-    /**
      * @return Y coordinate
      */
     double getY();
-
-    /**
-     * Set the Y coordinate.
-     * 
-     * @param y coordinate
-     */
-    void setY(double y);
-
-    /**
-     * Set the velocity of the entity.
-     * 
-     * @param velocity new vector
-     */
-    void setVelocity(Vector2D velocity);
 
     /**
      * @return the width of the entity
