@@ -3,6 +3,7 @@ package pixformer.model.entity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.TestGraphicsComponent;
 
 import java.util.Optional;
@@ -64,5 +65,11 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
      */
     public void setHasCollided(boolean hasCollided) {
         this.hasCollided = hasCollided;
+    }
+
+    @Override
+    public PhysicsComponent getPhysicsComponent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPhysicsComponent'");
     }
 }

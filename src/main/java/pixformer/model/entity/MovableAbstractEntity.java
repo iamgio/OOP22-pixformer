@@ -2,6 +2,7 @@ package pixformer.model.entity;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.physics.PhysicsComponent;
 
 /**
  * Abstract class for moving entities.
@@ -60,6 +61,12 @@ public class MovableAbstractEntity extends AbstractEntity {
     protected void updatePos(final Vector2D newForce, final double dt) {
         this.setX(this.getX() + newForce.x() * dt);
         this.setY(this.getY() + newForce.y() * dt);
+    }
+
+    @Override
+    public PhysicsComponent getPhysicsComponent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPhysicsComponent'");
     }
 
 }

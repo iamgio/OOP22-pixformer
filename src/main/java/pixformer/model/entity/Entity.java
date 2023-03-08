@@ -5,6 +5,7 @@ import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;
 
@@ -63,6 +64,11 @@ public interface Entity {
      * @return the bounding box of the entity
      */
     BoundingBox getBoundingBox();
+
+    /**
+     * @return the physics component of the entity
+     */
+    PhysicsComponent getPhysicsComponent();
 
     /**
      * @return the input component of the entity
