@@ -1,6 +1,5 @@
 package pixformer.model.entity.statics;
 
-import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 

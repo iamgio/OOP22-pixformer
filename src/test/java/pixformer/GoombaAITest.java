@@ -1,6 +1,5 @@
 package pixformer;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -13,7 +12,7 @@ import pixformer.model.WorldImpl;
 import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.statics.Block;
 
-public class GoombaAITest {
+final class GoombaAITest {
 
     private final World world = new WorldImpl();
     private Goomba goomba;

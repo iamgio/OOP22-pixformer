@@ -78,16 +78,16 @@ public class WorldImpl implements World {
         this.getEntities().forEach(entity -> {
             entity.getCollisionComponent().ifPresent(collisionComponent -> {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
+            });
             entity.getInputComponent()
                 .filter(AIInputComponent.class::isInstance)
                 .map(AIInputComponent.class::cast)
                 .ifPresent(ai -> ai.update(this));
-            });
             updatePosition(dt, entity);
         });
     }
 
-    private void updatePosition(final double dt, Entity entity) {
+    private void updatePosition(final double dt, final Entity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }

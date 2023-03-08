@@ -5,6 +5,7 @@ import pixformer.model.modelinput.CompleteModelInput;
 
 /**
  * Input component for the test entity.
+ * 
  * @deprecated test
  */
 @Deprecated
@@ -18,7 +19,7 @@ public class TestInputComponent extends UserInputComponent implements CompleteMo
 
     @Override
     public void jump() {
-        // testEntity.setX(testEntity.getX() + 0.1);
+        super.getEntity().setX(super.getEntity().getX() + 0.1);
     }
 
     @Override
