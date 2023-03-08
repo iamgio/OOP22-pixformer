@@ -2,6 +2,9 @@ package pixformer.controller.input;
 
 import pixformer.controller.Controller;
 
+/**
+ * Implementation for {@link ControllerInput}.
+ */
 public class ControllerInputImpl implements ControllerInput {
 
     private final Controller controller;

@@ -2,7 +2,6 @@ package pixformer.view.javafx;
 
 import javafx.scene.input.KeyCode;
 import pixformer.controller.input.ControllerInput;
-import pixformer.controller.input.PauseControllerInput;
 import pixformer.model.Level;
 import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.engine.InputMapper;

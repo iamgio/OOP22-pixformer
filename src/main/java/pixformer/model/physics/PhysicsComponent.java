@@ -17,7 +17,7 @@ public class PhysicsComponent implements Updatable {
     /**
      * Constructor for the PhysicComponent.
      * 
-     * @param vector
+     * @param entity for the physic component
      */
     public PhysicsComponent(final Entity entity) {
         this.force = new Vector2D(0, -GRAVITY);

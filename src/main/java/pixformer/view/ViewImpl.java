@@ -3,7 +3,6 @@ package pixformer.view;
 import pixformer.controller.Controller;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
-import pixformer.controller.input.PauseControllerInput;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
