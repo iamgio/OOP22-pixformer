@@ -1,12 +1,12 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.Vector2D;
-import pixformer.model.physics.PhysicsComponentImpl;
+import pixformer.model.physics.PhysicsComponent;
 
 /**
  * Implementation of PhysicalComponent for a Player entity.
  */
-public class PlayerPhysicsComponent extends PhysicsComponentImpl {
+public class PlayerPhysicsComponent extends PhysicsComponent {
 
     /**
      * 
@@ -14,7 +14,7 @@ public class PlayerPhysicsComponent extends PhysicsComponentImpl {
      */
     public PlayerPhysicsComponent(final Vector2D vector) {
         super(vector);
-        //TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
 }
