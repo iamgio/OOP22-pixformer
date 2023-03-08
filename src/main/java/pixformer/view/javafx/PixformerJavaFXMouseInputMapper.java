@@ -30,7 +30,7 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
      * {@inheritDoc}
      */
     @Override
-    public Optional<ControllerInput> mapController(final MouseButton input) {
+    public Optional<Consumer<ControllerInput>> mapController(final MouseButton input) {
         return Optional.empty();
     }
 }
