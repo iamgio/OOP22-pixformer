@@ -1,7 +1,5 @@
 package pixformer.controller.input;
 
-import pixformer.controller.GameLoopManager;
-
 /**
  * A tagging interface for the interfaces whose methods represent commands to
  * the controller.
@@ -9,10 +7,13 @@ import pixformer.controller.GameLoopManager;
 public interface ControllerInput {
 
     /**
-     * Execute a specific action.
-     * 
-     * @param gameLoopManager gameloop to apply the action on
+     * Pause the game.
      */
-    void execute(GameLoopManager gameLoopManager);
+    void pause();
+
+    /**
+     * Resume the game.
+     */
+    void resume();
 
 }

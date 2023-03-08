@@ -48,13 +48,12 @@ public interface SceneInput<T> {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toSet());
-
     }
 
     /**
      * @return the controller inputs mapped to their actions
      */
-    default Set<ControllerInput> getMappedCommands() {
+    default Set<Consumer<ControllerInput>> getMappedCommands() {
         return this.getRawPolling().stream()
                 .map(this.getMapper()::mapController)
                 .filter(Optional::isPresent)
