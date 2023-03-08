@@ -13,6 +13,7 @@ import pixformer.model.entity.statics.Block;
 
 final class GoombaAITest {
 
+    private static final double X_BLOCK = -2;
     private static final double DELTA = 0.0001;
     private final World world = new WorldImpl();
     private Goomba goomba;
@@ -37,7 +38,7 @@ final class GoombaAITest {
 
     @Test
     void testFindObstacle() {
-        world.spawnEntity(new Block(-2, 0)); // x_y
+        world.spawnEntity(new Block(X_BLOCK, 0)); // x_y
         for (double i = 0; i > -1; i += step) {
             assertEquals(i, goomba.getX());
             assertEquals(0, goomba.getY());
