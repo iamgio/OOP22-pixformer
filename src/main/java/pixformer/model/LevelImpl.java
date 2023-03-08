@@ -22,7 +22,7 @@ public class LevelImpl implements Level {
     private final List<CompleteModelInput> players;
 
     /**
-     * @param name level name
+     * @param name  level name
      * @param world game world of the level
      */
     public LevelImpl(final String name, final World world) {
@@ -91,6 +91,7 @@ public class LevelImpl implements Level {
      * @return a new player entity
      */
     private Entity createPlayer(final int playerIndex) {
-        return new Player(0, 0, 1, 1, playerIndex);
+        return new TestEntity(playerIndex * 5);
+        // return new Player(0, 0, 1, 1, playerIndex);
     }
 }
