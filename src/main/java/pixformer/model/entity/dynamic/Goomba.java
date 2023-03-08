@@ -14,7 +14,7 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
 
     private static final int WIDTH = 1;
     private static final int HEIGHT = 1;
-    private static final double INITIAL_VELOCITY = 0.04;
+    private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private final HorizontalModelInput joystick;
     private final GoombaAI ai;
 
