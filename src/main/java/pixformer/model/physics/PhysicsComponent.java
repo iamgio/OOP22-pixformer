@@ -8,7 +8,10 @@ import pixformer.model.entity.Entity;
  * {@inheritDoc}.
  */
 public class PhysicsComponent implements Updatable {
-    private Vector2D gravity;
+
+    private static final double GRAVITY = 9.81;
+
+    private Vector2D force;
     private Entity entity;
 
     /**
@@ -17,7 +20,7 @@ public class PhysicsComponent implements Updatable {
      * @param vector
      */
     public PhysicsComponent(final Entity entity) {
-        this.gravity = new Vector2D(0, -9.81);
+        this.force = new Vector2D(0, -GRAVITY);
         this.entity = entity;
     }
 
@@ -26,6 +29,6 @@ public class PhysicsComponent implements Updatable {
      */
     @Override
     public void update(final double dt) {
-        entity.setVelocity(entity.getVelocity().sum(gravity));
+        entity.setVelocity(entity.getVelocity().sum(force));
     }
 }

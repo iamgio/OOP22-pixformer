@@ -1,5 +1,7 @@
 package pixformer.model.entity;
 
+import java.util.Optional;
+
 import pixformer.common.Vector2D;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.physics.PhysicsComponent;
@@ -64,7 +66,7 @@ public class MovableAbstractEntity extends AbstractEntity {
     }
 
     @Override
-    public PhysicsComponent getPhysicsComponent() {
+    public Optional<PhysicsComponent> getPhysicsComponent() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPhysicsComponent'");
     }

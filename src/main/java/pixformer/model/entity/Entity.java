@@ -68,7 +68,9 @@ public interface Entity {
     /**
      * @return the physics component of the entity
      */
-    PhysicsComponent getPhysicsComponent();
+    default Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.empty();
+    }
 
     /**
      * @return the input component of the entity

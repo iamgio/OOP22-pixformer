@@ -19,6 +19,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     private boolean hasCollided = false;
 
     private final InputComponent inputComponent;
+    private final PhysicsComponent physicsComponent;
     private final CollisionComponent collisionComponent;
     private final GraphicsComponent graphicsComponent;
 
@@ -30,6 +31,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
         this.inputComponent = new TestInputComponent(this);
         this.collisionComponent = new TestCollisionComponent(this);
         this.graphicsComponent = new TestGraphicsComponent(this);
+        this.physicsComponent = new PhysicsComponent(this);
     }
 
     @Override
@@ -67,9 +69,12 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
         this.hasCollided = hasCollided;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public PhysicsComponent getPhysicsComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPhysicsComponent'");
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(this.physicsComponent);
     }
+
 }

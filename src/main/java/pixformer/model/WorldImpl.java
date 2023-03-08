@@ -76,13 +76,16 @@ public class WorldImpl implements World {
     @Override
     public void update(final double dt) {
         this.getEntities().forEach(entity -> {
+            entity.getPhysicsComponent().ifPresent(physicsComponent -> {
+                physicsComponent.update(dt);
+            });
             entity.getCollisionComponent().ifPresent(collisionComponent -> {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
             entity.getInputComponent()
-                .filter(AIInputComponent.class::isInstance)
-                .map(AIInputComponent.class::cast)
-                .ifPresent(ai -> ai.update(this));
+                    .filter(AIInputComponent.class::isInstance)
+                    .map(AIInputComponent.class::cast)
+                    .ifPresent(ai -> ai.update(this));
             updatePosition(dt, entity);
         });
     }

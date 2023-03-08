@@ -12,8 +12,8 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      * 
      * @param vector Gravity for the current entity.
      */
-    public PlayerPhysicsComponent(final Vector2D vector) {
-        super(vector);
+    public PlayerPhysicsComponent() {
+        super(null);
         // TODO Auto-generated constructor stub
     }
 
