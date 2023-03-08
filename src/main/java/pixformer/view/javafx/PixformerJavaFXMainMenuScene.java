@@ -28,11 +28,12 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
 
     private static final double INITIAL_WIDTH = 1200;
     private static final double INITIAL_HEIGHT = 600;
+    private static final int DEFAULT_PLAYERS_AMOUNT = 1;
 
     private final Wrapper<Controller> controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
 
-    private final IntegerProperty playersAmount = new SimpleIntegerProperty();
+    private final IntegerProperty playersAmount = new SimpleIntegerProperty(DEFAULT_PLAYERS_AMOUNT);
 
     /**
      * Instantiates a main menu scene.
@@ -41,7 +42,6 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     public PixformerJavaFXMainMenuScene(final Controller controller) {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
         this.controller = new SimpleWrapper<>(controller);
-        this.setPlayersAmount(controller.getPlayersAmount());
 
         Scene scene = super.getScene();
         Pane root = (Pane) scene.getRoot();
@@ -60,8 +60,8 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
 
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-                case UP -> this.setPlayersAmount(controller.getPlayersAmount() + 1);
-                case DOWN -> this.setPlayersAmount(controller.getPlayersAmount() - 1);
+                case UP -> this.setPlayersAmount(this.playersAmount.get() + 1);
+                case DOWN -> this.setPlayersAmount(this.playersAmount.get() - 1);
                 default -> {
                     // Required by the linter
                 }
@@ -69,11 +69,16 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         });
     }
 
-    private void setPlayersAmount(final int playersAmount) {
-        this.controller.unwrap(controller -> {
-            controller.setPlayersAmount(playersAmount);
-            this.playersAmount.set(controller.getPlayersAmount());
-        });
+    private void setPlayersAmount(int playersAmount) {
+        this.playersAmount.setValue(controller.get().correctSupportedPlayersAmount(playersAmount));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getPlayersAmount() {
+        return this.playersAmount.get();
     }
 
     private void selectLevel(final Level level) {

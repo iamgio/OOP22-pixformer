@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -17,7 +18,7 @@ public class LevelManagerImpl implements LevelManager {
 
     private final WritableWrapper<Level> level = new SimpleWritableWrapper<>();
 
-    private final Set<Consumer<Level>> onStart = new HashSet<>();
+    private final Set<BiConsumer<Level, Integer>> onStart = new HashSet<>();
     private final Set<Consumer<Level>> onEnd = new HashSet<>();
 
     /**
@@ -32,16 +33,16 @@ public class LevelManagerImpl implements LevelManager {
      * {@inheritDoc}
      */
     @Override
-    public void start(final Level level) {
+    public void start(final Level level, final int playersAmount) {
         this.level.set(Objects.requireNonNull(level));
-        this.onStart.forEach(action -> action.accept(level));
+        this.onStart.forEach(action -> action.accept(level, playersAmount));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addOnLevelStart(final Consumer<Level> action) {
+    public void addOnLevelStart(final BiConsumer<Level, Integer> action) {
         this.onStart.add(action);
     }
 

@@ -18,19 +18,15 @@ public final class GameLoopFactory {
     private final Wrapper<Level> level;
     private final Wrapper<View> view;
 
-    private final int playersAmount;
-
     /**
      * Instantiates a new game loop factory.
      * 
      * @param level         game level
      * @param view          game view
-     * @param playersAmount amount of players
      */
-    public GameLoopFactory(final Level level, final View view, final int playersAmount) {
+    public GameLoopFactory(final Level level, final View view) {
         this.level = new SimpleWrapper<>(level);
         this.view = new SimpleWrapper<>(view);
-        this.playersAmount = playersAmount;
     }
 
     /**
@@ -40,7 +36,6 @@ public final class GameLoopFactory {
         final Level level = this.level.get();
         final View view = this.view.get();
 
-        level.setup(this.playersAmount);
         view.setup();
         view.getScene().getGraphics().setScale(15); // test
 

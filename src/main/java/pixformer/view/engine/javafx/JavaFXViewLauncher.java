@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import pixformer.common.wrap.ObservableWritableWrapper;
 import pixformer.common.wrap.SimpleObservableWritableWrapper;
-import pixformer.common.wrap.SimpleWrapper;
-import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
@@ -19,7 +17,7 @@ import java.util.Objects;
  */
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
-    private final Wrapper<Controller> controller = new SimpleWrapper<>(this.createController());
+    private final Controller controller = this.createController();
     private final ObservableWritableWrapper<JavaFXScene> scene = new SimpleObservableWritableWrapper<>();
 
     /**
@@ -54,7 +52,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public Controller getController() {
-        return this.controller.get();
+        return this.controller;
     }
 
     /**
