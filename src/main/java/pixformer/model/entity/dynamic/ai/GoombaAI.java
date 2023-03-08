@@ -27,11 +27,9 @@ public class GoombaAI extends AIInputComponent {
 
     @Override
     public final void update(final World world) {
-        System.out.println(world.getEntities());
         final EntityCollisionManager collisionManager = world.getCollisionManager();
         final Entity goomba = super.getEntity();
         collisionManager.findCollisionsFor(goomba).stream()
-                .peek(System.out::println)
                 .filter(c -> c.entity() instanceof Block)
                 .findFirst()
                 .map(Collision::side)
