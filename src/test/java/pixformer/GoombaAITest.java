@@ -37,12 +37,12 @@ final class GoombaAITest {
 
     @Test
     void testFindObstacle() {
-        world.spawnEntity(new Block(1, 0));
-        world.update(1);
+        world.spawnEntity(new Block(2, 0)); // x_y
+        world.update(1);    // _xy
         assertEquals(1, goomba.getX());
         assertEquals(0, goomba.getY());
         world.update(1);
-        assertEquals(0, goomba.getX());
+        assertEquals(0, goomba.getX()); // x_y
         assertEquals(0, goomba.getY());
     }
 }
