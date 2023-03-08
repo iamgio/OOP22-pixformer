@@ -1,6 +1,6 @@
 package pixformer.model.entity;
 
-import pixformer.model.World;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
 import pixformer.view.entity.TestGraphicsComponent;
@@ -18,6 +18,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     private boolean hasCollided = false;
 
     private final InputComponent inputComponent;
+    private final CollisionComponent collisionComponent;
     private final GraphicsComponent graphicsComponent;
 
     /**
@@ -26,20 +27,21 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     public TestEntity(final double x) {
         super(x, 15, SIZE, SIZE);
         this.inputComponent = new TestInputComponent(this);
+        this.collisionComponent = new TestCollisionComponent(this);
         this.graphicsComponent = new TestGraphicsComponent(this);
+    }
+
+    @Override
+    public Optional<InputComponent> getInputComponent() {
+        return Optional.of(inputComponent);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onSpawn(final World world) {
-        world.getCollisionManager().addOnCollide(this, other -> hasCollided = true);
-    }
-
-    @Override
-    public Optional<InputComponent> getInputComponent() {
-        return Optional.of(inputComponent);
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
     }
 
     /**
@@ -55,5 +57,12 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
      */
     public boolean hasCollided() {
         return this.hasCollided;
+    }
+
+    /**
+     * @param hasCollided new colliding status
+     */
+    public void setHasCollided(boolean hasCollided) {
+        this.hasCollided = hasCollided;
     }
 }

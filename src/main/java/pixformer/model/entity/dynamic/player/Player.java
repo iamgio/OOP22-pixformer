@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.player;
 
 import java.util.Optional;
 import pixformer.common.Updatable;
@@ -17,6 +17,9 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
         DrawableEntity, DefaultRectangleBoundingBoxEntity {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
+
+    // This playerIndex
+    private int playerIndex;
 
     // State variables to check if player is jumping or crouching
     private boolean isCrouching;
@@ -48,10 +51,11 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
      * @param y      Y position of the player.
      * @param width  Width of the player.
      * @param height Height of the player.
+     * @param playerIndex Index of this player istance.
      */
-    public Player(final double x, final double y, final double width, final double height) {
+    public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
-        // this.isGrounded = groundHitbox(); <-- Dovrebbe essere così
+        this.playerIndex = playerIndex;
     }
 
     /**
@@ -98,13 +102,6 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
         isCrouching = true;
     }
 
-    /*
-     * @Override
-     * public Vector2D getPosition() {
-     * return this.position;
-     * }
-     */
-
     /**
      * @return True if is crouching.
      */
@@ -113,21 +110,11 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     }
 
     /**
-     * {@inheritDoc}
+     * Return this entity player index.
+     * @return playerIndex
      */
-    @Override
-    public double getWidth() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeight() {
-        // TODO Auto-generated method stub
-        return 0;
+    public int getIndex() {
+        return this.playerIndex;
     }
 
     /**

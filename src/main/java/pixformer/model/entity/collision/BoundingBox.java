@@ -1,5 +1,7 @@
 package pixformer.model.entity.collision;
 
+import java.util.Optional;
+
 /**
  * Represents the 2D space occupied by a game entity.
  */
@@ -12,7 +14,7 @@ public interface BoundingBox {
      * @param y1 Y coordinate of this bounding box
      * @param x2 X coordinate of the other bounding box
      * @param y2 Y coordinate of the other bounding box
-     * @return whether the two bounding boxes (at the given coordinates) collide
+     * @return the side the two bounding boxes (at the given coordinates) collide at, if it exists
      */
-    boolean collidesWith(BoundingBox other, double x1, double y1, double x2, double y2);
+    Optional<CollisionSide> getCollisionSide(BoundingBox other, double x1, double y1, double x2, double y2);
 }

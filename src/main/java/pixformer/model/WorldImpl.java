@@ -3,7 +3,8 @@ package pixformer.model;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.Player;
+import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.input.AIInputComponent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,9 +76,19 @@ public class WorldImpl implements World {
     @Override
     public void update(final double dt) {
         this.getEntities().forEach(entity -> {
-            this.collisionManager.findCollisionsFor(entity).forEach(other -> {
-                collisionManager.getOnCollideCallbacksFor(entity).forEach(callback -> callback.accept(other));
+            entity.getCollisionComponent().ifPresent(collisionComponent -> {
+                collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
+            entity.getInputComponent()
+                .filter(AIInputComponent.class::isInstance)
+                .map(AIInputComponent.class::cast)
+                .ifPresent(ai -> ai.update(this));
             });
+            updatePosition(dt, entity);
         });
+    }
+
+    private void updatePosition(final double dt, Entity entity) {
+        entity.setX(entity.getX() + dt * entity.getVelocity().x());
+        entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
 }
