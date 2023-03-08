@@ -25,7 +25,7 @@ public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBo
      */
     public Goomba(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
-        joystick = new HorizontalModelInputImpl(this, INITIAL_VELOCITY);
+        joystick = new HorizontalModelInputImpl(this::setVelocity, INITIAL_VELOCITY);
         ai = new GoombaAI(this, joystick);
         joystick.left();
     }
