@@ -2,10 +2,10 @@ package pixformer.view.engine.javafx;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pixformer.common.wrap.ObservableWritableWrapper;
+import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
-import pixformer.common.wrap.SimpleWritableWrapper;
 import pixformer.common.wrap.Wrapper;
-import pixformer.common.wrap.WritableWrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
@@ -20,15 +20,14 @@ import java.util.Objects;
 public abstract class JavaFXViewLauncher extends Application implements ViewLauncher {
 
     private final Wrapper<Controller> controller = new SimpleWrapper<>(this.createController());
-    private final WritableWrapper<JavaFXScene> scene = new SimpleWritableWrapper<>();
-    private final WritableWrapper<Stage> stage = new SimpleWritableWrapper<>();
+    private final ObservableWritableWrapper<JavaFXScene> scene = new SimpleObservableWritableWrapper<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start(final Stage primaryStage) {
-        this.stage.set(primaryStage);
+        this.scene.addOnChange(scene -> primaryStage.setScene(scene.getScene()));
         this.setScene(this.createInitialScene());
 
         primaryStage.setTitle(this.getTitle());
@@ -78,7 +77,6 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
 
         final JavaFXScene javaFXScene = (JavaFXScene) Objects.requireNonNull(scene);
         this.scene.set(javaFXScene);
-        Objects.requireNonNull(this.stage.get()).setScene(javaFXScene.getScene());
     }
 
     /**
