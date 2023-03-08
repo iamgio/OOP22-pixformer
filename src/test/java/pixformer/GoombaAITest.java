@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.entity.dynamic.Goomba;
