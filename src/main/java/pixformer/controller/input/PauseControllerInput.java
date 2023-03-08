@@ -8,7 +8,7 @@ import pixformer.controller.GameLoopManager;
 public class PauseControllerInput implements ControllerInput {
 
     /**
-     * Constructor for the PauseController
+     * Constructor for the PauseController.
      */
     public PauseControllerInput() {
     }

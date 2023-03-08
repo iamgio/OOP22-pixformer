@@ -87,11 +87,17 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         return this.isRunning;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void pause() {
         this.isRunning = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resume() {
         this.isRunning = true;

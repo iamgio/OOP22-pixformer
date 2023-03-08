@@ -20,7 +20,13 @@ public interface GameLoopManager {
      */
     boolean isRunning();
 
+    /**
+     * Pause the gameloop.
+     */
     void pause();
 
+    /**
+     * Unpause the gameloop.
+     */
     void resume();
 }
