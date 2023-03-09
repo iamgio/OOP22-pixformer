@@ -13,7 +13,7 @@ import pixformer.model.entity.TestEntity;
 
 public class PhysicTest {
 
-    private static final Vector2D gravity = new Vector2D(0, -9.81);
+    private static final Vector2D gravity = new Vector2D(0, -0.0000011);
 
     private final World world = new WorldImpl();
     private Entity entity;
@@ -29,10 +29,10 @@ public class PhysicTest {
         System.out.println(entity.getPhysicsComponent().orElse(null));
         world.update(1);
         assertEquals(gravity.x(), entity.getX());
-        assertEquals(15 + gravity.y(), entity.getY(), 0.01);
+        assertEquals(15 + gravity.y(), entity.getY(), 0.001);
         world.update(1);
         assertEquals(gravity.x(), entity.getX());
-        assertEquals(15 + (3 * gravity.y()), entity.getY(), 0.01);
+        assertEquals(15 + (3 * gravity.y()), entity.getY(), 0.001);
     }
 
 }
