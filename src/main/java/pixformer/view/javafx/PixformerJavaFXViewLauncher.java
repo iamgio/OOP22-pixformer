@@ -28,7 +28,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
 
     private JavaFXScene createMenuScene() {
         var menu = new PixformerJavaFXMainMenuScene(this.getController());
-        menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level));
+        menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level, menu.getPlayersAmount()));
         return menu;
     }
 
@@ -38,17 +38,17 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     @Override
     public JavaFXScene createInitialScene() {
         LevelManager levelManager = this.getController().getLevelManager();
-        levelManager.addOnLevelStart(level -> {
+        levelManager.addOnLevelStart((level, playersAmount) -> {
             this.setScene(this.createGameScene());
-            this.getController().getGameLoopManager().start();
+            this.getController().initLevel(level, playersAmount);
         });
         levelManager.addOnLevelEnd(level -> {
             this.setScene(this.createMenuScene());
-            this.getController().getGameLoopManager().stop();
+            this.getController().stopLevel(level);
         });
 
         // Commentare la riga sotto per far comparire il menu principale (togliere prima della consegna)
-        Platform.runLater(() -> this.getController().getLevelManager().start(new LevelMock()));
+        Platform.runLater(() -> this.getController().getLevelManager().start(new LevelMock(), 1));
 
         return this.createMenuScene();
     }

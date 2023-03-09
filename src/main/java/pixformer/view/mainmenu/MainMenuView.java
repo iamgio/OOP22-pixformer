@@ -10,6 +10,11 @@ import java.util.function.Consumer;
 public interface MainMenuView {
 
     /**
+     * @return the choosen amount of players
+     */
+    int getPlayersAmount();
+
+    /**
      * Adds a callback when a level is picked from the menu.
      * @param action action to run
      */

@@ -19,7 +19,7 @@ public class TestInputComponent extends UserInputComponent implements CompleteMo
 
     @Override
     public void jump() {
-        super.getEntity().setX(super.getEntity().getX() + 0.1);
+        ((AbstractEntity) super.getEntity()).setX(super.getEntity().getX() + 0.1);
     }
 
     @Override

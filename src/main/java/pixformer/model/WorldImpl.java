@@ -1,15 +1,13 @@
 package pixformer.model;
 
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.input.AIInputComponent;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +17,6 @@ public class WorldImpl implements World {
 
     private final Set<Entity> entities;
     private final EntityCollisionManager collisionManager;
-    private final List<Player> players = new ArrayList<>();
 
     /**
      * Create a new World.
@@ -58,22 +55,6 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public List<Player> getPlayers() {
-        return Collections.unmodifiableList(this.players);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addPlayer(final Player player) {
-        this.players.add(player);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void update(final double dt) {
         this.getEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
@@ -86,11 +67,14 @@ public class WorldImpl implements World {
                     .filter(AIInputComponent.class::isInstance)
                     .map(AIInputComponent.class::cast)
                     .ifPresent(ai -> ai.update(this));
-            updatePosition(dt, entity);
+
+            if (entity instanceof AbstractEntity abstractEntity) {
+                updatePosition(dt, abstractEntity);
+            }
         });
     }
 
-    private void updatePosition(final double dt, final Entity entity) {
+    private void updatePosition(final double dt, final AbstractEntity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
