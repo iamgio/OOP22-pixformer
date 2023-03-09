@@ -1,13 +1,14 @@
 package pixformer.model.entity.powerups.other;
 
 import pixformer.common.Updatable;
-import pixformer.model.entity.MovableAbstractEntity;
+import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.Vector2D;
 import pixformer.model.entity.collision.BoundingBox;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
-public class Fireball extends MovableAbstractEntity implements Updatable {
+public class Fireball extends AbstractEntity implements Updatable {
 
     static final double SPEED = 1.0;
 
