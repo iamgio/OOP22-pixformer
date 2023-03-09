@@ -1,6 +1,9 @@
 package pixformer.model.entity;
 
+import java.util.Optional;
+
 import pixformer.common.Vector2D;
+import pixformer.model.physics.PhysicsComponent;
 
 /**
  * Abstract class for an entity.
@@ -79,6 +82,20 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public Vector2D getVelocity() {
+        return new Vector2D(this.velocity.x(), this.velocity.y());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setVelocity(final Vector2D velocity) {
+
+    }
+
+    /**
      * Set the width of the entity.
      *
      * @param width the new width
@@ -99,14 +116,8 @@ public abstract class AbstractEntity implements Entity {
     /**
      * {@inheritDoc}
      */
-    public Vector2D getVelocity() {
-        return new Vector2D(this.velocity.x(), this.velocity.y());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setVelocity(final Vector2D velocity) {
-        this.velocity = velocity;
+    @Override
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.empty();
     }
 }

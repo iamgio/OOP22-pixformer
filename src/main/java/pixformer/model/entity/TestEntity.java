@@ -3,6 +3,7 @@ package pixformer.model.entity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.TestGraphicsComponent;
 
 import java.util.Optional;
@@ -18,6 +19,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     private boolean hasCollided = false;
 
     private final InputComponent inputComponent;
+    private final PhysicsComponent physicsComponent;
     private final CollisionComponent collisionComponent;
     private final GraphicsComponent graphicsComponent;
 
@@ -29,6 +31,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
         this.inputComponent = new TestInputComponent(this);
         this.collisionComponent = new TestCollisionComponent(this);
         this.graphicsComponent = new TestGraphicsComponent(this);
+        this.physicsComponent = new PhysicsComponent(this);
     }
 
     @Override
@@ -65,4 +68,13 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     public void setHasCollided(boolean hasCollided) {
         this.hasCollided = hasCollided;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(this.physicsComponent);
+    }
+
 }
