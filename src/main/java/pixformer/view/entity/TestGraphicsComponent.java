@@ -1,5 +1,6 @@
 package pixformer.view.entity;
 
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.TestEntity;
 import pixformer.view.engine.Color;
@@ -10,16 +11,14 @@ import pixformer.view.engine.RectangleRenderer;
  * @deprecated test
  */
 @Deprecated
-public class TestGraphicsComponent implements GraphicsComponent {
-
-    private final TestEntity entity;
+public class TestGraphicsComponent extends GraphicsComponent {
 
     /**
      * Instantiates a graphics component for a test entity.
      * @param entity test entity
      */
     public TestGraphicsComponent(final TestEntity entity) {
-        this.entity = entity;
+        super(entity);
     }
 
     /**
@@ -27,8 +26,9 @@ public class TestGraphicsComponent implements GraphicsComponent {
      */
     @Override
     public void update(final GameScene scene) {
+        final Entity entity = super.getEntity();
         final RectangleRenderer rect = scene.getRendererFactory().newRectangle(entity.getWidth(), entity.getHeight());
-        rect.setColor(new Color(1, entity.hasCollided() ? 1 : 0, 0));
+        rect.setColor(new Color(1, 0, 0));
         scene.getGraphics().draw(rect);
     }
 }

@@ -4,23 +4,25 @@ import pixformer.model.entity.Entity;
 
 /**
  * Generic component extended by other components.
+ * A component defines a specific property of a target entity and its behaviour.
+ *
+ * @param <T> supported entity type
  */
-public class Component {
+public class Component<T extends Entity> {
 
-    private final Entity entity;
+    private final T entity;
 
     /**
-     * 
      * @param entity Entity linked to the component.
      */
-    protected Component(final Entity entity) {
+    protected Component(final T entity) {
         this.entity = entity;
     }
 
     /**
      * @return The target entity.
      */
-    public Entity getEntity() {
+    protected T getEntity() {
         return this.entity;
     }
 }
