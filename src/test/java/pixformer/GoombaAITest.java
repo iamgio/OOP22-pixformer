@@ -24,7 +24,7 @@ final class GoombaAITest {
 
     @BeforeEach
     void setup() {
-        goomba = new Enemy(0, 0, 1, 1);
+        goomba = new Enemy(0, 0, 1, 1, step);
         world.spawnEntity(goomba);
     }
 

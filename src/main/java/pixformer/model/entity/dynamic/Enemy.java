@@ -14,7 +14,6 @@ import pixformer.model.modelinput.HorizontalModelInput;
  */
 public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
 
-    private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private final HorizontalModelInput joystick;
     private final GoombaAI ai;
 
@@ -24,9 +23,9 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
      * @param x coordinate
      * @param y coordinate.
      */
-    public Enemy(final double x, final double y, final double width, final double height) {
+    public Enemy(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
-        joystick = new HorizontalModelInputImpl(this::fixVelocity, INITIAL_VELOCITY);
+        joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
         ai = new GoombaAI(this, joystick);
         joystick.left();
     }

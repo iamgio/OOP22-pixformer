@@ -6,7 +6,7 @@ public class TurtleKoopa extends Enemy implements Koopa {
     private static final double HEIGHT = 1;
 
     public TurtleKoopa(final double x, final double y) {
-        super(x, y, WIDTH, HEIGHT);
+        super(x, y, WIDTH, HEIGHT, 1);
     }
     
 }
