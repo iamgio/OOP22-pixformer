@@ -3,7 +3,7 @@ package pixformer.model.entity.dynamic.player;
 import java.util.Optional;
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
-import pixformer.model.entity.MovableAbstractEntity;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
@@ -16,7 +16,7 @@ import pixformer.model.input.InputComponent;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends MovableAbstractEntity implements Updatable, CompleteModelInput,
+public class Player extends AbstractEntity implements Updatable, CompleteModelInput,
         DrawableEntity, DefaultRectangleBoundingBoxEntity {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
