@@ -1,6 +1,8 @@
 package pixformer.model.entity.dynamic.player;
 
 import java.util.Optional;
+import java.util.Vector;
+
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
@@ -65,6 +67,11 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
         this.playerIndex = playerIndex;
+        
+        this.graphicsComponent = new PlayerGraphicsComponent();
+        this.physicsComponent = new PlayerPhysicsComponent(new Vector2D(0, 0));
+        this.collisionComponent = new PlayerCollisionComponent(this);
+        this.inputComponent = new PlayerInputComponent(this);
     }
 
     /**
