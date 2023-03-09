@@ -9,7 +9,8 @@ import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.entity.collision.Collision;
 
 /**
- * A general AI which makes the entity go left until death.
+ * A general AI which makes the entity go left until death or it gets into a
+ * {@code Block}. If so, it changes its direction.
  */
 public class GoombaAI extends AIInputComponent {
 
@@ -36,10 +37,13 @@ public class GoombaAI extends AIInputComponent {
                 .ifPresent(c -> {
                     switch (c) {
                         case LEFT:
-                            joystick.left(); break;
+                            joystick.left();
+                            break;
                         case RIGHT:
-                            joystick.right(); break;
-                        default: break;
+                            joystick.right();
+                            break;
+                        default:
+                            break;
                     }
                 });
     }
