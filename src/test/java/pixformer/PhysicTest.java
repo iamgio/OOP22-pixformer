@@ -13,7 +13,7 @@ import pixformer.model.entity.TestEntity;
 
 public class PhysicTest {
 
-    private static final Vector2D gravity = new Vector2D(0, -9.81);
+    private static final Vector2D gravity = new Vector2D(0, -0.0000012);
 
     private final World world = new WorldImpl();
     private Entity entity;
