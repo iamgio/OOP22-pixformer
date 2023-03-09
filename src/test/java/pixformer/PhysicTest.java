@@ -26,7 +26,6 @@ public class PhysicTest {
 
     @Test
     void testDrop() {
-        System.out.println(entity.getPhysicsComponent().orElse(null));
         world.update(1);
         assertEquals(gravity.x(), entity.getX());
         assertEquals(15 + gravity.y(), entity.getY(), 0.001);
