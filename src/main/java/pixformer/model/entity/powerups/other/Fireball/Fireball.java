@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other;
+package pixformer.model.entity.powerups.other.Fireball;
 
 import pixformer.common.Updatable;
 import pixformer.model.entity.AbstractEntity;
