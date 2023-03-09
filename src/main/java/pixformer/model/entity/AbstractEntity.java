@@ -64,6 +64,13 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public Vector2D getVelocity() {
+        return new Vector2D(this.velocity.x(), this.velocity.y());
+    }
+
+    /**
      * Set the X coordinate of the entity.
      *
      * @param x the new X coordinate
@@ -84,15 +91,8 @@ public abstract class AbstractEntity implements Entity {
     /**
      * {@inheritDoc}
      */
-    public Vector2D getVelocity() {
-        return new Vector2D(this.velocity.x(), this.velocity.y());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void setVelocity(final Vector2D velocity) {
-
+        this.velocity = velocity;
     }
 
     /**
