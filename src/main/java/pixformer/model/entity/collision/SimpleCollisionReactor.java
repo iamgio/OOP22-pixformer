@@ -9,12 +9,21 @@ import java.util.function.Predicate;
 import pixformer.model.entity.Entity;
 
 /**
- * A simple implementation of {@link pixformer.model.entity.collision.CollisionReactor}.
+ * A simple implementation of
+ * {@link pixformer.model.entity.collision.CollisionReactor}.
  */
 public class SimpleCollisionReactor implements CollisionReactor {
 
     private final Map<Predicate<Entity>, Consumer<CollisionSide>> reactions;
 
+    /**
+     * @param reactions a {@code Map} whose entries are composed by a
+     *                  {@code Predicate<Entity>} which
+     *                  determined if the reactor should react the entity colliding
+     *                  and a {@code Consumer<CollisionSide>} which represents the
+     *                  actual reaction to the
+     *                  collision.
+     */
     public SimpleCollisionReactor(final Map<Predicate<Entity>, Consumer<CollisionSide>> reactions) {
         this.reactions = new HashMap<>(reactions);
     }
@@ -23,10 +32,10 @@ public class SimpleCollisionReactor implements CollisionReactor {
     public void react(final Collection<Collision> collisions) {
         for (final var reaction : reactions.entrySet()) {
             collisions.stream()
-                .filter(c -> reaction.getKey().test(c.entity()))
-                .map(Collision::side)
-                .forEach(reaction.getValue());
+                    .filter(c -> reaction.getKey().test(c.entity()))
+                    .map(Collision::side)
+                    .forEach(reaction.getValue());
         }
     }
-    
+
 }
