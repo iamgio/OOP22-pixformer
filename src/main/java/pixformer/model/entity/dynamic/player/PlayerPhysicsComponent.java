@@ -1,6 +1,6 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.common.Vector2D;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.physics.PhysicsComponent;
 
 /**
@@ -8,13 +8,15 @@ import pixformer.model.physics.PhysicsComponent;
  */
 public class PlayerPhysicsComponent extends PhysicsComponent {
 
+    static float SPEED = 1.0f;
+
     /**
      * 
-     * @param vector Gravity for the current entity.
+     * @param entity Entity linked to the component
      */
-    public PlayerPhysicsComponent() {
-        super(null);
-        // TODO Auto-generated constructor stub
+    public PlayerPhysicsComponent(AbstractEntity entity) {
+        super(entity);
+        //TODO Auto-generated constructor stub
     }
 
 }

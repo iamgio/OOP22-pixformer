@@ -1,5 +1,6 @@
 package pixformer.model.entity.dynamic.player;
 
+import java.lang.StackWalker.Option;
 import java.util.Optional;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
@@ -35,7 +36,7 @@ public class Player extends AbstractEntity implements CompleteModelInput,
     private double jumpTimeCounter = MAX_JUMP_DURATION;
 
     // Current powerup
-    private Optional<PowerUp> powerup;
+    private Optional<PowerUp> powerUp;
 
     // Player components
     private GraphicsComponent graphicsComponent;
@@ -55,8 +56,8 @@ public class Player extends AbstractEntity implements CompleteModelInput,
         super(x, y, width, height);
         this.playerIndex = playerIndex;
 
-        this.graphicsComponent = new PlayerGraphicsComponent();
-        this.physicsComponent = new PlayerPhysicsComponent(new Vector2D(0, 0));
+        this.graphicsComponent = new PlayerGraphicsComponent(this);
+        this.physicsComponent = new PlayerPhysicsComponent(this);
         this.collisionComponent = new PlayerCollisionComponent(this);
         this.inputComponent = new PlayerInputComponent(this);
     }
@@ -114,6 +115,14 @@ public class Player extends AbstractEntity implements CompleteModelInput,
      */
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(this.physicsComponent);
+    }
+
+    /**
+     * Return current player powerup.
+     * @return current player powerup.
+     */
+    public Optional<PowerUp> getPowerup() {
+        return this.powerUp;
     }
 
 }

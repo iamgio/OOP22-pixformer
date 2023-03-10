@@ -1,5 +1,6 @@
 package pixformer.model.entity.dynamic.player;
 
+import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
 import  pixformer.model.input.InputComponent;
 import pixformer.model.input.UserInputComponent;
@@ -10,12 +11,15 @@ import pixformer.model.modelinput.CompleteModelInput;
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
 
+    private Player player;
+
     /**
      * 
      * @param entity Entity associated with current component
      */
     protected PlayerInputComponent(final Player entity) {
         super(entity);
+        player = entity;
         //TODO Auto-generated constructor stub
     }
 
@@ -24,7 +28,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-        this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(-SPEED, 0)));
+        this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
     }
 
     /**
@@ -32,7 +36,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-        this.setVelocity(this.getVelocity().sum(new Vector2D(SPEED, 0)));
+        this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
     }
 
     /**
@@ -40,8 +44,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void ability() {
-        if (this.powerup.isPresent()) {
-            this.powerup.get().getBehaviour().ability();
+        if (player.getPowerup().isPresent()) {
+            player.getPowerup().get().getBehaviour().ability();
         }
     }
 
@@ -88,7 +92,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void crouch() {
-        isCrouching = true;
+        
     }
 
 }
