@@ -6,13 +6,14 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import pixformer.model.World;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
-import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionSide;
 
 /**
@@ -28,7 +29,7 @@ public class GoombaAI extends AIInputComponent {
      * 
      * @param entity which this AI will control.
      */
-    public GoombaAI(final Entity entity, final HorizontalModelInput modelInput) {
+    public GoombaAI(final AbstractEntity entity, final HorizontalModelInput modelInput) {
         super(entity);
         this.joystick = modelInput;
     }

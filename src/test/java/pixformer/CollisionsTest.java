@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.statics.Block;
@@ -27,7 +26,7 @@ public class CollisionsTest {
     }
 
     private World world;
-    private Entity entity;
+    private AbstractEntity entity;
 
     @BeforeEach
     void setup() {
