@@ -36,9 +36,9 @@ public class RectangleBoundingBox implements BoundingBox {
 
             if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
                 if (crossWidth > crossHeight) {
-                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.BOTTOM : CollisionSide.LEFT);
+                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.TOP : CollisionSide.LEFT);
                 } else {
-                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.RIGHT : CollisionSide.TOP);
+                    return Optional.of(crossWidth > -crossHeight ? CollisionSide.RIGHT : CollisionSide.BOTTOM);
                 }
             }
         }
