@@ -18,7 +18,7 @@ import pixformer.model.input.InputComponent;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements Updatable, CompleteModelInput,
+public class Player extends AbstractEntity implements CompleteModelInput,
         DrawableEntity, DefaultRectangleBoundingBoxEntity {
     static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
@@ -95,13 +95,13 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
      */
     @Override
     public void jump() {
-        
+        /*
         boolean isGrounded;
 
         if ( isGrounded ) {
             this.isJumping = true;
         }
-
+        
         // Manage jumping
         if (this.isGrounded) {
             // Reset jumpTimeCounter
@@ -109,11 +109,10 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
         } else {
             this.jumpTimeCounter -= dt;
         }
-/*
+
         if (!this.jumpingKey) {
             this.jumpTimeCounter = 0;
         }
-*/
         if (this.jumpTimeCounter <= 0) {
             this.isJumping = false;
         }
@@ -126,7 +125,7 @@ public class Player extends AbstractEntity implements Updatable, CompleteModelIn
         // Player is falling down
         if (!this.isGrounded && !this.isJumping) {
             //updatePos(new Vector2D(0, -GRAVITY), dt);
-        }
+        }*/
     }
 
     /**
