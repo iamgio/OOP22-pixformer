@@ -2,7 +2,6 @@ package pixformer.model.entity.powerups.other.Fireball;
 
 import pixformer.common.Updatable;
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.Vector2D;
 import pixformer.model.entity.collision.BoundingBox;
 
 /**

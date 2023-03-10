@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.player;
+package pixformer.model.entity.powerups.other.Fireball;
 
 import pixformer.common.Vector2D;
 import pixformer.model.physics.PhysicsComponentImpl;
@@ -6,13 +6,9 @@ import pixformer.model.physics.PhysicsComponentImpl;
 /**
  * Implementation of PhysicalComponent for a Player entity.
  */
-public class PlayerPhysicsComponent extends PhysicsComponentImpl {
+public class FireballPhysicsComponent extends PhysicsComponentImpl {
 
-    /**
-     * 
-     * @param vector Gravity for the current entity.
-     */
-    public PlayerPhysicsComponent(final Vector2D vector) {
+    public FireballPhysicsComponent(Vector2D vector) {
         super(vector);
         //TODO Auto-generated constructor stub
     }

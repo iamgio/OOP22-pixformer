@@ -1,21 +1,19 @@
-package pixformer.model.entity.dynamic.player;
+package pixformer.model.entity.powerups.other.Fireball;
 
 import java.util.Set;
 
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 
 /**
  * Implementation of CollisionComponent for a Player entity.
  */
-public class PlayerCollisionComponent extends CollisionComponent {
+public class FireballCollisionComponent extends CollisionComponent {
 
-    /**
-     * 
-     * @param entity Player entity whose collisions will be managed.
-     */
-    protected PlayerCollisionComponent(final Player entity) {
+    protected FireballCollisionComponent(Entity entity) {
         super(entity);
+        //TODO Auto-generated constructor stub
     }
 
     /**
