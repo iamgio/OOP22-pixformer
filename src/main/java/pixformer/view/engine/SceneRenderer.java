@@ -26,13 +26,6 @@ public class SceneRenderer implements Renderer {
     }
 
     /**
-     * @return a mutable, ordered list of components to render
-     */
-    public List<Renderer> getRenderers() {
-        return this.renderers;
-    }
-
-    /**
      * Adds a new renderer to the scene.
      * @param renderer renderer to append
      */

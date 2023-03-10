@@ -1,6 +1,6 @@
 package pixformer.model.input;
 
-import pixformer.model.entity.Entity;
+import pixformer.model.entity.AbstractEntity;
 
 /**
  * A user-controlled input component.
@@ -12,7 +12,7 @@ public abstract class UserInputComponent extends InputComponent {
      * 
      * @param entity target entity
      */
-    public UserInputComponent(final Entity entity) {
+    public UserInputComponent(final AbstractEntity entity) {
         super(entity);
         // TODO add hooks: player.addOnX(() -> ...)
         // e.g.: player.addOnJump(entity::jump)

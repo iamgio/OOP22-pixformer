@@ -2,7 +2,8 @@ package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
-import pixformer.view.ViewImpl;
+import pixformer.model.Level;
+import pixformer.view.View;
 
 /**
  * The controller that acts as a bridge between model and view.
@@ -28,18 +29,31 @@ public interface Controller {
      * @param view view to output to
      * @return a new game loop instance
      */
-    GameLoop createGameLoop(ViewImpl view); // TODO change to View
+    GameLoop createGameLoop(View view); // TODO change to View
 
     /**
-     * @return the current amount of players
+     * Set-ups, initializes and starts the given level with a given amount of players.
+     * @param level level to start
+     * @param playersAmount amount of players to play the level
+     * @implNote this is designed to be a consequence of {@link LevelManager#start(Level, int)},
+     *     so the implementation should not call that method.
      */
-    int getPlayersAmount();
+    void initLevel(Level level, int playersAmount);
 
     /**
-     * Sets a new amount of players.
-     * @param playersAmount new amount of players
-     * @apiNote min/max boundaries are applied
-     * @implNote changes don't affect a game that is already running
+     * Stops the lifecycle of the given level.
+     * @param level level to start
+     * @implNote this is designed to be a consequence of {@link LevelManager#endCurrentLevel()},
+     *     so the implementation should not call that method.
      */
-    void setPlayersAmount(int playersAmount);
+    void stopLevel(Level level);
+
+    /**
+     * Applies supported boundaries to a given amount of players.
+     * @param playersAmount raw, unchecked, amount of players
+     * @return the supported amount of players that matches the given value:
+     *     the value itself if it matches the supported boundaries,
+     *     or max/min if it is too low or too high
+     */
+    int correctSupportedPlayersAmount(int playersAmount);
 }
