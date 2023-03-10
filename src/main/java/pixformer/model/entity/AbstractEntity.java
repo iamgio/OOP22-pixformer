@@ -99,12 +99,15 @@ public abstract class AbstractEntity implements Entity {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Vector2D getVelocity() {
         return new Vector2D(this.velocity.x(), this.velocity.y());
     }
 
     /**
-     * {@inheritDoc}
+     * Set the new velocity of the entity.
+     *
+     * @param velocity the new velocity
      */
     public void setVelocity(final Vector2D velocity) {
         this.velocity = velocity;

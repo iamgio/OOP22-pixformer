@@ -1,27 +1,28 @@
 package pixformer.view;
 
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
-import pixformer.controller.input.PauseControllerInput;
+import pixformer.controller.input.ControllerInput;
+import pixformer.controller.input.ControllerInputImpl;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
-import pixformer.view.engine.TextRenderer;
+import pixformer.view.engine.ViewLauncher;
 
-import java.util.Date;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ControllerCommandSupplier<PauseControllerInput> {
+public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
 
     private final Controller controller;
-    private final GameScene scene;
+    private final Wrapper<GameScene> scene;
 
-    private TextRenderer text;
-    private Optional<Consumer<PauseControllerInput>> controllerCommand = Optional.empty();
+    private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
 
     /**
@@ -32,7 +33,16 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     public ViewImpl(final Controller controller, final GameScene scene) {
         this.controller = controller;
-        this.scene = scene;
+        this.scene = new SimpleWrapper<>(scene);
+    }
+
+    /**
+     * Initializes the default view.
+     *
+     * @param viewLauncher view launcher used to begin the visual output
+     */
+    public ViewImpl(final ViewLauncher viewLauncher) {
+        this(viewLauncher.getController(), viewLauncher.getScene());
     }
 
     /**
@@ -40,13 +50,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     @Override
     public void setup() {
-        final RendererFactory rendererFactory = scene.getRendererFactory();
-
-        scene.add(rendererFactory.newSolidBackground(Color.BLACK));
-
-        this.text = rendererFactory.newText("");
-        text.setColor(new Color(1, 0, 0));
-        scene.add(text.at(100, 100));
+        final RendererFactory rendererFactory = this.getScene().getRendererFactory();
+        this.getScene().add(rendererFactory.newSolidBackground(Color.BLACK));
     }
 
     /**
@@ -54,7 +59,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     @Override
     public GameScene getScene() {
-        return this.scene;
+        return this.scene.get();
     }
 
     /**
@@ -62,15 +67,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
      */
     @Override
     public void update(final double dt) {
-        this.scene.getGraphics().setTranslate(0, 0);
+        final GameScene scene = this.scene.get();
 
-        this.text.setText("Now:\n" + new Date());
+        scene.getGraphics().setTranslate(0, 0);
 
         scene.getInputs().stream()
-                .map(SceneInput::getMappedCommands)
-                .forEach(commands -> {
+                .map(SceneInput::getMappedCommands).forEach(commands -> {
                     commands.forEach(command -> {
-                        command.execute(this.controller.getGameLoopManager());
+                        command.accept(new ControllerInputImpl(controller));
                     });
                 });
 
@@ -84,11 +88,11 @@ public final class ViewImpl implements View, ControllerCommandSupplier<PauseCont
                     });
         }
 
-        this.scene.render();
+        scene.render();
     }
 
     @Override
-    public Optional<Consumer<PauseControllerInput>> supplyControllerCommand() {
+    public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;

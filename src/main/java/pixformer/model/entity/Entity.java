@@ -5,6 +5,7 @@ import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;
 
@@ -19,30 +20,9 @@ public interface Entity {
     double getX();
 
     /**
-     * Set the X coordinate.
-     * 
-     * @param x coordinate
-     */
-    void setX(double x);
-
-    /**
      * @return Y coordinate
      */
     double getY();
-
-    /**
-     * Set the Y coordinate.
-     * 
-     * @param y coordinate
-     */
-    void setY(double y);
-
-    /**
-     * Set the velocity of the entity.
-     * 
-     * @param velocity new vector
-     */
-    void setVelocity(Vector2D velocity);
 
     /**
      * @return the width of the entity
@@ -63,6 +43,13 @@ public interface Entity {
      * @return the bounding box of the entity
      */
     BoundingBox getBoundingBox();
+
+    /**
+     * @return the physics component of the entity
+     */
+    default Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.empty();
+    }
 
     /**
      * @return the input component of the entity

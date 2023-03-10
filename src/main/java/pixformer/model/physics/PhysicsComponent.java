@@ -1,22 +1,35 @@
 package pixformer.model.physics;
 
+import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
+import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.components.Component;
 
 /**
- * PhysicComponent of an Entity.
+ * {@inheritDoc}.
  */
-public interface PhysicsComponent {
+public class PhysicsComponent extends Component<AbstractEntity> implements Updatable {
+
+    private static final double GRAVITY = -0.0000011;
+
+    private final Vector2D force;
 
     /**
-     * @return the gravity
-     */
-    Vector2D getGravity();
-
-    /**
-     * Set the gravity of the component.
+     * Constructor for the PhysicComponent.
      * 
-     * @param vector intensity of the gravity
+     * @param entity for the physic component
      */
-    void setGravity(Vector2D vector);
+    public PhysicsComponent(final AbstractEntity entity) {
+        super(entity);
+        this.force = new Vector2D(0, -GRAVITY);
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(final double dt) {
+        final AbstractEntity entity = super.getEntity();
+        entity.setVelocity(entity.getVelocity().sum(force));
+    }
 }

@@ -1,6 +1,8 @@
 package pixformer.view.javafx;
 
 import javafx.animation.AnimationTimer;
+import pixformer.common.wrap.SimpleWrapper;
+import pixformer.common.wrap.Wrapper;
 import pixformer.controller.GameLoopManager;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.view.ViewImpl;
@@ -14,8 +16,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class JavaFXGameLoopManager implements GameLoopManager {
 
-    private final ViewLauncher viewLauncher;
+    private final Wrapper<ViewLauncher> viewLauncher;
 
+    private long lastFrameTime;
     private boolean isRunning;
     private AnimationTimer currentTimer;
 
@@ -24,7 +27,23 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     public JavaFXGameLoopManager(final ViewLauncher viewLauncher) {
         this.isRunning = true;
-        this.viewLauncher = viewLauncher;
+        this.viewLauncher = new SimpleWrapper<>(viewLauncher);
+    }
+
+    /**
+     * @return the time when javaFX generated our last frame
+     */
+    private long getLastFrameTime() {
+        return this.lastFrameTime;
+    }
+
+    /**
+     * Set the new lastFrameTime.
+     * 
+     * @param lastFrameTime new time
+     */
+    private void setLastFrameTime(final long lastFrameTime) {
+        this.lastFrameTime = lastFrameTime;
     }
 
     /**
@@ -32,10 +51,10 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void start() {
-        this.isRunning = true;
+        final ViewLauncher viewLauncher = this.viewLauncher.get();
         final GameLoop loop = Objects.requireNonNull(
-                this.viewLauncher.getController().createGameLoop(
-                        new ViewImpl(this.viewLauncher.getController(), this.viewLauncher.getScene())));
+                viewLauncher.getController().createGameLoop(new ViewImpl(viewLauncher))
+        );
 
         if (currentTimer != null) {
             currentTimer.stop();
@@ -44,9 +63,9 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                // if (isRunning) {
-                loop.loop(TimeUnit.NANOSECONDS.toMillis(now));
-                // }
+                long delta = now - getLastFrameTime();
+                setLastFrameTime(now);
+                loop.loop(TimeUnit.NANOSECONDS.toMillis(delta));
             }
         };
 
@@ -58,7 +77,6 @@ public class JavaFXGameLoopManager implements GameLoopManager {
      */
     @Override
     public void stop() {
-        this.isRunning = false;
         if (currentTimer != null) {
             currentTimer.stop();
         }
@@ -70,5 +88,21 @@ public class JavaFXGameLoopManager implements GameLoopManager {
     @Override
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void pause() {
+        this.isRunning = false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void resume() {
+        this.isRunning = true;
     }
 }

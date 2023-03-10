@@ -5,15 +5,12 @@ import pixformer.controller.GameLoopManager;
 /**
  * It represents a controller which can pause and unpause the game.
  */
-public class PauseControllerInput implements ControllerInput {
-
-    // private boolean isRunning;
+public class PauseControllerInput {
 
     /**
-     * Constructor for the PauseController
+     * Constructor for the PauseController.
      */
     public PauseControllerInput() {
-        // this.isRunning = true;
     }
 
     /**
@@ -21,15 +18,12 @@ public class PauseControllerInput implements ControllerInput {
      * 
      * @param gameLoopManager manager for the gameloop to control
      */
-    @Override
     public void execute(final GameLoopManager gameLoopManager) {
         System.out.println(gameLoopManager.isRunning());
         if (!gameLoopManager.isRunning()) {
-            gameLoopManager.start();
-            System.out.println("Run");
+            gameLoopManager.resume();
         } else {
-            gameLoopManager.stop();
-            System.out.println("Stop");
+            gameLoopManager.pause();
         }
     }
 }

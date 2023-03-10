@@ -19,4 +19,14 @@ public interface GameLoopManager {
      * @return if the gameloop is running
      */
     boolean isRunning();
+
+    /**
+     * Pause the gameloop.
+     */
+    void pause();
+
+    /**
+     * Unpause the gameloop.
+     */
+    void resume();
 }

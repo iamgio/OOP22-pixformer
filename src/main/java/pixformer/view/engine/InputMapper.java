@@ -23,5 +23,5 @@ public interface InputMapper<T> {
      * @param input raw input
      * @return associated controller action, if it exists
      */
-    Optional<ControllerInput> mapController(T input);
+    Optional<Consumer<ControllerInput>> mapController(T input);
 }
