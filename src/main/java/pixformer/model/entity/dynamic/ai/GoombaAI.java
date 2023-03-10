@@ -1,12 +1,13 @@
 package pixformer.model.entity.dynamic.ai;
 
 import pixformer.model.World;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
-import pixformer.model.entity.collision.Collision;
 
 /**
  * A general AI which makes the entity go left until death or it gets into a
@@ -21,7 +22,7 @@ public class GoombaAI extends AIInputComponent {
      * 
      * @param entity which this AI will control.
      */
-    public GoombaAI(final Entity entity, final HorizontalModelInput modelInput) {
+    public GoombaAI(final AbstractEntity entity, final HorizontalModelInput modelInput) {
         super(entity);
         this.joystick = modelInput;
     }

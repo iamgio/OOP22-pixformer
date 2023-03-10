@@ -1,11 +1,14 @@
 package pixformer.controller;
 
+import pixformer.common.wrap.SimpleWritableWrapper;
+import pixformer.common.wrap.WritableWrapper;
 import pixformer.model.Level;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -13,9 +16,9 @@ import java.util.function.Consumer;
  */
 public class LevelManagerImpl implements LevelManager {
 
-    private Level level;
+    private final WritableWrapper<Level> level = new SimpleWritableWrapper<>();
 
-    private final Set<Consumer<Level>> onStart = new HashSet<>();
+    private final Set<BiConsumer<Level, Integer>> onStart = new HashSet<>();
     private final Set<Consumer<Level>> onEnd = new HashSet<>();
 
     /**
@@ -23,23 +26,23 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public Optional<Level> getCurrentLevel() {
-        return Optional.ofNullable(this.level);
+        return Optional.ofNullable(this.level.get());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void start(final Level level) {
-        this.level = Objects.requireNonNull(level);
-        this.onStart.forEach(action -> action.accept(level));
+    public void start(final Level level, final int playersAmount) {
+        this.level.set(Objects.requireNonNull(level));
+        this.onStart.forEach(action -> action.accept(level, playersAmount));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addOnLevelStart(final Consumer<Level> action) {
+    public void addOnLevelStart(final BiConsumer<Level, Integer> action) {
         this.onStart.add(action);
     }
 
@@ -48,12 +51,14 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public void endCurrentLevel() {
-        if (this.level == null) {
+        final Level level = this.level.get();
+
+        if (level == null) {
             throw new IllegalStateException("No level to end.");
         }
 
-        this.onEnd.forEach(action -> action.accept(this.level));
-        this.level = null;
+        this.onEnd.forEach(action -> action.accept(level));
+        this.level.set(null);
     }
 
     /**
