@@ -1,7 +1,6 @@
 package pixformer.model.entity.dynamic.player;
 
 import java.util.Set;
-
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 

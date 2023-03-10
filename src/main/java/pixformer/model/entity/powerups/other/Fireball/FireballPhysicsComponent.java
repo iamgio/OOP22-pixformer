@@ -8,7 +8,11 @@ import pixformer.model.physics.PhysicsComponentImpl;
  */
 public class FireballPhysicsComponent extends PhysicsComponentImpl {
 
-    public FireballPhysicsComponent(Vector2D vector) {
+    /**
+     * 
+     * @param vector Gravity applied to the entity.
+     */
+    public FireballPhysicsComponent(final Vector2D vector) {
         super(vector);
         //TODO Auto-generated constructor stub
     }

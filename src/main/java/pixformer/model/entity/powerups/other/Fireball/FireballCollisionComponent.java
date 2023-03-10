@@ -11,7 +11,11 @@ import pixformer.model.entity.collision.CollisionComponent;
  */
 public class FireballCollisionComponent extends CollisionComponent {
 
-    protected FireballCollisionComponent(Entity entity) {
+    /**
+     * 
+     * @param entity Entity linked with current component.
+     */
+    protected FireballCollisionComponent(final Entity entity) {
         super(entity);
         //TODO Auto-generated constructor stub
     }
