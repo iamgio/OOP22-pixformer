@@ -53,7 +53,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
+
         this.playerIndex = playerIndex;
+        this.powerUp = Optional.empty();
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
