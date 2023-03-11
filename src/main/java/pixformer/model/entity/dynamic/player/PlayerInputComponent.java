@@ -28,6 +28,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
+
+        System.out.println("LEFT");
+
         this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
     }
 
@@ -36,6 +39,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
+
+        System.out.println("RIGHT");
+
         this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
     }
 
@@ -44,6 +50,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void ability() {
+
+        System.out.println("ABILITY");
+
         if (player.getPowerup().isPresent()) {
             player.getPowerup().get().getBehaviour().ability();
         }
@@ -54,6 +63,13 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
+
+        System.out.println("JUMP");
+
+        if ( this.player.isOnGround()) {
+            this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
+        }
+
         /*
         boolean isGrounded;
 
@@ -91,8 +107,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * {@inheritDoc}
      */
     @Override
-    public void crouch() {
-        
+    public void crouch() {        
+
+        System.out.println("CROUCH");
     }
 
 }
