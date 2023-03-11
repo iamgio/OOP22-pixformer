@@ -76,5 +76,4 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(this.physicsComponent);
     }
-
 }
