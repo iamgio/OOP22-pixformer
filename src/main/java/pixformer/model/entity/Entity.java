@@ -15,6 +15,11 @@ import java.util.Optional;
 public interface Entity {
 
     /**
+     * @return the world this entity lives in, if it exists
+     */
+    Optional<World> getWorld();
+
+    /**
      * @return X coordinate
      */
     double getX();
@@ -43,6 +48,17 @@ public interface Entity {
      * @return the bounding box of the entity
      */
     BoundingBox getBoundingBox();
+
+    /**
+     * @return whether the entity is solid, meaning it cannot be traversed by other entities
+     */
+    boolean isSolid();
+
+    /**
+     * @return whether the entity is touching the ground
+     * @see Entity#isSolid()
+     */
+    boolean isOnGround();
 
     /**
      * @return the physics component of the entity
