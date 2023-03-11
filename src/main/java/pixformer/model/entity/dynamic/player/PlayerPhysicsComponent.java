@@ -8,7 +8,7 @@ import pixformer.model.physics.PhysicsComponent;
  */
 public class PlayerPhysicsComponent extends PhysicsComponent {
 
-    static float SPEED = 1.0f;
+    static float SPEED = 0.00011f;
 
     /**
      * 
