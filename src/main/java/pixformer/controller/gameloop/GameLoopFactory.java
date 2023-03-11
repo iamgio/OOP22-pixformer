@@ -2,6 +2,7 @@ package pixformer.controller.gameloop;
 
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
+import pixformer.controller.GameLoopManager;
 import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
@@ -17,6 +18,7 @@ public final class GameLoopFactory {
 
     private final Wrapper<Level> level;
     private final Wrapper<View> view;
+    private final Wrapper<GameLoopManager> gameLoopManager;
 
     /**
      * Instantiates a new game loop factory.
@@ -24,9 +26,10 @@ public final class GameLoopFactory {
      * @param level         game level
      * @param view          game view
      */
-    public GameLoopFactory(final Level level, final View view) {
+    public GameLoopFactory(final Level level, final View view, final GameLoopManager gameLoopManager) {
         this.level = new SimpleWrapper<>(level);
         this.view = new SimpleWrapper<>(view);
+        this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
     }
 
     /**
@@ -42,7 +45,9 @@ public final class GameLoopFactory {
 
         return dt -> {
             view.update(dt);
-            world.update(dt);
+            if (this.gameLoopManager.get().isRunning()) {
+                world.update(dt);
+            }
 
             world.getEntities().stream()
                     .filter(DrawableEntity.class::isInstance)

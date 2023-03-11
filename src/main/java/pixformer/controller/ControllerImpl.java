@@ -75,7 +75,7 @@ public class ControllerImpl implements Controller {
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
-        return new GameLoopFactory(currentLevel.get(), view).defaultLoop();
+        return new GameLoopFactory(currentLevel.get(), view, this.gameLoopManager.get()).defaultLoop();
     }
 
     /**
