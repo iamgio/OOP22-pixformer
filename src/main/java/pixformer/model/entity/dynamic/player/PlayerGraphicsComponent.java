@@ -1,23 +1,27 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.model.entity.Entity;
+import pixformer.view.engine.Color;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.view.engine.GameScene;
+import pixformer.view.engine.RectangleRenderer;
 
 /**
  * Implementation of GraphicComponent for a Player entity.
  */
 public class PlayerGraphicsComponent extends GraphicsComponent {
 
-    protected PlayerGraphicsComponent(Entity entity) {
-        super(entity);
-        //TODO Auto-generated constructor stub
+    private Player player;
+
+    protected PlayerGraphicsComponent(final Player player) {
+        super(player);
+        this.player = player;
     }
 
     @Override
     public void update(GameScene scene) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
+        playerShape.setColor(new Color(1, 1, 1));
+        scene.getGraphics().draw(playerShape);
     }
 
 }
