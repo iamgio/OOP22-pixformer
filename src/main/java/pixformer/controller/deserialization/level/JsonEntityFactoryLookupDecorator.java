@@ -16,14 +16,14 @@ import java.util.stream.Stream;
  * @see EntityFactory
  * @see EntityType
  */
-public class EntityFactoryLookupDecorator {
+public class JsonEntityFactoryLookupDecorator {
 
     private final EntityFactory factory;
 
     /**
      * @param factory entity factory to instantiate entities from
      */
-    public EntityFactoryLookupDecorator(final EntityFactory factory) {
+    public JsonEntityFactoryLookupDecorator(final EntityFactory factory) {
         this.factory = factory;
     }
 

@@ -54,7 +54,7 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
         final int spawnPointX = object.get("spawnPointX").getAsInt();
         final int spawnPointY = object.get("spawnPointY").getAsInt();
 
-        final EntityFactoryLookupDecorator lookup = new EntityFactoryLookupDecorator(this.factory);
+        final JsonEntityFactoryLookupDecorator lookup = new JsonEntityFactoryLookupDecorator(this.factory);
         final Set<Entity> entities = new HashSet<>();
         for (final JsonElement entityElement : object.get("entities").getAsJsonArray()) {
             final JsonObject entityObject = entityElement.getAsJsonObject();
