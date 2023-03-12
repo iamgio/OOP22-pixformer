@@ -9,9 +9,9 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Optional;
 
 /**
- * Abstract class for an entity.
+ * The base class for a mutable entity.
  */
-public abstract class AbstractEntity implements Entity {
+public abstract class AbstractEntity implements MutableEntity {
 
     private World world;
     private double x;
@@ -53,10 +53,9 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the X coordinate of the entity.
-     *
-     * @param x the new X coordinate
+     * {@inheritDoc}
      */
+    @Override
     public void setX(final double x) {
         this.x = x;
     }
@@ -70,10 +69,9 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the Y coordinate of the entity.
-     *
-     * @param y the new Y coordinate
+     * {@inheritDoc}
      */
+    @Override
     public void setY(final double y) {
         this.y = y;
     }
@@ -87,11 +85,10 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the width of the entity.
-     *
-     * @param width the new width
+     * {@inheritDoc}
      */
-    protected void setWidth(final double width) {
+    @Override
+    public void setWidth(final double width) {
         this.width = width;
     }
 
@@ -104,11 +101,10 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the height of the entity.
-     *
-     * @param height the new height
+     * {@inheritDoc}
      */
-    protected void setHeight(final double height) {
+    @Override
+    public void setHeight(final double height) {
         this.height = height;
     }
 
@@ -121,10 +117,9 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the new velocity of the entity.
-     *
-     * @param velocity the new velocity
+     * {@inheritDoc}
      */
+    @Override
     public void setVelocity(final Vector2D velocity) {
         this.velocity = velocity;
     }
