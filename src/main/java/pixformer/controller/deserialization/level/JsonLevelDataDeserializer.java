@@ -7,16 +7,28 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import pixformer.model.LevelData;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.EntityFactory;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * A level data deserializer from JSON format.
  */
 public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDeserializer<LevelData> {
+
+    private final EntityFactory factory;
+
+    /**
+     * @param factory entity factory to create entities from
+     */
+    public JsonLevelDataDeserializer(final EntityFactory factory) {
+        this.factory = factory;
+    }
 
     /**
      * {@inheritDoc}
@@ -36,13 +48,25 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
     public LevelData deserialize(final JsonElement json,
                                  final Type typeOfT,
                                  final JsonDeserializationContext context) throws JsonParseException {
-        JsonObject object = json.getAsJsonObject();
+        final JsonObject object = json.getAsJsonObject();
 
-        String name = object.get("name").getAsString();
-        int spawnPointX = object.get("spawnPointX").getAsInt();
-        int spawnPointY = object.get("spawnPointY").getAsInt();
+        final String name = object.get("name").getAsString();
+        final int spawnPointX = object.get("spawnPointX").getAsInt();
+        final int spawnPointY = object.get("spawnPointY").getAsInt();
 
-        // TODO entities
-        return new LevelData(name, Set.of(), spawnPointX, spawnPointY);
+        final EntityFactoryLookupDecorator lookup = new EntityFactoryLookupDecorator(this.factory);
+        final Set<Entity> entities = new HashSet<>();
+        for (final JsonElement entityElement : object.get("entities").getAsJsonArray()) {
+            final JsonObject entityObject = entityElement.getAsJsonObject();
+
+            final String type = entityObject.get("type").getAsString();
+            final int x = entityObject.get("x").getAsInt();
+            final int y = entityObject.get("y").getAsInt();
+
+            final Entity entity = lookup.fromType(type, x, y);
+            entities.add(entity);
+        }
+
+        return new LevelData(name, entities, spawnPointX, spawnPointY);
     }
 }

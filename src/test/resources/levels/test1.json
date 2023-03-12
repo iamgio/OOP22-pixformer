@@ -4,7 +4,7 @@
   "spawnPointY": 2,
   "entities": [
     {
-      "type": "test",
+      "type": "grass",
       "x": "10",
       "y": "10"
     }
