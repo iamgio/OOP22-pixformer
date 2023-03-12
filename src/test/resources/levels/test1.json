@@ -1,0 +1,12 @@
+{
+  "name": "First level",
+  "spawnPointX": 1,
+  "spawnPointY": 2,
+  "entities": [
+    {
+      "type": "test",
+      "x": "10",
+      "y": "10"
+    }
+  ]
+}
