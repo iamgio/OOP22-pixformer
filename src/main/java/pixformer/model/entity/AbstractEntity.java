@@ -113,7 +113,7 @@ public abstract class AbstractEntity implements MutableEntity {
      */
     @Override
     public Vector2D getVelocity() {
-        return new Vector2D(this.velocity.x(), this.velocity.y());
+        return this.velocity;
     }
 
     /**
