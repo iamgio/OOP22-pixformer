@@ -60,10 +60,8 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
             final JsonObject entityObject = entityElement.getAsJsonObject();
 
             final String type = entityObject.get("type").getAsString();
-            final int x = entityObject.get("x").getAsInt();
-            final int y = entityObject.get("y").getAsInt();
 
-            final Entity entity = lookup.fromType(type, x, y);
+            final Entity entity = lookup.fromType(type, entityObject);
             entities.add(entity);
         }
 

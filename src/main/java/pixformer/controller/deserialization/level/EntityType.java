@@ -17,4 +17,9 @@ public @interface EntityType {
      * @return the entity type
      */
     String value();
+
+    /**
+     * @return names of the parameters from the target method
+     */
+    String[] parameters() default {"x", "y"};
 }

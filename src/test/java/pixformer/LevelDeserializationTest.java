@@ -17,6 +17,9 @@ public class LevelDeserializationTest {
         final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl())
                 .deserialize(this.getClass().getResourceAsStream("/levels/test1.json"));
 
+        System.out.println(data);
+        System.out.println(data.entities().iterator().next().getX());
+
         assertEquals("First level", data.name());
         assertEquals(1, data.spawnPointX());
         assertEquals(2, data.spawnPointY());
