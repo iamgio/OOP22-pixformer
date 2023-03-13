@@ -14,8 +14,8 @@ import pixformer.model.entity.dynamic.player.Player;
 public class WalkingKoopa extends Enemy implements KoopaState {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
-    private static double WIDTH = 1;
-    private static double HEIGHT = 2;
+    private static final double WIDTH = 1;
+    private static final double HEIGHT = 2;
     private final Runnable changeToTurtle;
 
     /**
