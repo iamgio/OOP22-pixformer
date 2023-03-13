@@ -11,7 +11,7 @@ import pixformer.model.entity.dynamic.player.Player;
 /**
  * The state of the koopa which walks normally and behaves like a goomba.
  */
-public class WalkingKoopa extends Enemy implements KoopaState {
+public final class WalkingKoopa extends Enemy implements KoopaState {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
