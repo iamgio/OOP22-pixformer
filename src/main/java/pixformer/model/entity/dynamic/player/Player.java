@@ -62,13 +62,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         this.inputComponent = new PlayerInputComponent(this);
     }
 
-        /**
-     * @return True if is crouching.
-     */
-    public boolean isCrouching() {
-        return isCrouching;
-    }
-
     /**
      * Return this entity player index.
      * @return playerIndex
@@ -125,4 +118,24 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         return this.powerUp;
     }
 
+     /**
+     * @return True if is crouching.
+     */
+    public boolean isCrouching() {
+        return isCrouching;
+    }
+
+    /**
+     * 
+     * @param jumpForce
+     * @return
+     */
+    public boolean jump (final float jumpForce) {
+        if (currentPlayerJump <= 0) {
+            return false;
+        }
+
+        currentPlayerJump -= jumpForce;
+        return true;
+    }
 }
