@@ -9,7 +9,7 @@ public class TurtleKoopa extends Enemy implements KoopaState {
     private static final double HEIGHT = 1;
 
     /**
-     * Create a new TurtleKoopa
+     * Create a new TurtleKoopa.
      * 
      * @param x its initial x position
      * @param y its initial y position.
