@@ -23,6 +23,7 @@ public class WalkingKoopa extends Enemy implements KoopaState {
      * 
      * @param x its initial x position
      * @param y its initial x position.
+     * @param changeToTurtle a Runnable which makes the koopa becomes a turtle.
      */
     public WalkingKoopa(final double x, final double y, final Runnable changeToTurtle) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
