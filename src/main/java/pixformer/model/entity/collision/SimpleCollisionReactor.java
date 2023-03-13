@@ -12,7 +12,7 @@ import pixformer.model.entity.Entity;
  * A simple implementation of
  * {@link pixformer.model.entity.collision.CollisionReactor}.
  */
-public class SimpleCollisionReactor implements CollisionReactor {
+public final class SimpleCollisionReactor implements CollisionReactor {
 
     private final Map<Predicate<Entity>, Consumer<CollisionSide>> reactions;
 
