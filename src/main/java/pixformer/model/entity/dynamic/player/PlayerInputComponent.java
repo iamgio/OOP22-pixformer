@@ -1,6 +1,7 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.Vector2D;
+import pixformer.model.World;
 import pixformer.model.entity.Entity;
 import  pixformer.model.input.InputComponent;
 import pixformer.model.input.UserInputComponent;
@@ -12,6 +13,8 @@ import pixformer.model.modelinput.CompleteModelInput;
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
 
     private Player player;
+    private boolean jumpKey = false;
+    private boolean jumpingDown = false;
 
     /**
      * 
@@ -65,8 +68,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     public void jump() {
 
         System.out.println("JUMP");
+        
+        jumpKey = true;
 
-        if ( this.player.jump(-PlayerPhysicsComponent.JUMP_FORCE) ) {            
+        if ( this.player.jump(-PlayerPhysicsComponent.JUMP_FORCE) ) {
             this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
         }
     }
@@ -75,11 +80,21 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * {@inheritDoc}
      */
     @Override
-    public void crouch() {        
-        
-        System.out.println("CROUCH");
+    public void crouch() {
 
+        System.out.println("CROUCH");
 
     }
 
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public void update(World world) {
+        if( !jumpKey && this.player.isJumping() ) {
+            this.player.stopJumping();
+        }
+
+        jumpKey = false;
+    }
 }

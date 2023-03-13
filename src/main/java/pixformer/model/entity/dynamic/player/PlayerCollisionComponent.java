@@ -8,13 +8,14 @@ import pixformer.model.entity.collision.CollisionComponent;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class PlayerCollisionComponent extends CollisionComponent {
-
+    private Player player;
     /**
      * 
      * @param entity Player entity whose collisions will be managed.
      */
-    protected PlayerCollisionComponent(final Player entity) {
-        super(entity);
+    protected PlayerCollisionComponent(final Player player) {
+        super(player);
+        this.player = player;
     }
 
     /**
@@ -22,6 +23,10 @@ public class PlayerCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
+
+        if (player.isOnGround()) {
+            player.resetJumping();
+        }
 
         for (var x : collisions) {
             throw new UnsupportedOperationException("Unimplemented method 'update'");
