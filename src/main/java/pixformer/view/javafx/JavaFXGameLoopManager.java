@@ -63,7 +63,7 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                long delta = now - getLastFrameTime();
+                long delta = getLastFrameTime() != 0 ? now - getLastFrameTime() : 0;
                 setLastFrameTime(now);
                 loop.loop(TimeUnit.NANOSECONDS.toMillis(delta));
             }

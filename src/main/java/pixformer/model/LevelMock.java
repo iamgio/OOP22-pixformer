@@ -1,5 +1,8 @@
 package pixformer.model;
 
+import pixformer.controller.deserialization.level.JsonLevelDataDeserializer;
+import pixformer.model.entity.EntityFactoryImpl;
+
 /**
  * @deprecated test
  */
@@ -10,14 +13,7 @@ public class LevelMock extends LevelImpl {
      * Test level.
      */
     public LevelMock() {
-        super("TestLevel", new WorldImpl());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setup(final int playersAmount) {
-        super.setup(playersAmount);
+        super(new JsonLevelDataDeserializer(new EntityFactoryImpl())
+                .deserialize(Level.class.getResourceAsStream("/levels/test1.json")));
     }
 }

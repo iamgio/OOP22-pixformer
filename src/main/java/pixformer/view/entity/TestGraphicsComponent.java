@@ -2,7 +2,6 @@ package pixformer.view.entity;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.TestEntity;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RectangleRenderer;
@@ -17,7 +16,7 @@ public class TestGraphicsComponent extends GraphicsComponent {
      * Instantiates a graphics component for a test entity.
      * @param entity test entity
      */
-    public TestGraphicsComponent(final TestEntity entity) {
+    public TestGraphicsComponent(final Entity entity) {
         super(entity);
     }
 

@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface Level {
 
     /**
-     * @return level name
+     * @return read-only level data
      */
-    String getName();
+    LevelData getData();
 
     /**
      * The level world is a mutable container where entities' lifecycles run as time passes and events happen.

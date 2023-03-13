@@ -2,15 +2,15 @@ package pixformer.model.physics;
 
 import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
-import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.components.Component;
 
 /**
  * {@inheritDoc}.
  */
-public class PhysicsComponent extends Component<AbstractEntity> implements Updatable {
+public class PhysicsComponent extends Component<MutableEntity> implements Updatable {
 
-    private static final double GRAVITY = -0.0000011;
+    private static final double GRAVITY = 0.00008;
 
     private final Vector2D force;
 
@@ -19,9 +19,9 @@ public class PhysicsComponent extends Component<AbstractEntity> implements Updat
      * 
      * @param entity for the physic component
      */
-    public PhysicsComponent(final AbstractEntity entity) {
+    public PhysicsComponent(final MutableEntity entity) {
         super(entity);
-        this.force = new Vector2D(0, -GRAVITY);
+        this.force = new Vector2D(0, GRAVITY);
     }
 
     /**
@@ -29,7 +29,7 @@ public class PhysicsComponent extends Component<AbstractEntity> implements Updat
      */
     @Override
     public void update(final double dt) {
-        final AbstractEntity entity = super.getEntity();
+        final MutableEntity entity = super.getEntity();
         entity.setVelocity(entity.getVelocity().sum(force));
     }
 }
