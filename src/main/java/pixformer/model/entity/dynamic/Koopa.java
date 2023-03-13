@@ -7,10 +7,19 @@ import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 
+/**
+ * The implementation of the enemy Koopa. This class uses the two states of a
+ * Koopa: walking and turtle.
+ */
 public final class Koopa implements MutableEntity {
 
     private KoopaState currentKoopaState;
 
+    /**
+     * Create a new Koopa.
+     * @param x its initial x position.
+     * @param y its initial y position.
+     */
     public Koopa(final double x, final double y) {
         currentKoopaState = new WalkingKoopa(x, y, this::changeToTurtle);
     }
@@ -66,7 +75,7 @@ public final class Koopa implements MutableEntity {
 
     @Override
     public void setX(double x) {
-       currentKoopaState.setX(x);
+        currentKoopaState.setX(x);
     }
 
     @Override
