@@ -127,15 +127,34 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
 
     /**
      * 
-     * @param jumpForce
+     * @param jumpForce Negative jumping force applied to the entity.
      * @return
      */
     public boolean jump (final float jumpForce) {
+
+        System.out.println(currentPlayerJump);
+
         if (currentPlayerJump <= 0) {
             return false;
         }
 
-        currentPlayerJump -= jumpForce;
+        currentPlayerJump += jumpForce;
         return true;
+    }
+
+    /**
+     * Check if Player is jumping.
+     * @return True if Player is jumping.
+     */
+    public boolean isJumping() {
+        return currentPlayerJump < MAX_JUMP_DURATION;
+    }
+
+    public void stopJumping() {
+        this.currentPlayerJump = 0;
+    }
+
+    public void resetJumping() {
+        this.currentPlayerJump = MAX_JUMP_DURATION;
     }
 }
