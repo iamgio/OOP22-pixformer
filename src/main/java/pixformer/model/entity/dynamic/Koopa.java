@@ -4,14 +4,20 @@ import java.util.Optional;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.TestGraphicsComponent;
 
 /**
  * The implementation of the enemy Koopa. This class uses the two states of a
  * Koopa: walking and turtle.
  */
-public final class Koopa implements MutableEntity {
+public final class Koopa implements MutableEntity, DrawableEntity {
 
     private KoopaState currentKoopaState;
 
@@ -96,6 +102,26 @@ public final class Koopa implements MutableEntity {
     @Override
     public void setVelocity(final Vector2D velocity) {
         this.currentKoopaState.setVelocity(velocity);
+    }
+
+    @Override
+    public GraphicsComponent getGraphicsComponent() {
+        return new TestGraphicsComponent(this);
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return currentKoopaState.getCollisionComponent();
+    }
+
+    @Override
+    public Optional<InputComponent> getInputComponent() {
+        return currentKoopaState.getInputComponent();
+    }
+
+    @Override
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return currentKoopaState.getPhysicsComponent();
     }
 
 }
