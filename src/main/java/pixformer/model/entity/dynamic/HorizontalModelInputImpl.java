@@ -10,7 +10,7 @@ import pixformer.model.modelinput.HorizontalModelInput;
  * An HorizontalInputComponent which make the entity move left or right at the
  * same velocity module.
  */
-public class HorizontalModelInputImpl implements HorizontalModelInput {
+public final class HorizontalModelInputImpl implements HorizontalModelInput {
 
     private final Vector2D rightVelocity;
     private final Vector2D leftVelocity;
