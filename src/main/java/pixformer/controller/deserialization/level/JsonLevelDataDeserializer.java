@@ -29,7 +29,7 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer {
     public LevelData deserialize(final InputStream inputStream) {
         return new GsonBuilder()
                 .registerTypeAdapter(Entity.class,
-                        new JsonEntityDeserializer(new JsonEntityFactoryLookupDecorator(factory)))
+                        new JsonEntityDeserializer(new EntityFactoryLookupDecorator(factory)))
                 .create()
                 .fromJson(new InputStreamReader(inputStream), LevelData.class);
     }

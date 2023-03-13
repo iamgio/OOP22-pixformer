@@ -1,5 +1,6 @@
 package pixformer.controller.deserialization.level;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -14,12 +15,12 @@ import java.lang.reflect.Type;
  */
 public class JsonEntityDeserializer implements JsonDeserializer<Entity> {
 
-    private final JsonEntityFactoryLookupDecorator lookup;
+    private final EntityFactoryLookupDecorator lookup;
 
     /**
      * @param lookup entity lookup from its {@link pixformer.model.entity.EntityFactory}
      */
-    JsonEntityDeserializer(final JsonEntityFactoryLookupDecorator lookup) {
+    JsonEntityDeserializer(final EntityFactoryLookupDecorator lookup) {
         this.lookup = lookup;
     }
 
@@ -32,6 +33,8 @@ public class JsonEntityDeserializer implements JsonDeserializer<Entity> {
                                  final JsonDeserializationContext context) throws JsonParseException {
         final JsonObject object = json.getAsJsonObject();
         final String type = object.get("type").getAsString();
-        return lookup.fromType(type, object);
+        return lookup.fromType(type,
+                (parameterName, parameterType) -> new Gson().fromJson(object.get(parameterName), parameterType)
+        );
     }
 }
