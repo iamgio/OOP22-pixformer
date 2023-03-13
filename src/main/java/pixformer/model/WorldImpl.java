@@ -63,10 +63,7 @@ public class WorldImpl implements World {
             entity.getCollisionComponent().ifPresent(collisionComponent -> {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
-            entity.getInputComponent()
-                    .filter(AIInputComponent.class::isInstance)
-                    .map(AIInputComponent.class::cast)
-                    .ifPresent(ai -> ai.update(this));
+            entity.getInputComponent().ifPresent(ai -> ai.update(this));
 
             if (entity instanceof MutableEntity mutableEntity) {
                 updatePosition(dt, mutableEntity);
