@@ -9,8 +9,14 @@ public class Goomba extends Enemy {
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
+    /**
+     * Create a new Goomba.
+     * 
+     * @param x its initial x coordinate position.
+     * @param y its initial y coordinate position.
+     */
     public Goomba(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
     }
-    
+
 }

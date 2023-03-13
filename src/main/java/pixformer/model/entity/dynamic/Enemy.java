@@ -22,6 +22,9 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
      * 
      * @param x coordinate
      * @param y coordinate.
+     * @param width of the Enemy.
+     * @param height of the Enemy.
+     * @param velocity the module of the velocity of the Enemy.
      */
     public Enemy(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
