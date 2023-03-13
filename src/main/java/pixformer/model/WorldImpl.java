@@ -1,5 +1,6 @@
 package pixformer.model;
 
+import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
@@ -76,6 +77,9 @@ public class WorldImpl implements World {
 
     private void updatePosition(final double dt, final MutableEntity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
+        if (entity.isOnGround() && entity.getVelocity().y() < 0) {
+            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+        }
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
 }
