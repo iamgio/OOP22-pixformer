@@ -66,41 +66,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         System.out.println("JUMP");
 
-        if ( this.player.isOnGround()) {
+        if ( this.player.jump(-PlayerPhysicsComponent.JUMP_FORCE) ) {            
             this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
         }
-
-        /*
-        boolean isGrounded;
-
-        if ( isGrounded ) {
-            this.isJumping = true;
-        }
-
-        // Manage jumping
-        if (this.isGrounded) {
-            // Reset jumpTimeCounter
-            this.jumpTimeCounter = MAX_JUMP_DURATION;
-        } else {
-            this.jumpTimeCounter -= dt;
-        }
-
-        if (!this.jumpingKey) {
-            this.jumpTimeCounter = 0;
-        }
-        if (this.jumpTimeCounter <= 0) {
-            this.isJumping = false;
-        }
-
-        // Player is jumping (moving up)
-        if (this.isJumping) {
-            //updatePos(new Vector2D(0, JUMP_FORCE), dt);
-        }
-
-        // Player is falling down
-        if (!this.isGrounded && !this.isJumping) {
-            //updatePos(new Vector2D(0, -GRAVITY), dt);
-        }*/
     }
 
     /**
@@ -108,8 +76,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void crouch() {        
-
+        
         System.out.println("CROUCH");
+
+
     }
 
 }
