@@ -30,11 +30,12 @@ final class GoombaAITest {
 
     @Test
     void testClearRoad() {
+        final double numberOfSteps = 2;
         world.update(dt);
         assertEquals(-step, goomba.getX());
         assertEquals(0, goomba.getY());
         world.update(dt);
-        assertEquals(-2 * step, goomba.getX());
+        assertEquals(-numberOfSteps * step, goomba.getX());
         assertEquals(0, goomba.getY());
     }
 
