@@ -24,6 +24,13 @@ public interface World extends Updatable {
     void spawnEntity(Entity entity);
 
     /**
+     * Destroy an entity in the game world.
+     *
+     * @param entity entity to destroy
+     */
+    void killEntity(Entity entity);
+
+    /**
      * @return the handler of entity collisions for this world
      */
     EntityCollisionManager getCollisionManager();
