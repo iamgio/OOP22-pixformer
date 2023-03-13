@@ -1,6 +1,6 @@
 package pixformer.model.entity.collision;
 
-import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.components.Component;
 
 import java.util.Set;
@@ -12,9 +12,9 @@ import java.util.Set;
  * The player's collision component would let the player perform a small jump,
  * while the monster's one would let the monster die.
  */
-public abstract class CollisionComponent extends Component<AbstractEntity> {
+public abstract class CollisionComponent extends Component<MutableEntity> {
 
-    protected CollisionComponent(final AbstractEntity entity) {
+    protected CollisionComponent(final MutableEntity entity) {
         super(entity);
     }
 

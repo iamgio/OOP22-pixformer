@@ -1,46 +1,22 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Optional;
-
-import pixformer.common.Vector2D;
-import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
-import pixformer.model.input.InputComponent;
-import pixformer.model.modelinput.HorizontalModelInput;
-
 /**
- * The default implementation of a goomba.
+ * The enemy gooba.
  */
-public class Goomba extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
+public class Goomba extends Enemy {
 
-    private static final int WIDTH = 1;
-    private static final int HEIGHT = 1;
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
-    private final HorizontalModelInput joystick;
-    private final GoombaAI ai;
+    private static final double WIDTH = 1;
+    private static final double HEIGHT = 1;
 
     /**
-     * Create a Goomba at position ({@code x}, {@code y}).
-     * @param x coordinate
-     * @param y coordinate.
+     * Create a new Goomba.
+     * 
+     * @param x its initial x coordinate position.
+     * @param y its initial y coordinate position.
      */
     public Goomba(final double x, final double y) {
-        super(x, y, WIDTH, HEIGHT);
-        joystick = new HorizontalModelInputImpl(this::fixVelocity, INITIAL_VELOCITY);
-        ai = new GoombaAI(this, joystick);
-        joystick.left();
-    }
-
-    @Override
-    public final Optional<InputComponent> getInputComponent() {
-        return Optional.of(ai);
-    }
-
-    private void fixVelocity(final Vector2D velocity) {
-        final Vector2D current = super.getVelocity();
-        final Vector2D newVelocity = new Vector2D(velocity.x(), current.y());
-        this.setVelocity(newVelocity);
+        super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
     }
 
 }

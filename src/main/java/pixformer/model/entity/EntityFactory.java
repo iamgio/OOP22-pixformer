@@ -1,51 +1,56 @@
 package pixformer.model.entity;
 
-import pixformer.common.Vector2D;
-
 /**
  * A factory for entities.
  */
 public interface EntityFactory {
 
     /**
-     * @param position position in the space of the entity
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a tile block
      */
-    DrawableEntity createTileBlock(Vector2D position);
+    Entity createTileBlock(int x, int y);
 
     /**
-     * @param position position in the space of the entity
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a grass block
      */
-    DrawableEntity createGrassBlock(Vector2D position);
+    Entity createGrassBlock(int x, int y);
 
     /**
-     * @param position position in the space of the entity
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a brick block
      */
-    DrawableEntity createBrickBlock(Vector2D position);
+    Entity createBrickBlock(int x, int y);
 
     /**
-     * @param position position in the space of the entity
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a surprise block
      */
-    DrawableEntity createSurpriseBlock(Vector2D position);
+    Entity createSurpriseBlock(int x, int y);
 
     /**
-     * @param position position in the space of the entity
-     * @return a goomba entity
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return a Goomba entity
      */
-    DrawableEntity createGoomba(Vector2D position);
+    Entity createGoomba(int x, int y);
 
     /**
-     * @param position position in the space of the entity
-     * @return a koopa entity
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return a Koopa entity
      */
-    DrawableEntity createKoopa(Vector2D position);
+    Entity createKoopa(int x, int y);
 
     /**
-     * @param position position in the space of the entity
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a main character
      */
-    DrawableEntity createMainCharacter(Vector2D position);
+    Entity createMainCharacter(int x, int y);
 }

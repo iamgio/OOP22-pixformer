@@ -1,7 +1,7 @@
 package pixformer.model;
 
-import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.input.AIInputComponent;
@@ -63,18 +63,15 @@ public class WorldImpl implements World {
             entity.getCollisionComponent().ifPresent(collisionComponent -> {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
-            entity.getInputComponent()
-                    .filter(AIInputComponent.class::isInstance)
-                    .map(AIInputComponent.class::cast)
-                    .ifPresent(ai -> ai.update(this));
+            entity.getInputComponent().ifPresent(ai -> ai.update(this));
 
-            if (entity instanceof AbstractEntity abstractEntity) {
-                updatePosition(dt, abstractEntity);
+            if (entity instanceof MutableEntity mutableEntity) {
+                updatePosition(dt, mutableEntity);
             }
         });
     }
 
-    private void updatePosition(final double dt, final AbstractEntity entity) {
+    private void updatePosition(final double dt, final MutableEntity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }

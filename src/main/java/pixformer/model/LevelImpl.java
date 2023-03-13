@@ -16,18 +16,17 @@ import java.util.stream.IntStream;
  */
 public class LevelImpl implements Level {
 
-    private final String name;
+    private final LevelData data;
     private final World world;
 
     private final List<CompleteModelInput> players;
 
     /**
-     * @param name  level name
-     * @param world game world of the level
+     * @param data level data
      */
-    public LevelImpl(final String name, final World world) {
-        this.name = name;
-        this.world = world;
+    public LevelImpl(final LevelData data) {
+        this.data = data;
+        this.world = new WorldImpl();
         this.players = new ArrayList<>();
     }
 
@@ -35,8 +34,8 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
-    public String getName() {
-        return this.name;
+    public LevelData getData() {
+        return this.data;
     }
 
     /**
@@ -76,6 +75,8 @@ public class LevelImpl implements Level {
      */
     @Override
     public void setup(final int playersAmount) {
+        this.data.entities().forEach(this.world::spawnEntity);
+        // TODO put player at spawn point from level data
         IntStream.range(0, playersAmount).forEach(i -> {
             Entity player = this.createPlayer(i);
             this.world.spawnEntity(player);
