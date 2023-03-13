@@ -1,6 +1,8 @@
 package pixformer.model.entity;
 
 import pixformer.controller.deserialization.level.EntityType;
+import pixformer.model.entity.dynamic.Goomba;
+import pixformer.model.entity.dynamic.Koopa;
 import pixformer.model.entity.statics.Block;
 
 /**
@@ -44,17 +46,19 @@ public class EntityFactoryImpl implements EntityFactory {
     /**
      * {@inheritDoc}
      */
+    @EntityType("goomba")
     @Override
     public Entity createGoomba(final int x, final int y) {
-        return null;
+        return new Goomba(x, y);
     }
 
     /**
      * {@inheritDoc}
      */
+    @EntityType("koopa")
     @Override
     public Entity createKoopa(final int x, final int y) {
-        return null;
+        return new Koopa(x, y);
     }
 
     /**
