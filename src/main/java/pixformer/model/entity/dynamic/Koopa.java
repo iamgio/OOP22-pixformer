@@ -74,12 +74,12 @@ public final class Koopa implements MutableEntity {
     }
 
     @Override
-    public void setX(double x) {
+    public void setX(final double x) {
         currentKoopaState.setX(x);
     }
 
     @Override
-    public void setY(double y) {
+    public void setY(final double y) {
         currentKoopaState.setY(y);
     }
 
