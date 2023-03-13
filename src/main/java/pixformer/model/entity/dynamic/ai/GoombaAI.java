@@ -1,14 +1,10 @@
 package pixformer.model.entity.dynamic.ai;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import pixformer.model.World;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.SimpleCollisionReactor;
