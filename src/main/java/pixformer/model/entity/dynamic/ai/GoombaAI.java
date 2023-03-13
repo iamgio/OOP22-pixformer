@@ -32,7 +32,7 @@ public class GoombaAI extends AIInputComponent {
         super(entity);
         this.joystick = modelInput;
         reactor = new SimpleCollisionReactor(Map.of(
-            Block.class::isInstance, this::reactOnBlockCollision,
+            Entity::isSolid, this::reactOnBlockCollision,
             Player.class::isInstance, (side) -> {/* TODO: this entity dies */ }
         ));
     }
