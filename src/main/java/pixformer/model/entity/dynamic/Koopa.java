@@ -1,10 +1,13 @@
 package pixformer.model.entity.dynamic;
 
+import java.util.Optional;
+
 import pixformer.common.Vector2D;
-import pixformer.model.entity.Entity;
+import pixformer.model.World;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 
-public class Koopa implements Entity {
+public class Koopa implements MutableEntity {
 
     private KoopaState currentKoopaState;
 
@@ -44,6 +47,46 @@ public class Koopa implements Entity {
     @Override
     public BoundingBox getBoundingBox() {
         return currentKoopaState.getBoundingBox();
+    }
+
+    @Override
+    public Optional<World> getWorld() {
+        return currentKoopaState.getWorld();
+    }
+
+    @Override
+    public boolean isSolid() {
+        return currentKoopaState.isSolid();
+    }
+
+    @Override
+    public boolean isOnGround() {
+        return currentKoopaState.isOnGround();
+    }
+
+    @Override
+    public void setX(double x) {
+       currentKoopaState.setX(x);
+    }
+
+    @Override
+    public void setY(double y) {
+        currentKoopaState.setY(y);
+    }
+
+    @Override
+    public void setWidth(final double width) {
+        this.currentKoopaState.setWidth(width);
+    }
+
+    @Override
+    public void setHeight(final double height) {
+        this.currentKoopaState.setHeight(height);
+    }
+
+    @Override
+    public void setVelocity(final Vector2D velocity) {
+        this.currentKoopaState.setVelocity(velocity);
     }
 
 }
