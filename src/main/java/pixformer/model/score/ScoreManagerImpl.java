@@ -11,9 +11,6 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     public ScoreManagerImpl() {
         this.score = new ScoreImpl();
-        // TODO
-        // Here i should specify the player this manager is linked to, and specify the events
-        // it has to observe
     }
 
     /**
@@ -22,5 +19,13 @@ public class ScoreManagerImpl implements ScoreManager {
     @Override
     public int getScore() {
         return this.score.getPoints();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addScore(final int points) {
+        this.score.addPoints(points);
     }
 }
