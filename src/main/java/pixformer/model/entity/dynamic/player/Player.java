@@ -16,18 +16,14 @@ import pixformer.model.input.InputComponent;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
-    // Player movement speed
-    static final float SPEED = 1.0f;
-    
-    // Max duration of a jump
-    static final float MAX_JUMP_DURATION = 5.0f;
-    static final float JUMP_FORCE = 1.0f;
-
+public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {    
     // This playerIndex
     private int playerIndex;
+    
+    // Max duration of a jump
+    static final float MAX_JUMP_DURATION = 0.01f;
 
-    // State variables to check if player is jumping or crouching
+    // State variable to check if player is crouching
     private boolean isCrouching;
 
     // Current jump state
