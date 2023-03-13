@@ -14,7 +14,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
     private Player player;
     private boolean jumpKey = false;
-    private boolean jumpingDown = false;
 
     /**
      * 
