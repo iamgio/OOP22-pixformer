@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.model.World;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
 
@@ -40,5 +41,10 @@ public class TestInputComponent extends UserInputComponent implements CompleteMo
     @Override
     public void ability() {
 
+    }
+
+    @Override
+    public void update(final World world) {
+        // TODO Auto-generated method stub
     }
 }
