@@ -1,8 +1,7 @@
 package pixformer.model;
 
-import pixformer.model.entity.TestEntity;
-
-import java.util.Set;
+import pixformer.controller.deserialization.level.JsonLevelDataDeserializer;
+import pixformer.model.entity.EntityFactoryImpl;
 
 /**
  * @deprecated test
@@ -14,6 +13,7 @@ public class LevelMock extends LevelImpl {
      * Test level.
      */
     public LevelMock() {
-        super(new LevelData("TestLevel", Set.of(new TestEntity(15)), 5, 5));
+        super(new JsonLevelDataDeserializer(new EntityFactoryImpl())
+                .deserialize(Level.class.getResourceAsStream("/levels/test1.json")));
     }
 }
