@@ -19,6 +19,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 
     @Override
     public void update(GameScene scene) {
+        System.out.println(player.getX() + " " + player.getY());
         RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
         playerShape.setColor(new Color(1, 1, 1));
         scene.getGraphics().draw(playerShape);

@@ -17,7 +17,6 @@ import pixformer.model.input.InputComponent;
  * The class manages the character used by the player.
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
-    static final double GRAVITY = 1.0;
     static final double SPEED = 1.0;
 
     // This playerIndex
@@ -63,7 +62,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         this.inputComponent = new PlayerInputComponent(this);
     }
 
-    /**
+        /**
      * @return True if is crouching.
      */
     public boolean isCrouching() {
