@@ -7,6 +7,7 @@ import pixformer.model.entity.EntityFactory;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 /**
  * A level data deserializer from JSON format.
@@ -31,6 +32,6 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer {
                 .registerTypeAdapter(Entity.class,
                         new JsonEntityDeserializer(new EntityFactoryLookupDecorator(factory)))
                 .create()
-                .fromJson(new InputStreamReader(inputStream), LevelData.class);
+                .fromJson(new InputStreamReader(inputStream, Charset.defaultCharset()), LevelData.class);
     }
 }
