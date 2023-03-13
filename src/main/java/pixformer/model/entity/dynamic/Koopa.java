@@ -7,7 +7,7 @@ import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 
-public class Koopa implements MutableEntity {
+public final class Koopa implements MutableEntity {
 
     private KoopaState currentKoopaState;
 
