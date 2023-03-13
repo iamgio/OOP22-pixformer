@@ -9,17 +9,19 @@ import pixformer.view.engine.GameScene;
  */
 public class FireballGraphicsComponent extends GraphicsComponent {
 
-    protected FireballGraphicsComponent(Entity entity) {
+    /**
+     * Entity that will be displayed.
+     * @param entity
+     */
+    protected FireballGraphicsComponent(final Entity entity) {
         super(entity);
-        //TODO Auto-generated constructor stub
     }
 
     /**
      * {@inheritDoc}}
      */
     @Override
-    public void update(GameScene scene) {
-        // TODO Auto-generated method stub
+    public void update(final GameScene scene) {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 

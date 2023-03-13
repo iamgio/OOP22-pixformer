@@ -9,9 +9,10 @@ import pixformer.model.entity.collision.CollisionComponent;
  */
 public class PlayerCollisionComponent extends CollisionComponent {
     private Player player;
+
     /**
      * 
-     * @param entity Player entity whose collisions will be managed.
+     * @param player Player entity whose collisions will be managed.
      */
     protected PlayerCollisionComponent(final Player player) {
         super(player);

@@ -12,13 +12,20 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 
     private Player player;
 
+    /**
+     * 
+     * @param player Player entity who will be displayed.
+     */
     protected PlayerGraphicsComponent(final Player player) {
         super(player);
         this.player = player;
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
-    public void update(GameScene scene) {
+    public void update(final GameScene scene) {
         System.out.println(player.getX() + " " + player.getY());
         RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
         playerShape.setColor(new Color(1, 1, 1));

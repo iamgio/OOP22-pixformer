@@ -3,7 +3,6 @@ package pixformer.model.entity.powerups.other.Fireball;
 import java.util.Set;
 
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 
@@ -16,7 +15,7 @@ public class FireballCollisionComponent extends CollisionComponent {
      * 
      * @param entity Entity linked with current component.
      */
-    protected FireballCollisionComponent(AbstractEntity entity) {
+    protected FireballCollisionComponent(final AbstractEntity entity) {
         super(entity);
         //TODO Auto-generated constructor stub
     }

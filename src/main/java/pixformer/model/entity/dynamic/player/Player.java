@@ -1,14 +1,11 @@
 package pixformer.model.entity.dynamic.player;
 
-import java.lang.StackWalker.Option;
 import java.util.Optional;
-import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
@@ -16,10 +13,10 @@ import pixformer.model.input.InputComponent;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {    
+public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
     // This playerIndex
     private int playerIndex;
-    
+
     // Max duration of a jump
     static final float MAX_JUMP_DURATION = 0.01f;
 
@@ -124,9 +121,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     /**
      * 
      * @param jumpForce Negative jumping force applied to the entity.
-     * @return
+     * @return True if the player jumped, False if he couldnt.
      */
-    public boolean jump (final float jumpForce) {
+    public boolean jump(final float jumpForce) {
 
         System.out.println(currentPlayerJump);
 
@@ -146,10 +143,16 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         return currentPlayerJump < MAX_JUMP_DURATION;
     }
 
+    /**
+     * Block player jump.
+     */
     public void stopJumping() {
         this.currentPlayerJump = 0;
     }
 
+    /**
+     * Reset the "jump counter" variable.
+     */
     public void resetJumping() {
         this.currentPlayerJump = MAX_JUMP_DURATION;
     }
