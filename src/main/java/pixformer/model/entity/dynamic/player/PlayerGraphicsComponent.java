@@ -37,7 +37,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
     }
 
     /**
-     * Describe what happens on Player death
+     * Describe what happens on Player death.
      */
     public void startDeathAnimation() {
         isAlive = false;

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.dynamic.Koopa;
 
@@ -34,8 +33,8 @@ public class PlayerCollisionComponent extends CollisionComponent {
         }
 
         for (var x : collisions) {
-            if (x.entity().getClass().equals(Goomba.class) || x.entity().getClass().equals(Koopa.class)) {
-                if (x.side() == CollisionSide.LEFT || x.side() == CollisionSide.RIGHT) {
+            if (x.entity() instanceof Goomba || x.entity() instanceof Koopa) {
+                if (x.side().isHorizontal()) {
                     this.player.getDamage();
                 }
             }
