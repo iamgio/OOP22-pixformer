@@ -16,6 +16,7 @@ import java.util.Set;
 public class WorldImpl implements World {
 
     private final Set<Entity> entities;
+    private final Set<Entity> killedEntities;
     private final EntityCollisionManager collisionManager;
 
     /**
@@ -23,6 +24,7 @@ public class WorldImpl implements World {
      */
     public WorldImpl() {
         this.entities = new HashSet<>();
+        this.killedEntities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
     }
 
@@ -41,6 +43,14 @@ public class WorldImpl implements World {
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void killEntity(final Entity entity) {
+        this.killedEntities.add(entity);
     }
 
     /**
@@ -69,6 +79,7 @@ public class WorldImpl implements World {
                 updatePosition(dt, mutableEntity);
             }
         });
+        this.entities.removeAll(this.killedEntities);
     }
 
     private void updatePosition(final double dt, final MutableEntity entity) {
