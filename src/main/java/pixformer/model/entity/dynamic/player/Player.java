@@ -33,10 +33,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private Optional<PowerUp> powerUp;
 
     // Player components
-    private GraphicsComponent graphicsComponent;
-    private PhysicsComponent physicsComponent;
-    private CollisionComponent collisionComponent;
-    private InputComponent inputComponent;
+    private PlayerGraphicsComponent graphicsComponent;
+    private PlayerPhysicsComponent physicsComponent;
+    private PlayerCollisionComponent collisionComponent;
+    private PlayerInputComponent inputComponent;
 
     /**
      * 
@@ -70,7 +70,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Set the new inputComponent.
      * @param inputComponent new Player's inputComponent.
      */
-    public void setInputComponent(final InputComponent inputComponent) {
+    public void setInputComponent(final PlayerInputComponent inputComponent) {
         this.inputComponent = inputComponent;
     }
 
@@ -161,14 +161,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     public void getDamage() {
-        if(powerUp.isEmpty()) {
+        if(this.powerUp.isEmpty()) {
             death();
         }
 
-        powerUp = Optional.empty();
+        this.powerUp = Optional.empty();
     }
 
     private void death() {
-
+        this.graphicsComponent.startDeathAnimation();
     }
 }
