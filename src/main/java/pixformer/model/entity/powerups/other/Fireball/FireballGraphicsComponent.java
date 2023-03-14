@@ -2,7 +2,9 @@ package pixformer.model.entity.powerups.other.Fireball;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
+import pixformer.view.engine.RectangleRenderer;
 
 /**
  * Implementation of a GraphicsCopmponent for a Fireball entity.
@@ -22,7 +24,9 @@ public class FireballGraphicsComponent extends GraphicsComponent {
      */
     @Override
     public void update(final GameScene scene) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        RectangleRenderer fireballShape = scene.getRendererFactory().newRectangle(getEntity().getWidth(), getEntity().getHeight());
+        fireballShape.setColor(new Color(1, 0, 0));
+        scene.getGraphics().draw(fireballShape);
     }
 
 }
