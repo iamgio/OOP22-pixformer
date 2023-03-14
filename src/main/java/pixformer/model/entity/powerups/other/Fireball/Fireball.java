@@ -1,13 +1,14 @@
 package pixformer.model.entity.powerups.other.Fireball;
 
-import pixformer.common.Updatable;
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
-public class Fireball extends AbstractEntity implements Updatable {
+public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     static final double SPEED = 1.0;
 
@@ -22,20 +23,9 @@ public class Fireball extends AbstractEntity implements Updatable {
         super(x, y, width, height);
     }
 
-    /**
-     * {@inheritDoc}}
-     */
     @Override
-    public void update(final double dt) {
-        //updatePos(new Vector2D(SPEED * dt * (this.getDirection() == Direction.LEFT ? -1 : 1), 0), dt);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public BoundingBox getBoundingBox() {
+    public GraphicsComponent getGraphicsComponent() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
     }
 }
