@@ -2,7 +2,6 @@ package pixformer.model.entity.dynamic.player;
 
 import java.util.Set;
 
-import javafx.geometry.Side;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.CollisionSide;
@@ -35,8 +34,8 @@ public class PlayerCollisionComponent extends CollisionComponent {
         }
 
         for (var x : collisions) {
-            if(x.entity().getClass().equals(Goomba.class) || x.entity().getClass().equals(Koopa.class)) {
-                if(x.side() == CollisionSide.LEFT || x.side() == CollisionSide.RIGHT) {
+            if (x.entity().getClass().equals(Goomba.class) || x.entity().getClass().equals(Koopa.class)) {
+                if (x.side() == CollisionSide.LEFT || x.side() == CollisionSide.RIGHT) {
                     this.player.getDamage();
                 }
             }

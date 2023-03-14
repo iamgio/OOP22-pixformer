@@ -160,6 +160,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         this.currentPlayerJump = MAX_JUMP_DURATION;
     }
 
+    /**
+     * Define what happens when Player get damaged.
+     */
     public void getDamage() {
         if(this.powerUp.isEmpty()) {
             death();
@@ -168,6 +171,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         this.powerUp = Optional.empty();
     }
 
+    /**
+     * Define what happens on Player death.
+     */
     private void death() {
         this.graphicsComponent.startDeathAnimation();
     }
