@@ -10,14 +10,15 @@ import pixformer.model.entity.collision.CollisionComponent;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class FireballCollisionComponent extends CollisionComponent {
+    private Fireball fireball;
 
     /**
      * 
      * @param entity Entity linked with current component.
      */
-    protected FireballCollisionComponent(final AbstractEntity entity) {
-        super(entity);
-        //TODO Auto-generated constructor stub
+    protected FireballCollisionComponent(final Fireball fireball) {
+        super(fireball);
+        this.fireball = fireball;
     }
 
     /**
@@ -27,7 +28,9 @@ public class FireballCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
 
         for (var x : collisions) {
-            throw new UnsupportedOperationException("Unimplemented method 'update'");
+            if (x.side().isHorizontal()) {
+                // This.destroy();
+            }
         }
 
     }
