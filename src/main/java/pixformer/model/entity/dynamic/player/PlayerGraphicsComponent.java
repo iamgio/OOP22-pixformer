@@ -32,4 +32,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
         scene.getGraphics().draw(playerShape);
     }
 
+    public void startDeathAnimation() {
+    }
+
 }
