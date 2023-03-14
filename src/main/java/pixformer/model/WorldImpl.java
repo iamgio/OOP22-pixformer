@@ -5,7 +5,10 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.input.AIInputComponent;
+import pixformer.model.event.EventManager;
+import pixformer.model.event.EventSubscriber;
+import pixformer.model.score.ScoreManager;
+import pixformer.model.score.ScoreManagerImpl;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,6 +22,8 @@ public class WorldImpl implements World {
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
     private final EntityCollisionManager collisionManager;
+    private final EventManager eventManager;
+    private final ScoreManager scoreManager;
 
     /**
      * Create a new World.
@@ -27,6 +32,8 @@ public class WorldImpl implements World {
         this.entities = new HashSet<>();
         this.killedEntities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
+        this.eventManager = new EventManager();
+        this.scoreManager = new ScoreManagerImpl(this.eventManager);
     }
 
     /**
@@ -44,6 +51,7 @@ public class WorldImpl implements World {
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
+
     }
 
     /**
@@ -52,6 +60,7 @@ public class WorldImpl implements World {
     @Override
     public void killEntity(final Entity entity) {
         this.killedEntities.add(entity);
+        eventManager.die(entity);
     }
 
     /**

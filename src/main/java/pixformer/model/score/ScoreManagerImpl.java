@@ -1,5 +1,7 @@
 package pixformer.model.score;
 
+import pixformer.model.event.EventSubscriber;
+
 /**
  * {@inheritDoc}.
  */
@@ -9,8 +11,9 @@ public class ScoreManagerImpl implements ScoreManager {
     /**
      * Costructor for the class.
      */
-    public ScoreManagerImpl() {
+    public ScoreManagerImpl(final EventSubscriber eventSubscriber) {
         this.score = new ScoreImpl();
+        eventSubscriber.addPlayerOnKill(entity -> this.score.addPoints(100));
     }
 
     /**
@@ -21,11 +24,4 @@ public class ScoreManagerImpl implements ScoreManager {
         return this.score.getPoints();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addScore(final int points) {
-        this.score.addPoints(points);
-    }
 }
