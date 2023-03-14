@@ -10,12 +10,12 @@ public record Vector2D(double x, double y) {
 
     /**
      * Sums two vectors.
-     * @param other vector to add
+     * @param vector2d vector to add
      * @return a new Vector2D whose components are the sum of the components of
      * {@code this} and {@code other}.
      */
-    public Vector2D sum(final Vector2D other) {
-        return new Vector2D(this.x + other.x, this.y + other.y);
+    public Vector2D sum(final Vector2D vector2d) {
+        return new Vector2D(this.x + vector2d.x, this.y + vector2d.y);
     }
 
     /**

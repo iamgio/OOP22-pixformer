@@ -1,6 +1,9 @@
 package pixformer.controller.input;
 
+import pixformer.model.modelinput.AbilityModelInput;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.modelinput.CrouchModelInput;
+import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.modelinput.JumpModelInput;
 import pixformer.model.modelinput.ModelInput;
 
@@ -30,7 +33,9 @@ public final class ModelInputAdapter implements CompleteModelInput {
      */
     @Override
     public void crouch() {
-        // TODO
+        if (this.input instanceof CrouchModelInput crouchable) {
+            crouchable.crouch();
+        }
     }
 
     /**
@@ -38,7 +43,9 @@ public final class ModelInputAdapter implements CompleteModelInput {
      */
     @Override
     public void ability() {
-        // TODO
+        if (this.input instanceof AbilityModelInput activable) {
+            activable.ability();
+        }
     }
 
     /**
@@ -46,7 +53,9 @@ public final class ModelInputAdapter implements CompleteModelInput {
      */
     @Override
     public void left() {
-        // TODO
+        if (this.input instanceof HorizontalModelInput movable) {
+            movable.left();
+        }
     }
 
     /**
@@ -54,7 +63,9 @@ public final class ModelInputAdapter implements CompleteModelInput {
      */
     @Override
     public void right() {
-        // TODO
+        if (this.input instanceof HorizontalModelInput movable) {
+            movable.right();
+        }
     }
 
     /**

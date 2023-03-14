@@ -1,49 +1,42 @@
 package pixformer.model.entity.dynamic.player;
 
 import java.util.Optional;
-import pixformer.common.Updatable;
-import pixformer.common.Vector2D;
-import pixformer.model.entity.MovableAbstractEntity;
+import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.model.physics.PhysicsComponent;
 import pixformer.model.entity.powerups.PowerUp;
+import pixformer.model.input.InputComponent;
 
 /**
  * The class manages the character used by the player.
  */
-public class Player extends MovableAbstractEntity implements Updatable, CompleteModelInput,
-        DrawableEntity, DefaultRectangleBoundingBoxEntity {
-    static final double GRAVITY = 1.0;
-    static final double SPEED = 1.0;
-
+public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
     // This playerIndex
     private int playerIndex;
 
-    // State variables to check if player is jumping or crouching
-    private boolean isCrouching;
-    private boolean isJumping;
-
-    // State variable to check if player is touching ground
-    private boolean isGrounded = true;
+    // State of the player life
+    private boolean isAlive = true;
 
     // Max duration of a jump
-    static final double MAX_JUMP_DURATION = 5.0;
-    static final double JUMP_FORCE = 1.0;
+    static final float MAX_JUMP_DURATION = 0.01f;
+
+    // State variable to check if player is crouching
+    private boolean isCrouching;
 
     // Current jump state
-    private double jumpTimeCounter = MAX_JUMP_DURATION;
-
-    // Variables to manage player input, True if in the last timeslot has been
-    // pressed a movement key, False otherwise
-    private boolean leftKey;
-    private boolean rightKey;
-    /* private boolean abilityKey; */
-    private boolean jumpingKey;
+    private float currentPlayerJump = MAX_JUMP_DURATION;
 
     // Current powerup
-    private Optional<PowerUp> powerup;
+    private Optional<PowerUp> powerUp;
+
+    // Player components
+    private PlayerGraphicsComponent graphicsComponent;
+    private PlayerPhysicsComponent physicsComponent;
+    private PlayerCollisionComponent collisionComponent;
+    private PlayerInputComponent inputComponent;
 
     /**
      * 
@@ -55,58 +48,14 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
      */
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
         super(x, y, width, height);
+
         this.playerIndex = playerIndex;
-    }
+        this.powerUp = Optional.empty();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void left() {
-        this.leftKey = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void right() {
-        this.rightKey = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void ability() {
-        /* this.abilityKey = true; */
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void jump() {
-        this.jumpingKey = true;
-
-        if (this.isGrounded) {
-            this.isJumping = true;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void crouch() {
-        isCrouching = true;
-    }
-
-    /**
-     * @return True if is crouching.
-     */
-    public boolean isCrouching() {
-        return isCrouching;
+        this.graphicsComponent = new PlayerGraphicsComponent(this);
+        this.physicsComponent = new PlayerPhysicsComponent(this);
+        this.collisionComponent = new PlayerCollisionComponent(this);
+        this.inputComponent = new PlayerInputComponent(this);
     }
 
     /**
@@ -118,77 +67,114 @@ public class Player extends MovableAbstractEntity implements Updatable, Complete
     }
 
     /**
-     * {@inheritDoc}
+     * Set the new inputComponent.
+     * @param inputComponent new Player's inputComponent.
      */
-    @Override
-    public GraphicsComponent getGraphicsComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGraphicsComponent'");
+    public void setInputComponent(final PlayerInputComponent inputComponent) {
+        this.inputComponent = inputComponent;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(final double dt) {
-        // Manage movement
-        int movement = 0;
+    public Optional<InputComponent> getInputComponent() {
+        return Optional.of(this.inputComponent);
+    }
 
-        if (this.leftKey) {
-            movement--;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent getGraphicsComponent() {
+        return this.graphicsComponent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(this.collisionComponent);
+    }
+
+    /**
+     * Return current physics component.
+     * @return player's physics component.
+     */
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(this.physicsComponent);
+    }
+
+    /**
+     * Return current player powerup.
+     * @return current player powerup.
+     */
+    public Optional<PowerUp> getPowerup() {
+        return this.powerUp;
+    }
+
+     /**
+     * @return True if is crouching.
+     */
+    public boolean isCrouching() {
+        return isCrouching;
+    }
+
+    /**
+     * 
+     * @param jumpForce Negative jumping force applied to the entity.
+     * @return True if the player jumped, False if he couldnt.
+     */
+    public boolean jump(final float jumpForce) {
+
+        System.out.println(currentPlayerJump);
+
+        if (currentPlayerJump <= 0) {
+            return false;
         }
 
-        if (this.rightKey) {
-            movement++;
+        currentPlayerJump += jumpForce;
+        return true;
+    }
+
+    /**
+     * Check if Player is jumping.
+     * @return True if Player is jumping.
+     */
+    public boolean isJumping() {
+        return currentPlayerJump < MAX_JUMP_DURATION;
+    }
+
+    /**
+     * Block player jump.
+     */
+    public void stopJumping() {
+        this.currentPlayerJump = 0;
+    }
+
+    /**
+     * Reset the "jump counter" variable.
+     */
+    public void resetJumping() {
+        this.currentPlayerJump = MAX_JUMP_DURATION;
+    }
+
+    /**
+     * Define what happens when Player get damaged.
+     */
+    public void getDamage() {
+        if(this.powerUp.isEmpty()) {
+            death();
         }
 
-        updatePos(new Vector2D(SPEED * movement, 0), dt);
+        this.powerUp = Optional.empty();
+    }
 
-        // Manage jumping
-        if (this.isGrounded) {
-            // Reset jumpTimeCounter
-            this.jumpTimeCounter = MAX_JUMP_DURATION;
-        } else {
-            this.jumpTimeCounter -= dt;
-        }
-
-        if (!this.jumpingKey) {
-            this.jumpTimeCounter = 0;
-        }
-
-        if (this.jumpTimeCounter <= 0) {
-            this.isJumping = false;
-        }
-
-        // Player is jumping (moving up)
-        if (this.isJumping) {
-            updatePos(new Vector2D(0, JUMP_FORCE), dt);
-        }
-
-        // Player is falling down
-        if (!this.isGrounded && !this.isJumping) {
-            updatePos(new Vector2D(0, -GRAVITY), dt);
-        }
-
-        // Manage abilities
-        /*
-         * if (this.abilityKey) {
-         * //NEED TO IMPLEMENT UPGRADES
-         * }
-         */
-
-        /*
-         * Manage collisions !!!
-         */
-        // If grounded
-        this.isGrounded = true;
-        // else
-        this.isGrounded = false;
-
-        // reset keys variables
-        this.leftKey = false;
-        this.rightKey = false;
-        this.jumpingKey = false;
-        /* this.abilityKey = false; */
+    /**
+     * Define what happens on Player death.
+     */
+    private void death() {
+        this.graphicsComponent.startDeathAnimation();
     }
 }
