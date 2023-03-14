@@ -12,6 +12,8 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 
     private Player player;
 
+    private boolean isAlive = true;
+
     /**
      * 
      * @param player Player entity who will be displayed.
@@ -27,12 +29,15 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
     @Override
     public void update(final GameScene scene) {
         System.out.println(player.getX() + " " + player.getY());
-        RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
-        playerShape.setColor(new Color(1, 1, 1));
-        scene.getGraphics().draw(playerShape);
+        if(this.isAlive) {
+            RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
+            playerShape.setColor(new Color(1, 1, 1));
+            scene.getGraphics().draw(playerShape);
+        }        
     }
 
     public void startDeathAnimation() {
+        isAlive = false;
     }
 
 }
