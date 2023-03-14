@@ -4,6 +4,6 @@ import pixformer.model.entity.Entity;
 
 public interface EventHandler {
 
-    void die(Entity entity);
+    void killed(Entity entity);
 
 }

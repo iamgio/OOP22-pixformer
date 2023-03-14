@@ -6,7 +6,6 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.event.EventManager;
-import pixformer.model.event.EventSubscriber;
 import pixformer.model.score.ScoreManager;
 import pixformer.model.score.ScoreManagerImpl;
 
@@ -60,7 +59,7 @@ public class WorldImpl implements World {
     @Override
     public void killEntity(final Entity entity) {
         this.killedEntities.add(entity);
-        eventManager.die(entity);
+        eventManager.killed(entity);
     }
 
     /**
