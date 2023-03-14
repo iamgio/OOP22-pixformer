@@ -17,6 +17,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     // This playerIndex
     private int playerIndex;
 
+    // State of the player life
+    private boolean isAlive = true;
+
     // Max duration of a jump
     static final float MAX_JUMP_DURATION = 0.01f;
 
@@ -155,5 +158,17 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void resetJumping() {
         this.currentPlayerJump = MAX_JUMP_DURATION;
+    }
+
+    public void getDamage() {
+        if(powerUp.isEmpty()) {
+            death();
+        }
+
+        powerUp = Optional.empty();
+    }
+
+    private void death() {
+
     }
 }
