@@ -10,8 +10,6 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
  */
 public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
-    static final double SPEED = 1.0;
-
     /**
      * 
      * @param x Starting X position.
