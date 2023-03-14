@@ -161,6 +161,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
+     *  Get if Player is alive.
+     * @return True if player is alive, false if is not.
+     */
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    /**
      * Define what happens when Player get damaged.
      */
     public void getDamage() {
