@@ -46,6 +46,7 @@ public class OnPressedTest {
     void testIfGoombaDies() {
         final Goomba goomba = new Goomba(0, 2);
         final World world = createPrisonAndFallingPlayer(goomba);
+        assertTrue(world.getEntities().contains(goomba));
         world.update(DT);
         assertTrue(!world.getEntities().contains(goomba));
     }
