@@ -11,6 +11,7 @@ import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
@@ -107,7 +108,7 @@ public final class Koopa implements MutableEntity, DrawableEntity {
 
     @Override
     public GraphicsComponent getGraphicsComponent() {
-        return new RectangleGraphicsComponent(this);
+        return new RectangleGraphicsComponent(this, new Color(0, 1, 0));
     }
 
     @Override
