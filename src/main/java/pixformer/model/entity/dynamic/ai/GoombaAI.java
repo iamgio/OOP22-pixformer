@@ -27,13 +27,13 @@ public class GoombaAI extends AIInputComponent {
      * Create a new GoombaAI.
      * 
      * @param entity which this AI will control.
+     * @param modelInput to control the movement of the entity.
      */
     public GoombaAI(final AbstractEntity entity, final HorizontalModelInput modelInput) {
         super(entity);
         this.joystick = modelInput;
         reactor = new SimpleCollisionReactor(Map.of(
-            Entity::isSolid, this::reactOnBlockCollision,
-            Player.class::isInstance, (side) -> {/* TODO: this entity dies */ }
+            Entity::isSolid, this::reactOnBlockCollision
         ));
     }
 
