@@ -14,6 +14,7 @@ public class EntityFactoryImpl implements EntityFactory {
     /**
      * {@inheritDoc}
      */
+    @EntityType("block")
     @Override
     public Entity createTileBlock(final int x, final int y) {
         return new Block(x, y);
@@ -40,6 +41,7 @@ public class EntityFactoryImpl implements EntityFactory {
     /**
      * {@inheritDoc}
      */
+    @EntityType("surprise")
     @Override
     public Entity createSurpriseBlock(final int x, final int y) {
         return null;
@@ -66,6 +68,7 @@ public class EntityFactoryImpl implements EntityFactory {
     /**
      * {@inheritDoc}
      */
+    @EntityType("player")
     @Override
     public Entity createMainCharacter(final int x, final int y) {
         return null;
