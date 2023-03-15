@@ -2,7 +2,7 @@ package pixformer.controller.input;
 
 import pixformer.model.modelinput.AbilityModelInput;
 import pixformer.model.modelinput.CompleteModelInput;
-import pixformer.model.modelinput.CrouchModelInput;
+import pixformer.model.modelinput.SprintModelInput;
 import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.modelinput.JumpModelInput;
 import pixformer.model.modelinput.ModelInput;
@@ -32,9 +32,9 @@ public final class ModelInputAdapter implements CompleteModelInput {
      * {@inheritDoc}
      */
     @Override
-    public void crouch() {
-        if (this.input instanceof CrouchModelInput crouchable) {
-            crouchable.crouch();
+    public void sprint() {
+        if (this.input instanceof SprintModelInput sprintable) {
+            sprintable.sprint();
         }
     }
 

@@ -24,7 +24,7 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
             case D -> level -> level.getPlayer1().ifPresent(CompleteModelInput::right);
             case SPACE -> level -> level.getPlayer1().ifPresent(CompleteModelInput::jump);
             case SHIFT -> level -> level.getPlayer1().ifPresent(CompleteModelInput::ability);
-            case CONTROL -> level -> level.getPlayer1().ifPresent(CompleteModelInput::crouch);
+            case CONTROL -> level -> level.getPlayer1().ifPresent(CompleteModelInput::sprint);
 
             case W -> level -> level.getPlayer2().ifPresent(CompleteModelInput::jump);
             default -> null;

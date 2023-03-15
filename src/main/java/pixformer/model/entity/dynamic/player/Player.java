@@ -20,8 +20,8 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     // State of the player life
     private boolean isAlive = true;
 
-    // State variable to check if player is crouching
-    private boolean isCrouching;
+    // State variable to check if player is sprinting
+    private boolean isSprinting;
 
     // Current powerup
     private Optional<PowerUp> powerUp;
@@ -109,10 +109,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
      /**
-     * @return True if is crouching.
+     * @return True if is sprinting.
      */
-    public boolean isCrouching() {
-        return isCrouching;
+    public boolean isSprinting() {
+        return isSprinting;
     }
 
     /**

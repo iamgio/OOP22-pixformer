@@ -11056,3 +11056,15 @@ INFORMAZIONI: Unsupported notification method: $/setTrace
 
 2023.03.14 18:47:33 WARN  code navigation does not work for the file 'C:\Users\giacomo.antonelli4\OOP22-pixformer\src\main\java\pixformer\model\entity\dynamic\player\PlayerGraphicsComponent.java' because it doesn't belong to a build target.
 2023.03.14 18:47:33 WARN  no build target for: C:\Users\giacomo.antonelli4\OOP22-pixformer\src\main\java\pixformer\view\engine\Graphics.java
+2023.03.15 12:36:46 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\giacomo.antonelli4\Desktop\OOP22-pixformer\.metals\lsp.trace.json or C:\Users\giacomo.antonelli4\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2023.03.15 12:36:48 INFO  logging to file C:\Users\giacomo.antonelli4\Desktop\OOP22-pixformer\.metals\metals.log
+2023.03.15 12:36:48 INFO  Started: Metals version 0.11.10 in workspace 'C:\Users\giacomo.antonelli4\Desktop\OOP22-pixformer' for client Visual Studio Code 1.74.3.
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/C:/Users/giacomo.antonelli4/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.10.5/scribe-slf4j_2.13-3.10.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2023.03.15 12:36:53 INFO  time: initialize in 5.43s
+2023.03.15 12:36:55 WARN  Build server is not auto-connectable.
+2023.03.15 12:36:55 WARN  no build target for: C:\Users\giacomo.antonelli4\Desktop\OOP22-pixformer\src\main\java\pixformer\view\javafx\PixformerJavaFXKeyboardInputMapper.java

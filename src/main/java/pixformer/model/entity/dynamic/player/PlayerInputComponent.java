@@ -81,8 +81,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * {@inheritDoc}
      */
     @Override
-    public void crouch() {
-        System.out.println("CROUCH");
+    public void sprint() {
+        System.out.println("SPRINT");
     }
 
     /**

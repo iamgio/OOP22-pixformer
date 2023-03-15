@@ -7,6 +7,6 @@ public interface CompleteModelInput extends
         HorizontalModelInput,
         AbilityModelInput,
         JumpModelInput,
-        CrouchModelInput {
+        SprintModelInput {
 
 }
