@@ -7,7 +7,7 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
-import pixformer.view.entity.Player.PlayerGraphicsComponent;
+import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.model.entity.powerups.FireFlower;
 import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;

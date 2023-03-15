@@ -9,6 +9,7 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
