@@ -1,4 +1,4 @@
-package pixformer.view.entity.Player;
+package pixformer.view.entity.player;
 
 import pixformer.view.engine.Color;
 import pixformer.model.entity.GraphicsComponent;
