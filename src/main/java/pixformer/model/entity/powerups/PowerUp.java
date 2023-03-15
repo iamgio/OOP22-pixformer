@@ -26,15 +26,6 @@ public class PowerUp {
     }
 
     /**
-     * Get powerup priority.
-     * 
-     * @return powerup priority.
-     */
-    public int getPriority() {
-        return priority;
-    }
-
-    /**
      * Get powerup behaviour.
      * 
      * @return powerup behaviour.
