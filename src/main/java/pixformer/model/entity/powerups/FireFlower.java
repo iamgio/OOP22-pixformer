@@ -8,12 +8,14 @@ public class FireFlower implements PowerupBehaviour {
 
     private final int priority = 1;
 
+    private final float fireballBaseSpeed = 0.01f;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void ability(final Entity entity) {
-        
+
     }
 
     /**
