@@ -11,7 +11,7 @@ public class FireballPhysicsComponent extends PhysicsComponent {
 
     /**
      * 
-     * @param entity Entity affected by the class physics rules.
+     * @param fireball Entity Fireball affected by the class physics rules.
      */
     public FireballPhysicsComponent(final Fireball fireball) {
         super(fireball);
@@ -24,7 +24,6 @@ public class FireballPhysicsComponent extends PhysicsComponent {
     @Override
     public void update(final double dt) {
         super.update(dt);
-
         fireball.setVelocity(new Vector2D(fireball.getSpeed(), fireball.getVelocity().y()));
     }
 }

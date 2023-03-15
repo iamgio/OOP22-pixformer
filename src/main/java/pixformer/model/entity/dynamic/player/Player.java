@@ -136,7 +136,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens when Player get damaged.
      */
     public void damaged() {
-        if(this.powerUp.isEmpty()) {
+        if (this.powerUp.isEmpty()) {
             kill();
         }
 

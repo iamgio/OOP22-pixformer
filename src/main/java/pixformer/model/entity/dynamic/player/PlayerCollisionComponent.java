@@ -1,12 +1,9 @@
 package pixformer.model.entity.dynamic.player;
 
 import java.util.Set;
-
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.dynamic.player.PlayerInputComponent;
 import pixformer.model.entity.dynamic.Enemy;
-import pixformer.model.input.InputComponent;
 
 /**
  * Implementation of CollisionComponent for a Player entity.

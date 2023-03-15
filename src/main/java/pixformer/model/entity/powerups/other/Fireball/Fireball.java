@@ -27,6 +27,8 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      * @param y Starting Y position.
      * @param width Width.
      * @param height Height.
+     * @param speed Fireball constant speed.
+     * @param world Instance of current world spawn.
      */
     public Fireball(final double x, final double y, final double width, final double height, final float speed, final World world) {
         super(x, y, width, height);
@@ -39,16 +41,26 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         world.spawnEntity(this);
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
     public GraphicsComponent getGraphicsComponent() {
         return graphicsComponent;
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
         return Optional.of(collisionComponent);
     }
-    
+
+    /**
+     * Return an Optional with the PhisicsComponent of the Fireball.
+     * @return PhysicsComponent of the Fireball.
+     */
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
     }
