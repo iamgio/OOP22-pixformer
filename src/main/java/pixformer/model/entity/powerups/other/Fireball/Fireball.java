@@ -1,5 +1,7 @@
 package pixformer.model.entity.powerups.other.Fireball;
 
+import java.util.Optional;
+
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
@@ -34,11 +36,12 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         return graphicsComponent;
     }
 
-    public CollisionComponent getCollisionComponent() {
-        return collisionComponent;
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
     }
     
-    public PhysicsComponent getPhysicsComponent() {
-        return physicsComponent;
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(physicsComponent);
     }
 }
