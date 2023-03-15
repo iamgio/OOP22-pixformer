@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.Fireball;
+package pixformer.view.entity.powerups.fireball;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
@@ -15,7 +15,7 @@ public class FireballGraphicsComponent extends GraphicsComponent {
      * Entity that will be displayed.
      * @param entity
      */
-    protected FireballGraphicsComponent(final Entity entity) {
+    public FireballGraphicsComponent(final Entity entity) {
         super(entity);
     }
 
