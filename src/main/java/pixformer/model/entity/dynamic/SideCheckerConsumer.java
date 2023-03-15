@@ -7,7 +7,7 @@ import pixformer.model.entity.collision.CollisionSide;
 /**
  * A Consumer which runs only if the CollisionSide passed to it respect some conditions.
  */
-public class SideCheckerConsumer implements Consumer<CollisionSide> {
+public final class SideCheckerConsumer implements Consumer<CollisionSide> {
 
     private final CollisionSide checkingSide;
     private final Runnable runnable;
