@@ -6,6 +6,7 @@ import pixformer.model.entity.EntityFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -30,10 +31,10 @@ public class EntityFactoryLookupDecorator {
      * Retrieves an entity from its type.
      * @param type entity type, matching the one specified by the {@link EntityType} annotation
      * @param argumentMapper mapper from <tt>(parameterName, parameterType)</tt> to the corresponding argument value
-     * @return new instance of the matching entity
+     * @return supplier of a new instance of the matching entity
      * @throws java.util.NoSuchElementException if no entity with the given type was found
      */
-    public Entity fromType(final String type, final BiFunction<String, Class<?>, Object> argumentMapper) {
+    public Supplier<Entity> fromType(final String type, final BiFunction<String, Class<?>, Object> argumentMapper) {
         Method factoryMethod = Stream.of(factory.getClass().getMethods())
                 .filter(method -> method.isAnnotationPresent(EntityType.class))
                 .filter(method -> method.getAnnotation(EntityType.class).value().equals(type))
@@ -53,10 +54,12 @@ public class EntityFactoryLookupDecorator {
             arguments[i] = argumentMapper.apply(parameterNames[i], parameterTypes[i]);
         }
 
-        try {
-            return (Entity) factoryMethod.invoke(factory, arguments);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            return null;
-        }
+        return () -> {
+            try {
+                return (Entity) factoryMethod.invoke(factory, arguments);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                return null;
+            }
+        };
     }
 }

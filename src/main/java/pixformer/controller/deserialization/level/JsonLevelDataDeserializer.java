@@ -7,6 +7,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import pixformer.controller.deserialization.level.macro.EntityMacro;
+import pixformer.controller.deserialization.level.macro.NoMacro;
 import pixformer.model.LevelData;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
@@ -17,6 +19,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * A level data deserializer from JSON format.
@@ -69,11 +72,18 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
     private void appendEntity(Set<Entity> entities, JsonObject json, EntityFactoryLookupDecorator lookup) {
         final String type = json.get("type").getAsString();
 
-        final Entity entity = lookup.fromType(type,
+
+        final Supplier<Entity> entitySupplier = lookup.fromType(type,
                 // Retrieving factory method's parameter values from JSON
                 (parameterName, parameterType) -> new Gson().fromJson(json.get(parameterName), parameterType)
         );
 
-        entities.add(entity);
+        final EntityMacro macro = this.retrieveMacro(json.getAsJsonObject("macro"));
+
+        entities.add(macro.apply(entitySupplier));
+    }
+
+    private EntityMacro retrieveMacro(JsonObject macroJson) {
+        return new NoMacro();
     }
 }
