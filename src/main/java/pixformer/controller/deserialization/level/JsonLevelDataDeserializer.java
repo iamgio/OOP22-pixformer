@@ -8,7 +8,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import pixformer.controller.deserialization.level.macro.EntityMacro;
+import pixformer.controller.deserialization.level.macro.FillMacro;
 import pixformer.controller.deserialization.level.macro.NoMacro;
+import pixformer.controller.deserialization.level.macro.TranslateMacro;
 import pixformer.model.LevelData;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
@@ -69,7 +71,7 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
         return new LevelData(name, entities, spawnPointX, spawnPointY);
     }
 
-    private void appendEntity(Set<Entity> entities, JsonObject json, EntityFactoryLookupDecorator lookup) {
+    private void appendEntity(final Set<Entity> entities, final JsonObject json, final EntityFactoryLookupDecorator lookup) {
         final String type = json.get("type").getAsString();
 
 
@@ -80,10 +82,26 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
 
         final EntityMacro macro = this.retrieveMacro(json.getAsJsonObject("macro"));
 
-        entities.add(macro.apply(entitySupplier));
+        entities.addAll(macro.apply(entitySupplier));
     }
 
-    private EntityMacro retrieveMacro(JsonObject macroJson) {
-        return new NoMacro();
+    private EntityMacro retrieveMacro(final JsonObject macroJson) {
+        if (macroJson == null) {
+            return new NoMacro();
+        }
+
+        return switch (macroJson.get("type").getAsString()) {
+            case "fill" -> {
+                final int width = macroJson.get("width").getAsInt();
+                final int height = macroJson.get("height").getAsInt();
+                yield new FillMacro(width, height);
+            }
+            case "translate" -> {
+                final int x = macroJson.get("x").getAsInt();
+                final int y = macroJson.get("y").getAsInt();
+                yield new TranslateMacro(x, y);
+            }
+            default -> new NoMacro();
+        };
     }
 }

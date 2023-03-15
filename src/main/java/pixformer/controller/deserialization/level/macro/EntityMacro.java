@@ -2,6 +2,7 @@ package pixformer.controller.deserialization.level.macro;
 
 import pixformer.model.entity.Entity;
 
+import java.util.Set;
 import java.util.function.Supplier;
 
 /**
@@ -10,9 +11,9 @@ import java.util.function.Supplier;
 public interface EntityMacro {
 
     /**
-     * Applies a modification to an entity supplier.
+     * Applies a modification to an entity supplier and produces one or more entity outputs.
      * @param entitySupplier supplier of entities
-     * @return an entity, retrieved from the given supplier, with the given modifications
+     * @return one or more entities, retrieved from the given supplier, with the given modifications
      */
-    Entity apply(Supplier<Entity> entitySupplier);
+    Set<Entity> apply(Supplier<Entity> entitySupplier);
 }
