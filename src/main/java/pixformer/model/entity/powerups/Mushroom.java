@@ -6,7 +6,7 @@ import pixformer.model.entity.Entity;
  */
 public class Mushroom implements PowerupBehaviour {
 
-    private final int priority = 0;
+    private final int priority = 1;
 
     /**
      * {@inheritDoc}}

@@ -8,7 +8,7 @@ import pixformer.model.entity.powerups.other.Fireball.Fireball;
  */
 public class FireFlower implements PowerupBehaviour {
 
-    private final int priority = 1;
+    private final int priority = 2;
 
     private final float fireballBaseSpeed = 0.01f;
 
