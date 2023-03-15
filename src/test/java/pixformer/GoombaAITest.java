@@ -18,13 +18,12 @@ final class GoombaAITest {
     private static final double X_BLOCK = -2;
     private static final double DELTA = 0.0001;
     private final World world = new WorldImpl();
-    private Enemy goomba;
-    private final double step = 0.002;
-    private final double dt = 1;
+    private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
+    private static final double step = 0.002;
+    private static final double dt = 1;
 
     @BeforeEach
     void setup() {
-        goomba = new Enemy(0, 0, 1, 1, step);
         world.spawnEntity(goomba);
     }
 
