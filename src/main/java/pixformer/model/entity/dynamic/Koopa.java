@@ -32,6 +32,20 @@ public final class Koopa implements MutableEntity, DrawableEntity {
         currentKoopaState = new WalkingKoopa(x, y, this::changeToTurtle);
     }
 
+    /**
+     * @return true if the koopa is walking, otherwise false.
+     */
+    public boolean isWalking() {
+        return this.getHeight() == 2;
+    }
+
+    /**
+     * @return false if the koopa is turtle, otherwise false.
+     */
+    public boolean isTurtle() {
+        return !isWalking();
+    }
+
     private void changeToTurtle() {
         this.currentKoopaState = new TurtleKoopa(getX(), getY());
     }
