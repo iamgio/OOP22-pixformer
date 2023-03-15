@@ -1,5 +1,6 @@
 package pixformer.model.entity.powerups;
 
+import pixformer.model.entity.Entity;
 /**
  * Class representing the FireFlower powerup.
  */
@@ -11,7 +12,7 @@ public class FireFlower implements PowerupBehaviour {
      * {@inheritDoc}
      */
     @Override
-    public void ability() {
+    public void ability(final Entity entity) {
         
     }
 

@@ -58,7 +58,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         System.out.println("ABILITY");
 
         if (player.getPowerup().isPresent()) {
-            player.getPowerup().get().getBehaviour().ability();
+            player.getPowerup().get().getBehaviour().ability(player);
         }
     }
 
