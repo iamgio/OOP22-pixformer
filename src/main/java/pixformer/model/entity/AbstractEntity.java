@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.SolidEntity;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * The base class for a mutable entity.
