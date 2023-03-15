@@ -1,9 +1,14 @@
 package pixformer.model.entity.dynamic;
 
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.view.engine.Color;
+import pixformer.view.entity.RectangleGraphicsComponent;
+
 /**
  * The enemy gooba.
  */
-public class Goomba extends Enemy {
+public class Goomba extends Enemy implements DrawableEntity {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
@@ -17,6 +22,11 @@ public class Goomba extends Enemy {
      */
     public Goomba(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
+    }
+
+    @Override
+    public GraphicsComponent getGraphicsComponent() {
+        return new RectangleGraphicsComponent(this, new Color(0.7, 0.4, 0));
     }
 
 }

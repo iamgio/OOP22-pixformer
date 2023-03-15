@@ -7,17 +7,21 @@ import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RectangleRenderer;
 
 /**
- * @deprecated test
+ * Represent as a rectangle of dimensions proportional to the Entity to be
+ * represented.
  */
-@Deprecated
-public class TestGraphicsComponent extends GraphicsComponent {
+public class RectangleGraphicsComponent extends GraphicsComponent {
+
+    private Color color;
 
     /**
      * Instantiates a graphics component for a test entity.
+     * 
      * @param entity test entity
      */
-    public TestGraphicsComponent(final Entity entity) {
+    public RectangleGraphicsComponent(final Entity entity, final Color color) {
         super(entity);
+        this.color = color;
     }
 
     /**
@@ -27,7 +31,7 @@ public class TestGraphicsComponent extends GraphicsComponent {
     public void update(final GameScene scene) {
         final Entity entity = super.getEntity();
         final RectangleRenderer rect = scene.getRendererFactory().newRectangle(entity.getWidth(), entity.getHeight());
-        rect.setColor(new Color(1, 0, 0));
+        rect.setColor(color);
         scene.getGraphics().draw(rect);
     }
 }
