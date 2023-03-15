@@ -1,5 +1,9 @@
 package pixformer.model.entity.dynamic;
 
+import java.util.Optional;
+
+import pixformer.model.entity.collision.CollisionComponent;
+
 /**
  * The state of the koopa when it is a turtle.
  */
@@ -16,6 +20,11 @@ public class TurtleKoopa extends Enemy implements KoopaState {
      */
     public TurtleKoopa(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT, 1);
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return DieOnPressedCollisionComponent.createWithWorldFromEntity(this);
     }
 
 }
