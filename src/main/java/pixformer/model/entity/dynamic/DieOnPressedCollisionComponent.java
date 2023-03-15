@@ -23,7 +23,7 @@ public final class DieOnPressedCollisionComponent extends CollisionComponent {
     private final CollisionReactor reactor;
 
     /**
-     * If the entity has a world create {@code DieOnPressedCollisionComponent}.
+     * If the entity has a world create a {@code DieOnPressedCollisionComponent}.
      * 
      * @param entity to be controlled.
      * @return a {@code DieOnPressedCollisionComponent} if the entity has a world
