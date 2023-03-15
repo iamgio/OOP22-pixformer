@@ -9,9 +9,9 @@ import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
- * The enemy gooba.
+ * The enemy goomba.
  */
-public class Goomba extends Enemy implements DrawableEntity {
+public final class Goomba extends Enemy implements DrawableEntity {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
