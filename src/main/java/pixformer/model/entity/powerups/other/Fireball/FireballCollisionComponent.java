@@ -2,6 +2,7 @@ package pixformer.model.entity.powerups.other.Fireball;
 
 import java.util.Set;
 
+import pixformer.model.World;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
@@ -11,14 +12,16 @@ import pixformer.model.entity.collision.CollisionComponent;
  */
 public class FireballCollisionComponent extends CollisionComponent {
     private Fireball fireball;
+    private World world;
 
     /**
      * 
      * @param entity Entity linked with current component.
      */
-    protected FireballCollisionComponent(final Fireball fireball) {
+    protected FireballCollisionComponent(final Fireball fireball, final World world) {
         super(fireball);
         this.fireball = fireball;
+        this.world = world;
     }
 
     /**
@@ -29,7 +32,7 @@ public class FireballCollisionComponent extends CollisionComponent {
 
         for (var x : collisions) {
             if (x.side().isHorizontal()) {
-                // This.destroy();
+                world.killEntity(fireball);
             }
         }
 

@@ -31,11 +31,11 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         super(x, y, width, height);
 
         graphicsComponent = new FireballGraphicsComponent(this);
-        collisionComponent = new FireballCollisionComponent(this);
+        collisionComponent = new FireballCollisionComponent(this, world);
         physicsComponent = new FireballPhysicsComponent(this);
 
         this.speed = speed;
-        world.spawnEntity(this);          
+        world.spawnEntity(this);
     }
 
     @Override
