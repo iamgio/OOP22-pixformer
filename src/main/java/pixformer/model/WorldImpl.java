@@ -1,7 +1,8 @@
 package pixformer.model;
 
-import pixformer.model.entity.AbstractEntity;
+import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.input.AIInputComponent;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class WorldImpl implements World {
 
     private final Set<Entity> entities;
+    private final Set<Entity> killedEntities;
     private final EntityCollisionManager collisionManager;
 
     /**
@@ -23,6 +25,7 @@ public class WorldImpl implements World {
      */
     public WorldImpl() {
         this.entities = new HashSet<>();
+        this.killedEntities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
     }
 
@@ -47,6 +50,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public void killEntity(final Entity entity) {
+        this.killedEntities.add(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityCollisionManager getCollisionManager() {
         return this.collisionManager;
     }
@@ -63,19 +74,20 @@ public class WorldImpl implements World {
             entity.getCollisionComponent().ifPresent(collisionComponent -> {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
-            entity.getInputComponent()
-                    .filter(AIInputComponent.class::isInstance)
-                    .map(AIInputComponent.class::cast)
-                    .ifPresent(ai -> ai.update(this));
+            entity.getInputComponent().ifPresent(ai -> ai.update(this));
 
-            if (entity instanceof AbstractEntity abstractEntity) {
-                updatePosition(dt, abstractEntity);
+            if (entity instanceof MutableEntity mutableEntity) {
+                updatePosition(dt, mutableEntity);
             }
         });
+        this.entities.removeAll(this.killedEntities);
     }
 
-    private void updatePosition(final double dt, final AbstractEntity entity) {
+    private void updatePosition(final double dt, final MutableEntity entity) {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
+        if (entity.isOnGround() && entity.getVelocity().y() < 0) {
+            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+        }
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
 }

@@ -20,7 +20,12 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
     @Override
     public Optional<Consumer<Level>> map(final KeyCode input) {
         final Consumer<Level> action = switch (input) {
+            case A -> level -> level.getPlayer1().ifPresent(CompleteModelInput::left);
+            case D -> level -> level.getPlayer1().ifPresent(CompleteModelInput::right);
             case SPACE -> level -> level.getPlayer1().ifPresent(CompleteModelInput::jump);
+            case SHIFT -> level -> level.getPlayer1().ifPresent(CompleteModelInput::ability);
+            case CONTROL -> level -> level.getPlayer1().ifPresent(CompleteModelInput::sprint);
+
             case W -> level -> level.getPlayer2().ifPresent(CompleteModelInput::jump);
             default -> null;
         };

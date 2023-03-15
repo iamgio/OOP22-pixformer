@@ -1,11 +1,19 @@
 package pixformer.model.entity;
 
 import pixformer.common.Vector2D;
+import pixformer.model.World;
+import pixformer.model.entity.collision.CollisionSide;
+import pixformer.model.entity.collision.SolidEntity;
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+import java.util.Optional;
 
 /**
- * Abstract class for an entity.
+ * The base class for a mutable entity.
  */
-public abstract class AbstractEntity implements Entity {
+public abstract class AbstractEntity implements MutableEntity {
+
+    private World world;
     private double x;
     private double y;
     private double width;
@@ -32,8 +40,24 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
+    public Optional<World> getWorld() {
+        return Optional.ofNullable(this.world);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public double getX() {
         return this.x;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setX(final double x) {
+        this.x = x;
     }
 
     /**
@@ -48,8 +72,24 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
+    public void setY(final double y) {
+        this.y = y;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public double getWidth() {
         return this.width;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWidth(final double width) {
+        this.width = width;
     }
 
     /**
@@ -61,38 +101,10 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Set the X coordinate of the entity.
-     *
-     * @param x the new X coordinate
+     * {@inheritDoc}
      */
-    public void setX(final double x) {
-        this.x = x;
-    }
-
-    /**
-     * Set the Y coordinate of the entity.
-     *
-     * @param y the new Y coordinate
-     */
-    public void setY(final double y) {
-        this.y = y;
-    }
-
-    /**
-     * Set the width of the entity.
-     *
-     * @param width the new width
-     */
-    protected void setWidth(final double width) {
-        this.width = width;
-    }
-
-    /**
-     * Set the height of the entity.
-     *
-     * @param height the new height
-     */
-    protected void setHeight(final double height) {
+    @Override
+    public void setHeight(final double height) {
         this.height = height;
     }
 
@@ -101,15 +113,46 @@ public abstract class AbstractEntity implements Entity {
      */
     @Override
     public Vector2D getVelocity() {
-        return new Vector2D(this.velocity.x(), this.velocity.y());
+        return this.velocity;
     }
 
     /**
-     * Set the new velocity of the entity.
-     *
-     * @param velocity the new velocity
+     * {@inheritDoc}
      */
+    @Override
     public void setVelocity(final Vector2D velocity) {
         this.velocity = velocity;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see pixformer.model.entity.collision.SolidEntity
+     */
+    @Override
+    public boolean isSolid() {
+        return this instanceof SolidEntity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOnGround() {
+        if (this.world == null) {
+            return false;
+        }
+
+        return this.world.getCollisionManager().findCollisionsFor(this).stream()
+                .filter(collision -> collision.side() == CollisionSide.BOTTOM)
+                .anyMatch(collision -> collision.entity().isSolid());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @OverridingMethodsMustInvokeSuper
+    @Override
+    public void onSpawn(final World world) {
+        this.world = world;
     }
 }

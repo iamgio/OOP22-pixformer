@@ -1,0 +1,32 @@
+{
+  "name": "First level",
+  "spawnPointX": 1,
+  "spawnPointY": 2,
+  "entities": [
+    {
+      "type": "grass",
+      "x": 10,
+      "y": 30
+    },
+    {
+      "type": "grass",
+      "x": 11,
+      "y": 30
+    },
+    {
+      "type": "grass",
+      "x": 12,
+      "y": 30
+    },
+    {
+      "type": "koopa",
+      "x": 11,
+      "y": 28
+    },
+    {
+      "type": "grass",
+      "x": 8,
+      "y": 28
+    }
+  ]
+}

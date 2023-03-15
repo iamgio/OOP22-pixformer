@@ -1,0 +1,17 @@
+{
+  "name": "First level",
+  "spawnPointX": 1,
+  "spawnPointY": 2,
+  "entities": [
+    {
+      "type": "grass",
+      "x": 10,
+      "y": 10
+    },
+    {
+      "type": "brick",
+      "x": 11,
+      "y": 10
+    }
+  ]
+}
