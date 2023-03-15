@@ -33,4 +33,12 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     public GraphicsComponent getGraphicsComponent() {
         return graphicsComponent;
     }
+
+    public CollisionComponent getCollisionComponent() {
+        return collisionComponent;
+    }
+    
+    public PhysicsComponent getPhysicsComponent() {
+        return physicsComponent;
+    }
 }
