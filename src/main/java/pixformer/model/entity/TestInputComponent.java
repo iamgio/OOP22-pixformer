@@ -34,7 +34,7 @@ public class TestInputComponent extends UserInputComponent implements CompleteMo
     }
 
     @Override
-    public void crouch() {
+    public void sprint() {
 
     }
 

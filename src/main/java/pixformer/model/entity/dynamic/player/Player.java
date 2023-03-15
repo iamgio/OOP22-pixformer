@@ -20,14 +20,8 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     // State of the player life
     private boolean isAlive = true;
 
-    // Max duration of a jump
-    static final float MAX_JUMP_DURATION = 0.01f;
-
-    // State variable to check if player is crouching
-    private boolean isCrouching;
-
-    // Current jump state
-    private float currentPlayerJump = MAX_JUMP_DURATION;
+    // State variable to check if player is sprinting
+    private boolean isSprinting;
 
     // Current powerup
     private Optional<PowerUp> powerUp;
@@ -115,49 +109,17 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
      /**
-     * @return True if is crouching.
+     * @return True if is sprinting.
      */
-    public boolean isCrouching() {
-        return isCrouching;
+    public boolean isSprinting() {
+        return isSprinting;
     }
 
     /**
-     * 
-     * @param jumpForce Negative jumping force applied to the entity.
-     * @return True if the player jumped, False if he couldnt.
-     */
-    public boolean jump(final float jumpForce) {
-
-        System.out.println(currentPlayerJump);
-
-        if (currentPlayerJump <= 0) {
-            return false;
-        }
-
-        currentPlayerJump += jumpForce;
-        return true;
-    }
-
-    /**
-     * Check if Player is jumping.
-     * @return True if Player is jumping.
-     */
-    public boolean isJumping() {
-        return currentPlayerJump < MAX_JUMP_DURATION;
-    }
-
-    /**
-     * Block player jump.
-     */
-    public void stopJumping() {
-        this.currentPlayerJump = 0;
-    }
-
-    /**
-     * Reset the "jump counter" variable.
+     * Reset Jump of current entity.
      */
     public void resetJumping() {
-        this.currentPlayerJump = MAX_JUMP_DURATION;
+        this.inputComponent.resetJumping();
     }
 
     /**

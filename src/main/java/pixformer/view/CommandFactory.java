@@ -59,10 +59,10 @@ public final class CommandFactory {
     }
 
     /**
-     * @return command for couching.
+     * @return command for sprinting.
      */
-    public Command<CompleteModelInput> crouch() {
-        return gameInput(CompleteModelInput::crouch);
+    public Command<CompleteModelInput> sprint() {
+        return gameInput(CompleteModelInput::sprint);
     }
 
     /**

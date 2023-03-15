@@ -43,8 +43,8 @@ public final class ModelMock implements CompleteModelInput {
     }
 
     @Override
-    public void crouch() {
-        System.out.println(name + " crouch"); // NOPMD see above
+    public void sprint() {
+        System.out.println(name + " sprint"); // NOPMD see above
     }
 
     @Override
