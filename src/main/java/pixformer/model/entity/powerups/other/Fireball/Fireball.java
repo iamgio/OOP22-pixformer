@@ -2,6 +2,7 @@ package pixformer.model.entity.powerups.other.Fireball;
 
 import java.util.Optional;
 
+import pixformer.model.World;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
@@ -26,7 +27,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      * @param width Width.
      * @param height Height.
      */
-    public Fireball(final double x, final double y, final double width, final double height, final float speed) {
+    public Fireball(final double x, final double y, final double width, final double height, final float speed, final World world) {
         super(x, y, width, height);
 
         graphicsComponent = new FireballGraphicsComponent(this);
@@ -34,6 +35,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         physicsComponent = new FireballPhysicsComponent(this);
 
         this.speed = speed;
+        world.spawnEntity(this);          
     }
 
     @Override

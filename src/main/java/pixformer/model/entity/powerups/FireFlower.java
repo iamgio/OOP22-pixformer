@@ -17,7 +17,8 @@ public class FireFlower implements PowerupBehaviour {
      */
     @Override
     public void ability(final Entity entity) {
-        Fireball fireball = new Fireball(entity.getX(), entity.getY(), entity.getWidth()/2, entity.getHeight()/2, fireballBaseSpeed);
+        System.out.println("MARIO HA SPARATO CAZZO");
+        Fireball fireball = new Fireball(entity.getX(), entity.getY(), entity.getWidth()/2, entity.getHeight()/2, fireballBaseSpeed, entity.getWorld().get());
         fireball.setVelocity(new Vector2D( entity.getVelocity().x()>=0?fireball.getSpeed():-fireball.getSpeed(), fireball.getVelocity().y()));
     }
 
