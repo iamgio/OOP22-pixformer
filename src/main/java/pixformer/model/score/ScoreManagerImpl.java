@@ -1,5 +1,7 @@
 package pixformer.model.score;
 
+import pixformer.model.event.EventSubscriber;
+
 /**
  * {@inheritDoc}.
  */
@@ -9,11 +11,9 @@ public class ScoreManagerImpl implements ScoreManager {
     /**
      * Costructor for the class.
      */
-    public ScoreManagerImpl() {
+    public ScoreManagerImpl(final EventSubscriber eventSubscriber) {
         this.score = new ScoreImpl();
-        // TODO
-        // Here i should specify the player this manager is linked to, and specify the events
-        // it has to observe
+        eventSubscriber.addPlayerOnKill(entity -> this.score.addPoints(100));
     }
 
     /**
@@ -23,4 +23,5 @@ public class ScoreManagerImpl implements ScoreManager {
     public int getScore() {
         return this.score.getPoints();
     }
+
 }

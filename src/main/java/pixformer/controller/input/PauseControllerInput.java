@@ -19,7 +19,6 @@ public class PauseControllerInput {
      * @param gameLoopManager manager for the gameloop to control
      */
     public void execute(final GameLoopManager gameLoopManager) {
-        System.out.println(gameLoopManager.isRunning());
         if (!gameLoopManager.isRunning()) {
             gameLoopManager.resume();
         } else {
