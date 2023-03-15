@@ -12,6 +12,9 @@ import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Block;
 
+/**
+ * Tests to check if the {@link pixformer.model.entity.dynamic.DieOnPressedCollisionComponent} works.
+ */
 public class DieGoombaTest {
 
     private static final int SECONDS_TO_MILLIS = 1_000;
