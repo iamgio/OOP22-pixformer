@@ -27,6 +27,16 @@
       "type": "brick",
       "x": 8,
       "y": 28
+    },
+    {
+      "type": "grass",
+      "x": 0,
+      "y": 35,
+      "macro": {
+        "type": "fill",
+        "width": 20,
+        "height": 2
+      }
     }
   ]
 }
