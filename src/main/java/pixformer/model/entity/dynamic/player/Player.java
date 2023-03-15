@@ -137,7 +137,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void damaged() {
         if(this.powerUp.isEmpty()) {
-            death();
+            kill();
         }
 
         this.powerUp = Optional.empty();
@@ -146,7 +146,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     /**
      * Define what happens on Player death.
      */
-    private void death() {
+    private void kill() {
         this.graphicsComponent.startDeathAnimation();
     }
 }
