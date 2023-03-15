@@ -23,12 +23,12 @@ public class LevelDeserializationTest {
         assertEquals("First level", data.name());
         assertEquals(1, data.spawnPointX());
         assertEquals(2, data.spawnPointY());
-        assertEquals(1, data.entities().size());
+        assertEquals(2, data.entities().size());
 
-        Entity first = data.entities().iterator().next();
+        Entity block = data.entities().stream().filter(Block.class::isInstance).findFirst().orElseThrow();
 
-        assertInstanceOf(Block.class, first);
-        assertEquals(first.getX(), 10);
-        assertEquals(first.getY(), 10);
+        assertInstanceOf(Block.class, block);
+        assertEquals(block.getX(), 10);
+        assertEquals(block.getY(), 10);
     }
 }
