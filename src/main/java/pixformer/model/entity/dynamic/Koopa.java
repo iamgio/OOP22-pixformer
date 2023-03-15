@@ -11,7 +11,7 @@ import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
-import pixformer.view.entity.TestGraphicsComponent;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
  * The implementation of the enemy Koopa. This class uses the two states of a
@@ -23,6 +23,7 @@ public final class Koopa implements MutableEntity, DrawableEntity {
 
     /**
      * Create a new Koopa.
+     * 
      * @param x its initial x position.
      * @param y its initial y position.
      */
@@ -106,7 +107,7 @@ public final class Koopa implements MutableEntity, DrawableEntity {
 
     @Override
     public GraphicsComponent getGraphicsComponent() {
-        return new TestGraphicsComponent(this);
+        return new RectangleGraphicsComponent(this);
     }
 
     @Override

@@ -5,7 +5,7 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.view.entity.TestGraphicsComponent;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
  * Standard block in the world.
@@ -25,7 +25,7 @@ public class Block extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     public Block(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
-        this.graphicsComponent = new TestGraphicsComponent(this);
+        this.graphicsComponent = new RectangleGraphicsComponent(this);
     }
 
     /**

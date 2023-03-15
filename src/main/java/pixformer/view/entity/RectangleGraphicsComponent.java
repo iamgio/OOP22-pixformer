@@ -10,13 +10,14 @@ import pixformer.view.engine.RectangleRenderer;
  * @deprecated test
  */
 @Deprecated
-public class TestGraphicsComponent extends GraphicsComponent {
+public class RectangleGraphicsComponent extends GraphicsComponent {
 
     /**
      * Instantiates a graphics component for a test entity.
+     * 
      * @param entity test entity
      */
-    public TestGraphicsComponent(final Entity entity) {
+    public RectangleGraphicsComponent(final Entity entity) {
         super(entity);
     }
 

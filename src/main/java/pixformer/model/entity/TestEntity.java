@@ -4,7 +4,7 @@ import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
-import pixformer.view.entity.TestGraphicsComponent;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
 
@@ -30,7 +30,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
         super(x, 15, SIZE, SIZE);
         this.inputComponent = new TestInputComponent(this);
         this.collisionComponent = new TestCollisionComponent(this);
-        this.graphicsComponent = new TestGraphicsComponent(this);
+        this.graphicsComponent = new RectangleGraphicsComponent(this);
         this.physicsComponent = new PhysicsComponent(this);
     }
 
