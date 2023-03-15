@@ -36,7 +36,7 @@ public class PlayerCollisionComponent extends CollisionComponent {
         for (var collisor : collisions) {
             if (collisor.entity() instanceof Enemy) {
                 if (collisor.side().isHorizontal()) {
-                    this.player.getDamage();
+                    this.player.damaged();
                 }
             }
         }
