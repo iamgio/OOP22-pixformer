@@ -13,6 +13,8 @@ import pixformer.model.physics.PhysicsComponent;
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
 public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+    private final float speed;
+
     private GraphicsComponent graphicsComponent;
     private CollisionComponent collisionComponent;
     private PhysicsComponent physicsComponent;
@@ -24,11 +26,14 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      * @param width Width.
      * @param height Height.
      */
-    public Fireball(final double x, final double y, final double width, final double height) {
+    public Fireball(final double x, final double y, final double width, final double height, final float speed) {
         super(x, y, width, height);
+
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this);
         physicsComponent = new FireballPhysicsComponent(this);
+
+        this.speed = speed;
     }
 
     @Override
@@ -43,5 +48,13 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
+    }
+
+    /**
+     * 
+     * @return current fireball speed.
+     */
+    public float getSpeed() {
+        return this.speed;
     }
 }
