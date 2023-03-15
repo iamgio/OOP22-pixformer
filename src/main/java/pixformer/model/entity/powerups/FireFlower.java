@@ -5,13 +5,22 @@ package pixformer.model.entity.powerups;
  */
 public class FireFlower implements PowerupBehaviour {
 
+    private final int priority = 1;
+
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public void ability() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ability'");
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getPriority() {
+        return priority;
     }
 
 }
