@@ -7,6 +7,8 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.Player.PlayerGraphicsComponent;
+import pixformer.model.entity.powerups.FireFlower;
 import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
 
@@ -44,7 +46,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerUp = Optional.empty();
+        this.powerUp = Optional.of(new PowerUp(new FireFlower(), 1));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
