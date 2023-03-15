@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 public class LevelDeserializationTest {
 
     @Test
-    void testLevel1() {
+    void testSimple() {
         final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl())
                 .deserialize(this.getClass().getResourceAsStream("/levels/test1.json"));
 
@@ -30,5 +30,18 @@ public class LevelDeserializationTest {
         assertInstanceOf(Block.class, block);
         assertEquals(block.getX(), 10);
         assertEquals(block.getY(), 10);
+    }
+
+    @Test
+    void testMacro() {
+        final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl())
+                .deserialize(this.getClass().getResourceAsStream("/levels/test2.json"));
+
+        assertEquals("Second level", data.name());
+        assertEquals(5 * 3, data.entities().size());
+
+        for (Entity entity : data.entities()) {
+            assertInstanceOf(Block.class, entity);
+        }
     }
 }

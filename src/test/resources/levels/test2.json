@@ -1,0 +1,17 @@
+{
+  "name": "Second level",
+  "spawnPointX": 1,
+  "spawnPointY": 2,
+  "entities": [
+    {
+      "type": "grass",
+      "x": 0,
+      "y": 0,
+      "macro": {
+        "type": "fill",
+        "width": 5,
+        "height": 3
+      }
+    }
+  ]
+}
