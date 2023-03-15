@@ -9,9 +9,14 @@ import pixformer.model.modelinput.CompleteModelInput;
  * Implementation of InputComponent for a Player entity.
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
-
     private Player player;
     private boolean jumpKey = false;
+
+    // Max duration of a jump
+    static final float MAX_JUMP_DURATION = 0.01f;
+
+    // Current jump state
+    private float currentPlayerJump = MAX_JUMP_DURATION;
 
     /**
      * 
@@ -67,7 +72,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         jumpKey = true;
 
-        if (this.player.jump(-PlayerPhysicsComponent.JUMP_FORCE)) {
+        if (jump(-PlayerPhysicsComponent.JUMP_FORCE)) {
             this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
         }
     }
@@ -85,10 +90,49 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-        if (!jumpKey && this.player.isJumping()) {
-            this.player.stopJumping();
+        if (!jumpKey && isJumping()) {
+            stopJumping();
         }
 
         jumpKey = false;
+    }
+    
+    /**
+     * 
+     * @param jumpForce Negative jumping force applied to the entity.
+     * @return True if the player jumped, False if he couldnt.
+     */
+    public boolean jump(final float jumpForce) {
+
+        System.out.println(currentPlayerJump);
+
+        if (currentPlayerJump <= 0) {
+            return false;
+        }
+
+        currentPlayerJump += jumpForce;
+        return true;
+    }
+
+    /**
+     * Check if Player is jumping.
+     * @return True if Player is jumping.
+     */
+    public boolean isJumping() {
+        return currentPlayerJump < MAX_JUMP_DURATION;
+    }
+
+    /**
+     * Block player jump.
+     */
+    public void stopJumping() {
+        this.currentPlayerJump = 0;
+    }
+
+    /**
+     * Reset the "jump counter" variable.
+     */
+    public void resetJumping() {
+        this.currentPlayerJump = MAX_JUMP_DURATION;
     }
 }

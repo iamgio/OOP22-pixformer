@@ -4,8 +4,10 @@ import java.util.Set;
 
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.dynamic.player.PlayerInputComponent;
 import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.dynamic.Koopa;
+import pixformer.model.input.InputComponent;
 
 /**
  * Implementation of CollisionComponent for a Player entity.
@@ -29,7 +31,7 @@ public class PlayerCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
 
         if (player.isOnGround()) {
-            player.resetJumping();
+            this.player.resetJumping();
         }
 
         for (var x : collisions) {
