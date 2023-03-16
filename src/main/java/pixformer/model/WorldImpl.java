@@ -123,9 +123,21 @@ public class WorldImpl implements World {
         // Ceiling collision
         if (collisionManager.isCollidingCeiling(entity) && entity.getVelocity().y() < 0) {
             entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
-            entity.setY(Math.ceil(entity.getY())); // Fixes intersections.
+            entity.setY(Math.ceil(entity.getY()));
         }
 
-        // TODO left and right collisions (collisionsManager.isCollingLeft/RightWall)
+        // Left collision
+        if (collisionManager.isCollidingLeftWall(entity) && entity.getVelocity().x() < 0) {
+            entity.setVelocity(new Vector2D(0, entity.getVelocity().y()));
+            entity.setX(Math.ceil(entity.getX()));
+        }
+
+        // Right collision
+        if (collisionManager.isCollidingRightWall(entity) && entity.getVelocity().x() > 0) {
+            entity.setVelocity(new Vector2D(0, entity.getVelocity().y()));
+            entity.setX(Math.floor(entity.getX()));
+        }
+
+        // TODO reduce repetitions
     }
 }

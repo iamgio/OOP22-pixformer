@@ -78,14 +78,14 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
      */
     @Override
     public boolean isCollidingRightWall(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.RIGHT);
+        return this.isCollingSolidEntity(entity, CollisionSide.LEFT); // TODO switch sides
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isCollidingLeft(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.LEFT);
+    public boolean isCollidingLeftWall(final Entity entity) {
+        return this.isCollingSolidEntity(entity, CollisionSide.RIGHT); // TODO switch sides
     }
 }
