@@ -98,12 +98,34 @@ public class WorldImpl implements World {
         this.entities.removeAll(this.killedEntities);
     }
 
+    /**
+     * Updates an entity's position depending on its velocity and possible nearby solid entities.
+     * @param dt dela time
+     * @param entity entity to update position of
+     */
     private void updatePosition(final double dt, final MutableEntity entity) {
+        this.handleCollisions(entity);
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
-        if (entity.isOnGround() && entity.getVelocity().y() > 0) {
+        entity.setY(entity.getY() + dt * entity.getVelocity().y());
+    }
+
+    /**
+     * Handles an entity's velocity and position in case of collisions width solid entities.
+     * @param entity entity to handle collisions for
+     */
+    private void handleCollisions(final MutableEntity entity) {
+        // Ground collision
+        if (collisionManager.isCollidingGround(entity) && entity.getVelocity().y() > 0) {
             entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
             entity.setY(Math.floor(entity.getY())); // Fixes intersections.
         }
-        entity.setY(entity.getY() + dt * entity.getVelocity().y());
+
+        // Ceiling collision
+        if (collisionManager.isCollidingCeiling(entity) && entity.getVelocity().y() < 0) {
+            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+            entity.setY(Math.ceil(entity.getY())); // Fixes intersections.
+        }
+
+        // TODO left and right collisions (collisionsManager.isCollingLeft/RightWall)
     }
 }
