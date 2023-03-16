@@ -21,6 +21,7 @@ import pixformer.view.entity.RectangleGraphicsComponent;
 public final class Koopa implements MutableEntity, DrawableEntity {
 
     private KoopaState currentKoopaState;
+    private World world;
 
     /**
      * Create a new Koopa.
@@ -48,6 +49,7 @@ public final class Koopa implements MutableEntity, DrawableEntity {
 
     private void changeToTurtle() {
         this.currentKoopaState = new TurtleKoopa(getX(), getY());
+        currentKoopaState.onSpawn(getWorld().get());
     }
 
     @Override
@@ -82,7 +84,7 @@ public final class Koopa implements MutableEntity, DrawableEntity {
 
     @Override
     public Optional<World> getWorld() {
-        return currentKoopaState.getWorld();
+        return Optional.of(world);
     }
 
     @Override
@@ -138,6 +140,12 @@ public final class Koopa implements MutableEntity, DrawableEntity {
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return currentKoopaState.getPhysicsComponent();
+    }
+
+    @Override
+    public void onSpawn(final World world) {
+        this.world = world;
+        currentKoopaState.onSpawn(getWorld().get());
     }
 
 }
