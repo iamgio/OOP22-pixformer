@@ -46,7 +46,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerUp = Optional.of(new PowerUp(new FireFlower(), 1));
+        this.powerUp = Optional.of(new PowerUp(new FireFlower()));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
