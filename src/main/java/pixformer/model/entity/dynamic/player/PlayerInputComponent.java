@@ -100,6 +100,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
             stopJumping();
         }
 
+        if (!player.isOnGround() && !isJumping()) {
+            stopJumping();
+        }
+
         jumpKey = false;
 
         // Fireball cooldown management
