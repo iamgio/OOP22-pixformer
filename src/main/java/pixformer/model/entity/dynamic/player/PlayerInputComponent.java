@@ -11,6 +11,7 @@ import pixformer.model.modelinput.CompleteModelInput;
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
     private Player player;
     private boolean jumpKey = false;
+    private boolean sprintKey = false;
 
     // Max duration of a jump
     private final float maxJumpDuration = 0.01f;
@@ -86,7 +87,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void sprint() {
+
         System.out.println("SPRINT");
+
+        sprintKey = true;        
     }
 
     /**
@@ -106,6 +110,17 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         jumpKey = false;
 
+        // Player speed limit management
+        int direction = player.getVelocity().x() >= 0 ? 1 : -1;
+
+        if (!sprintKey && Math.abs(player.getVelocity().x()) > baseSpeedLimit) {
+            player.setVelocity(new Vector2D(baseSpeedLimit * direction, player.getVelocity().y()));
+        } else if (sprintKey && Math.abs(player.getVelocity().x()) > sprintSpeedLimit) {
+            player.setVelocity(new Vector2D(sprintSpeedLimit * direction, player.getVelocity().y()));
+        }
+        
+        sprintKey = true;  
+        
         // Fireball cooldown management
 
     }
