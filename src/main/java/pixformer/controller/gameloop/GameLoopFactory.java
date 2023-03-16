@@ -84,7 +84,7 @@ public final class GameLoopFactory {
      * @param followedEntities entities to follow
      * @return a new camera instance centered on the given entities
      */
-    private Camera createCamera(Set<Entity> followedEntities) {
+    private Camera createCamera(final Set<Entity> followedEntities) {
         return new SimpleCameraBuilder()
                 .withEntityCenteringX(followedEntities)
                 .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
