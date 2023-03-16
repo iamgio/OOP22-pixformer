@@ -102,6 +102,7 @@ public class WorldImpl implements World {
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         if (entity.isOnGround() && entity.getVelocity().y() > 0) {
             entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+            entity.setY(Math.floor(entity.getY())); // Fixes intersections.
         }
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
