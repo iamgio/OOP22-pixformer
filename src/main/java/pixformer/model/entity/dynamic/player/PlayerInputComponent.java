@@ -37,9 +37,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-
-        System.out.println("LEFT");
-
         this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
     }
 
@@ -48,9 +45,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-
-        System.out.println("RIGHT");
-
         this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
     }
 
@@ -59,9 +53,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void ability() {
-
-        System.out.println("ABILITY");
-
         if (player.getPowerup().isPresent()) {
             player.getPowerup().get().getBehaviour().ability(player);
         }
@@ -72,9 +63,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
-
-        System.out.println("JUMP");
-
         jumpKey = true;
 
         if (jump(-PlayerPhysicsComponent.JUMP_FORCE)) {
@@ -87,9 +75,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void sprint() {
-
-        System.out.println("SPRINT");
-
         sprintKey = true;        
     }
 
@@ -131,9 +116,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if the player jumped, False if he couldnt.
      */
     public boolean jump(final float jumpForce) {
-
-        System.out.println(currentPlayerJump);
-
         if (currentPlayerJump <= 0) {
             return false;
         }
