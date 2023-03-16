@@ -6,12 +6,14 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.event.EventManager;
+import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
 import pixformer.model.score.ScoreManagerImpl;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The standard implementation of the game world.
@@ -41,6 +43,17 @@ public class WorldImpl implements World {
     @Override
     public Set<Entity> getEntities() {
         return Collections.unmodifiableSet(this.entities);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Entity> getUserControlledEntities() {
+        return this.entities.stream()
+                .filter(entity -> entity.getInputComponent().isPresent())
+                .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**

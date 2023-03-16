@@ -17,6 +17,11 @@ public interface World extends Updatable {
     Set<Entity> getEntities();
 
     /**
+     * @return an immutable subset of {@link World#getEntities()} with only user-controlled entities.
+     */
+    Set<Entity> getUserControlledEntities();
+
+    /**
      * Adds an entity to the game world.
      * 
      * @param entity entity to add

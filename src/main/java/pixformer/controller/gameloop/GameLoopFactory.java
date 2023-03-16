@@ -7,13 +7,11 @@ import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.View;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Factory of available game loops.
@@ -53,6 +51,7 @@ public final class GameLoopFactory {
         view.setup();
 
         final World world = this.level.get().getWorld();
+        final Set<Entity> playersEntities = world.getUserControlledEntities();
 
         return dt -> {
             view.update(dt);
@@ -60,17 +59,7 @@ public final class GameLoopFactory {
                 world.update(dt);
             }
 
-            // test
-            Set<Entity> players = world.getEntities().stream()
-                    .filter(e -> e instanceof Player).collect(Collectors.toUnmodifiableSet());
-
-            Camera camera = new SimpleCameraBuilder()
-                    .withEntityCenteringX(players)
-                    .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
-                    .withScale(CAMERA_SCALE)
-                    .build();
-
-            view.setCamera(camera);
+            view.setCamera(this.createCamera(playersEntities));
 
             world.getEntities().stream()
                     .filter(DrawableEntity.class::isInstance)
@@ -89,5 +78,17 @@ public final class GameLoopFactory {
                 }
             }
         };
+    }
+
+    /**
+     * @param followedEntities entities to follow
+     * @return a new camera instance centered on the given entities
+     */
+    private Camera createCamera(Set<Entity> followedEntities) {
+        return new SimpleCameraBuilder()
+                .withEntityCenteringX(followedEntities)
+                .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
+                .withScale(CAMERA_SCALE)
+                .build();
     }
 }
