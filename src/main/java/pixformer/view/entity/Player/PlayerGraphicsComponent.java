@@ -1,7 +1,8 @@
-package pixformer.model.entity.dynamic.player;
+package pixformer.view.entity.player;
 
 import pixformer.view.engine.Color;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RectangleRenderer;
 
@@ -18,7 +19,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
      * 
      * @param player Player entity who will be displayed.
      */
-    protected PlayerGraphicsComponent(final Player player) {
+    public PlayerGraphicsComponent(final Player player) {
         super(player);
         this.player = player;
     }
@@ -28,7 +29,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
      */
     @Override
     public void update(final GameScene scene) {
-        System.out.println(player.getX() + " " + player.getY());
+        //System.out.println(player.getX() + " " + player.getY());
         if (this.isAlive) {
             RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
             playerShape.setColor(new Color(1, 1, 1));

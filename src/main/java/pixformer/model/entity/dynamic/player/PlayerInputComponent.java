@@ -58,7 +58,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         System.out.println("ABILITY");
 
         if (player.getPowerup().isPresent()) {
-            player.getPowerup().get().getBehaviour().ability();
+            player.getPowerup().get().getBehaviour().ability(player);
         }
     }
 
@@ -90,13 +90,18 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
+
+        // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
         }
 
         jumpKey = false;
+
+        // Fireball cooldown management
+
     }
-    
+
     /**
      * 
      * @param jumpForce Negative jumping force applied to the entity.

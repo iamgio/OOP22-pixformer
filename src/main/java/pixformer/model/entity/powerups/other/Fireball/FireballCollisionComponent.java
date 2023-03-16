@@ -2,7 +2,7 @@ package pixformer.model.entity.powerups.other.Fireball;
 
 import java.util.Set;
 
-import pixformer.model.entity.AbstractEntity;
+import pixformer.model.World;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 
@@ -10,14 +10,18 @@ import pixformer.model.entity.collision.CollisionComponent;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class FireballCollisionComponent extends CollisionComponent {
+    private Fireball fireball;
+    private World world;
 
     /**
      * 
-     * @param entity Entity linked with current component.
+     * @param fireball Fireball Entity linked with current component.
+     * @param world Instance of current world spawn.
      */
-    protected FireballCollisionComponent(final AbstractEntity entity) {
-        super(entity);
-        //TODO Auto-generated constructor stub
+    protected FireballCollisionComponent(final Fireball fireball, final World world) {
+        super(fireball);
+        this.fireball = fireball;
+        this.world = world;
     }
 
     /**
@@ -27,7 +31,9 @@ public class FireballCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
 
         for (var x : collisions) {
-            throw new UnsupportedOperationException("Unimplemented method 'update'");
+            if (x.side().isHorizontal()) {
+                world.killEntity(fireball);
+            }
         }
 
     }
