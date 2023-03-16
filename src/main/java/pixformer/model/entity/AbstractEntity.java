@@ -4,6 +4,7 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.entity.dynamic.Koopa;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Optional;
@@ -139,11 +140,11 @@ public abstract class AbstractEntity implements MutableEntity {
      */
     @Override
     public boolean isOnGround() {
-        if (this.world == null) {
+        if (getWorld().isEmpty()) {
             return false;
         }
 
-        return this.world.getCollisionManager().findCollisionsFor(this).stream()
+        return getWorld().get().getCollisionManager().findCollisionsFor(this).stream()
                 .filter(collision -> collision.side() == CollisionSide.BOTTOM)
                 .anyMatch(collision -> collision.entity().isSolid());
     }
