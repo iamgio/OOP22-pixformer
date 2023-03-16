@@ -9,6 +9,7 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.model.entity.powerups.FireFlower;
+import pixformer.model.entity.powerups.Mushroom;
 import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
 
@@ -140,7 +141,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
             kill();
         }
 
-        this.powerUp = Optional.empty();
+        if (this.powerUp.get().getBehaviour().getPriority() == 2) {
+            this.powerUp = Optional.of(new PowerUp(new Mushroom()));
+        }
+
+        if (this.powerUp.get().getBehaviour().getPriority() == 1) {
+            this.powerUp = Optional.empty();
+        }        
     }
 
     /**
