@@ -47,6 +47,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public ScoreManager getScoreManager() {
+        return this.scoreManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
