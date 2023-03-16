@@ -17,8 +17,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private final float maxJumpDuration = 0.01f;
 
     // Speedup factor while sprinting
-    static final float baseSpeedLimit = 0.03f;
-    static final float sprintSpeedLimit = 0.06f;
+    static final float baseSpeedLimit = 0.01f;
+    static final float sprintSpeedLimit = 0.02f;
 
     // Current jump state
     private float currentPlayerJump = maxJumpDuration;
@@ -83,7 +83,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-        
+        System.out.println("Speed: " + player.getVelocity().x());
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
