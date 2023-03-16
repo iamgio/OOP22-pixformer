@@ -104,7 +104,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
             player.setVelocity(new Vector2D(sprintSpeedLimit * direction, player.getVelocity().y()));
         }
         
-        sprintKey = true;  
+        sprintKey = false;  
         
         // Fireball cooldown management
 
