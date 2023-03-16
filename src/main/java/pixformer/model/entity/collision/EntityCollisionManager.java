@@ -38,5 +38,5 @@ public interface EntityCollisionManager {
      * @param entity entity to check collisions for
      * @return whether the entity is colliding a solid entity on the left side.
      */
-    boolean isCollidingLeft(Entity entity);
+    boolean isCollidingLeftWall(Entity entity);
 }
