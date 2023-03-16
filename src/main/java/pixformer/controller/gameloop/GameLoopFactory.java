@@ -43,7 +43,6 @@ public final class GameLoopFactory {
         final View view = this.view.get();
 
         view.setup();
-        view.getScene().getGraphics().setScale(15); // test
 
         final World world = this.level.get().getWorld();
 
@@ -55,7 +54,7 @@ public final class GameLoopFactory {
 
             // test
             Entity player = world.getEntities().stream().filter(e -> e instanceof Player).findFirst().get();
-            Camera camera = new SimpleCamera(player.getX() - 10, player.getY() - 10);
+            Camera camera = new SimpleCamera(player.getX() - 10, player.getY() - 10, 15);
             view.setCamera(camera);
 
             world.getEntities().stream()

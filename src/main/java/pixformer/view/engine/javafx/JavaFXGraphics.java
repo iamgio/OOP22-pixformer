@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public class JavaFXGraphics implements Graphics {
 
+    private static final double DEFAULT_SCALE = 1;
+
     private final Wrapper<GraphicsContext> graphics;
 
     private double originX;
@@ -21,6 +23,8 @@ public class JavaFXGraphics implements Graphics {
 
     private double translationX;
     private double translationY;
+
+    private double scale;
 
     /**
      * Creates a wrapper for JavaFX graphics.
@@ -60,7 +64,8 @@ public class JavaFXGraphics implements Graphics {
      */
     @Override
     public void setScale(final double scale) {
-        this.graphics.get().scale(scale, scale);
+        this.graphics.get().scale(scale - this.scale + DEFAULT_SCALE, scale - this.scale + DEFAULT_SCALE);
+        this.scale = scale;
     }
 
     /**

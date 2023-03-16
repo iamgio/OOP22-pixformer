@@ -8,12 +8,12 @@ import pixformer.view.engine.Graphics;
  * @param pivotX X coordinate of the origin point
  * @param pivotY Y coordinate of the origin point
  */
-public record SimpleCamera(double pivotX, double pivotY) implements Camera {
+public record SimpleCamera(double pivotX, double pivotY, double scale) implements Camera {
 
     /**
      * The default camera used at startup.
      */
-    public static final SimpleCamera DEFAULT_CAMERA = new SimpleCamera(0, 0);
+    public static final SimpleCamera DEFAULT_CAMERA = new SimpleCamera(0, 0, 1);
 
     /**
      * {@inheritDoc}
@@ -21,5 +21,6 @@ public record SimpleCamera(double pivotX, double pivotY) implements Camera {
     @Override
     public void applyBeforeRendering(final Graphics graphics) {
         graphics.setOriginPoint(-pivotX, -pivotY);
+        graphics.setScale(scale);
     }
 }
