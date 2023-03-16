@@ -16,6 +16,9 @@ public class JavaFXGraphics implements Graphics {
 
     private final Wrapper<GraphicsContext> graphics;
 
+    private double originX;
+    private double originY;
+
     private double translationX;
     private double translationY;
 
@@ -64,10 +67,26 @@ public class JavaFXGraphics implements Graphics {
      * {@inheritDoc}
      */
     @Override
+    public void setOriginPoint(final double x, final double y) {
+        this.originX = x;
+        this.originY = y;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setTranslate(final double x, final double y) {
-        this.graphics.get().translate(x - this.translationX, y - this.translationY);
-        this.translationX = x;
-        this.translationY = y;
+        final double translationX = x + this.originX;
+        final double translationY = y + this.originY;
+
+        this.graphics.get().translate(
+                translationX - this.translationX,
+                translationY - this.translationY
+        );
+
+        this.translationX = translationX;
+        this.translationY = translationY;
     }
 
     /**

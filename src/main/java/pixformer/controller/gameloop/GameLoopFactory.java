@@ -10,6 +10,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.View;
 import pixformer.view.engine.camera.Camera;
+import pixformer.view.engine.camera.SimpleCamera;
 
 /**
  * Factory of available game loops.
@@ -54,16 +55,14 @@ public final class GameLoopFactory {
 
             // test
             Entity player = world.getEntities().stream().filter(e -> e instanceof Player).findFirst().get();
-            Camera camera = new Camera(player.getX() - 10, player.getY() - 10);
+            Camera camera = new SimpleCamera(player.getX() - 10, player.getY() - 10);
             view.setCamera(camera);
 
             world.getEntities().stream()
                     .filter(DrawableEntity.class::isInstance)
                     .map(DrawableEntity.class::cast)
                     .forEach(entity -> {
-                        final double x = -view.getCamera().pivotX() + entity.getX();
-                        final double y = -view.getCamera().pivotY() + entity.getY();
-                        view.getScene().getGraphics().setTranslate(x, y);
+                        view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                         entity.getGraphicsComponent().update(view.getScene());
                     });
 

@@ -1,15 +1,17 @@
 package pixformer.view.engine.camera;
 
+import pixformer.view.engine.Graphics;
+
 /**
- * A camera that sets a visual origin point within a view.
- *
- * @param pivotX X coordinate of the origin point
- * @param pivotY Y coordinate of the origin point
+ * A camera is the component that handles a coordinate system
+ * in order to display it on screen.
  */
-public record Camera(double pivotX, double pivotY) {
+public interface Camera {
 
     /**
-     * The default camera used at startup.
+     * Applies the properties of the camera to the scene graphics.
+     * @param graphics graphics to operate onto
+     * @apiNote this is called every frame <i>before</i> rendering the scene
      */
-    public static final Camera DEFAULT_CAMERA = new Camera(0, 0);
+    void applyBeforeRendering(Graphics graphics);
 }

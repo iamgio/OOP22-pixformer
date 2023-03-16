@@ -13,6 +13,7 @@ import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.ViewLauncher;
 import pixformer.view.engine.camera.Camera;
+import pixformer.view.engine.camera.SimpleCamera;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -38,7 +39,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     public ViewImpl(final Controller controller, final GameScene scene) {
         this.controller = controller;
         this.scene = new SimpleWrapper<>(scene);
-        this.camera = new SimpleObservableWritableWrapper<>(Camera.DEFAULT_CAMERA);
+        this.camera = new SimpleObservableWritableWrapper<>(SimpleCamera.DEFAULT_CAMERA);
+
+        this.camera.addOnChange(camera -> camera.applyBeforeRendering(this.getScene().getGraphics()));
     }
 
     /**
@@ -84,6 +87,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     public void update(final double dt) {
         final GameScene scene = this.scene.get();
 
+        scene.getGraphics().setOriginPoint(0, 0);
         scene.getGraphics().setTranslate(0, 0);
 
         scene.getInputs().stream()
