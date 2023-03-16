@@ -13,10 +13,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private boolean jumpKey = false;
 
     // Max duration of a jump
-    static final float MAX_JUMP_DURATION = 0.01f;
-
+    private final float maxJumpDuration = 0.01f;
+    
     // Current jump state
-    private float currentPlayerJump = MAX_JUMP_DURATION;
+    private float currentPlayerJump = maxJumpDuration;
 
     /**
      * 
@@ -90,7 +90,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-
+        
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
@@ -124,7 +124,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping.
      */
     public boolean isJumping() {
-        return currentPlayerJump < MAX_JUMP_DURATION;
+        return currentPlayerJump < maxJumpDuration;
     }
 
     /**
@@ -138,6 +138,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Reset the "jump counter" variable.
      */
     public void resetJumping() {
-        this.currentPlayerJump = MAX_JUMP_DURATION;
+        this.currentPlayerJump = maxJumpDuration;
     }
 }
