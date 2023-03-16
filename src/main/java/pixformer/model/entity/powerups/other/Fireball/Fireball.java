@@ -1,15 +1,25 @@
 package pixformer.model.entity.powerups.other.Fireball;
 
-import pixformer.common.Updatable;
+import java.util.Optional;
+
+import pixformer.model.World;
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
-public class Fireball extends AbstractEntity implements Updatable {
+public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+    private final float speed;
 
-    static final double SPEED = 1.0;
+    private GraphicsComponent graphicsComponent;
+    private CollisionComponent collisionComponent;
+    private PhysicsComponent physicsComponent;
 
     /**
      * 
@@ -17,25 +27,49 @@ public class Fireball extends AbstractEntity implements Updatable {
      * @param y Starting Y position.
      * @param width Width.
      * @param height Height.
+     * @param speed Fireball constant speed.
+     * @param world Instance of current world spawn.
      */
-    public Fireball(final double x, final double y, final double width, final double height) {
+    public Fireball(final double x, final double y, final double width, final double height, final float speed, final World world) {
         super(x, y, width, height);
+
+        graphicsComponent = new FireballGraphicsComponent(this);
+        collisionComponent = new FireballCollisionComponent(this, world);
+        physicsComponent = new FireballPhysicsComponent(this);
+
+        this.speed = speed;
+        world.spawnEntity(this);
     }
 
     /**
      * {@inheritDoc}}
      */
     @Override
-    public void update(final double dt) {
-        //updatePos(new Vector2D(SPEED * dt * (this.getDirection() == Direction.LEFT ? -1 : 1), 0), dt);
+    public GraphicsComponent getGraphicsComponent() {
+        return graphicsComponent;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}}
      */
     @Override
-    public BoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
+    }
+
+    /**
+     * Return an Optional with the PhisicsComponent of the Fireball.
+     * @return PhysicsComponent of the Fireball.
+     */
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(physicsComponent);
+    }
+
+    /**
+     * 
+     * @return current fireball speed.
+     */
+    public float getSpeed() {
+        return this.speed;
     }
 }

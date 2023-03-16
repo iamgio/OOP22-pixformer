@@ -13,10 +13,14 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private boolean jumpKey = false;
 
     // Max duration of a jump
-    static final float MAX_JUMP_DURATION = 0.01f;
+    private final float maxJumpDuration = 0.01f;
+
+    // Speedup factor while sprinting
+    static final float baseSpeedLimit = 0.03f;
+    static final float sprintSpeedLimit = 0.06f;
 
     // Current jump state
-    private float currentPlayerJump = MAX_JUMP_DURATION;
+    private float currentPlayerJump = maxJumpDuration;
 
     /**
      * 
@@ -58,7 +62,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         System.out.println("ABILITY");
 
         if (player.getPowerup().isPresent()) {
-            player.getPowerup().get().getBehaviour().ability();
+            player.getPowerup().get().getBehaviour().ability(player);
         }
     }
 
@@ -90,13 +94,18 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
+        
+        // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
         }
 
         jumpKey = false;
+
+        // Fireball cooldown management
+
     }
-    
+
     /**
      * 
      * @param jumpForce Negative jumping force applied to the entity.
@@ -119,7 +128,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping.
      */
     public boolean isJumping() {
-        return currentPlayerJump < MAX_JUMP_DURATION;
+        return currentPlayerJump < maxJumpDuration;
     }
 
     /**
@@ -133,6 +142,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Reset the "jump counter" variable.
      */
     public void resetJumping() {
-        this.currentPlayerJump = MAX_JUMP_DURATION;
+        this.currentPlayerJump = maxJumpDuration;
     }
 }
