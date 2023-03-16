@@ -50,7 +50,6 @@ public class WorldImpl implements World {
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
-
     }
 
     /**
@@ -60,6 +59,14 @@ public class WorldImpl implements World {
     public void killEntity(final Entity entity) {
         this.killedEntities.add(entity);
         eventManager.killed(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dropEntity(final Entity entity) {
+        this.killedEntities.add(entity);
     }
 
     /**
