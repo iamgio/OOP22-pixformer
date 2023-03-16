@@ -1,5 +1,7 @@
 package pixformer.view;
 
+import pixformer.common.wrap.ObservableWritableWrapper;
+import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
@@ -10,6 +12,7 @@ import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.ViewLauncher;
+import pixformer.view.engine.camera.Camera;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -21,6 +24,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
 
     private final Controller controller;
     private final Wrapper<GameScene> scene;
+    private final ObservableWritableWrapper<Camera> camera;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
@@ -34,6 +38,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     public ViewImpl(final Controller controller, final GameScene scene) {
         this.controller = controller;
         this.scene = new SimpleWrapper<>(scene);
+        this.camera = new SimpleObservableWritableWrapper<>(Camera.DEFAULT_CAMERA);
     }
 
     /**
@@ -60,6 +65,16 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     @Override
     public GameScene getScene() {
         return this.scene.get();
+    }
+
+    @Override
+    public Camera getCamera() {
+        return this.camera.get();
+    }
+
+    @Override
+    public void setCamera(final Camera camera) {
+        this.camera.set(camera);
     }
 
     /**
