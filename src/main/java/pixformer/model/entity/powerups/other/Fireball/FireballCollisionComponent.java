@@ -11,8 +11,8 @@ import pixformer.model.entity.dynamic.player.Player;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class FireballCollisionComponent extends CollisionComponent {
-    private Fireball fireball;
-    private World world;
+    final private Fireball fireball;
+    final private World world;
 
     /**
      * 
@@ -31,8 +31,8 @@ public class FireballCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
 
-        for (var x : collisions) {
-            if (x.side().isHorizontal() && !(x.entity() instanceof Player)) {
+        for (final var collisor : collisions) {
+            if (collisor.side().isHorizontal() && !(collisor.entity() instanceof Player)) {
                 world.killEntity(fireball);
             }
         }

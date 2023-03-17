@@ -18,7 +18,7 @@ import pixformer.model.input.InputComponent;
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
     // This playerIndex
-    private int playerIndex;
+    private final int playerIndex;
 
     // State variable to check if player is sprinting
     private boolean isSprinting;
@@ -27,9 +27,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private Optional<PowerUp> powerUp;
 
     // Player components
-    private PlayerGraphicsComponent graphicsComponent;
-    private PlayerPhysicsComponent physicsComponent;
-    private PlayerCollisionComponent collisionComponent;
+    private final PlayerGraphicsComponent graphicsComponent;
+    private final PlayerPhysicsComponent physicsComponent;
+    private final PlayerCollisionComponent collisionComponent;
     private PlayerInputComponent inputComponent;
 
     /**
@@ -96,6 +96,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Return current physics component.
      * @return player's physics component.
      */
+    @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(this.physicsComponent);
     }

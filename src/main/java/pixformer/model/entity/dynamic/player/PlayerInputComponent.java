@@ -10,25 +10,25 @@ import pixformer.model.modelinput.CompleteModelInput;
  * Implementation of InputComponent for a Player entity.
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
-    private Player player;
-    private boolean jumpKey = false;
-    private boolean sprintKey = false;
+    private final Player player;
+    private boolean jumpKey;
+    private boolean sprintKey;
 
     // Max duration of a jump
-    private final float maxJumpDuration = 0.01f;
+    private static final float MAX_JUMP_DURATION = 0.01f;
 
     // Speedup factor while sprinting
-    private final float baseSpeedLimit = 0.01f;
-    private final float sprintSpeedLimit = 0.02f;
+    private static final float BASE_SPEED_LIMIT = 0.01f;
+    private static final float SPRINT_SPEED_LIMIT = 0.02f;
 
     // Ability cooldown in milliseconds
-    private final int abilityCooldown = 500;
+    private static final int ABILITY_COOLDOWN = 500;
 
     // Current jump state
-    private float currentPlayerJump = maxJumpDuration;
+    private float currentPlayerJump = MAX_JUMP_DURATION;
 
     // Chronometer for ability cooldown
-    private ChronometerImpl abilityDelay = new ChronometerImpl();
+    private final ChronometerImpl abilityDelay = new ChronometerImpl();
 
     /**
      * 
@@ -61,12 +61,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void ability() {
-        if (player.getPowerup().isPresent()) {
-            if (abilityDelay.hasElapsed(abilityCooldown)) {
-                player.getPowerup().get().getBehaviour().ability(player);
-                abilityDelay.reset();
-                abilityDelay.start();
-            }
+        if (player.getPowerup().isPresent() && abilityDelay.hasElapsed(ABILITY_COOLDOWN)) {
+            player.getPowerup().get().getBehaviour().ability(player);
+            abilityDelay.reset();
+            abilityDelay.start();
         }
     }
 
@@ -107,12 +105,12 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         jumpKey = false;
 
         // Player speed limit management
-        int direction = player.getVelocity().x() >= 0 ? 1 : -1;
+        final int direction = player.getVelocity().x() >= 0 ? 1 : -1;
 
-        if (!sprintKey && Math.abs(player.getVelocity().x()) > baseSpeedLimit) {
-            player.setVelocity(new Vector2D(baseSpeedLimit * direction, player.getVelocity().y()));
-        } else if (sprintKey && Math.abs(player.getVelocity().x()) > sprintSpeedLimit) {
-            player.setVelocity(new Vector2D(sprintSpeedLimit * direction, player.getVelocity().y()));
+        if (!sprintKey && Math.abs(player.getVelocity().x()) > BASE_SPEED_LIMIT) {
+            player.setVelocity(new Vector2D(BASE_SPEED_LIMIT * direction, player.getVelocity().y()));
+        } else if (sprintKey && Math.abs(player.getVelocity().x()) > SPRINT_SPEED_LIMIT) {
+            player.setVelocity(new Vector2D(SPRINT_SPEED_LIMIT * direction, player.getVelocity().y()));
         }
 
         sprintKey = false;
@@ -137,7 +135,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping.
      */
     public boolean isJumping() {
-        return currentPlayerJump < maxJumpDuration;
+        return currentPlayerJump < MAX_JUMP_DURATION;
     }
 
     /**
@@ -151,6 +149,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Reset the "jump counter" variable.
      */
     public void resetJumping() {
-        this.currentPlayerJump = maxJumpDuration;
+        this.currentPlayerJump = MAX_JUMP_DURATION;
     }
 }

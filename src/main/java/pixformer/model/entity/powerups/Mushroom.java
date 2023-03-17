@@ -6,14 +6,14 @@ import pixformer.model.entity.Entity;
  */
 public class Mushroom implements PowerupBehaviour {
 
-    private final int priority = 1;
+    private static final int PRIORITY = 1;
 
     /**
      * {@inheritDoc}}
      */
     @Override
     public void ability(final Entity entity) {
-        return;
+
     }
 
     /**
@@ -21,7 +21,7 @@ public class Mushroom implements PowerupBehaviour {
      */
     @Override
     public int getPriority() {
-        return priority;
+        return PRIORITY;
     }
 
 }

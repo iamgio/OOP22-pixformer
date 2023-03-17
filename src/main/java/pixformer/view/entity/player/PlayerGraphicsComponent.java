@@ -10,8 +10,8 @@ import pixformer.view.engine.RectangleRenderer;
  * Implementation of GraphicComponent for a Player entity.
  */
 public class PlayerGraphicsComponent extends GraphicsComponent {
-
-    private Player player;
+    final double width;
+    final double height;
 
     private boolean isAlive = true;
 
@@ -21,7 +21,8 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
      */
     public PlayerGraphicsComponent(final Player player) {
         super(player);
-        this.player = player;
+        this.width = player.getWidth();
+        this.height = player.getHeight();
     }
 
     /**
@@ -29,9 +30,8 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
      */
     @Override
     public void update(final GameScene scene) {
-        //System.out.println(player.getX() + " " + player.getY());
         if (this.isAlive) {
-            RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(player.getWidth(), player.getHeight());
+            final RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(width, height);
             playerShape.setColor(new Color(1, 1, 1));
             scene.getGraphics().draw(playerShape);
         }

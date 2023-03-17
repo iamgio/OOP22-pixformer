@@ -17,9 +17,9 @@ import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
     private final float speed;
 
-    private GraphicsComponent graphicsComponent;
-    private CollisionComponent collisionComponent;
-    private PhysicsComponent physicsComponent;
+    private final GraphicsComponent graphicsComponent;
+    private final CollisionComponent collisionComponent;
+    private final PhysicsComponent physicsComponent;
 
     /**
      * 
@@ -61,6 +61,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      * Return an Optional with the PhisicsComponent of the Fireball.
      * @return PhysicsComponent of the Fireball.
      */
+    @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
     }
