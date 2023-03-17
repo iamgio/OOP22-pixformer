@@ -3,7 +3,7 @@ package pixformer.common.time;
 /**
  * {@inheritDoc}.
  */
-public class ChronometerImpl implements Chronometer{
+public class ChronometerImpl implements Chronometer {
     private long startTime;
     private long stopTime;
     private boolean isRunning;
@@ -42,7 +42,7 @@ public class ChronometerImpl implements Chronometer{
     @Override
     public boolean hasElapsed(final long time) {
         if (this.isRunning) {
-            return (System.currentTimeMillis() - startTime) - time <= 0;
+            return (System.currentTimeMillis() - startTime) - time >= 0;
         }
         return false;
     }
