@@ -1,7 +1,7 @@
 package pixformer.common.time;
 
 /**
- * Chronometer interface, representing a chronometer.
+ * Simple Chronometer.
  */
 public interface Chronometer {
 
@@ -12,7 +12,23 @@ public interface Chronometer {
 
     /**
      * Stop the chronometer.
-     * @return the time passed since the chronometer started
      */
-    long end();
+    void stop();
+
+    /**
+     * Reset the chronometer.
+     */
+    void reset();
+
+    /**
+     * @param time to compare
+     * @return if the time in input is elapsed
+     */
+    boolean hasElapsed(long time);
+
+    /**
+     * @return the time elapsed between the start and the stop of the chronometer
+     */
+    long getTimeElapsed();
+
 }

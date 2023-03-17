@@ -3,7 +3,11 @@ package pixformer.model.entity.statics;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.collision.*;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
@@ -48,7 +52,7 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
              * {@inheritDoc}
              */
             @Override
-            public void update(double dt, Set<Collision> collisions) {
+            public void update(final double dt, final Set<Collision> collisions) {
                 for (var collision : collisions) {
                     if (collision.side() == CollisionSide.BOTTOM && getWorld().isPresent()) {
                         getWorld().get().killEntity(this.getEntity());

@@ -1,13 +1,12 @@
 package pixformer.model.input;
 
 import pixformer.model.World;
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.components.Component;
 import pixformer.model.modelinput.ModelInput;
 
 /**
- * Represents an input source for an {@link Entity}.
+ * Represents an input source for an {@link MutableEntity}.
  */
 public abstract class InputComponent extends Component<MutableEntity> implements ModelInput {
 
