@@ -2,7 +2,6 @@ package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
-import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
@@ -33,23 +32,6 @@ public interface Controller {
      * @return a new game loop instance
      */
     GameLoop createGameLoop(View view); // TODO change to View
-
-    /**
-     * Set-ups, initializes and starts the given level with a given amount of players.
-     * @param level level to start
-     * @param playersAmount amount of players to play the level
-     * @implNote this is designed to be a consequence of {@link LevelManager#start(Level, int)},
-     *     so the implementation should not call that method.
-     */
-    void initLevel(Level level, int playersAmount);
-
-    /**
-     * Stops the lifecycle of the given level.
-     * @param level level to start
-     * @implNote this is designed to be a consequence of {@link LevelManager#endCurrentLevel()},
-     *     so the implementation should not call that method.
-     */
-    void stopLevel(Level level);
 
     /**
      * Applies supported boundaries to a given amount of players.
