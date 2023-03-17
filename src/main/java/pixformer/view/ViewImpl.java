@@ -14,6 +14,7 @@ import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.ViewLauncher;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
+import pixformer.view.engine.camera.SimpleCameraBuilder;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -22,6 +23,10 @@ import java.util.function.Consumer;
  * Implementation of the standard game view.
  */
 public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
+
+    private static final double CAMERA_X_OFFSET = -10;
+    private static final double CAMERA_Y_OFFSET = 0;
+    private static final double CAMERA_SCALE = 15;
 
     private final Controller controller;
     private final Wrapper<GameScene> scene;
@@ -70,13 +75,16 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         return this.scene.get();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Camera getCamera() {
-        return this.camera.get();
-    }
-
-    @Override
-    public void setCamera(final Camera camera) {
+    public void updateCamera(final double pivotX, final double pivotY) {
+        final Camera camera = new SimpleCameraBuilder()
+                .withPivot(pivotX, pivotY)
+                .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
+                .withScale(CAMERA_SCALE)
+                .build();
         this.camera.set(camera);
     }
 

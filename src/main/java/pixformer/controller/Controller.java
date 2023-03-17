@@ -3,7 +3,10 @@ package pixformer.controller;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
+import pixformer.model.entity.Entity;
 import pixformer.view.View;
+
+import java.util.Set;
 
 /**
  * The controller that acts as a bridge between model and view.
@@ -56,4 +59,10 @@ public interface Controller {
      *     or max/min if it is too low or too high
      */
     int correctSupportedPlayersAmount(int playersAmount);
+
+    /**
+     * @param entities entities to find a common point for
+     * @return X coordinate of the common point (possibly average) between the given entitites
+     */
+    double calcEntitiesCommonPointX(Set<Entity> entities);
 }

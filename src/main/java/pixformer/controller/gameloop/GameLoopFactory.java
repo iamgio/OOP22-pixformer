@@ -2,14 +2,12 @@ package pixformer.controller.gameloop;
 
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
-import pixformer.controller.GameLoopManager;
+import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
-import pixformer.view.engine.camera.Camera;
-import pixformer.view.engine.camera.SimpleCameraBuilder;
 
 import java.util.Set;
 
@@ -21,25 +19,22 @@ public final class GameLoopFactory {
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
 
-    private static final double CAMERA_X_OFFSET = -10;
-    private static final double CAMERA_Y_OFFSET = 0;
-    private static final double CAMERA_SCALE = 15;
-
     private final Wrapper<Level> level;
     private final Wrapper<View> view;
-    private final Wrapper<GameLoopManager> gameLoopManager;
+
+    private final Controller controller;
 
     /**
      * Instantiates a new game loop factory.
      *
-     * @param level           game level
-     * @param view            game view
-     * @param gameLoopManager game loop handler
+     * @param level      game level
+     * @param controller game controller
+     * @param view       game view
      */
-    public GameLoopFactory(final Level level, final View view, final GameLoopManager gameLoopManager) {
+    public GameLoopFactory(final Level level, final Controller controller, final View view) {
         this.level = new SimpleWrapper<>(level);
         this.view = new SimpleWrapper<>(view);
-        this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
+        this.controller = controller;
     }
 
     /**
@@ -55,11 +50,13 @@ public final class GameLoopFactory {
 
         return dt -> {
             view.update(dt);
-            if (this.gameLoopManager.get().isRunning()) {
+            if (this.controller.getGameLoopManager().isRunning()) {
                 world.update(dt);
             }
 
-            view.setCamera(this.createCamera(playersEntities));
+            final double cameraPivotX = this.controller.calcEntitiesCommonPointX(playersEntities);
+            final double cameraPivotY = 0; // TODO might be something else?
+            view.updateCamera(cameraPivotX, cameraPivotY);
 
             world.getEntities().stream()
                     .filter(DrawableEntity.class::isInstance)
@@ -78,17 +75,5 @@ public final class GameLoopFactory {
                 }
             }
         };
-    }
-
-    /**
-     * @param followedEntities entities to follow
-     * @return a new camera instance centered on the given entities
-     */
-    private Camera createCamera(final Set<Entity> followedEntities) {
-        return new SimpleCameraBuilder()
-                .withEntityCenteringX(followedEntities)
-                .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
-                .withScale(CAMERA_SCALE)
-                .build();
     }
 }
