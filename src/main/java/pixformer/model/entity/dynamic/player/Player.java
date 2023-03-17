@@ -20,9 +20,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     // This playerIndex
     private int playerIndex;
 
-    // State of the player life
-    private boolean isAlive = true;
-
     // State variable to check if player is sprinting
     private boolean isSprinting;
 
@@ -123,14 +120,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void resetJumping() {
         this.inputComponent.resetJumping();
-    }
-
-    /**
-     *  Get if Player is alive.
-     * @return True if player is alive, false if is not.
-     */
-    public boolean isAlive() {
-        return isAlive;
     }
 
     /**
