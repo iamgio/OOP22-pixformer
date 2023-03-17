@@ -31,6 +31,8 @@ public class ControllerImpl implements Controller {
         this.settings = settings;
         this.levelManager = new SimpleWrapper<>(levelManager);
         this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
+
+        this.setupLevelChangeActions();
     }
 
     /**
@@ -40,6 +42,14 @@ public class ControllerImpl implements Controller {
     public ControllerImpl(final GameLoopManager gameLoopManager) {
         // TODO implement GameSettings
         this(null, new LevelManagerImpl(), gameLoopManager);
+    }
+
+    private void setupLevelChangeActions() {
+        getLevelManager().addOnLevelStart((level, playersAmount) -> {
+            level.setup(playersAmount);
+            this.getGameLoopManager().start();
+        });
+        getLevelManager().addOnLevelEnd(level -> this.getGameLoopManager().stop());
     }
 
     /**
@@ -76,23 +86,6 @@ public class ControllerImpl implements Controller {
             throw new IllegalStateException("Current level is not set.");
         }
         return new GameLoopFactory(currentLevel.get(), view, this.gameLoopManager.get()).defaultLoop();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initLevel(final Level level, final int playersAmount) {
-        level.setup(playersAmount);
-        this.getGameLoopManager().start();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopLevel(final Level level) {
-        this.getGameLoopManager().stop();
     }
 
     /**

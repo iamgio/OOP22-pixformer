@@ -44,13 +44,7 @@ public interface ViewLauncher {
      */
     default void setupLevelScenesRoutine() {
         LevelManager levelManager = this.getController().getLevelManager();
-        levelManager.addOnLevelStart((level, playersAmount) -> {
-            this.setScene(this.createGameScene());
-            this.getController().initLevel(level, playersAmount);
-        });
-        levelManager.addOnLevelEnd(level -> {
-            this.setScene(this.createMenuScene());
-            this.getController().stopLevel(level);
-        });
+        levelManager.addOnLevelStart((level, playersAmount) -> this.setScene(this.createGameScene()));
+        levelManager.addOnLevelEnd(level -> this.setScene(this.createMenuScene()));
     }
 }
