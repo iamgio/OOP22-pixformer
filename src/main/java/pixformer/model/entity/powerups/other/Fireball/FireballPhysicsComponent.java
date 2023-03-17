@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.Fireball;
+package pixformer.model.entity.powerups.other.fireball;
 
 import pixformer.common.Vector2D;
 import pixformer.model.physics.PhysicsComponent;
