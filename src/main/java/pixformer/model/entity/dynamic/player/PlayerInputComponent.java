@@ -1,6 +1,7 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.Vector2D;
+import pixformer.common.time.ChronometerImpl;
 import pixformer.model.World;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
@@ -17,11 +18,17 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private final float maxJumpDuration = 0.01f;
 
     // Speedup factor while sprinting
-    static final float baseSpeedLimit = 0.01f;
-    static final float sprintSpeedLimit = 0.02f;
+    private final float baseSpeedLimit = 0.01f;
+    private final float sprintSpeedLimit = 0.02f;
+
+    // Ability cooldown in milliseconds
+    private final int abilityCooldown = 500;
 
     // Current jump state
     private float currentPlayerJump = maxJumpDuration;
+
+    // Chronometer for ability cooldown
+    private ChronometerImpl abilityDelay = new ChronometerImpl();
 
     /**
      * 
@@ -30,6 +37,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     protected PlayerInputComponent(final Player entity) {
         super(entity);
         player = entity;
+        abilityDelay.start();
     }
 
     /**
@@ -54,7 +62,11 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void ability() {
         if (player.getPowerup().isPresent()) {
-            player.getPowerup().get().getBehaviour().ability(player);
+            if (abilityDelay.hasElapsed(abilityCooldown)) {
+                player.getPowerup().get().getBehaviour().ability(player);
+                abilityDelay.reset();
+                abilityDelay.start();
+            }
         }
     }
 
@@ -75,7 +87,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void sprint() {
-        sprintKey = true;        
+        sprintKey = true;
     }
 
     /**
@@ -83,7 +95,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-        System.out.println("Speed: " + player.getVelocity().x());
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
@@ -103,11 +114,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         } else if (sprintKey && Math.abs(player.getVelocity().x()) > sprintSpeedLimit) {
             player.setVelocity(new Vector2D(sprintSpeedLimit * direction, player.getVelocity().y()));
         }
-        
-        sprintKey = false;  
-        
-        // Fireball cooldown management
 
+        sprintKey = false;
     }
 
     /**
