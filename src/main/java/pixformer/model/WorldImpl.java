@@ -129,25 +129,25 @@ public class WorldImpl implements World {
     private void handleCollisions(final MutableEntity entity) {
         // Ground collision
         if (entity.getVelocity().y() > 0 && collisionManager.isCollidingGround(entity)) {
-            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+            entity.setVelocity(entity.getVelocity().copyWithY(0));
             entity.setY(Math.floor(entity.getY())); // Fixes intersections.
         }
 
         // Ceiling collision
         if (entity.getVelocity().y() < 0 && collisionManager.isCollidingCeiling(entity)) {
-            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
+            entity.setVelocity(entity.getVelocity().copyWithY(0));
             entity.setY(Math.ceil(entity.getY()));
         }
 
         // Left collision
         if (entity.getVelocity().x() < 0 && collisionManager.isCollidingLeftWall(entity)) {
-            entity.setVelocity(new Vector2D(0, entity.getVelocity().y()));
+            entity.setVelocity(entity.getVelocity().copyWithX(0));
             entity.setX(Math.ceil(entity.getX()));
         }
 
         // Right collision
         if (entity.getVelocity().x() > 0 && collisionManager.isCollidingRightWall(entity)) {
-            entity.setVelocity(new Vector2D(0, entity.getVelocity().y()));
+            entity.setVelocity(entity.getVelocity().copyWithX(0));
             entity.setX(Math.floor(entity.getX()));
         }
 
