@@ -28,6 +28,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private static final double CAMERA_Y_OFFSET = 0;
     private static final double CAMERA_SCALE = 15;
 
+    private static final Color BACKGROUND_COLOR = new Color(0.4, 0.55, 0.95);
+
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
@@ -64,7 +66,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     @Override
     public void setup() {
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
-        this.getScene().add(rendererFactory.newSolidBackground(Color.BLACK));
+        this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
     }
 
     /**

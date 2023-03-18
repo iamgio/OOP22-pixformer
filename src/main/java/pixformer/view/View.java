@@ -20,6 +20,9 @@ public interface View extends Updatable {
 
     /**
      * Sets a new game camera.
+     *
+     * @param pivotX X coordinate of the center point
+     * @param pivotY Y coordinate of the center point
      */
     void updateCamera(double pivotX, double pivotY);
 }
