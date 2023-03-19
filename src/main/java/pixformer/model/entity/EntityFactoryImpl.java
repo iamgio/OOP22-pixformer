@@ -5,6 +5,7 @@ import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.dynamic.Koopa;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.entity.statics.Brick;
+import pixformer.model.entity.statics.Surprise;
 
 /**
  * {@inheritDoc}.
@@ -44,7 +45,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("surprise")
     @Override
     public Entity createSurpriseBlock(final int x, final int y) {
-        return null;
+        return new Surprise(x, y);
     }
 
     /**

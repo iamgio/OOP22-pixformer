@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Brick block, common block which can be destroyed.
+ * Brick block, common brick block which can be destroyed from the bottom.
  */
 public class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
