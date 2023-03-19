@@ -4,6 +4,8 @@ import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GameLoopFactory;
+import pixformer.controller.level.LevelManager;
+import pixformer.controller.level.LevelManagerImpl;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;

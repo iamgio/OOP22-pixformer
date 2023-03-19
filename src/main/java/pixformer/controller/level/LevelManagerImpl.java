@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.level;
 
 import pixformer.common.wrap.SimpleWritableWrapper;
 import pixformer.common.wrap.WritableWrapper;

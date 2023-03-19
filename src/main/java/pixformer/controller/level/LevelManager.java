@@ -1,4 +1,4 @@
-package pixformer.controller;
+package pixformer.controller.level;
 
 import pixformer.model.Level;
 

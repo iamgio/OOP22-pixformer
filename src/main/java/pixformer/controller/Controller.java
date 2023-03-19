@@ -1,6 +1,7 @@
 package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.level.LevelManager;
 import pixformer.model.GameSettings;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
