@@ -49,6 +49,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public ScoreManager getScoreManager() {
+        return this.scoreManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Set<Entity> getUserControlledEntities() {
         return this.entities.stream()
                 .filter(entity -> entity.getInputComponent().isPresent())

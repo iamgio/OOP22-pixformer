@@ -7,6 +7,7 @@ import pixformer.controller.gameloop.GameLoopFactory;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;
+import pixformer.model.score.Score;
 import pixformer.view.View;
 
 import java.util.Optional;
@@ -88,6 +89,15 @@ public class ControllerImpl implements Controller {
             throw new IllegalStateException("Current level is not set.");
         }
         return new GameLoopFactory(currentLevel.get(), this, view).defaultLoop();
+    }
+
+    @Override
+    public int getScore() {
+        final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
+        if (level != null) {
+            return level.getWorld().getScoreManager().getScore();
+        }
+        return 0;
     }
 
     /**

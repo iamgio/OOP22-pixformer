@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
+import pixformer.model.score.ScoreManager;
 
 import java.util.Set;
 
@@ -15,6 +16,11 @@ public interface World extends Updatable {
      * @return the entities living within this world
      */
     Set<Entity> getEntities();
+
+    /**
+     * @return the score manager of the game world
+     */
+    ScoreManager getScoreManager();
 
     /**
      * @return an immutable subset of {@link World#getEntities()} with only user-controlled entities.
