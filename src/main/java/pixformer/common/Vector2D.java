@@ -27,4 +27,20 @@ public record Vector2D(double x, double y) {
     public Vector2D scale(final double k) {
         return new Vector2D(this.x * k, this.y * k);
     }
+
+    /**
+     * @param y new Y coordinate
+     * @return a new Vector with a new Y coordinate
+     */
+    public Vector2D copyWithY(final double y) {
+        return new Vector2D(this.x, y);
+    }
+
+    /**
+     * @param x new X coordinate
+     * @return a new Vector with a new X coordinate
+     */
+    public Vector2D copyWithX(final double x) {
+        return new Vector2D(x, this.y);
+    }
 }

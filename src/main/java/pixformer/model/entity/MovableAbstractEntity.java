@@ -65,6 +65,9 @@ public class MovableAbstractEntity extends AbstractEntity {
         this.setY(this.getY() + newForce.y() * dt);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         // TODO Auto-generated method stub

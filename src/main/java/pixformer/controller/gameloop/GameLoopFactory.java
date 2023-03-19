@@ -2,11 +2,14 @@ package pixformer.controller.gameloop;
 
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
-import pixformer.controller.GameLoopManager;
+import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
 import pixformer.view.View;
+
+import java.util.Set;
 
 /**
  * Factory of available game loops.
@@ -18,18 +21,20 @@ public final class GameLoopFactory {
 
     private final Wrapper<Level> level;
     private final Wrapper<View> view;
-    private final Wrapper<GameLoopManager> gameLoopManager;
+
+    private final Controller controller;
 
     /**
      * Instantiates a new game loop factory.
-     * 
-     * @param level         game level
-     * @param view          game view
+     *
+     * @param level      game level
+     * @param controller game controller
+     * @param view       game view
      */
-    public GameLoopFactory(final Level level, final View view, final GameLoopManager gameLoopManager) {
+    public GameLoopFactory(final Level level, final Controller controller, final View view) {
         this.level = new SimpleWrapper<>(level);
         this.view = new SimpleWrapper<>(view);
-        this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
+        this.controller = controller;
     }
 
     /**
@@ -39,15 +44,19 @@ public final class GameLoopFactory {
         final View view = this.view.get();
 
         view.setup();
-        view.getScene().getGraphics().setScale(15); // test
 
         final World world = this.level.get().getWorld();
+        final Set<Entity> playersEntities = world.getUserControlledEntities();
 
         return dt -> {
             view.update(dt);
-            if (this.gameLoopManager.get().isRunning()) {
+            if (this.controller.getGameLoopManager().isRunning()) {
                 world.update(dt);
             }
+
+            final double cameraPivotX = this.controller.calcEntitiesCommonPointX(playersEntities);
+            final double cameraPivotY = 0; // TODO might be something else?
+            view.updateCamera(cameraPivotX, cameraPivotY);
 
             world.getEntities().stream()
                     .filter(DrawableEntity.class::isInstance)

@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.Fireball;
+package pixformer.model.entity.powerups.other.fireball;
 
 import pixformer.common.Vector2D;
 import pixformer.model.physics.PhysicsComponent;
@@ -7,7 +7,7 @@ import pixformer.model.physics.PhysicsComponent;
  * Implementation of PhysicalComponent for a Player entity.
  */
 public class FireballPhysicsComponent extends PhysicsComponent {
-    private Fireball fireball;
+    final private Fireball fireball;
 
     /**
      * 

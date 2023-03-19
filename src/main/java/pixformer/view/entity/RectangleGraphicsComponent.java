@@ -18,6 +18,7 @@ public class RectangleGraphicsComponent extends GraphicsComponent {
      * Instantiates a graphics component for a test entity.
      * 
      * @param entity test entity
+     * @param color color of the rectangle
      */
     public RectangleGraphicsComponent(final Entity entity, final Color color) {
         super(entity);

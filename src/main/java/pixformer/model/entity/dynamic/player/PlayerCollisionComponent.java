@@ -9,7 +9,7 @@ import pixformer.model.entity.dynamic.Enemy;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class PlayerCollisionComponent extends CollisionComponent {
-    private Player player;
+    private final Player player;
 
     /**
      * 
@@ -30,11 +30,9 @@ public class PlayerCollisionComponent extends CollisionComponent {
             this.player.resetJumping();
         }
 
-        for (var collisor : collisions) {
-            if (collisor.entity() instanceof Enemy) {
-                if (collisor.side().isHorizontal()) {
-                    this.player.damaged();
-                }
+        for (final var collisor : collisions) {
+            if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
+                this.player.damaged();
             }
         }
 

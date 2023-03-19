@@ -17,4 +17,9 @@ public interface View extends Updatable {
      * @return the active game scene
      */
     GameScene getScene();
+
+    /**
+     * Sets a new game camera.
+     */
+    void updateCamera(double pivotX, double pivotY);
 }

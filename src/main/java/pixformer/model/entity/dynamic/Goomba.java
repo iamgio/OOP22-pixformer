@@ -1,14 +1,17 @@
 package pixformer.model.entity.dynamic;
 
+import java.util.Optional;
+
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
- * The enemy gooba.
+ * The enemy goomba.
  */
-public class Goomba extends Enemy implements DrawableEntity {
+public final class Goomba extends Enemy implements DrawableEntity {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
@@ -27,6 +30,11 @@ public class Goomba extends Enemy implements DrawableEntity {
     @Override
     public GraphicsComponent getGraphicsComponent() {
         return new RectangleGraphicsComponent(this, new Color(0.7, 0.4, 0));
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return DieOnPressedCollisionComponent.createWithWorldFromEntity(this);
     }
 
 }

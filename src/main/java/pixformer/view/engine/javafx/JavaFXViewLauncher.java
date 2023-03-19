@@ -1,11 +1,13 @@
 package pixformer.view.engine.javafx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import pixformer.common.wrap.ObservableWritableWrapper;
 import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.ControllerImpl;
+import pixformer.model.LevelMock;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
 import pixformer.view.javafx.JavaFXGameLoopManager;
@@ -25,11 +27,17 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public void start(final Stage primaryStage) {
+        setupLevelScenesRoutine();
         this.scene.addOnChange(scene -> {
             primaryStage.setScene(scene.getScene());
             scene.handleInput();
         });
-        this.setScene(this.createInitialScene());
+
+        // Commentare la riga sotto per far comparire il menu principale
+        // TODO togliere prima della consegna
+        Platform.runLater(() -> this.getController().getLevelManager().start(new LevelMock(), 1));
+
+        this.setScene(this.createMenuScene());
 
         primaryStage.setTitle(this.getTitle());
         primaryStage.show();

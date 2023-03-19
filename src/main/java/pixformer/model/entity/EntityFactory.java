@@ -36,6 +36,13 @@ public interface EntityFactory {
     /**
      * @param x X coordinate
      * @param y Y coordinate
+     * @return a barrier block
+     */
+    Entity createBarrierBlock(int x, int y);
+
+    /**
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a Goomba entity
      */
     Entity createGoomba(int x, int y);

@@ -6,9 +6,11 @@ import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.gameloop.GameLoopFactory;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
+import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * The default implementation of a {@link Controller}.
@@ -31,6 +33,8 @@ public class ControllerImpl implements Controller {
         this.settings = settings;
         this.levelManager = new SimpleWrapper<>(levelManager);
         this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
+
+        this.setupLevelChangeActions();
     }
 
     /**
@@ -40,6 +44,14 @@ public class ControllerImpl implements Controller {
     public ControllerImpl(final GameLoopManager gameLoopManager) {
         // TODO implement GameSettings
         this(null, new LevelManagerImpl(), gameLoopManager);
+    }
+
+    private void setupLevelChangeActions() {
+        getLevelManager().addOnLevelStart((level, playersAmount) -> {
+            level.setup(playersAmount);
+            this.getGameLoopManager().start();
+        });
+        getLevelManager().addOnLevelEnd(level -> this.getGameLoopManager().stop());
     }
 
     /**
@@ -75,24 +87,7 @@ public class ControllerImpl implements Controller {
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
-        return new GameLoopFactory(currentLevel.get(), view, this.gameLoopManager.get()).defaultLoop();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initLevel(final Level level, final int playersAmount) {
-        level.setup(playersAmount);
-        this.getGameLoopManager().start();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopLevel(final Level level) {
-        this.getGameLoopManager().stop();
+        return new GameLoopFactory(currentLevel.get(), this, view).defaultLoop();
     }
 
     /**
@@ -105,5 +100,13 @@ public class ControllerImpl implements Controller {
         } else {
             return Math.min(playersAmount, MAX_PLAYERS_AMOUNT);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double calcEntitiesCommonPointX(final Set<Entity> entities) {
+        return entities.stream().mapToDouble(Entity::getX).average().orElse(0);
     }
 }

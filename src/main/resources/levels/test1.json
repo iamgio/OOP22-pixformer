@@ -37,6 +37,16 @@
         "width": 20,
         "height": 2
       }
+    },
+    {
+      "type": "grass",
+      "x": 12,
+      "y": 31,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 4
+      }
     }
   ]
 }

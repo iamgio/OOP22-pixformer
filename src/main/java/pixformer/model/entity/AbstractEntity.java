@@ -2,12 +2,10 @@ package pixformer.model.entity;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
-import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidEntity;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * The base class for a mutable entity.
@@ -139,13 +137,7 @@ public abstract class AbstractEntity implements MutableEntity {
      */
     @Override
     public boolean isOnGround() {
-        if (this.world == null) {
-            return false;
-        }
-
-        return this.world.getCollisionManager().findCollisionsFor(this).stream()
-                .filter(collision -> collision.side() == CollisionSide.BOTTOM)
-                .anyMatch(collision -> collision.entity().isSolid());
+        return this.world != null && this.world.getCollisionManager().isCollidingGround(this);
     }
 
     /**

@@ -6,7 +6,7 @@ package pixformer.model.entity.powerups;
 public class PowerUp {
 
     // Current powerup ability power
-    private PowerupBehaviour behaviour;
+    private final PowerupBehaviour behaviour;
 
     /**
      * 

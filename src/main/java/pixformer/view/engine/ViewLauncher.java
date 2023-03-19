@@ -1,6 +1,7 @@
 package pixformer.view.engine;
 
 import pixformer.controller.Controller;
+import pixformer.controller.LevelManager;
 
 /**
  * Responsible for launching a kind of view.
@@ -29,7 +30,21 @@ public interface ViewLauncher {
     void setScene(GameScene scene);
 
     /**
-     * @return the initial new game scene instance
+     * @return a new game scene instance
      */
-    GameScene createInitialScene();
+    GameScene createGameScene();
+
+    /**
+     * @return a new main menu scene instance
+     */
+    GameScene createMenuScene();
+
+    /**
+     * Set-ups the scene switch when a level starts or ends.
+     */
+    default void setupLevelScenesRoutine() {
+        LevelManager levelManager = this.getController().getLevelManager();
+        levelManager.addOnLevelStart((level, playersAmount) -> this.setScene(this.createGameScene()));
+        levelManager.addOnLevelEnd(level -> this.setScene(this.createMenuScene()));
+    }
 }
