@@ -13,7 +13,7 @@ import pixformer.model.entity.collision.CollisionReactor;
 public final class CollisionComponentFactory {
 
     private CollisionComponentFactory() {
-        
+
     }
 
     /**
