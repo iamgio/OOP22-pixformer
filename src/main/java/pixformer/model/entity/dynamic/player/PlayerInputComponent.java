@@ -24,11 +24,17 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Ability cooldown in milliseconds
     private static final int ABILITY_COOLDOWN = 500;
 
+    // On enemy jump cooldown in milliseconds
+    private static final int ON_ENEMY_JUMP_COOLDOWN = 500;
+
     // Current jump state
     private float currentPlayerJump = MAX_JUMP_DURATION;
 
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
+
+    // Chronometer for the jump trigger on enemies
+    private final ChronometerImpl onEnemyJumpDelay = new ChronometerImpl();
 
     /**
      * 
@@ -38,6 +44,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         super(entity);
         player = entity;
         abilityDelay.start();
+        onEnemyJumpDelay.start();
     }
 
     /**
@@ -154,5 +161,18 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     public void resetJumping() {
         this.currentPlayerJump = MAX_JUMP_DURATION;
+    }
+
+    /**
+     * Force a jump on player
+     */
+    public void onEnemyJump() {
+
+        if (onEnemyJumpDelay.hasElapsed(ABILITY_COOLDOWN)) {
+            resetJumping();
+            player.setVelocity(player.getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
+            onEnemyJumpDelay.reset();
+            onEnemyJumpDelay.start();
+        }
     }
 }

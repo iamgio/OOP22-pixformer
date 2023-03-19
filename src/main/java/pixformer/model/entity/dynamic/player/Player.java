@@ -108,6 +108,12 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public Optional<PowerUp> getPowerup() {
         return this.powerUp;
     }
+    /**
+     * Manage the player behaviour when jumping on an enemy.
+     */
+    public void onEnemyJump() {
+        this.inputComponent.onEnemyJump();
+    }
 
      /**
      * @return True if is sprinting.

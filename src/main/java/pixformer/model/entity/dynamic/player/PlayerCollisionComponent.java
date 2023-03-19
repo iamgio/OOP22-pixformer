@@ -27,6 +27,11 @@ public class PlayerCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
 
         for (final var collisor : collisions) {
+
+            if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
+                this.player.onEnemyJump();
+            }
+
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
                 this.player.damaged();
             }
