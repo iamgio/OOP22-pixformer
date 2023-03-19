@@ -24,7 +24,7 @@ public final class TurtleKoopa extends Enemy implements KoopaState {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return DieOnPressedCollisionComponent.createWithWorldFromEntity(this);
+        return ActionOnPressedCollisionComponent.createWithWorldFromEntityForDying(this);
     }
 
     @Override
