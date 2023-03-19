@@ -160,7 +160,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     }
 
     /**
-     * Force a jump on player
+     * Force a jump on player.
      */
     public void onEnemyJump() {
 

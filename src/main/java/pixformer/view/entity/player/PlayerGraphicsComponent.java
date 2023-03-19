@@ -10,8 +10,8 @@ import pixformer.view.engine.RectangleRenderer;
  * Implementation of GraphicComponent for a Player entity.
  */
 public class PlayerGraphicsComponent extends GraphicsComponent {
-    final double width;
-    final double height;
+    private final double width;
+    private final double height;
 
     private boolean isAlive = true;
 

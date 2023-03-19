@@ -136,7 +136,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
 
         if (this.powerUp.get().getBehaviour().getPriority() == 1) {
             this.powerUp = Optional.empty();
-        }        
+        }
     }
 
     /**
