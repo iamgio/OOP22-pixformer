@@ -1,6 +1,7 @@
 package pixformer.model.entity.dynamic;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -20,6 +21,16 @@ import pixformer.model.entity.dynamic.player.Player;
 public final class DieOnPressedCollisionComponent extends CollisionComponent {
 
     private final CollisionReactor reactor;
+
+    /**
+     * If the entity has a world create a {@code DieOnPressedCollisionComponent}.
+     * 
+     * @param entity to be controlled.
+     * @return a {@code DieOnPressedCollisionComponent} if the entity has a world
+     */
+    static Optional<CollisionComponent> createWithWorldFromEntity(final MutableEntity entity) {
+        return entity.getWorld().map(world -> new DieOnPressedCollisionComponent(entity, world::killEntity));
+    }
 
     /**
      * @param entity to be controlled.

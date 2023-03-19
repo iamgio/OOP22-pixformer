@@ -7,14 +7,13 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.input.InputComponent;
-import pixformer.model.modelinput.HorizontalModelInput;
+import pixformer.model.physics.PhysicsComponent;
 
 /**
  * The default implementation of an enemy.
  */
 public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
 
-    private final HorizontalModelInput joystick;
     private final GoombaAI ai;
 
     /**
@@ -28,9 +27,8 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     public Enemy(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
-        joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
-        ai = new GoombaAI(this, joystick);
-        joystick.left();
+        // joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
+        ai = new GoombaAI(this, this::fixVelocity, velocity);
     }
 
     @Override
@@ -42,6 +40,11 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
         final Vector2D current = super.getVelocity();
         final Vector2D newVelocity = new Vector2D(velocity.x(), current.y());
         this.setVelocity(newVelocity);
+    }
+
+    @Override
+    public final Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(new PhysicsComponent(this));
     }
 
 }
