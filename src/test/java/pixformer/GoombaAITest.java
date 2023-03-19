@@ -24,11 +24,13 @@ final class GoombaAITest {
 
     private static final double X_BLOCK = -2;
     private static final double DELTA = 0.0001;
+    private static final double STEP = 0.002;
+    private static final double DT = 1;
     private final World world = new WorldImpl();
     // private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
     private final Entity goomba = new AbstractEntity(0, 0, 1, 1) {
 
-        private final Optional<InputComponent> ai = Optional.of(new GoombaAI(this, this::setVelocity, step));
+        private final Optional<InputComponent> ai = Optional.of(new GoombaAI(this, this::setVelocity, STEP));
 
         @Override
         public BoundingBox getBoundingBox() {
@@ -41,8 +43,6 @@ final class GoombaAITest {
         }
         
     };
-    private static final double step = 0.002;
-    private static final double dt = 1;
 
     @BeforeEach
     void setup() {
@@ -52,11 +52,11 @@ final class GoombaAITest {
     @Test
     void testClearRoad() {
         final double numberOfSteps = 2;
-        world.update(dt);
-        assertEquals(-step, goomba.getX());
+        world.update(DT);
+        assertEquals(-STEP, goomba.getX());
         assertEquals(0, goomba.getY());
-        world.update(dt);
-        assertEquals(-numberOfSteps * step, goomba.getX());
+        world.update(DT);
+        assertEquals(-numberOfSteps * STEP, goomba.getX());
         assertEquals(0, goomba.getY());
     }
 
@@ -64,8 +64,8 @@ final class GoombaAITest {
     void testFindObstacle() {
         world.spawnEntity(new Block(X_BLOCK, 0)); // -2, -1
         world.spawnEntity(new Block(2, 0)); // 1, 2
-        goUntil(0, i -> i > -1, i -> i - step, -1 + step);
-        goUntil(-1 + step, i -> i < 1, i -> i + step, 1 - step);
+        goUntil(0, i -> i > -1, i -> i - STEP, -1 + STEP);
+        goUntil(-1 + STEP, i -> i < 1, i -> i + STEP, 1 - STEP);
         // for (double i = -1 + step; i < 1; i += step) {
         // assertEquals(i, goomba.getX(), DELTA);
         // assertEquals(0, goomba.getY());
@@ -84,9 +84,9 @@ final class GoombaAITest {
         for (double i = start; hasNext.test(i); i = next.applyAsDouble(i)) {
             assertEquals(i, goomba.getX(), DELTA);
             assertEquals(0, goomba.getY(), DELTA);
-            world.update(dt);
+            world.update(DT);
         }
-        world.update(dt);
+        world.update(DT);
         assertEquals(finalPosition, goomba.getX(), DELTA);
         assertEquals(0, goomba.getY(), DELTA);
     }
