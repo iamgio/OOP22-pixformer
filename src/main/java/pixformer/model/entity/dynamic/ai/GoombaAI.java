@@ -5,8 +5,8 @@ import java.util.function.Consumer;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
-import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.SimpleCollisionReactor;
@@ -31,7 +31,7 @@ public class GoombaAI extends AIInputComponent {
      * @param velocitySetter the entity setter for its velocity.
      * @param velocity       the module of the velocity of the controlled entity.
      */
-    public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
+    public GoombaAI(final MutableEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
         reactor = new SimpleCollisionReactor(Map.of(
