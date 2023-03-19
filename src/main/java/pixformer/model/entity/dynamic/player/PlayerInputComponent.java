@@ -24,11 +24,17 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Ability cooldown in milliseconds
     private static final int ABILITY_COOLDOWN = 500;
 
+    // On enemy jump cooldown in milliseconds
+    private static final int ON_ENEMY_JUMP_COOLDOWN = 500;
+
     // Current jump state
     private float currentPlayerJump = MAX_JUMP_DURATION;
 
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
+
+    // Chronometer for the jump trigger on enemies
+    private final ChronometerImpl onEnemyJumpDelay = new ChronometerImpl();
 
     /**
      * 
@@ -38,6 +44,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         super(entity);
         player = entity;
         abilityDelay.start();
+        onEnemyJumpDelay.start();
     }
 
     /**
@@ -45,7 +52,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-        this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
     }
 
     /**
@@ -53,7 +60,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-        this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
     }
 
     /**
@@ -63,6 +70,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     public void ability() {
         if (player.getPowerup().isPresent() && abilityDelay.hasElapsed(ABILITY_COOLDOWN)) {
             player.getPowerup().get().getBehaviour().ability(player);
+
             abilityDelay.reset();
             abilityDelay.start();
         }
@@ -75,8 +83,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     public void jump() {
         jumpKey = true;
 
-        if (jump(-PlayerPhysicsComponent.JUMP_FORCE)) {
-            this.getEntity().setVelocity(this.getEntity().getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
+        if (currentPlayerJump > 0) {
+            forceJump();
+            currentPlayerJump -= PlayerPhysicsComponent.JUMP_FORCE;
         }
     }
 
@@ -93,6 +102,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
+
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
@@ -102,9 +112,13 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
             stopJumping();
         }
 
+        if (player.isOnGround()) {
+            resetJumping();
+        }
+
         jumpKey = false;
 
-        // Player speed limit management
+        // Player speed limit and sprint management
         final int direction = player.getVelocity().x() >= 0 ? 1 : -1;
 
         if (!sprintKey && Math.abs(player.getVelocity().x()) > BASE_SPEED_LIMIT) {
@@ -116,39 +130,45 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         sprintKey = false;
     }
 
-    /**
-     * 
-     * @param jumpForce Negative jumping force applied to the entity.
-     * @return True if the player jumped, False if he couldnt.
-     */
-    public boolean jump(final float jumpForce) {
-        if (currentPlayerJump <= 0) {
-            return false;
-        }
-
-        currentPlayerJump += jumpForce;
-        return true;
-    }
-
-    /**
+     /**
      * Check if Player is jumping.
-     * @return True if Player is jumping.
+     * @return True if Player is jumping otherwise False.
      */
     public boolean isJumping() {
         return currentPlayerJump < MAX_JUMP_DURATION;
     }
 
     /**
-     * Block player jump.
+     * Apply jump force to the player.
      */
-    public void stopJumping() {
+    private void forceJump() {
+        player.setVelocity(player.getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
+    }
+
+    /**
+     * Stop player on jumping further.
+     */
+    private void stopJumping() {
         this.currentPlayerJump = 0;
     }
 
     /**
-     * Reset the "jump counter" variable.
+     * Reset the "jumpCounter" variable.
      */
-    public void resetJumping() {
+    private void resetJumping() {
         this.currentPlayerJump = MAX_JUMP_DURATION;
+    }
+
+    /**
+     * Force a jump on player.
+     */
+    public void onEnemyJump() {
+
+        if (onEnemyJumpDelay.hasElapsed(ON_ENEMY_JUMP_COOLDOWN)) {
+            resetJumping();
+            forceJump();
+            onEnemyJumpDelay.reset();
+            onEnemyJumpDelay.start();
+        }
     }
 }

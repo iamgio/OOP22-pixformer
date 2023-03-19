@@ -7,7 +7,7 @@ import pixformer.model.physics.PhysicsComponent;
  * Implementation of PhysicalComponent for a Player entity.
  */
 public class FireballPhysicsComponent extends PhysicsComponent {
-    final private Fireball fireball;
+    private final Fireball fireball;
 
     /**
      * 
