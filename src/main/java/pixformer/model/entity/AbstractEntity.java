@@ -4,7 +4,6 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.entity.dynamic.Koopa;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Optional;

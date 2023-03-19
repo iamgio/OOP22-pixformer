@@ -3,7 +3,6 @@ package pixformer.model.entity.dynamic;
 import java.util.function.Consumer;
 
 import pixformer.common.Vector2D;
-import pixformer.model.entity.Entity;
 import pixformer.model.modelinput.HorizontalModelInput;
 
 /**

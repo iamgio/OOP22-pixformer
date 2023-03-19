@@ -15,7 +15,6 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.RectangleBoundingBox;
-import pixformer.model.entity.dynamic.Enemy;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.InputComponent;

@@ -11,8 +11,6 @@ import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.SimpleCollisionReactor;
 import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
-import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.entity.collision.CollisionSide;
