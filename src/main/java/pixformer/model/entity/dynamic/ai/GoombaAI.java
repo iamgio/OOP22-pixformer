@@ -27,16 +27,15 @@ public class GoombaAI extends AIInputComponent {
     /**
      * Create a new GoombaAI.
      * 
-     * @param entity which this AI will control.
+     * @param entity         which this AI will control.
      * @param velocitySetter the entity setter for its velocity.
-     * @param velocity the module of the velocity of the controlled entity.
+     * @param velocity       the module of the velocity of the controlled entity.
      */
     public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
         reactor = new SimpleCollisionReactor(Map.of(
-            Entity::isSolid, this::reactOnBlockCollision
-        ));
+                Entity::isSolid, this::reactOnBlockCollision));
         initialBehaviour();
     }
 
@@ -49,7 +48,7 @@ public class GoombaAI extends AIInputComponent {
         final EntityCollisionManager collisionManager = world.getCollisionManager();
         final Entity goomba = super.getEntity();
         reactor.react(collisionManager.findCollisionsFor(goomba));
-    }       
+    }
 
     private void reactOnBlockCollision(final CollisionSide side) {
         switch (side) {

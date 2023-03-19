@@ -40,7 +40,7 @@ final class GoombaAITest {
         public Optional<InputComponent> getInputComponent() {
             return ai;
         }
-        
+
     };
 
     @BeforeEach
