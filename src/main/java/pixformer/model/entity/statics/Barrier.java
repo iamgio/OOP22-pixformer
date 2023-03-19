@@ -9,15 +9,16 @@ import pixformer.model.entity.collision.SolidEntity;
  */
 public class Barrier extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity {
 
+    private static final double WIDTH = 1;
+    private static final double HEIGHT = 1;
+
     /**
      * Constructor for the Barrier.
      *
      * @param x      X coordinate
      * @param y      Y coordinate
-     * @param width  width of the entity
-     * @param height height of the entity
      */
-    protected Barrier(double x, double y, double width, double height) {
-        super(x, y, width, height);
+    public Barrier(final double x, final double y) {
+        super(x, y, WIDTH, HEIGHT);
     }
 }
