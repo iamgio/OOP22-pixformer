@@ -30,9 +30,10 @@ public class GoombaAI extends AIInputComponent {
      * Create a new GoombaAI.
      * 
      * @param entity which this AI will control.
-     * @param modelInput to control the movement of the entity.
+     * @param velocitySetter the entity setter for its velocity.
+     * @param velocity the module of the velocity of the controlled entity.
      */
-    public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, double velocity) {
+    public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
         reactor = new SimpleCollisionReactor(Map.of(
