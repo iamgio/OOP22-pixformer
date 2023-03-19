@@ -7,4 +7,15 @@ import pixformer.model.entity.MutableEntity;
  */
 public interface KoopaState extends MutableEntity {
 
+    /**
+     * @return true if the koopa is walking, otherwise false.
+     */
+    boolean isWalking();
+
+    /**
+     * @return true if the koopa is turtle, otherwise false.
+     */
+    default public boolean isTurtle() {
+        return !isWalking();
+    }
 }
