@@ -1,0 +1,17 @@
+.root {
+    -fx-background-color: cornflowerblue;
+}
+
+.text {
+    -fx-font-smoothing-type: gray;
+    -fx-fill: white;
+    -fx-font-family: "Monomaniac One";
+}
+
+.title {
+    -fx-font-size: 35;
+}
+
+.subtitle {
+    -fx-font-size: 25;
+}

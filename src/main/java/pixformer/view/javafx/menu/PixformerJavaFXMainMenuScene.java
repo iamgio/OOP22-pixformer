@@ -1,14 +1,10 @@
-package pixformer.view.javafx;
+package pixformer.view.javafx.menu;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.LevelMock;
@@ -28,6 +24,9 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     private static final double INITIAL_HEIGHT = 600;
     private static final int DEFAULT_PLAYERS_AMOUNT = 1;
 
+    private static final String STYLESHEET = "/ui/style/menu.css";
+    private static final String FONT = "/ui/fonts/MonomaniacOne-Regular.ttf";
+
     private final Controller controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
 
@@ -44,14 +43,10 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         Scene scene = super.getScene();
         Pane root = (Pane) scene.getRoot();
 
-        root.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
+        Font.loadFont(getClass().getResourceAsStream(FONT), 20);
+        scene.getStylesheets().add(STYLESHEET);
 
-        var text = new Label();
-        text.textProperty().bind(
-                new SimpleStringProperty("Click to start\nPlayers: ").concat(this.playersAmount.asString())
-        );
-        text.setTextFill(Color.WHITE);
-        root.getChildren().add(text);
+        root.getChildren().add(new MainMenuTitle());
 
         // Here the level will be retrieved from a button, or something...
         root.setOnMouseClicked(e -> this.selectLevel(new LevelMock()));
