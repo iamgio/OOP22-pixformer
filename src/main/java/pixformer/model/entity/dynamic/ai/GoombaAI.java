@@ -53,7 +53,7 @@ public class GoombaAI extends AIInputComponent {
     private void reactOnBlockCollision(final CollisionSide side) {
         switch (side) {
             case LEFT:
-                initialBehaviour();
+                joystick.left();
                 break;
             case RIGHT:
                 joystick.right();
