@@ -1,13 +1,16 @@
 package pixformer.model.entity.dynamic.ai;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
+import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.SimpleCollisionReactor;
+import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
@@ -29,12 +32,17 @@ public class GoombaAI extends AIInputComponent {
      * @param entity which this AI will control.
      * @param modelInput to control the movement of the entity.
      */
-    public GoombaAI(final AbstractEntity entity, final HorizontalModelInput modelInput) {
+    public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, double velocity) {
         super(entity);
-        this.joystick = modelInput;
+        this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
         reactor = new SimpleCollisionReactor(Map.of(
             Entity::isSolid, this::reactOnBlockCollision
         ));
+        initialBehaviour();
+    }
+
+    private void initialBehaviour() {
+        joystick.left();
     }
 
     @Override
@@ -47,7 +55,7 @@ public class GoombaAI extends AIInputComponent {
     private void reactOnBlockCollision(final CollisionSide side) {
         switch (side) {
             case LEFT:
-                joystick.left();
+                initialBehaviour();
                 break;
             case RIGHT:
                 joystick.right();

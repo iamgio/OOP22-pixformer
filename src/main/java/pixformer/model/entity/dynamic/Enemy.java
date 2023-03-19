@@ -15,7 +15,6 @@ import pixformer.model.physics.PhysicsComponent;
  */
 public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
 
-    private final HorizontalModelInput joystick;
     private final GoombaAI ai;
 
     /**
@@ -29,9 +28,8 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     public Enemy(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
-        joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
-        ai = new GoombaAI(this, joystick);
-        joystick.left();
+        // joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
+        ai = new GoombaAI(this, this::fixVelocity, velocity);
     }
 
     @Override
