@@ -7,7 +7,7 @@ import pixformer.model.entity.collision.CollisionComponent;
 /**
  * The state of the koopa when it is a turtle.
  */
-public class TurtleKoopa extends Enemy implements KoopaState {
+public final class TurtleKoopa extends Enemy implements KoopaState {
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
