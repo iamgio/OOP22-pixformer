@@ -1,8 +1,6 @@
 package pixformer.model.entity.statics;
 
 import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.DrawableEntity;
-import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidEntity;
 
