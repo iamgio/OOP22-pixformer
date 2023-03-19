@@ -4,11 +4,11 @@
 
 .text {
     -fx-font-smoothing-type: gray;
-    -fx-fill: white;
     -fx-font-family: "Monomaniac One";
 }
 
-.mainbox {
+.label {
+    -fx-text-fill: white;
 }
 
 .title {
@@ -16,7 +16,23 @@
     -fx-alignment: center;
 }
 
-.subtitle {
+.subtitle, .players-text, .players-amount {
     -fx-font-size: 25;
     -fx-alignment: center;
+}
+
+.subtitle {
+    -fx-opacity: .7;
+    -fx-text-alignment: center;
+}
+
+.players-control {
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.players-control .button {
+    -fx-background-color: white;
+    -fx-text-fill: cornflowerblue;
+    -fx-font-size: 25;
 }

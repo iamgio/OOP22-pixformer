@@ -7,7 +7,7 @@ import pixformer.view.engine.internationalization.Lang;
 /**
  * Title and subtitle texts for the main menu.
  */
-class MainMenuTitle extends VBox {
+final class MainMenuTitle extends VBox {
 
     MainMenuTitle() {
         final Lang lang = Lang.getInstance();

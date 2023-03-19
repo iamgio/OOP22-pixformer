@@ -20,11 +20,10 @@ import java.util.function.Consumer;
 /**
  * The main menu scene for JavaFX.
  */
-public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMenuView {
+public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMenuView {
 
     private static final double INITIAL_WIDTH = 1200;
     private static final double INITIAL_HEIGHT = 600;
-    private static final int DEFAULT_PLAYERS_AMOUNT = 1;
 
     private static final String STYLESHEET = "/ui/style/menu.css";
     private static final String FONT = "/ui/fonts/MonomaniacOne-Regular.ttf";
@@ -32,7 +31,7 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
     private final Controller controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
 
-    private final IntegerProperty playersAmount = new SimpleIntegerProperty(DEFAULT_PLAYERS_AMOUNT);
+    private final IntegerProperty playersAmount = new SimpleIntegerProperty();
 
     /**
      * Instantiates a main menu scene.
@@ -46,7 +45,6 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         final Pane root = (Pane) scene.getRoot();
 
         final VBox mainBox = new VBox();
-        mainBox.getStyleClass().add("mainbox");
         mainBox.prefWidthProperty().bind(scene.widthProperty());
         mainBox.prefHeightProperty().bind(scene.heightProperty());
         mainBox.setAlignment(Pos.CENTER);
@@ -56,26 +54,17 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         Font.loadFont(getClass().getResourceAsStream(FONT), 20);
         scene.getStylesheets().add(STYLESHEET);
 
-        var title = new MainMenuTitle();
+        final var title = new MainMenuTitle();
         title.prefWidthProperty().bind(mainBox.prefWidthProperty());
         mainBox.getChildren().add(title);
 
+        final var playersSelector = new MainMenuPlayersSelector(controller);
+        playersSelector.prefWidthProperty().bind(mainBox.prefWidthProperty());
+        this.playersAmount.bind(playersSelector.playersAmountProperty());
+        mainBox.getChildren().add(playersSelector);
+
         // Here the level will be retrieved from a button, or something...
         root.setOnMouseClicked(e -> this.selectLevel(new LevelMock()));
-
-        scene.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case UP -> this.setPlayersAmount(this.playersAmount.get() + 1);
-                case DOWN -> this.setPlayersAmount(this.playersAmount.get() - 1);
-                default -> {
-                    // Required by the linter
-                }
-            }
-        });
-    }
-
-    private void setPlayersAmount(final int playersAmount) {
-        this.playersAmount.setValue(controller.correctSupportedPlayersAmount(playersAmount));
     }
 
     /**
