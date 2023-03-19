@@ -38,7 +38,6 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         physicsComponent = new FireballPhysicsComponent(this);
 
         this.speed = speed;
-        world.spawnEntity(this);
     }
 
     /**
