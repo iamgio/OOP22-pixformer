@@ -32,15 +32,7 @@ public final class WalkingKoopa extends Enemy implements KoopaState {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(CollisionComponentFactory.fromReactor(
-            new SimpleCollisionReactor(Map.of(
-                Player.class::isInstance, side -> {
-                    if (side == CollisionSide.TOP) {
-                        changeToTurtle.run();
-                    }
-                }
-            ))
-        ));
+        return Optional.of(new DieOnPressedCollisionComponent(this, e -> changeToTurtle.run()));
     }
 
 }
