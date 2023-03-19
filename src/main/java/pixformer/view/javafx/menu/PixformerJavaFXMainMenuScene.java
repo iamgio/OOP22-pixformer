@@ -2,8 +2,10 @@ package pixformer.view.javafx.menu;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
@@ -40,13 +42,23 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
         this.controller = controller;
 
-        Scene scene = super.getScene();
-        Pane root = (Pane) scene.getRoot();
+        final Scene scene = super.getScene();
+        final Pane root = (Pane) scene.getRoot();
+
+        final VBox mainBox = new VBox();
+        mainBox.getStyleClass().add("mainbox");
+        mainBox.prefWidthProperty().bind(scene.widthProperty());
+        mainBox.prefHeightProperty().bind(scene.heightProperty());
+        mainBox.setAlignment(Pos.CENTER);
+
+        root.getChildren().add(mainBox);
 
         Font.loadFont(getClass().getResourceAsStream(FONT), 20);
         scene.getStylesheets().add(STYLESHEET);
 
-        root.getChildren().add(new MainMenuTitle());
+        var title = new MainMenuTitle();
+        title.prefWidthProperty().bind(mainBox.prefWidthProperty());
+        mainBox.getChildren().add(title);
 
         // Here the level will be retrieved from a button, or something...
         root.setOnMouseClicked(e -> this.selectLevel(new LevelMock()));

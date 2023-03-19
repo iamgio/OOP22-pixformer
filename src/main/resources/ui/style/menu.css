@@ -8,10 +8,15 @@
     -fx-font-family: "Monomaniac One";
 }
 
+.mainbox {
+}
+
 .title {
     -fx-font-size: 35;
+    -fx-alignment: center;
 }
 
 .subtitle {
     -fx-font-size: 25;
+    -fx-alignment: center;
 }
