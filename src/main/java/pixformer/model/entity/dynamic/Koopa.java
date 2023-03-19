@@ -9,6 +9,7 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.engine.Color;
@@ -18,7 +19,7 @@ import pixformer.view.entity.RectangleGraphicsComponent;
  * The implementation of the enemy Koopa. This class uses the two states of a
  * Koopa: walking and turtle.
  */
-public final class Koopa implements MutableEntity, DrawableEntity {
+public final class Koopa implements MutableEntity, DrawableEntity, DefaultRectangleBoundingBoxEntity  {
 
     private KoopaState currentKoopaState;
     private World world;
