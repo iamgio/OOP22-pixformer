@@ -6,12 +6,19 @@ import pixformer.model.GameSettings;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
+import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 /**
  * The controller that acts as a bridge between model and view.
  */
 public interface Controller {
+
+    /**
+     * Performs the actions required by the controller to work.
+     */
+    void setup();
 
     /**
      * @return current game mechanics settings
@@ -48,4 +55,9 @@ public interface Controller {
      * @return X coordinate of the common point (possibly average) between the given entitites
      */
     double calcEntitiesCommonPointX(Set<Entity> entities);
+
+    /**
+     * @return level files on the filesystem
+     */
+    List<File> getLevelFiles();
 }

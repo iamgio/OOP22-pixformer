@@ -1,5 +1,6 @@
 package pixformer.controller;
 
+import pixformer.common.file.FileUtils;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.controller.gameloop.GameLoop;
@@ -11,13 +12,17 @@ import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
+import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 /**
  * The default implementation of a {@link Controller}.
  */
-public class ControllerImpl implements Controller {
+public final class ControllerImpl implements Controller {
+
+    private static final File APP_DIRECTORY = new File(System.getProperty("user.home"), ".pixformer");
 
     private static final int MIN_PLAYERS_AMOUNT = 1;
     private static final int MAX_PLAYERS_AMOUNT = 8;
@@ -35,8 +40,6 @@ public class ControllerImpl implements Controller {
         this.settings = settings;
         this.levelManager = new SimpleWrapper<>(levelManager);
         this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
-
-        this.setupLevelChangeActions();
     }
 
     /**
@@ -46,6 +49,19 @@ public class ControllerImpl implements Controller {
     public ControllerImpl(final GameLoopManager gameLoopManager) {
         // TODO implement GameSettings
         this(null, new LevelManagerImpl(), gameLoopManager);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setup() {
+        if (!APP_DIRECTORY.exists()) {
+            APP_DIRECTORY.mkdirs();
+        }
+
+        this.setupLevelChangeActions();
+        this.copyBuiltinLevelFiles();
     }
 
     private void setupLevelChangeActions() {
@@ -110,5 +126,22 @@ public class ControllerImpl implements Controller {
     @Override
     public double calcEntitiesCommonPointX(final Set<Entity> entities) {
         return entities.stream().mapToDouble(Entity::getX).average().orElse(0);
+    }
+
+    /**
+     * Copies the level data stored as internal resources to files on the filesystem.
+     */
+    private void copyBuiltinLevelFiles() {
+        if (!FileUtils.copyDirectory("/levels", new File(APP_DIRECTORY, "levels"))) {
+            throw new IllegalStateException("Could not copy level files");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<File> getLevelFiles() {
+        return null;
     }
 }
