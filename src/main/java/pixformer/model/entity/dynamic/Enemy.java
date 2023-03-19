@@ -44,7 +44,7 @@ public class Enemy extends AbstractEntity implements DefaultRectangleBoundingBox
     }
 
     @Override
-    public Optional<PhysicsComponent> getPhysicsComponent() {
+    public final Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(new PhysicsComponent(this));
     }
 
