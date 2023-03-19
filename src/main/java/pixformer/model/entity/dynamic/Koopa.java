@@ -6,7 +6,6 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
@@ -19,7 +18,7 @@ import pixformer.view.entity.RectangleGraphicsComponent;
  * The implementation of the enemy Koopa. This class uses the two states of a
  * Koopa: walking and turtle.
  */
-public final class Koopa implements MutableEntity, DrawableEntity, DefaultRectangleBoundingBoxEntity  {
+public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private KoopaState currentKoopaState;
     private World world;
@@ -34,18 +33,14 @@ public final class Koopa implements MutableEntity, DrawableEntity, DefaultRectan
         currentKoopaState = new WalkingKoopa(x, y, this::changeToTurtle);
     }
 
-    /**
-     * @return true if the koopa is walking, otherwise false.
-     */
+    @Override
     public boolean isWalking() {
-        return this.getHeight() == 2;
+        return currentKoopaState.isWalking();
     }
 
-    /**
-     * @return false if the koopa is turtle, otherwise false.
-     */
+    @Override
     public boolean isTurtle() {
-        return !isWalking();
+        return currentKoopaState.isTurtle();
     }
 
     private void changeToTurtle() {

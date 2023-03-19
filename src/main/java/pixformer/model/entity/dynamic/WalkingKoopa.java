@@ -21,8 +21,8 @@ public final class WalkingKoopa extends Enemy implements KoopaState {
     /**
      * Construct a WalkingKoopa.
      * 
-     * @param x its initial x position
-     * @param y its initial x position.
+     * @param x              its initial x position
+     * @param y              its initial x position.
      * @param changeToTurtle a Runnable which makes the koopa becomes a turtle.
      */
     public WalkingKoopa(final double x, final double y, final Runnable changeToTurtle) {
@@ -33,6 +33,11 @@ public final class WalkingKoopa extends Enemy implements KoopaState {
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
         return Optional.of(new DieOnPressedCollisionComponent(this, e -> changeToTurtle.run()));
+    }
+
+    @Override
+    public boolean isWalking() {
+        return true;
     }
 
 }
