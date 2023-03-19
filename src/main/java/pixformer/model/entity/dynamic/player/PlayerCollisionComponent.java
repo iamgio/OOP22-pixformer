@@ -26,10 +26,6 @@ public class PlayerCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
 
-        if (player.isOnGround()) {
-            this.player.resetJumping();
-        }
-
         for (final var collisor : collisions) {
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
                 this.player.damaged();

@@ -102,6 +102,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
             stopJumping();
         }
 
+        if (player.isOnGround()) {
+            resetJumping();
+        }
+
         jumpKey = false;
 
         // Player speed limit management

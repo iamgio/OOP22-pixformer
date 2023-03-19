@@ -117,13 +117,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
-     * Reset Jump of current entity.
-     */
-    public void resetJumping() {
-        this.inputComponent.resetJumping();
-    }
-
-    /**
      * Define what happens when Player get damaged.
      */
     public void damaged() {
