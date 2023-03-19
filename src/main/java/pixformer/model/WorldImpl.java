@@ -6,12 +6,14 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.event.EventManager;
+import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
 import pixformer.model.score.ScoreManagerImpl;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The standard implementation of the game world.
@@ -47,10 +49,20 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public Set<Entity> getUserControlledEntities() {
+        return this.entities.stream()
+                .filter(entity -> entity.getInputComponent().isPresent())
+                .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
-
     }
 
     /**
@@ -60,6 +72,14 @@ public class WorldImpl implements World {
     public void killEntity(final Entity entity) {
         this.killedEntities.add(entity);
         eventManager.killed(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dropEntity(final Entity entity) {
+        this.killedEntities.add(entity);
     }
 
     /**
@@ -91,11 +111,46 @@ public class WorldImpl implements World {
         this.entities.removeAll(this.killedEntities);
     }
 
+    /**
+     * Updates an entity's position depending on its velocity and possible nearby solid entities.
+     * @param dt dela time
+     * @param entity entity to update position of
+     */
     private void updatePosition(final double dt, final MutableEntity entity) {
+        this.handleCollisions(entity);
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
-        if (entity.isOnGround() && entity.getVelocity().y() > 0) {
-            entity.setVelocity(new Vector2D(entity.getVelocity().x(), 0));
-        }
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
+    }
+
+    /**
+     * Handles an entity's velocity and position in case of collisions width solid entities.
+     * @param entity entity to handle collisions for
+     */
+    private void handleCollisions(final MutableEntity entity) {
+        // Ground collision
+        if (entity.getVelocity().y() > 0 && collisionManager.isCollidingGround(entity)) {
+            entity.setVelocity(entity.getVelocity().copyWithY(0));
+            entity.setY(Math.floor(entity.getY())); // Fixes intersections.
+        }
+
+        // Ceiling collision
+        if (entity.getVelocity().y() < 0 && collisionManager.isCollidingCeiling(entity)) {
+            entity.setVelocity(entity.getVelocity().copyWithY(0));
+            entity.setY(Math.ceil(entity.getY()));
+        }
+
+        // Left collision
+        if (entity.getVelocity().x() < 0 && collisionManager.isCollidingLeftWall(entity)) {
+            entity.setVelocity(entity.getVelocity().copyWithX(0));
+            entity.setX(Math.ceil(entity.getX()));
+        }
+
+        // Right collision
+        if (entity.getVelocity().x() > 0 && collisionManager.isCollidingRightWall(entity)) {
+            entity.setVelocity(entity.getVelocity().copyWithX(0));
+            entity.setX(Math.floor(entity.getX()));
+        }
+
+        // TODO reduce repetitions
     }
 }

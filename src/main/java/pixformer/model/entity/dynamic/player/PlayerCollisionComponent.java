@@ -1,19 +1,15 @@
 package pixformer.model.entity.dynamic.player;
 
 import java.util.Set;
-
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.dynamic.player.PlayerInputComponent;
-import pixformer.model.entity.dynamic.Goomba;
-import pixformer.model.entity.dynamic.Koopa;
-import pixformer.model.input.InputComponent;
+import pixformer.model.entity.dynamic.Enemy;
 
 /**
  * Implementation of CollisionComponent for a Player entity.
  */
 public class PlayerCollisionComponent extends CollisionComponent {
-    private Player player;
+    private final Player player;
 
     /**
      * 
@@ -34,11 +30,9 @@ public class PlayerCollisionComponent extends CollisionComponent {
             this.player.resetJumping();
         }
 
-        for (var x : collisions) {
-            if (x.entity() instanceof Goomba || x.entity() instanceof Koopa) {
-                if (x.side().isHorizontal()) {
-                    this.player.getDamage();
-                }
+        for (final var collisor : collisions) {
+            if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
+                this.player.damaged();
             }
         }
 

@@ -11,6 +11,8 @@ public interface EventSubscriber {
 
     /**
      * Add an observer when the player kill an entity.
+     *
+     * @param consumer consumer subscribed to a specific event
      */
     void addPlayerOnKill(Consumer<Entity> consumer);
 }

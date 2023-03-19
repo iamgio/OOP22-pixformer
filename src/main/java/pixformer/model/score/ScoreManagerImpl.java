@@ -9,7 +9,9 @@ public class ScoreManagerImpl implements ScoreManager {
     private final Score score;
 
     /**
-     * Costructor for the class.
+     * Constructor for the class.
+     *
+     * @param eventSubscriber subscriber for the score manager
      */
     public ScoreManagerImpl(final EventSubscriber eventSubscriber) {
         this.score = new ScoreImpl();

@@ -6,32 +6,14 @@ package pixformer.model.entity.powerups;
 public class PowerUp {
 
     // Current powerup ability power
-    private PowerupBehaviour behaviour;
-
-    /*
-     * Priority among powerups (if player current powerup is lower than the new one
-     * the new powerup is set,
-     * otherwhise the previous powerup will be kept)
-     */
-    private int priority = 0;
+    private final PowerupBehaviour behaviour;
 
     /**
      * 
      * @param behaviour current powerup behaviour.
-     * @param priority  The priority of current powerup
      */
-    public PowerUp(final PowerupBehaviour behaviour, final int priority) {
+    public PowerUp(final PowerupBehaviour behaviour) {
         this.behaviour = behaviour;
-        this.priority = priority;
-    }
-
-    /**
-     * Get powerup priority.
-     * 
-     * @return powerup priority.
-     */
-    public int getPriority() {
-        return priority;
     }
 
     /**

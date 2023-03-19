@@ -7,6 +7,9 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.player.PlayerGraphicsComponent;
+import pixformer.model.entity.powerups.FireFlower;
+import pixformer.model.entity.powerups.Mushroom;
 import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
 
@@ -15,10 +18,7 @@ import pixformer.model.input.InputComponent;
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
     // This playerIndex
-    private int playerIndex;
-
-    // State of the player life
-    private boolean isAlive = true;
+    private final int playerIndex;
 
     // State variable to check if player is sprinting
     private boolean isSprinting;
@@ -27,9 +27,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private Optional<PowerUp> powerUp;
 
     // Player components
-    private PlayerGraphicsComponent graphicsComponent;
-    private PlayerPhysicsComponent physicsComponent;
-    private PlayerCollisionComponent collisionComponent;
+    private final PlayerGraphicsComponent graphicsComponent;
+    private final PlayerPhysicsComponent physicsComponent;
+    private final PlayerCollisionComponent collisionComponent;
     private PlayerInputComponent inputComponent;
 
     /**
@@ -44,7 +44,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerUp = Optional.empty();
+        this.powerUp = Optional.of(new PowerUp(new FireFlower()));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
@@ -96,6 +96,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Return current physics component.
      * @return player's physics component.
      */
+    @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(this.physicsComponent);
     }
@@ -125,18 +126,24 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     /**
      * Define what happens when Player get damaged.
      */
-    public void getDamage() {
-        if(this.powerUp.isEmpty()) {
-            death();
+    public void damaged() {
+        if (this.powerUp.isEmpty()) {
+            kill();
         }
 
-        this.powerUp = Optional.empty();
+        if (this.powerUp.get().getBehaviour().getPriority() == 2) {
+            this.powerUp = Optional.of(new PowerUp(new Mushroom()));
+        }
+
+        if (this.powerUp.get().getBehaviour().getPriority() == 1) {
+            this.powerUp = Optional.empty();
+        }        
     }
 
     /**
      * Define what happens on Player death.
      */
-    private void death() {
+    private void kill() {
         this.graphicsComponent.startDeathAnimation();
     }
 }

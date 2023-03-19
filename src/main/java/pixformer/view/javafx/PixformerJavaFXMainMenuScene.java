@@ -67,7 +67,7 @@ public class PixformerJavaFXMainMenuScene extends JavaFXScene implements MainMen
         });
     }
 
-    private void setPlayersAmount(int playersAmount) {
+    private void setPlayersAmount(final int playersAmount) {
         this.playersAmount.setValue(controller.correctSupportedPlayersAmount(playersAmount));
     }
 

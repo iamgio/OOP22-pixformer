@@ -19,11 +19,20 @@ public interface Graphics {
     /**
      * Sets a scale factor for the next renders.
      * @param scale scale factor
+     * @implNote the default scale is 1
      */
     void setScale(double scale);
 
     /**
-     * Sets the new coordinates to use as the origin point to draw.
+     * Sets the new origin point.
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @implNote the default origin point is (0,0)
+     */
+    void setOriginPoint(double x, double y);
+
+    /**
+     * Sets the new starting coordinates to use to draw, on top of the origin point.
      * @param x X coordinate
      * @param y Y coordinate
      * @implNote the default translation is (0,0)

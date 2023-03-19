@@ -4,10 +4,10 @@ import pixformer.common.wrap.SimpleWritableWrapper;
 import pixformer.common.wrap.WritableWrapper;
 import pixformer.model.Level;
 
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -18,8 +18,8 @@ public class LevelManagerImpl implements LevelManager {
 
     private final WritableWrapper<Level> level = new SimpleWritableWrapper<>();
 
-    private final Set<BiConsumer<Level, Integer>> onStart = new HashSet<>();
-    private final Set<Consumer<Level>> onEnd = new HashSet<>();
+    private final List<BiConsumer<Level, Integer>> onStart = new LinkedList<>();
+    private final List<Consumer<Level>> onEnd = new LinkedList<>();
 
     /**
      * {@inheritDoc}
@@ -40,10 +40,11 @@ public class LevelManagerImpl implements LevelManager {
 
     /**
      * {@inheritDoc}
+     * @implNote newly added actions have higher priority
      */
     @Override
     public void addOnLevelStart(final BiConsumer<Level, Integer> action) {
-        this.onStart.add(action);
+        this.onStart.add(0, action);
     }
 
     /**
@@ -63,9 +64,10 @@ public class LevelManagerImpl implements LevelManager {
 
     /**
      * {@inheritDoc}
+     * @implNote newly added actions have higher priority
      */
     @Override
     public void addOnLevelEnd(final Consumer<Level> action) {
-        this.onEnd.add(action);
+        this.onEnd.add(0, action);
     }
 }
