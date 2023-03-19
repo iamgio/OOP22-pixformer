@@ -1,5 +1,6 @@
 package pixformer.view;
 
+import org.w3c.dom.Text;
 import pixformer.common.wrap.ObservableWritableWrapper;
 import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
@@ -7,11 +8,7 @@ import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
-import pixformer.view.engine.Color;
-import pixformer.view.engine.GameScene;
-import pixformer.view.engine.RendererFactory;
-import pixformer.view.engine.SceneInput;
-import pixformer.view.engine.ViewLauncher;
+import pixformer.view.engine.*;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
@@ -31,6 +28,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
+    private TextRenderer scoreLabel;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
     // private final CommandFactory commandFactory = new CommandFactory();
@@ -65,6 +63,11 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     public void setup() {
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(Color.BLACK));
+
+        this.scoreLabel = rendererFactory.newText("");
+        this.scoreLabel.setColor(new Color(1, 0, 0));
+        this.scoreLabel.setFontSize(1);
+        this.getScene().add(scoreLabel.at(1, 1));
     }
 
     /**
@@ -114,6 +117,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
                         });
                     });
         }
+
+        this.scoreLabel.setText("Score = " + this.controller.getScore());
 
         scene.render();
     }
