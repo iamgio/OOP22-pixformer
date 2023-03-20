@@ -6,7 +6,6 @@ import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
-
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +44,7 @@ public interface Controller {
     /**
      * @return the score of the player
      */
-    int getScore();
+    List<Integer> getScore();
 
     /**
      * Applies supported boundaries to a given amount of players.

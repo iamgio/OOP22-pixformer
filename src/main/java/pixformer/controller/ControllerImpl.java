@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -117,12 +118,12 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public int getScore() {
+    public List<Integer> getScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getScore();
+            return level.getWorld().getScoreManager().getAllScores();
         }
-        return 0;
+        return new ArrayList<>();
     }
 
     /**

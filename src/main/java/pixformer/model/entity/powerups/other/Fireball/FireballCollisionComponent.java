@@ -33,7 +33,7 @@ public class FireballCollisionComponent extends CollisionComponent {
 
         for (final var collisor : collisions) {
             if (collisor.side().isHorizontal() && !(collisor.entity() instanceof Player)) {
-                world.killEntity(fireball);
+                world.dropEntity(fireball);
             }
         }
 

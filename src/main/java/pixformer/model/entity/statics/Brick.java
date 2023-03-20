@@ -55,7 +55,7 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
             public void update(final double dt, final Set<Collision> collisions) {
                 for (var collision : collisions) {
                     if (collision.side() == CollisionSide.BOTTOM && getWorld().isPresent()) {
-                        getWorld().get().killEntity(this.getEntity());
+                        getWorld().get().dropEntity(this.getEntity());
                     }
                 }
             }
