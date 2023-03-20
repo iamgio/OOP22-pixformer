@@ -7,9 +7,9 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
+import pixformer.model.entity.collision.BiConsumerCollisionReactor;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.collision.SimpleCollisionReactor;
 import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
@@ -34,8 +34,8 @@ public class GoombaAI extends AIInputComponent {
     public GoombaAI(final MutableEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
-        reactor = new SimpleCollisionReactor(Map.of(
-                Entity::isSolid, this::reactOnBlockCollision));
+        reactor = new BiConsumerCollisionReactor(Map.of(
+                Entity::isSolid, (c, e) -> reactOnBlockCollision(c)));
         initialBehaviour();
     }
 
