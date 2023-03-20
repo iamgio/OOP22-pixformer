@@ -3,6 +3,7 @@ package pixformer.controller;
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.level.LevelManager;
 import pixformer.model.GameSettings;
+import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
@@ -60,4 +61,12 @@ public interface Controller {
      * @return level files on the filesystem
      */
     List<File> getLevelFiles();
+
+    /**
+     * Parses and extracts data from a level file
+     * @param levelFile level file to parse
+     * @return a new level instance loaded from the file
+     * @throws IllegalStateException if the file could not be turned into a level
+     */
+    Level getLevelFromFile(File levelFile);
 }

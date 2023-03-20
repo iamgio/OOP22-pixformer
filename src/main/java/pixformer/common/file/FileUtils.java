@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -33,9 +34,13 @@ public final class FileUtils {
             outputDir.mkdirs();
         }
 
-        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(dirInputStream))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(dirInputStream, Charset.defaultCharset()))) {
             while (reader.ready()) {
                 final String name = reader.readLine();
+                if (name == null) {
+                    continue;
+                }
+
                 final File outputFile = new File(outputDir, name);
                 if (!outputFile.exists()) {
                     final InputStream levelInputStream = FileUtils.class.getResourceAsStream(inputDir + "/" + name);
@@ -48,5 +53,13 @@ public final class FileUtils {
         } catch (final IOException e) {
             return false;
         }
+    }
+
+    /**
+     * @param file file to get the name of
+     * @return name of the file without the extension
+     */
+    public static String getNameWithoutExtension(final File file) {
+        return file.getName().substring(0, file.getName().lastIndexOf('.'));
     }
 }

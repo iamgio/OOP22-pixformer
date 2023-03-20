@@ -5,19 +5,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import pixformer.common.file.FileUtils;
 import pixformer.controller.Controller;
 import pixformer.view.engine.internationalization.Lang;
+
+import java.io.File;
+import java.util.function.Consumer;
 
 /**
  * Level selector for the main menu.
  */
 final class MainMenuLevelSelector extends VBox {
 
-    private final Controller controller;
+    private Consumer<File> onSelect;
 
     MainMenuLevelSelector(final Controller controller) {
-        this.controller = controller;
-
         final Lang lang = Lang.getInstance();
 
         final var title = new Label(lang.get("menu.levels"));
@@ -27,15 +29,32 @@ final class MainMenuLevelSelector extends VBox {
         final var levelsBox = new FlowPane(Orientation.HORIZONTAL);
         levelsBox.getStyleClass().add("levels-box");
 
-        levelsBox.getChildren().add(createLevelButton("Test level 1"));
-        levelsBox.getChildren().add(createLevelButton("Test level 2"));
+        controller.getLevelFiles().forEach(file -> {
+            levelsBox.getChildren().add(createLevelButton(file));
+        });
 
         getChildren().addAll(title, levelsBox);
     }
 
-    private Button createLevelButton(String name) {
+    private Button createLevelButton(final File levelFile) {
+        final String name = FileUtils.getNameWithoutExtension(levelFile);
         final var button = new Button(name);
         button.getStyleClass().add("level-button");
+
+        button.setOnAction(e -> {
+            if (this.onSelect != null) {
+                this.onSelect.accept(levelFile);
+            }
+        });
+
         return button;
+    }
+
+    /**
+     * Adds an action to run when a level file is selected.
+     * @param action action to run, with the level file as an argument
+     */
+    public void setOnSelect(final Consumer<File> action) {
+        this.onSelect = action;
     }
 }

@@ -9,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
-import pixformer.model.LevelMock;
 import pixformer.view.engine.javafx.JavaFXScene;
 import pixformer.view.mainmenu.MainMenuView;
 
@@ -27,8 +26,8 @@ public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements M
 
     private static final String STYLESHEET = "/ui/style/menu.css";
     private static final String FONT = "/ui/fonts/MonomaniacOne-Regular.ttf";
+    private static final int LOADED_FONT_SIZE = 25;
 
-    private final Controller controller;
     private final Set<Consumer<Level>> onLevelSelect = new HashSet<>();
 
     private final IntegerProperty playersAmount = new SimpleIntegerProperty();
@@ -39,7 +38,6 @@ public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements M
      */
     public PixformerJavaFXMainMenuScene(final Controller controller) {
         super(INITIAL_WIDTH, INITIAL_HEIGHT);
-        this.controller = controller;
 
         final Scene scene = super.getScene();
         final Pane root = (Pane) scene.getRoot();
@@ -51,7 +49,7 @@ public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements M
 
         root.getChildren().add(mainBox);
 
-        Font.loadFont(getClass().getResourceAsStream(FONT), 20);
+        Font.loadFont(getClass().getResourceAsStream(FONT), LOADED_FONT_SIZE);
         scene.getStylesheets().add(STYLESHEET);
 
         final var title = new MainMenuTitle();
@@ -61,14 +59,12 @@ public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements M
         final var levelsSelector = new MainMenuLevelSelector(controller);
         levelsSelector.prefWidthProperty().bind(mainBox.prefWidthProperty());
         mainBox.getChildren().add(levelsSelector);
+        levelsSelector.setOnSelect(file -> this.selectLevel(controller.getLevelFromFile(file)));
 
         final var playersSelector = new MainMenuPlayersSelector(controller);
         playersSelector.prefWidthProperty().bind(mainBox.prefWidthProperty());
         this.playersAmount.bind(playersSelector.playersAmountProperty());
         mainBox.getChildren().add(playersSelector);
-
-        // Here the level will be retrieved from a button, or something...
-        root.setOnMouseClicked(e -> this.selectLevel(new LevelMock()));
     }
 
     /**
