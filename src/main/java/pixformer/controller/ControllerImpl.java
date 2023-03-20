@@ -64,8 +64,8 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public void init() {
-        if (!APP_DIRECTORY.exists()) {
-            APP_DIRECTORY.mkdirs();
+        if (!APP_DIRECTORY.exists() && !APP_DIRECTORY.mkdirs()) {
+            throw new IllegalStateException("Cannot create application directory at " + APP_DIRECTORY);
         }
 
         this.setupLevelChangeActions();
