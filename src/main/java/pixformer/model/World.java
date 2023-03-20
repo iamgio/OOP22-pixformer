@@ -39,6 +39,7 @@ public interface World extends Updatable {
      * Destroy an entity in the game world after the entity got killed.
      *
      * @param entity entity to destroy
+     * @param player player who killed the entity
      */
     void killEntity(Entity entity, Entity player);
 

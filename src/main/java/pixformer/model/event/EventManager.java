@@ -1,7 +1,6 @@
 package pixformer.model.event;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.HashSet;
 import java.util.Set;

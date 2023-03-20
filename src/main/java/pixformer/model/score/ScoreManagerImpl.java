@@ -24,6 +24,11 @@ public class ScoreManagerImpl implements ScoreManager {
         eventSubscriber.addPlayerOnKill(entity -> this.increaseScore(entity, DEFAULT_SCORE_INCREMENT));
     }
 
+    /**
+     * Method to update the score of a psecific player.
+     * @param player player to update the score
+     * @param score score to add at the previous score of the player
+     */
     private void increaseScore(final Entity player, final int score) {
         if (scoreMap.containsKey(player)) {
             scoreMap.get(player).addPoints(score);

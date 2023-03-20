@@ -1,7 +1,6 @@
 package pixformer.model.event;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 
 /**
  * Event handler to manage specific event that happens in the game.
