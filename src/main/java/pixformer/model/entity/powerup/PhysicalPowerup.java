@@ -4,7 +4,7 @@ package pixformer.model.entity.powerup;
  * Represents a physical object in the game that contains a powerup inside.
  */
 public interface PhysicalPowerup {
-    
+
     /**
      * Returns the powerup behavior represented by this physical powerup.
      * 
