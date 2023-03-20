@@ -8,7 +8,6 @@ import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Brick block, common brick block which can be destroyed from the bottom.
@@ -42,23 +41,6 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-<<<<<<< HEAD
-        return Optional.of(new CollisionComponent(this) {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void update(final double dt, final Set<Collision> collisions) {
-                for (var collision : collisions) {
-                    if (collision.side() == CollisionSide.BOTTOM && getWorld().isPresent()) {
-                        getWorld().get().dropEntity(this.getEntity());
-                    }
-                }
-            }
-        });
-=======
         return Optional.of(new BrickCollisionComponent(this));
->>>>>>> 6177e99ef295c90ef87a1252fd938d821aab9271
     }
 }
