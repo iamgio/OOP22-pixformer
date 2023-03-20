@@ -41,16 +41,12 @@ public class PlayerCollisionComponent extends CollisionComponent {
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
                 if (invulnerabilityChronometer.getTimeElapsed() == 0 || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
 
-                    System.out.println(invulnerabilityChronometer.getTimeElapsed() + " " + invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME));
-
                     this.player.damaged();
 
-                    System.out.println(collisor.entity() + " " + collisor.side());
                     invulnerabilityChronometer.reset();
                     invulnerabilityChronometer.start();
                 }
             }
-            
         }
     }
 }

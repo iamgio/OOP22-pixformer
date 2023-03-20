@@ -127,13 +127,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void damaged() {
         if (this.powerUp.isEmpty()) {
-            System.out.println("Morto");
             kill();
         } else if (this.powerUp.get().getBehaviour().getPriority() == 1) {
-            System.out.println("MINI");
             this.powerUp = Optional.empty();
         } else if (this.powerUp.get().getBehaviour().getPriority() == 2) {
-            System.out.println("FUNGO");
             this.powerUp = Optional.of(new PowerUp(new Mushroom()));
         }
     }
