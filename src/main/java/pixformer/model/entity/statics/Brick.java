@@ -3,11 +3,7 @@ package pixformer.model.entity.statics;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.collision.Collision;
-import pixformer.model.entity.collision.CollisionSide;
+import pixformer.model.entity.collision.*;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
@@ -15,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Brick block, common block which can be destroyed.
+ * Brick block, common brick block which can be destroyed from the bottom.
  */
 public class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
@@ -46,6 +42,7 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
+<<<<<<< HEAD
         return Optional.of(new CollisionComponent(this) {
 
             /**
@@ -60,5 +57,8 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
                 }
             }
         });
+=======
+        return Optional.of(new BrickCollisionComponent(this));
+>>>>>>> 6177e99ef295c90ef87a1252fd938d821aab9271
     }
 }

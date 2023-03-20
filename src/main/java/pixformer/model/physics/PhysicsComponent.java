@@ -12,7 +12,6 @@ public class PhysicsComponent extends Component<MutableEntity> implements Updata
 
     private static final double GRAVITY = 0.00008;
     private static final double FRICTION = 0.978;
-
     private final Vector2D force;
 
     /**
