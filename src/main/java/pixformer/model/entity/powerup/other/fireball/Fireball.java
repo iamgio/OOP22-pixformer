@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.fireball;
+package pixformer.model.entity.powerup.other.fireball;
 
 import java.util.Optional;
 
@@ -8,10 +8,9 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.powerup.other.fireball.Fireball;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
-import pixformer.model.entity.powerups.other.fireball.FireballCollisionComponent;
-import pixformer.model.entity.powerups.other.fireball.Fireball;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
@@ -33,7 +32,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
 
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
-        physicsComponent = new pixformer.model.entity.powerups.other.fireball.FireballPhysicsComponent(this);
+        physicsComponent = new pixformer.model.entity.powerup.other.fireball.FireballPhysicsComponent(this);
 
         this.speed = speed;
     }
