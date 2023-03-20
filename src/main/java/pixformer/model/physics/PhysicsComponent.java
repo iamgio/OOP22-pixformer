@@ -4,6 +4,7 @@ import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.components.Component;
+import pixformer.model.entity.dynamic.player.Player;
 
 /**
  * {@inheritDoc}.
@@ -31,7 +32,7 @@ public class PhysicsComponent extends Component<MutableEntity> implements Updata
     public void update(final double dt) {
         final MutableEntity entity = super.getEntity();
         entity.setVelocity(entity.getVelocity().sum(force));
-        if (entity.isOnGround()) {
+        if (entity.isOnGround() && entity instanceof Player) {
             entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * FRICTION));
         }
     }
