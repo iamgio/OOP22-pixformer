@@ -16,7 +16,8 @@ import pixformer.model.entity.statics.Block;
 
 /**
  * Tests to check if the
- * {@link pixformer.model.entity.dynamic.DieOnPressedCollisionComponent} works.
+ * {@link pixformer.model.entity.dynamic.ActionOnPressedCollisionComponent}
+ * works.
  */
 public class OnPressedTest {
 
@@ -37,8 +38,7 @@ public class OnPressedTest {
                 new Player(0, 0, 1, 2, 0),
                 new Block(-1, 2),
                 new Block(1, 2),
-                new Block(0, 3)
-        ).forEach(world::spawnEntity);
+                new Block(0, 3)).forEach(world::spawnEntity);
         return world;
     }
 
