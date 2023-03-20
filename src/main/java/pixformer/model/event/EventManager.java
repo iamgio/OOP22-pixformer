@@ -1,6 +1,7 @@
 package pixformer.model.event;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +25,8 @@ public class EventManager implements EventSubscriber, EventHandler{
      * {@inheritDoc}
      */
     @Override
-    public void killed(final Entity entity) {
-        listeners.forEach(cons -> cons.accept(entity));
+    public void killed(final Entity entity, final Entity player) {
+        listeners.forEach(cons -> cons.accept(player));
     }
 
     /**

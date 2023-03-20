@@ -9,8 +9,8 @@ public class ScoreImpl implements Score {
     /**
      * Constructor for the class.
      */
-    public ScoreImpl() {
-        this.points = 0;
+    public ScoreImpl(final int points) {
+        this.points = points;
     }
 
     /**

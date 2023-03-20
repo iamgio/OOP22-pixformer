@@ -118,9 +118,16 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
                     });
         }
 
-        this.scoreLabel.setText("Score = " + this.controller.getScore());
+        this.updateTextRenderer();
 
         scene.render();
+    }
+
+    private void updateTextRenderer() {
+        int counter = 0;
+        for (var x : this.controller.getScore()) {
+            this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
+        }
     }
 
     @Override
