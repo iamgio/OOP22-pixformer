@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.internationalization.Lang;
 import pixformer.view.engine.javafx.JavaFXViewLauncher;
+import pixformer.view.javafx.menu.PixformerJavaFXMainMenuScene;
 
 /**
  * The default game view launcher for JavaFX.

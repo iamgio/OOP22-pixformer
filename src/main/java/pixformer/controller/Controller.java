@@ -1,16 +1,25 @@
 package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
+import pixformer.controller.level.LevelManager;
 import pixformer.model.GameSettings;
+import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
+import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 /**
  * The controller that acts as a bridge between model and view.
  */
 public interface Controller {
+
+    /**
+     * Performs the actions required by the controller to work.
+     */
+    void init();
 
     /**
      * @return current game mechanics settings
@@ -31,7 +40,7 @@ public interface Controller {
      * @param view view to output to
      * @return a new game loop instance
      */
-    GameLoop createGameLoop(View view); // TODO change to View
+    GameLoop createGameLoop(View view);
 
     /**
      * @return the score of the player
@@ -52,4 +61,17 @@ public interface Controller {
      * @return X coordinate of the common point (possibly average) between the given entitites
      */
     double calcEntitiesCommonPointX(Set<Entity> entities);
+
+    /**
+     * @return level files on the filesystem
+     */
+    List<File> getLevelFiles();
+
+    /**
+     * Parses and extracts data from a level file
+     * @param levelFile level file to parse
+     * @return a new level instance loaded from the file
+     * @throws IllegalStateException if the file could not be turned into a level
+     */
+    Level getLevelFromFile(File levelFile);
 }

@@ -1,7 +1,7 @@
 package pixformer.view.engine;
 
 import pixformer.controller.Controller;
-import pixformer.controller.LevelManager;
+import pixformer.controller.level.LevelManager;
 
 /**
  * Responsible for launching a kind of view.
