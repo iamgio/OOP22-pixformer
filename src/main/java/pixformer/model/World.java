@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.score.ScoreManager;
 
 import java.util.Set;
@@ -39,7 +40,7 @@ public interface World extends Updatable {
      *
      * @param entity entity to destroy
      */
-    void killEntity(Entity entity);
+    void killEntity(Entity entity, Entity player);
 
     /**
      * Remove an entity in the game world if the entity dropped out of it.
