@@ -1,12 +1,8 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Map;
 import java.util.Optional;
 
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.collision.CollisionSide;
-import pixformer.model.entity.collision.SimpleCollisionReactor;
-import pixformer.model.entity.dynamic.player.Player;
 
 /**
  * The state of the koopa which walks normally and behaves like a goomba.
@@ -32,7 +28,7 @@ public final class WalkingKoopa extends Enemy implements KoopaState {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new ActionOnPressedCollisionComponent(this, e -> changeToTurtle.run()));
+        return Optional.of(new ActionOnPressedCollisionComponent(this, (e, ee) -> changeToTurtle.run()));
     }
 
     @Override
