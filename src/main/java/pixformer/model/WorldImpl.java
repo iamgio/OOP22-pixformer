@@ -23,6 +23,7 @@ public class WorldImpl implements World {
 
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
+    private final Set<Entity> toSpawnEntities;
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
@@ -33,6 +34,7 @@ public class WorldImpl implements World {
     public WorldImpl() {
         this.entities = new HashSet<>();
         this.killedEntities = new HashSet<>();
+        this.toSpawnEntities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
         this.eventManager = new EventManager();
         this.scoreManager = new ScoreManagerImpl(this.eventManager);
@@ -72,6 +74,14 @@ public class WorldImpl implements World {
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEntityToSpawn(final Entity entity) {
+        this.toSpawnEntities.add(entity);
     }
 
     /**
@@ -118,6 +128,10 @@ public class WorldImpl implements World {
             }
         });
         this.entities.removeAll(this.killedEntities);
+        for (var entity : this.toSpawnEntities) {
+            spawnEntity(entity);
+        }
+        this.toSpawnEntities.clear();
     }
 
     /**

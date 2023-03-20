@@ -36,6 +36,13 @@ public interface World extends Updatable {
     void spawnEntity(Entity entity);
 
     /**
+     * Add an entity to spawn at the game world.
+     *
+     * @param entity entity to spawn
+     */
+    void addEntityToSpawn(Entity entity);
+
+    /**
      * Destroy an entity in the game world after the entity got killed.
      *
      * @param entity entity to destroy
