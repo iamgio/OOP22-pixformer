@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.fireball;
+package pixformer.model.entity.powerup.other.fireball;
 
 import java.util.Set;
 

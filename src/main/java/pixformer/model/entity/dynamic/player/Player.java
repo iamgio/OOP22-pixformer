@@ -6,11 +6,11 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.powerup.PowerUp;
+import pixformer.model.entity.powerup.powerups.FireFlower;
+import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
-import pixformer.model.entity.powerups.FireFlower;
-import pixformer.model.entity.powerups.Mushroom;
-import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
 
 /**

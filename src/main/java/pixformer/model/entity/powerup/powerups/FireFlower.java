@@ -1,7 +1,8 @@
-package pixformer.model.entity.powerups;
+package pixformer.model.entity.powerup.powerups;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.powerups.other.fireball.Fireball;
+import pixformer.model.entity.powerup.PowerupBehaviour;
+import pixformer.model.entity.powerup.other.fireball.Fireball;
 /**
  * Class representing the FireFlower powerup.
  */

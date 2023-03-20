@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups;
+package pixformer.model.entity.powerup;
 
 /**
  * Class defining the powerup object.
