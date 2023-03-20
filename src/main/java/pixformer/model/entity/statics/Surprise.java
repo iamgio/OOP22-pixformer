@@ -5,8 +5,6 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.*;
 import pixformer.model.entity.dynamic.player.Player;
-//import pixformer.model.entity.powerups.FireFlower;
-//import pixformer.model.entity.powerups.Mushroom;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 

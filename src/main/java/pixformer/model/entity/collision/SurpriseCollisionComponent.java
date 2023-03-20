@@ -14,7 +14,7 @@ public class SurpriseCollisionComponent extends CollisionComponent{
     /**
      * {@inheritDoc}
      */
-    public SurpriseCollisionComponent(MutableEntity entity) {
+    public SurpriseCollisionComponent(final MutableEntity entity) {
         super(entity);
         this.hasCollided = false;
     }
@@ -23,9 +23,9 @@ public class SurpriseCollisionComponent extends CollisionComponent{
      * {@inheritDoc}
      */
     @Override
-    public void update(double dt, Set<Collision> collisions) {
+    public void update(final double dt, final Set<Collision> collisions) {
         for (var collision : collisions) {
-            if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent() && !hasCollided) {
+            if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent() && !this.hasCollided) {
                 super.getEntity().getWorld().get().addEntityToSpawn(new Brick(20, 20));
                 this.hasCollided = true;
             }
