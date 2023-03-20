@@ -11,6 +11,7 @@ import pixformer.model.entity.components.Component;
 public class PhysicsComponent extends Component<MutableEntity> implements Updatable {
 
     private static final double GRAVITY = 0.00008;
+    private static final double FRICTION = 0.978;
 
     private final Vector2D force;
 
@@ -31,5 +32,8 @@ public class PhysicsComponent extends Component<MutableEntity> implements Updata
     public void update(final double dt) {
         final MutableEntity entity = super.getEntity();
         entity.setVelocity(entity.getVelocity().sum(force));
+        if (entity.isOnGround()) {
+            entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * FRICTION));
+        }
     }
 }
