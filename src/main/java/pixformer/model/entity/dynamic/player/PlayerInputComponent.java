@@ -17,15 +17,18 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Max duration of a jump
     private static final float MAX_JUMP_DURATION = 0.01f;
 
-    // Speedup factor while sprinting
+    // Speed-limits of the player
     private static final float BASE_SPEED_LIMIT = 0.01f;
     private static final float SPRINT_SPEED_LIMIT = 0.02f;
 
     // Ability cooldown in milliseconds
-    private static final int ABILITY_COOLDOWN = 500;
+    private static final long ABILITY_COOLDOWN = 500;
 
     // On enemy jump cooldown in milliseconds
-    private static final int ON_ENEMY_JUMP_COOLDOWN = 500;
+    private static final long ON_ENEMY_JUMP_COOLDOWN = 500;
+
+    // Force multiplier applied to the jumpforce when jumping on an enemy
+    private static final int ON_ENEMY_JUMP_MULTIPLIER = 7;
 
     // Current jump state
     private float currentPlayerJump = MAX_JUMP_DURATION;
@@ -142,7 +145,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Apply jump force to the player.
      */
     private void forceJump() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE)));
+        player.setVelocity(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE*ON_ENEMY_JUMP_MULTIPLIER));
     }
 
     /**
