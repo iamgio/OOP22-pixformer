@@ -10,8 +10,8 @@ import pixformer.view.engine.RectangleRenderer;
  * Implementation of a GraphicsCopmponent for a Fireball entity.
  */
 public class FireballGraphicsComponent extends GraphicsComponent {
-    final private double width;
-    final private double height;
+    private final double width;
+    private final double height;
 
     /**
      * @param fireball Entity that will be displayed.

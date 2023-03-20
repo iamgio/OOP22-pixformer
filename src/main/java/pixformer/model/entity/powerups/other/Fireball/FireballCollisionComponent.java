@@ -11,8 +11,8 @@ import pixformer.model.entity.dynamic.player.Player;
  * Implementation of CollisionComponent for a Player entity.
  */
 public class FireballCollisionComponent extends CollisionComponent {
-    final private Fireball fireball;
-    final private World world;
+    private final Fireball fireball;
+    private final World world;
 
     /**
      * 
