@@ -7,6 +7,7 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
+import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.powerups.FireFlower;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.physics.PhysicsComponent;
@@ -108,6 +109,19 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public Optional<PowerUp> getPowerup() {
         return this.powerUp;
     }
+
+    /**
+     * Set the new Powerup for the player.
+     * @param powerupBehaviour the new powerup.
+     */
+    public void setPowerup(final PowerupBehaviour powerupBehaviour) {
+        if (this.powerUp.isEmpty()) {
+            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
+        } else if (powerupBehaviour.getPriority() >= this.powerUp.get().getBehaviour().getPriority()) {
+            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
+        }
+    }
+
     /**
      * Manage the player behaviour when jumping on an enemy.
      */

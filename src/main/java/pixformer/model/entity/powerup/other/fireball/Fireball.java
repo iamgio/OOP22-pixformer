@@ -8,7 +8,6 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.powerup.other.fireball.Fireball;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 
