@@ -25,7 +25,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
      */
     @Override
     public void start(final Stage primaryStage) {
-        this.controller.setup();
+        this.controller.init();
         setupLevelScenesRoutine();
         this.scene.addOnChange(scene -> {
             primaryStage.setScene(scene.getScene());

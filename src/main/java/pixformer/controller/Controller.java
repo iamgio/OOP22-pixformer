@@ -19,7 +19,7 @@ public interface Controller {
     /**
      * Performs the actions required by the controller to work.
      */
-    void setup();
+    void init();
 
     /**
      * @return current game mechanics settings
@@ -40,7 +40,7 @@ public interface Controller {
      * @param view view to output to
      * @return a new game loop instance
      */
-    GameLoop createGameLoop(View view); // TODO change to View
+    GameLoop createGameLoop(View view);
 
     /**
      * Applies supported boundaries to a given amount of players.

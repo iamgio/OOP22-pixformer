@@ -63,7 +63,7 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
+    public void init() {
         if (!APP_DIRECTORY.exists()) {
             APP_DIRECTORY.mkdirs();
         }

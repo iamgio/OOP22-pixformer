@@ -30,8 +30,8 @@ public final class FileUtils {
             throw new IllegalStateException("Cannot read internal data");
         }
 
-        if (!outputDir.exists()) {
-            outputDir.mkdirs();
+        if (!outputDir.exists() && !outputDir.mkdirs()) {
+            throw new IllegalStateException("Cannot create path");
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(dirInputStream, Charset.defaultCharset()))) {
