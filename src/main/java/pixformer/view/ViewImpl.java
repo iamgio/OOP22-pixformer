@@ -1,6 +1,5 @@
 package pixformer.view;
 
-import org.w3c.dom.Text;
 import pixformer.common.wrap.ObservableWritableWrapper;
 import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
@@ -125,6 +124,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         scene.render();
     }
 
+    /**
+     * Update the scoreLabel, with all players score, during the game.
+     */
     private void updateTextRenderer() {
         int counter = 0;
         this.scoreLabel.setText("");
@@ -134,6 +136,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));

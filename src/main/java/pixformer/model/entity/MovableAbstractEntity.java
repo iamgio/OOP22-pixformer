@@ -11,7 +11,6 @@ import pixformer.model.physics.PhysicsComponent;
  */
 public class MovableAbstractEntity extends AbstractEntity {
 
-    // Forza a cui è attualmente soggetta l'entità
     private Vector2D movingForce = new Vector2D(0, 0);
 
     /**
@@ -24,7 +23,6 @@ public class MovableAbstractEntity extends AbstractEntity {
      */
     protected MovableAbstractEntity(final double x, final double y, final double width, final double height) {
         super(x, y, width, height);
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -32,7 +30,6 @@ public class MovableAbstractEntity extends AbstractEntity {
      */
     @Override
     public BoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
     }
 
@@ -70,8 +67,7 @@ public class MovableAbstractEntity extends AbstractEntity {
      */
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPhysicsComponent'");
+        return super.getPhysicsComponent();
     }
 
 }

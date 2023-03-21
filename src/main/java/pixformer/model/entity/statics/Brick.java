@@ -20,7 +20,7 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
     private final CollisionComponent collisionComponent;
 
     /**
-     * Constructor of the Block.
+     * Simple constructor of the Block.
      * 
      * @param x X coordinate
      * @param y Y coordinate

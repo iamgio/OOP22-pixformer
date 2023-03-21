@@ -10,9 +10,11 @@ import java.util.Set;
 public class BrickCollisionComponent extends CollisionComponent {
 
     /**
-     * {@inheritDoc}
+     * Simple constructor for the BrickCollisionComponent
+     *
+     * @param entity entity with this collision component
      */
-    public BrickCollisionComponent(MutableEntity entity) {
+    public BrickCollisionComponent(final MutableEntity entity) {
         super(entity);
     }
 
@@ -20,7 +22,7 @@ public class BrickCollisionComponent extends CollisionComponent {
      * {@inheritDoc}
      */
     @Override
-    public void update(double dt, Set<Collision> collisions) {
+    public void update(final double dt, final Set<Collision> collisions) {
         for (var collision : collisions) {
             if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
                 super.getEntity().getWorld().get().dropEntity(this.getEntity());

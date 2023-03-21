@@ -11,7 +11,8 @@ public interface Score {
     int getPoints();
 
     /**
-     * Method to update the score adding a new value.
+     * Method to update the score adding a new value to the old value.
+     *
      * @param points points to add
      */
     void addPoints(int points);

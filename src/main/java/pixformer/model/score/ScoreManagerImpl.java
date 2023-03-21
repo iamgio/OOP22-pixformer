@@ -25,7 +25,7 @@ public class ScoreManagerImpl implements ScoreManager {
     }
 
     /**
-     * Method to update the score of a psecific player.
+     * Method to update the score of a specific player.
      * @param player player to update the score
      * @param score score to add at the previous score of the player
      */

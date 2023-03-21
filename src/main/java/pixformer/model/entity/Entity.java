@@ -86,7 +86,7 @@ public interface Entity {
      * 
      * @param world game world the entity spawned on
      */
-    default void onSpawn(World world) {
+    default void onSpawn(final World world) {
 
     }
 }

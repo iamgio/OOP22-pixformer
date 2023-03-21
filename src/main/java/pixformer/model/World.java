@@ -36,7 +36,7 @@ public interface World extends Updatable {
     void spawnEntity(Entity entity);
 
     /**
-     * Add an entity to spawn at the game world.
+     * Add an entity to spawn in the game world.
      *
      * @param entity entity to spawn
      */

@@ -15,7 +15,7 @@ public interface ScoreManager {
     int getScore(Entity entity);
 
     /**
-     * @return a list containing the ordered score of each player
+     * @return a list containing the ordered scores of each player
      */
     List<Integer> getAllScores();
 

@@ -23,7 +23,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
     private final CollisionComponent collisionComponent;
 
     /**
-     * Constructor of the Surprise block.
+     * Simple constructor of the Surprise block.
      * 
      * @param x X coordinate
      * @param y Y coordinate

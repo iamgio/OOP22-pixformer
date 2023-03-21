@@ -16,17 +16,17 @@ public interface GameLoopManager {
     void stop();
 
     /**
-     * @return if the gameloop is running
+     * @return if the game loop is running
      */
     boolean isRunning();
 
     /**
-     * Pause the gameloop.
+     * Pause the game loop.
      */
     void pause();
 
     /**
-     * Unpause the gameloop.
+     * Unpause the game loop.
      */
     void resume();
 }

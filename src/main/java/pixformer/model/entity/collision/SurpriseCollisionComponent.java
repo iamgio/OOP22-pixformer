@@ -12,7 +12,9 @@ public class SurpriseCollisionComponent extends CollisionComponent{
     private boolean hasCollided;
 
     /**
-     * {@inheritDoc}
+     * Simple constructor for the SurpriseCollisionComponent
+     *
+     * @param entity entity with this collision component
      */
     public SurpriseCollisionComponent(final MutableEntity entity) {
         super(entity);
