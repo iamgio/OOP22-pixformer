@@ -127,7 +127,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
 
     private void updateTextRenderer() {
         int counter = 0;
+        this.scoreLabel.setText("");
         for (var x : this.controller.getScore()) {
+            counter++;
             this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
         }
     }
