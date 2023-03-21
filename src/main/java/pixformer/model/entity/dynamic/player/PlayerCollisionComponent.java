@@ -49,8 +49,8 @@ public class PlayerCollisionComponent extends CollisionComponent {
                 }
             }
 
-            if (collisor.entity() instanceof PhysicalPowerup) {
-                player.setPowerup(((PhysicalPowerup) (collisor.entity())).getPowerupBehaviour());
+            if (collisor.entity() instanceof PhysicalPowerup powerup) {
+                player.setPowerup(powerup.getPowerupBehaviour());
             }
         }
     }
