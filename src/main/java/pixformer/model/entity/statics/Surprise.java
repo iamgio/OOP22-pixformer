@@ -37,10 +37,18 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
         this.graphicsComponent = new SurpriseGraphicsComponent(this);
     }
 
+    /**
+     * Set the flag representing the collision of the surprise block.
+     *
+     * @param hasCollided boolean representing the flag
+     */
     public void setCollided(final boolean hasCollided) {
         this.hasCollided = hasCollided;
     }
 
+    /**
+     * @return if the surprise block has already collided during the game
+     */
     public boolean hasCollided() {
         return this.hasCollided;
     }
