@@ -33,13 +33,12 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
     }
 
     /**
-     * @param input raw input
-     * @return associated controller action, if it exists
+     * {@inheritDoc}
      */
     public Optional<Consumer<ControllerInput>> mapController(final KeyCode input) {
         final Consumer<ControllerInput> command = switch (input) {
-            case P -> controllerInput -> controllerInput.pause();
-            case O -> controllerInput -> controllerInput.resume();
+            case P -> ControllerInput::pause;
+            case O -> ControllerInput::resume;
             default -> null;
         };
         return Optional.ofNullable(command);

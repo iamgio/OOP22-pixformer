@@ -14,7 +14,7 @@ public class EventManager implements EventSubscriber, EventHandler{
     private final Set<Consumer<Entity>> listeners;
 
     /**
-     * Constructor for the event manager.
+     * Simple constructor for the event manager.
      */
     public EventManager() {
         this.listeners = new HashSet<>();

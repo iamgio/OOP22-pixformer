@@ -117,6 +117,9 @@ public final class ControllerImpl implements Controller {
         return new GameLoopFactory(currentLevel.get(), this, view).defaultLoop();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Integer> getScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);

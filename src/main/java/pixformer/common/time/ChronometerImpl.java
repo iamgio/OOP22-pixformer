@@ -54,4 +54,12 @@ public class ChronometerImpl implements Chronometer {
     public long getTimeElapsed() {
         return this.stopTime - this.startTime;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isRunning() {
+        return this.isRunning;
+    }
 }

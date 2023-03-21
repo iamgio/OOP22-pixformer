@@ -4,8 +4,7 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.*;
-import pixformer.view.engine.Color;
-import pixformer.view.entity.RectangleGraphicsComponent;
+import pixformer.view.entity.statics.BrickGraphicsComponent;
 
 import java.util.Optional;
 
@@ -16,16 +15,19 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
-    private final GraphicsComponent graphicsComponent = new RectangleGraphicsComponent(this, new Color(0, 0, 1));
+    private final GraphicsComponent graphicsComponent;
+    private final CollisionComponent collisionComponent;
 
     /**
-     * Constructor of the Block.
+     * Simple constructor of the Block.
      * 
      * @param x X coordinate
      * @param y Y coordinate
      */
     public Brick(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
+        this.collisionComponent = new BrickCollisionComponent(this);
+        this.graphicsComponent = new BrickGraphicsComponent(this);
     }
 
     /**
@@ -41,6 +43,6 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new BrickCollisionComponent(this));
+        return Optional.of(this.collisionComponent);
     }
 }

@@ -24,6 +24,11 @@ public interface RendererFactory {
      */
     Renderer newSolidBackground(Color color);
 
-    // Renderer newImage(Image image);
-    // TODO needs wrapping or sprite enum
+    /**
+     * @param resourcePath path to an internal image resource
+     * @param width width of the image
+     * @param height height of the image
+     * @return a new image renderer
+     */
+    PositionableRenderer newImage(String resourcePath, double width, double height);
 }

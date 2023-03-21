@@ -13,10 +13,10 @@ public class Barrier extends AbstractEntity implements DefaultRectangleBoundingB
     private static final double HEIGHT = 1;
 
     /**
-     * Constructor for the Barrier.
+     * Simple constructor for the Barrier.
      *
-     * @param x      X coordinate
-     * @param y      Y coordinate
+     * @param x X coordinate
+     * @param y Y coordinate
      */
     public Barrier(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);

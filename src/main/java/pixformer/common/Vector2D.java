@@ -29,6 +29,7 @@ public record Vector2D(double x, double y) {
     }
 
     /**
+     * Create a new vector with the same X coordinate but a different Y coordinate.
      * @param y new Y coordinate
      * @return a new Vector with a new Y coordinate
      */
@@ -37,6 +38,7 @@ public record Vector2D(double x, double y) {
     }
 
     /**
+     * Create a new vector with the same Y coordinate but a different X coordinate.
      * @param x new X coordinate
      * @return a new Vector with a new X coordinate
      */

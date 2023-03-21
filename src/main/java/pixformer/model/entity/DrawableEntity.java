@@ -6,7 +6,7 @@ package pixformer.model.entity;
 public interface DrawableEntity extends Entity {
 
     /**
-     * @return the entity's graphicsComponent
+     * @return the entity's graphicsComponent to permit the representation of it
      */
     GraphicsComponent getGraphicsComponent();
 

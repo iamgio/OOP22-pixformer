@@ -42,7 +42,7 @@ public interface Controller {
     GameLoop createGameLoop(View view);
 
     /**
-     * @return the score of the player
+     * @return the score of all the players
      */
     List<Integer> getScore();
 

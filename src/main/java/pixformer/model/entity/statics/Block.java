@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidEntity;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
+import pixformer.view.entity.statics.GrassGraphicsComponent;
 
 /**
  * Standard block in the world, indestructible block in the world.
@@ -19,14 +20,15 @@ public class Block extends AbstractEntity implements DefaultRectangleBoundingBox
     private final GraphicsComponent graphicsComponent;
 
     /**
-     * Constructor of the Block.
+     * Simple constructor of the Block.
      * 
      * @param x X coordinate
      * @param y Y coordinate
      */
     public Block(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
-        this.graphicsComponent = new RectangleGraphicsComponent(this, new Color(0.6, 0.25, 0.0));
+        // this.graphicsComponent = new RectangleGraphicsComponent(this, new Color(0.6, 0.25, 0.0));
+        this.graphicsComponent = new GrassGraphicsComponent(this);
     }
 
     /**
