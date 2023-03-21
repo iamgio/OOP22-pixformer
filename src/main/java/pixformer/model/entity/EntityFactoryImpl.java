@@ -13,6 +13,15 @@ import pixformer.model.entity.statics.Surprise;
  */
 public class EntityFactoryImpl implements EntityFactory {
 
+    private final GraphicsComponentFactory graphicsComponentFactory;
+
+    /**
+     * @param graphicsComponentFactory the factory to get the graphics components from
+     */
+    public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory) {
+        this.graphicsComponentFactory = graphicsComponentFactory;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -64,7 +73,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("goomba")
     @Override
     public Entity createGoomba(final int x, final int y) {
-        return new Goomba(x, y);
+        return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
 
     /**

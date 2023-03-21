@@ -13,14 +13,16 @@ import pixformer.model.Level;
 import pixformer.model.LevelData;
 import pixformer.model.LevelImpl;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.view.View;
+import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -172,8 +174,9 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public Level getLevelFromFile(final File levelFile) {
-        try(final FileInputStream inputStream = new FileInputStream(levelFile)) {
-            final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl()).deserialize(inputStream);
+        try (FileInputStream inputStream = new FileInputStream(levelFile)) {
+            final EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
+            final LevelData data = new JsonLevelDataDeserializer(entityFactory).deserialize(inputStream);
             return new LevelImpl(data);
         } catch (IOException e) {
             throw new IllegalStateException("Could not get level data from file");

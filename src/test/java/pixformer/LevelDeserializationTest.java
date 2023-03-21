@@ -6,6 +6,7 @@ import pixformer.model.LevelData;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.statics.Block;
+import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -17,7 +18,7 @@ public class LevelDeserializationTest {
 
     @Test
     void testSimple() {
-        final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl())
+        final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory()))
                 .deserialize(this.getClass().getResourceAsStream("/levels/test1.json"));
 
         assertEquals("First level", data.name());
@@ -34,7 +35,7 @@ public class LevelDeserializationTest {
 
     @Test
     void testMacro() {
-        final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl())
+        final LevelData data = new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory()))
                 .deserialize(this.getClass().getResourceAsStream("/levels/test2.json"));
 
         assertEquals("Second level", data.name());

@@ -2,8 +2,8 @@ package pixformer.model.entity.dynamic;
 
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 
 import java.util.Optional;
 
@@ -23,10 +23,11 @@ public final class Goomba extends Enemy implements DrawableEntity {
      * 
      * @param x its initial x coordinate position.
      * @param y its initial y coordinate position.
+     * @param graphicsComponent graphics component retriever
      */
-    public Goomba(final double x, final double y) {
+    public Goomba(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
-        this.graphicsComponent = new GoombaGraphicsComponent(this);
+        this.graphicsComponent = graphicsComponent.apply(this);
     }
 
     @Override
