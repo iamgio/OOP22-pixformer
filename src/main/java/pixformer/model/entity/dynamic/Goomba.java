@@ -1,12 +1,11 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Optional;
-
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.view.engine.Color;
-import pixformer.view.entity.RectangleGraphicsComponent;
+import pixformer.view.entity.enemies.GoombaGraphicsComponent;
+
+import java.util.Optional;
 
 /**
  * The enemy goomba.
@@ -17,6 +16,8 @@ public final class Goomba extends Enemy implements DrawableEntity {
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
+    private final GraphicsComponent graphicsComponent;
+
     /**
      * Create a new Goomba.
      * 
@@ -25,11 +26,12 @@ public final class Goomba extends Enemy implements DrawableEntity {
      */
     public Goomba(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
+        this.graphicsComponent = new GoombaGraphicsComponent(this);
     }
 
     @Override
     public GraphicsComponent getGraphicsComponent() {
-        return new RectangleGraphicsComponent(this, new Color(0.7, 0.4, 0));
+        return this.graphicsComponent;
     }
 
     @Override
