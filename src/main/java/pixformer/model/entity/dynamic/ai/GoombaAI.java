@@ -38,6 +38,13 @@ public class GoombaAI extends AIInputComponent {
             HorizontalModelInput::left);
     }
 
+    /**
+     * @param entity to be controlled.
+     * @param velocitySetter the entity setter for its velocity
+     * @param velocity the module of the velocity of the controlled entity
+     * @param whichEntities determines to which entity this should react
+     * @param initialBehaviour of the entity.
+     */
     public GoombaAI(
         final MutableEntity entity, 
         final Consumer<Vector2D> velocitySetter, 
