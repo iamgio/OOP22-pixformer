@@ -137,6 +137,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
+     * @return true if the player is touching ground otherwise false.
+     */
+    public boolean isOnGround() {
+        return collisionComponent.getIsOnGround();
+    }
+
+    /**
      * Define what happens when Player get damaged.
      */
     public void damaged() {

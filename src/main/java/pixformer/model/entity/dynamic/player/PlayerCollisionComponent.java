@@ -4,17 +4,19 @@ import java.util.Set;
 
 import pixformer.common.time.ChronometerImpl;
 import pixformer.model.entity.collision.Collision;
-import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 
 /**
  * Implementation of CollisionComponent for a Player entity.
  */
-public class PlayerCollisionComponent extends CollisionComponent {
+public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
 
     private final Player player;
+
+    private boolean isOnGround = false;
 
     private final ChronometerImpl invulnerabilityChronometer = new ChronometerImpl();
 
@@ -27,16 +29,26 @@ public class PlayerCollisionComponent extends CollisionComponent {
         this.player = player;
     }
 
+    public boolean getIsOnGround() {
+        return isOnGround;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
 
+        super.update(dt, collisions);
+
+        isOnGround = false;
+
         for (final var collisor : collisions) {
 
             if (collisor.entity() instanceof Enemy && collisor.side().isVertical()) {
                 this.player.onEnemyJump();
+            } else if (isCollidingGround(collisions)) {
+                isOnGround = true;
             }
 
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
