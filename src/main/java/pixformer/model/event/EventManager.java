@@ -24,8 +24,8 @@ public class EventManager implements EventSubscriber, EventHandler{
      * {@inheritDoc}
      */
     @Override
-    public void killed(final Entity entity) {
-        listeners.forEach(cons -> cons.accept(entity));
+    public void killed(final Entity entity, final Entity player) {
+        listeners.forEach(cons -> cons.accept(player));
     }
 
     /**

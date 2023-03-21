@@ -5,11 +5,11 @@ import java.util.function.Consumer;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
-import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.MutableEntity;
+import pixformer.model.entity.collision.BiConsumerCollisionReactor;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.collision.SimpleCollisionReactor;
 import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
@@ -31,11 +31,11 @@ public class GoombaAI extends AIInputComponent {
      * @param velocitySetter the entity setter for its velocity.
      * @param velocity       the module of the velocity of the controlled entity.
      */
-    public GoombaAI(final AbstractEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
+    public GoombaAI(final MutableEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
-        reactor = new SimpleCollisionReactor(Map.of(
-                Entity::isSolid, this::reactOnBlockCollision));
+        reactor = new BiConsumerCollisionReactor(Map.of(
+                Entity::isSolid, (c, e) -> reactOnBlockCollision(c)));
         initialBehaviour();
     }
 
@@ -53,7 +53,7 @@ public class GoombaAI extends AIInputComponent {
     private void reactOnBlockCollision(final CollisionSide side) {
         switch (side) {
             case LEFT:
-                initialBehaviour();
+                joystick.left();
                 break;
             case RIGHT:
                 joystick.right();

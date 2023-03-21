@@ -1,7 +1,7 @@
 package pixformer.view.entity.powerups.fireball;
 
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.powerups.other.fireball.Fireball;
+import pixformer.model.entity.powerup.other.fireball.Fireball;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RectangleRenderer;

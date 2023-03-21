@@ -6,11 +6,12 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.powerup.PowerUp;
+import pixformer.model.entity.powerup.PowerupBehaviour;
+import pixformer.model.entity.powerup.powerups.FireFlower;
+import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
-import pixformer.model.entity.powerups.FireFlower;
-import pixformer.model.entity.powerups.Mushroom;
-import pixformer.model.entity.powerups.PowerUp;
 import pixformer.model.input.InputComponent;
 
 /**
@@ -108,6 +109,19 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public Optional<PowerUp> getPowerup() {
         return this.powerUp;
     }
+
+    /**
+     * Set the new Powerup for the player.
+     * @param powerupBehaviour the new powerup.
+     */
+    public void setPowerup(final PowerupBehaviour powerupBehaviour) {
+        if (this.powerUp.isEmpty()) {
+            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
+        } else if (powerupBehaviour.getPriority() >= this.powerUp.get().getBehaviour().getPriority()) {
+            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
+        }
+    }
+
     /**
      * Manage the player behaviour when jumping on an enemy.
      */
@@ -128,14 +142,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public void damaged() {
         if (this.powerUp.isEmpty()) {
             kill();
-        }
-
-        if (this.powerUp.get().getBehaviour().getPriority() == 2) {
-            this.powerUp = Optional.of(new PowerUp(new Mushroom()));
-        }
-
-        if (this.powerUp.get().getBehaviour().getPriority() == 1) {
+        } else if (this.powerUp.get().getBehaviour().getPriority() == 1) {
             this.powerUp = Optional.empty();
+        } else if (this.powerUp.get().getBehaviour().getPriority() == 2) {
+            this.powerUp = Optional.of(new PowerUp(new Mushroom()));
         }
     }
 
@@ -143,6 +153,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens on Player death.
      */
     private void kill() {
-        this.graphicsComponent.startDeathAnimation();
+        getWorld().get().dropEntity(this);
+        //this.graphicsComponent.startDeathAnimation();
     }
 }

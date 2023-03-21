@@ -9,7 +9,7 @@ import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
- * Standard block in the world.
+ * Standard block in the world, indestructible block in the world.
  */
 public class Block extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 

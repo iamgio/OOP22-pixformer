@@ -5,6 +5,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -22,6 +23,7 @@ public class WorldImpl implements World {
 
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
+    private final Set<Entity> toSpawnEntities;
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
@@ -32,6 +34,7 @@ public class WorldImpl implements World {
     public WorldImpl() {
         this.entities = new HashSet<>();
         this.killedEntities = new HashSet<>();
+        this.toSpawnEntities = new HashSet<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
         this.eventManager = new EventManager();
         this.scoreManager = new ScoreManagerImpl(this.eventManager);
@@ -77,9 +80,17 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void killEntity(final Entity entity) {
+    public void addEntityToSpawn(final Entity entity) {
+        this.toSpawnEntities.add(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void killEntity(final Entity entity, final Entity player) {
         this.killedEntities.add(entity);
-        eventManager.killed(entity);
+        eventManager.killed(entity, player);
     }
 
     /**
@@ -117,6 +128,10 @@ public class WorldImpl implements World {
             }
         });
         this.entities.removeAll(this.killedEntities);
+        for (var entity : this.toSpawnEntities) {
+            spawnEntity(entity);
+        }
+        this.toSpawnEntities.clear();
     }
 
     /**

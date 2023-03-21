@@ -34,7 +34,7 @@ public final class Goomba extends Enemy implements DrawableEntity {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return DieOnPressedCollisionComponent.createWithWorldFromEntity(this);
+        return ActionOnPressedCollisionComponent.createWithWorldFromEntityForDying(this);
     }
 
 }

@@ -1,4 +1,4 @@
-package pixformer.model.entity.powerups.other.fireball;
+package pixformer.model.entity.powerup.other.fireball;
 
 import java.util.Optional;
 
@@ -31,7 +31,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
 
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
-        physicsComponent = new FireballPhysicsComponent(this);
+        physicsComponent = new pixformer.model.entity.powerup.other.fireball.FireballPhysicsComponent(this);
 
         this.speed = speed;
     }

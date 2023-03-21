@@ -1,6 +1,7 @@
-package pixformer.model.entity.powerups;
+package pixformer.model.entity.powerup.powerups;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.powerup.PowerupBehaviour;
 /**
  * Class representing the Mushroom powerup.
  */

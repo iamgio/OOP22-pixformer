@@ -3,8 +3,13 @@ package pixformer.model.entity.statics;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.entity.collision.*;
+import pixformer.model.entity.dynamic.player.Player;
+import pixformer.view.engine.Color;
+import pixformer.view.entity.RectangleGraphicsComponent;
+
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Surprise block, which contains a power-up.
@@ -14,7 +19,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
-    private final GraphicsComponent graphicsComponent = null;
+    private final GraphicsComponent graphicsComponent = new RectangleGraphicsComponent(this, new Color(1, 0, 1));
 
     /**
      * Constructor of the Surprise block.
@@ -32,5 +37,13 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
     @Override
     public GraphicsComponent getGraphicsComponent() {
         return this.graphicsComponent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(new SurpriseCollisionComponent(this));
     }
 }
