@@ -16,7 +16,8 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
-    private final GraphicsComponent graphicsComponent = new RectangleGraphicsComponent(this, new Color(0, 0, 1));
+    private final GraphicsComponent graphicsComponent;
+    private final CollisionComponent collisionComponent;
 
     /**
      * Constructor of the Block.
@@ -26,6 +27,8 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     public Brick(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
+        this.collisionComponent = new BrickCollisionComponent(this);
+        this.graphicsComponent = new RectangleGraphicsComponent(this, new Color(0, 0, 1));
     }
 
     /**
@@ -41,6 +44,6 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new BrickCollisionComponent(this));
+        return Optional.of(this.collisionComponent);
     }
 }

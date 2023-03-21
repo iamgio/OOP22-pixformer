@@ -19,7 +19,8 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
-    private final GraphicsComponent graphicsComponent = new RectangleGraphicsComponent(this, new Color(1, 0, 1));
+    private final GraphicsComponent graphicsComponent;
+    private final CollisionComponent collisionComponent;
 
     /**
      * Constructor of the Surprise block.
@@ -29,6 +30,8 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
      */
     public Surprise(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
+        this.collisionComponent = new SurpriseCollisionComponent(this);
+        this.graphicsComponent = new RectangleGraphicsComponent(this, new Color(1, 0, 1));
     }
 
     /**
@@ -44,6 +47,6 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new SurpriseCollisionComponent(this));
+        return Optional.of(this.collisionComponent);
     }
 }
