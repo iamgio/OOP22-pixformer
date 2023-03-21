@@ -1,6 +1,5 @@
 package pixformer.model.entity.collision;
 
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.statics.Brick;
 import pixformer.model.entity.statics.Surprise;
 
@@ -25,6 +24,7 @@ public class SurpriseCollisionComponent extends CollisionComponent{
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
+        // TODO better way to cast the entity
         Surprise entity;
         if (super.getEntity() instanceof Surprise) {
             entity = (Surprise) super.getEntity();
