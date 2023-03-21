@@ -145,7 +145,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Apply jump force to the player.
      */
     private void forceJump() {
-        player.setVelocity(new Vector2D(0, -PlayerPhysicsComponent.JUMP_FORCE*ON_ENEMY_JUMP_MULTIPLIER));
+        player.setVelocity(new Vector2D(player.getVelocity().x(), -PlayerPhysicsComponent.JUMP_FORCE*ON_ENEMY_JUMP_MULTIPLIER));
     }
 
     /**
