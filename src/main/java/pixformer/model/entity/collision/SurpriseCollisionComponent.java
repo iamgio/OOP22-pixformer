@@ -22,6 +22,13 @@ public class SurpriseCollisionComponent extends CollisionComponent{
     }
 
     /**
+     * @return if the surprise has already collided with something and there is no more surprise
+     */
+    public boolean HasCollided() {
+        return this.hasCollided;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

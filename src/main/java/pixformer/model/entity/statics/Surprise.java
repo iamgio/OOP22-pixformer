@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.*;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
+import pixformer.view.entity.statics.SurpriseGraphicsComponent;
 
 import java.util.Optional;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
     public Surprise(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
         this.collisionComponent = new SurpriseCollisionComponent(this);
-        this.graphicsComponent = new RectangleGraphicsComponent(this, new Color(1, 0, 1));
+        this.graphicsComponent = new SurpriseGraphicsComponent(this);
     }
 
     /**
