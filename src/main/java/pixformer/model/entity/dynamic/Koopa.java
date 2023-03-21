@@ -1,7 +1,5 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Optional;
-
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
@@ -13,6 +11,8 @@ import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
+
+import java.util.Optional;
 
 /**
  * The implementation of the enemy Koopa. This class uses the two states of a
@@ -86,11 +86,6 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
     @Override
     public boolean isSolid() {
         return currentKoopaState.isSolid();
-    }
-
-    @Override
-    public boolean isOnGround() {
-        return currentKoopaState.isOnGround();
     }
 
     @Override
