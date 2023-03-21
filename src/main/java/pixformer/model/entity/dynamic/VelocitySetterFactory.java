@@ -1,8 +1,8 @@
-package pixformer.model.entity.dynamic.player;
+package pixformer.model.entity.dynamic;
 
 import pixformer.model.entity.MutableEntity;
 
-final class VelocitySetterFactory {
+public final class VelocitySetterFactory {
 
     public static void limitSpeed(final MutableEntity player, final double speedLimit) {
         final double direction = Math.signum(player.getVelocity().x());

@@ -3,6 +3,7 @@ package pixformer.model.entity.dynamic.player;
 import pixformer.common.Vector2D;
 import pixformer.common.time.ChronometerImpl;
 import pixformer.model.World;
+import pixformer.model.entity.dynamic.VelocitySetterFactory;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
 
