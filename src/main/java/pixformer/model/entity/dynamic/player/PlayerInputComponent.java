@@ -3,6 +3,7 @@ package pixformer.model.entity.dynamic.player;
 import pixformer.common.Vector2D;
 import pixformer.common.time.ChronometerImpl;
 import pixformer.model.World;
+import pixformer.model.entity.dynamic.VelocitySetterFactory;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
 
@@ -122,13 +123,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         jumpKey = false;
 
         // Player speed limit and sprint management
-        final int direction = player.getVelocity().x() >= 0 ? 1 : -1;
 
-        if (!sprintKey && Math.abs(player.getVelocity().x()) > BASE_SPEED_LIMIT) {
-            player.setVelocity(new Vector2D(BASE_SPEED_LIMIT * direction, player.getVelocity().y()));
-        } else if (sprintKey && Math.abs(player.getVelocity().x()) > SPRINT_SPEED_LIMIT) {
-            player.setVelocity(new Vector2D(SPRINT_SPEED_LIMIT * direction, player.getVelocity().y()));
-        }
+        VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
 
         sprintKey = false;
     }
