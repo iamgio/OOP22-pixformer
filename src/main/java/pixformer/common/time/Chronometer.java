@@ -31,4 +31,8 @@ public interface Chronometer {
      */
     long getTimeElapsed();
 
+    /**
+     * @return whether the chronometer is running
+     */
+    boolean isRunning();
 }
