@@ -24,6 +24,9 @@ public class SurpriseGraphicsComponent extends StaticGraphicsComponent {
      */
     @Override
     protected Renderer getRenderer(final RendererFactory factory) {
+        if (surprise.hasCollided()) {
+            return factory.newImage("/sprites/blocks/block.png", getEntity().getWidth(), getEntity().getHeight());
+        }
         return factory.newImage("/sprites/blocks/surprise.png", getEntity().getWidth(), getEntity().getHeight());
     }
 }

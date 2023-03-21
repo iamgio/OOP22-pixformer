@@ -22,6 +22,7 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
 
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
+    private boolean hasCollided;
 
     /**
      * Simple constructor of the Surprise block.
@@ -31,8 +32,17 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
      */
     public Surprise(final double x, final double y) {
         super(x, y, WIDTH, HEIGHT);
+        this.hasCollided = false;
         this.collisionComponent = new SurpriseCollisionComponent(this);
         this.graphicsComponent = new SurpriseGraphicsComponent(this);
+    }
+
+    public void setCollided(final boolean hasCollided) {
+        this.hasCollided = hasCollided;
+    }
+
+    public boolean hasCollided() {
+        return this.hasCollided;
     }
 
     /**
