@@ -55,12 +55,6 @@ public interface Entity {
     boolean isSolid();
 
     /**
-     * @return whether the entity is touching the ground
-     * @see Entity#isSolid()
-     */
-    boolean isOnGround();
-
-    /**
      * @return the physics component of the entity
      */
     default Optional<PhysicsComponent> getPhysicsComponent() {
