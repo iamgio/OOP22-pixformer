@@ -58,7 +58,7 @@ public interface Entity {
      * @param other other entity
      * @return distance between the two entities
      */
-    default double getDistanceFrom(Entity other) {
+    default double getDistanceFrom(final Entity other) {
         if (!getWorld().equals(other.getWorld())) {
             return Double.POSITIVE_INFINITY;
         }

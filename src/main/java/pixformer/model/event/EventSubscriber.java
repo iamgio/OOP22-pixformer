@@ -5,7 +5,7 @@ import pixformer.model.entity.Entity;
 import java.util.function.BiConsumer;
 
 /**
- * Event manager for what happens in the game, do specific action depending on what happened.
+ * Event subscriber for what happens in the game, do specific actions depending on what happened.
  */
 public interface EventSubscriber {
 

@@ -1,7 +1,7 @@
 package pixformer.model.entity;
 
 /**
- * A factory for entities.
+ * A factory for {@link Entity}.
  */
 public interface EntityFactory {
 

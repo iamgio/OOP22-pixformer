@@ -7,8 +7,10 @@ public interface Timer {
 
     /**
      * Start the counting of the time.
+     *
+     * @param time time quantity that have to pass
      */
-    void start();
+    void start(long time);
 
     /**
      * @return a bool representing if the timer has ended or not

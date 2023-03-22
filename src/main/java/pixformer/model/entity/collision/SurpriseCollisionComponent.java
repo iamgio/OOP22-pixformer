@@ -8,7 +8,8 @@ import pixformer.view.entity.SpritesGraphicsComponentFactory;
 import java.util.Set;
 
 /**
- * Collision component for the surprise block.
+ * A {@link CollisionComponent} component for the surprise block, specifying the behaviour
+ * when something collide with it.
  */
 public class SurpriseCollisionComponent extends CollisionComponent{
 

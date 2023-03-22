@@ -1,7 +1,7 @@
 package pixformer.common.time;
 
 /**
- * Simple Chronometer.
+ * Simple Chronometer with the basic functionality.
  */
 public interface Chronometer {
 
@@ -21,6 +21,8 @@ public interface Chronometer {
     void reset();
 
     /**
+     * Compare the chronometer with a time specific quantity.
+     *
      * @param time to compare
      * @return if the time in input is elapsed
      */

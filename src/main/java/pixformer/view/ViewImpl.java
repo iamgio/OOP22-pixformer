@@ -32,7 +32,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private TextRenderer scoreLabel;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
-    // private final CommandFactory commandFactory = new CommandFactory();
 
     /**
      * Initializes the default view.

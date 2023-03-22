@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 /**
- * Implementation of a game level.
+ * Implementation of a game {@link Level}.
  */
 public class LevelImpl implements Level {
 
