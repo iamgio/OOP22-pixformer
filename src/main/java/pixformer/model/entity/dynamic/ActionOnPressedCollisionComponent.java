@@ -29,7 +29,8 @@ public final class ActionOnPressedCollisionComponent extends CollisionComponent 
      * @return a {@code ActionOnPressedCollisionComponent} if the entity has a world
      */
     static Optional<CollisionComponent> createWithWorldFromEntityForDying(final MutableEntity entity) {
-        return entity.getWorld().map(world -> new ActionOnPressedCollisionComponent(entity, (killed, killer) -> world.killEntity(killed, killer)));
+        return entity.getWorld().map(world -> new ActionOnPressedCollisionComponent(entity,
+                (killed, killer) -> world.killEntity(killed, killer)));
     }
 
     /**

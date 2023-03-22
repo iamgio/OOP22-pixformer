@@ -19,7 +19,7 @@ import pixformer.model.modelinput.HorizontalModelInput;
 public final class TurtleKoopaInputComponent extends AIInputComponent {
 
     private static final double VELOCITY = 0.02;
-    private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> {};
+    private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> { };
 
     private final InputComponent wrappedInputComponent;
 
