@@ -78,9 +78,10 @@ public class WorldImpl implements World {
     }
 
     /**
-     * @return entities within the 'update range' from any player
+     * {@inheritDoc}
      */
-    private Stream<Entity> getEntitiesInUpdateRange() {
+    @Override
+    public Stream<Entity> getUpdatableEntities() {
         return this.getEntities().stream()
                 .filter(entity ->
                         getUserControlledEntities().stream()
@@ -135,7 +136,7 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.getEntitiesInUpdateRange().forEach(entity -> {
+        this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
             });
