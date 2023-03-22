@@ -20,11 +20,7 @@ import java.util.stream.Stream;
  */
 public class WorldImpl implements World {
 
-    /**
-     * The distance range from any player in which entities are updated.
-     */
-    private static final int UPDATE_RANGE = 8;
-
+    private final WorldOptions options;
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
     private final Set<Entity> toSpawnEntities;
@@ -36,8 +32,11 @@ public class WorldImpl implements World {
 
     /**
      * Create a new World.
+     *
+     * @param options world options that affect this world's behavior
      */
-    public WorldImpl() {
+    public WorldImpl(final WorldOptions options) {
+        this.options = options;
         this.entities = new HashSet<>();
         this.killedEntities = new HashSet<>();
         this.toSpawnEntities = new HashSet<>();
@@ -82,10 +81,14 @@ public class WorldImpl implements World {
      */
     @Override
     public Stream<Entity> getUpdatableEntities() {
+        if (this.options.updateRange() == WorldOptions.INFINITE_UPDATE_RANGE) {
+            return this.getEntities().stream();
+        }
+
         return this.getEntities().stream()
                 .filter(entity ->
                         getUserControlledEntities().stream()
-                                .anyMatch(player -> entity.getDistanceFrom(player) < UPDATE_RANGE)
+                                .anyMatch(player -> entity.getDistanceFrom(player) < this.options.updateRange())
                 );
     }
 

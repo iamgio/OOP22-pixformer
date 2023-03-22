@@ -25,7 +25,7 @@ public class LevelImpl implements Level {
      */
     public LevelImpl(final LevelData data) {
         this.data = data;
-        this.world = new WorldImpl();
+        this.world = new WorldImpl(WorldOptionsFactory.defaultOptions());
         this.players = new ArrayList<>();
     }
 

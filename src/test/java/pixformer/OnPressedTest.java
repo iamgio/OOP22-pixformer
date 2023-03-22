@@ -3,6 +3,7 @@ package pixformer;
 import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
@@ -30,7 +31,7 @@ final class OnPressedTest {
     private final EntityFactory factory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
 
     private World createPrisonAndFallingPlayer(final Entity entity) {
-        final World world = new WorldImpl();
+        final World world = new WorldImpl(WorldOptionsFactory.testOptions());
         /*
          * p
          * p
