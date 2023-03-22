@@ -1,11 +1,9 @@
 package pixformer.model;
 
-import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -15,11 +13,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The standard implementation of the game world.
  */
 public class WorldImpl implements World {
+
+    /**
+     * The distance range from any player in which entities are updated.
+     */
+    private static final int UPDATE_RANGE = 8;
 
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
@@ -27,6 +31,8 @@ public class WorldImpl implements World {
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
+
+    private Set<Entity> lazyUserControlledEntity;
 
     /**
      * Create a new World.
@@ -58,13 +64,28 @@ public class WorldImpl implements World {
 
     /**
      * {@inheritDoc}
+     * @implNote lazily evaluated
      */
     @Override
     public Set<Entity> getUserControlledEntities() {
-        return this.entities.stream()
-                .filter(entity -> entity.getInputComponent().isPresent())
-                .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
-                .collect(Collectors.toUnmodifiableSet());
+        if (this.lazyUserControlledEntity == null) {
+            this.lazyUserControlledEntity = this.entities.stream()
+                    .filter(entity -> entity.getInputComponent().isPresent())
+                    .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
+                    .collect(Collectors.toUnmodifiableSet());
+        }
+        return this.lazyUserControlledEntity;
+    }
+
+    /**
+     * @return entities within the 'update range' from any player
+     */
+    private Stream<Entity> getEntitiesInUpdateRange() {
+        return this.getEntities().stream()
+                .filter(entity ->
+                        getUserControlledEntities().stream()
+                                .anyMatch(player -> entity.getDistanceFrom(player) < UPDATE_RANGE)
+                );
     }
 
     /**
@@ -114,7 +135,7 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.getEntities().forEach(entity -> {
+        this.getEntitiesInUpdateRange().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
             });
