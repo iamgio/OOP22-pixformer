@@ -1,19 +1,20 @@
 package pixformer;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
-
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.Goomba;
+import pixformer.model.entity.EntityFactory;
+import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.Koopa;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Block;
+import pixformer.view.entity.NullGraphicsComponentFactory;
+
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests to check if the
@@ -24,7 +25,9 @@ final class OnPressedTest {
 
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
-    private static final double DT = SECONDS_TO_MILLIS / FPS * 30;
+    private static final double DT = (double) SECONDS_TO_MILLIS / FPS * 30;
+
+    private final EntityFactory factory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
 
     private World createPrisonAndFallingPlayer(final Entity entity) {
         final World world = new WorldImpl();
@@ -45,7 +48,7 @@ final class OnPressedTest {
 
     @Test
     void testIfGoombaDies() {
-        final Goomba goomba = new Goomba(0, 2);
+        final Entity goomba = factory.createGoomba(0, 2);
         final World world = createPrisonAndFallingPlayer(goomba);
         assertTrue(world.getEntities().contains(goomba));
         world.update(DT);
@@ -54,7 +57,7 @@ final class OnPressedTest {
 
     @Test
     void testIfKoopaChangesState() {
-        final Koopa koopa = new Koopa(0, 2);
+        final Koopa koopa = (Koopa) factory.createKoopa(0, 2);
         final World world = createPrisonAndFallingPlayer(koopa);
         assertTrue(koopa.isWalking());
         world.update(DT);
