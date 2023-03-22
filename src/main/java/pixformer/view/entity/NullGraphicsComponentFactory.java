@@ -59,6 +59,14 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent coin(Entity entity) {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GraphicsComponent goomba(final Entity entity) {
         return NULL_COMPONENT;
     }

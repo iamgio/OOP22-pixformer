@@ -30,6 +30,12 @@ public interface GraphicsComponentFactory {
     GraphicsComponent surpriseBlock(Entity entity);
 
     /**
+     * @param entity coin
+     * @return the graphics component for the coin
+     */
+    GraphicsComponent coin(Entity entity);
+
+    /**
      * @param entity target entity
      * @return a new Goomba graphics component
      */

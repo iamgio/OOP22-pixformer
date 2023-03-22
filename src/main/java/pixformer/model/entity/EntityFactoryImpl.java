@@ -3,10 +3,7 @@ package pixformer.model.entity;
 import pixformer.controller.deserialization.level.EntityType;
 import pixformer.model.entity.dynamic.Goomba;
 import pixformer.model.entity.dynamic.Koopa;
-import pixformer.model.entity.statics.Barrier;
-import pixformer.model.entity.statics.Block;
-import pixformer.model.entity.statics.Brick;
-import pixformer.model.entity.statics.Surprise;
+import pixformer.model.entity.statics.*;
 
 /**
  * {@inheritDoc}.
@@ -65,6 +62,15 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createBarrierBlock(final int x, final int y) {
         return new Barrier(x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @EntityType("coin")
+    @Override
+    public Entity createCoin(final int x, final int y) {
+        return new Coin(x, y, graphicsComponentFactory::coin);
     }
 
     /**
