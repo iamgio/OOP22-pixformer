@@ -15,7 +15,7 @@ import pixformer.model.entity.statics.Surprise;
 /**
  * {@inheritDoc}.
  */
-public class EntityFactoryImpl implements EntityFactory {
+public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
 
     private final GraphicsComponentFactory graphicsComponentFactory;
 
@@ -107,12 +107,18 @@ public class EntityFactoryImpl implements EntityFactory {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @EntityType("fire_flower")
     @Override
     public Entity createFireFlower(final int x, final int y) {
         return new FlowerPowerupEntity(x, y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @EntityType("mushroom")
     @Override
     public Entity createMushroom(final int x, final int y) {

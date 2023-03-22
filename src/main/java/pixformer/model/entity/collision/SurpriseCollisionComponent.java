@@ -1,7 +1,9 @@
 package pixformer.model.entity.collision;
 
-import pixformer.model.entity.statics.Brick;
+import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.entity.PowerUpFactory;
 import pixformer.model.entity.statics.Surprise;
+import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Set;
 
@@ -10,6 +12,8 @@ import java.util.Set;
  */
 public class SurpriseCollisionComponent extends CollisionComponent{
 
+    private final PowerUpFactory powerupFactory;
+
     /**
      * Simple constructor for the SurpriseCollisionComponent
      *
@@ -17,6 +21,7 @@ public class SurpriseCollisionComponent extends CollisionComponent{
      */
     public SurpriseCollisionComponent(final Surprise entity) {
         super(entity);
+        this.powerupFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
     }
 
     /**
@@ -33,7 +38,7 @@ public class SurpriseCollisionComponent extends CollisionComponent{
         }
         for (var collision : collisions) {
             if (collision.side() == CollisionSide.BOTTOM && entity.getWorld().isPresent() && !entity.hasCollided()) {
-                entity.getWorld().get().addEntityToSpawn(new Brick(20, 20));
+                entity.getWorld().get().addEntityToSpawn(powerupFactory.createMushroom(20, 20));
                 entity.setCollided(true);
             }
         }
