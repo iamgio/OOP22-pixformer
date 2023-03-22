@@ -3,8 +3,8 @@ package pixformer.model.entity.statics;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.*;
-import pixformer.view.entity.statics.BrickGraphicsComponent;
 
 import java.util.Optional;
 
@@ -23,11 +23,12 @@ public class Brick extends AbstractEntity implements DefaultRectangleBoundingBox
      * 
      * @param x X coordinate
      * @param y Y coordinate
+     * @param graphicsComponent graphics component of the brick
      */
-    public Brick(final double x, final double y) {
+    public Brick(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
         this.collisionComponent = new BrickCollisionComponent(this);
-        this.graphicsComponent = new BrickGraphicsComponent(this);
+        this.graphicsComponent = graphicsComponent.apply(this);
     }
 
     /**
