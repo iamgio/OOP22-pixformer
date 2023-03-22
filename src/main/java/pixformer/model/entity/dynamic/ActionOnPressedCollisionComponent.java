@@ -1,10 +1,5 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.BiConsumer;
-
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BiConsumerCollisionReactor;
@@ -12,13 +7,19 @@ import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.CollisionSide;
+import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * A collision component which makes its entity die when it collides from the
  * top with a Player.
  */
-public final class ActionOnPressedCollisionComponent extends CollisionComponent {
+public final class ActionOnPressedCollisionComponent extends SolidCollisionComponent {
 
     private final CollisionReactor reactor;
 
@@ -49,6 +50,7 @@ public final class ActionOnPressedCollisionComponent extends CollisionComponent 
 
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
+        super.update(dt, collisions);
         reactor.react(collisions);
     }
 
