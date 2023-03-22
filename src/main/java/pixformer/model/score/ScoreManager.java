@@ -19,4 +19,9 @@ public interface ScoreManager {
      */
     List<Integer> getAllScores();
 
+    /**
+     * @return the remaining coins in the game
+     */
+    int getRemainingCoins();
+
 }

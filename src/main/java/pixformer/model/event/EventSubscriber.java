@@ -2,7 +2,7 @@ package pixformer.model.event;
 
 import pixformer.model.entity.Entity;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * Event manager for what happens in the game, do specific action depending on what happened.
@@ -14,5 +14,5 @@ public interface EventSubscriber {
      *
      * @param consumer consumer subscribed to a specific event
      */
-    void addPlayerOnKill(Consumer<Entity> consumer);
+    void addPlayerOnKill(BiConsumer<Entity, Entity> consumer);
 }

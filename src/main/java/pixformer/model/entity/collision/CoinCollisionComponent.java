@@ -1,5 +1,6 @@
 package pixformer.model.entity.collision;
 
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Coin;
 
 import java.util.Set;
@@ -23,6 +24,10 @@ public class CoinCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(double dt, Set<Collision> collisions) {
-
+        for (var collision : collisions.stream().filter(x -> x.entity() instanceof Player).toList()) {
+            if (super.getEntity().getWorld().isPresent()) {
+                super.getEntity().getWorld().get().killEntity(super.getEntity(), collision.entity());
+            }
+        }
     }
 }
