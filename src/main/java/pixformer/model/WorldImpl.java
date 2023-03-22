@@ -13,11 +13,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The standard implementation of the game world.
  */
 public class WorldImpl implements World {
+
+    /**
+     * The distance range from any player in which entities are updated.
+     */
+    private static final int UPDATE_RANGE = 8;
 
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
@@ -72,6 +78,17 @@ public class WorldImpl implements World {
     }
 
     /**
+     * @return entities within the 'update range' from any player
+     */
+    private Stream<Entity> getEntitiesInUpdateRange() {
+        return this.getEntities().stream()
+                .filter(entity ->
+                        getUserControlledEntities().stream()
+                                .anyMatch(player -> entity.getDistanceFrom(player) < UPDATE_RANGE)
+                );
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -118,7 +135,7 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.getEntities().forEach(entity -> {
+        this.getEntitiesInUpdateRange().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
             });

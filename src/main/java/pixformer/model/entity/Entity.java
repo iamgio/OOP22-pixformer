@@ -61,6 +61,20 @@ public interface Entity {
     boolean isOnGround();
 
     /**
+     * @param other other entity
+     * @return distance between the two entities
+     */
+    default double getDistanceFrom(Entity other) {
+        if (!getWorld().equals(other.getWorld())) {
+            return Double.POSITIVE_INFINITY;
+        }
+
+        final double dx = getX() - other.getX();
+        final double dy = getY() - other.getY();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    /**
      * @return the physics component of the entity
      */
     default Optional<PhysicsComponent> getPhysicsComponent() {
