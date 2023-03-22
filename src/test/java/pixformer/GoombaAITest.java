@@ -1,16 +1,10 @@
 package pixformer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Optional;
-import java.util.function.DoublePredicate;
-import java.util.function.DoubleUnaryOperator;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
+import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.BoundingBox;
@@ -19,13 +13,19 @@ import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.InputComponent;
 
+import java.util.Optional;
+import java.util.function.DoublePredicate;
+import java.util.function.DoubleUnaryOperator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 final class GoombaAITest {
 
     private static final double X_BLOCK = -2;
     private static final double DELTA = 0.0001;
     private static final double STEP = 0.002;
     private static final double DT = 1;
-    private final World world = new WorldImpl();
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     // private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
     private final Entity goomba = new AbstractEntity(0, 0, 1, 1) {
 

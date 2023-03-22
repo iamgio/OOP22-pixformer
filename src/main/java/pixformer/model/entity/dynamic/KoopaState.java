@@ -15,7 +15,7 @@ public interface KoopaState extends MutableEntity {
     /**
      * @return true if the koopa is turtle, otherwise false.
      */
-    default public boolean isTurtle() {
+    default boolean isTurtle() {
         return !isWalking();
     }
 }

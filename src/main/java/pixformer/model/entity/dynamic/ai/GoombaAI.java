@@ -2,6 +2,7 @@ package pixformer.model.entity.dynamic.ai;
 
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
@@ -32,15 +33,29 @@ public class GoombaAI extends AIInputComponent {
      * @param velocity       the module of the velocity of the controlled entity.
      */
     public GoombaAI(final MutableEntity entity, final Consumer<Vector2D> velocitySetter, final double velocity) {
+        this(entity, velocitySetter, velocity, 
+            Entity::isSolid, 
+            HorizontalModelInput::left);
+    }
+
+    /**
+     * @param entity to be controlled.
+     * @param velocitySetter the entity setter for its velocity
+     * @param velocity the module of the velocity of the controlled entity
+     * @param whichEntities determines to which entity this should react
+     * @param initialBehaviour of the entity.
+     */
+    public GoombaAI(
+        final MutableEntity entity, 
+        final Consumer<Vector2D> velocitySetter, 
+        final double velocity,
+        final Predicate<Entity> whichEntities,
+        final Consumer<HorizontalModelInput> initialBehaviour) {
         super(entity);
         this.joystick = new HorizontalModelInputImpl(velocitySetter, velocity);
         reactor = new BiConsumerCollisionReactor(Map.of(
-                Entity::isSolid, (c, e) -> reactOnBlockCollision(c)));
-        initialBehaviour();
-    }
-
-    private void initialBehaviour() {
-        joystick.left();
+                whichEntities, (c, e) -> reactOnBlockCollision(c)));
+        initialBehaviour.accept(joystick);
     }
 
     @Override

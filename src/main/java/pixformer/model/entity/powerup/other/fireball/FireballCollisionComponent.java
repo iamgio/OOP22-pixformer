@@ -1,17 +1,18 @@
 package pixformer.model.entity.powerup.other.fireball;
 
-import java.util.Set;
-
 import pixformer.common.time.ChronometerImpl;
 import pixformer.model.World;
 import pixformer.model.entity.collision.Collision;
-import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
+
+import java.util.Set;
 
 /**
  * Implementation of CollisionComponent for a Player entity.
  */
-public class FireballCollisionComponent extends CollisionComponent {
+public class FireballCollisionComponent extends SolidCollisionComponent {
+
     static final long ALIVE_TIME = 3000;
 
     private final Fireball fireball;
@@ -38,6 +39,7 @@ public class FireballCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
+        super.update(dt, collisions);
 
         if (despawnCronometer.hasElapsed(ALIVE_TIME)) {
             world.dropEntity(fireball);

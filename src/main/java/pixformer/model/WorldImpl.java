@@ -20,11 +20,7 @@ import java.util.stream.Stream;
  */
 public class WorldImpl implements World {
 
-    /**
-     * The distance range from any player in which entities are updated.
-     */
-    private static final int UPDATE_RANGE = 8;
-
+    private final WorldOptions options;
     private final Set<Entity> entities;
     private final Set<Entity> killedEntities;
     private final Set<Entity> toSpawnEntities;
@@ -36,8 +32,11 @@ public class WorldImpl implements World {
 
     /**
      * Create a new World.
+     *
+     * @param options world options that affect this world's behavior
      */
-    public WorldImpl() {
+    public WorldImpl(final WorldOptions options) {
+        this.options = options;
         this.entities = new HashSet<>();
         this.killedEntities = new HashSet<>();
         this.toSpawnEntities = new HashSet<>();
@@ -78,13 +77,18 @@ public class WorldImpl implements World {
     }
 
     /**
-     * @return entities within the 'update range' from any player
+     * {@inheritDoc}
      */
-    private Stream<Entity> getEntitiesInUpdateRange() {
+    @Override
+    public Stream<Entity> getUpdatableEntities() {
+        if (this.options.updateRange() == WorldOptions.INFINITE_UPDATE_RANGE) {
+            return this.getEntities().stream();
+        }
+
         return this.getEntities().stream()
                 .filter(entity ->
                         getUserControlledEntities().stream()
-                                .anyMatch(player -> entity.getDistanceFrom(player) < UPDATE_RANGE)
+                                .anyMatch(player -> entity.getDistanceFrom(player) < this.options.updateRange())
                 );
     }
 
@@ -135,7 +139,7 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.getEntitiesInUpdateRange().forEach(entity -> {
+        this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
             });
@@ -161,40 +165,7 @@ public class WorldImpl implements World {
      * @param entity entity to update position of
      */
     private void updatePosition(final double dt, final MutableEntity entity) {
-        this.handleCollisions(entity);
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
-    }
-
-    /**
-     * Handles an entity's velocity and position in case of collisions width solid entities.
-     * @param entity entity to handle collisions for
-     */
-    private void handleCollisions(final MutableEntity entity) {
-        // Ground collision
-        if (entity.getVelocity().y() > 0 && collisionManager.isCollidingGround(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithY(0));
-            entity.setY(Math.floor(entity.getY())); // Fixes intersections.
-        }
-
-        // Ceiling collision
-        if (entity.getVelocity().y() < 0 && collisionManager.isCollidingCeiling(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithY(0));
-            entity.setY(Math.ceil(entity.getY()));
-        }
-
-        // Left collision
-        if (entity.getVelocity().x() < 0 && collisionManager.isCollidingLeftWall(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithX(0));
-            entity.setX(Math.ceil(entity.getX()));
-        }
-
-        // Right collision
-        if (entity.getVelocity().x() > 0 && collisionManager.isCollidingRightWall(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithX(0));
-            entity.setX(Math.floor(entity.getX()));
-        }
-
-        // TODO reduce repetitions
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
@@ -30,7 +31,7 @@ public class CollisionsTest {
 
     @BeforeEach
     void setup() {
-        this.world = new WorldImpl();
+        this.world = new WorldImpl(WorldOptionsFactory.testOptions());
         this.entity = new TestEntity(0, 0);
         world.spawnEntity(entity);
     }

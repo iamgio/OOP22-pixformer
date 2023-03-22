@@ -58,7 +58,7 @@ public final class GameLoopFactory {
             final double cameraPivotY = 0; // TODO might be something else?
             view.updateCamera(cameraPivotX, cameraPivotY);
 
-            world.getEntities().stream()
+            world.getUpdatableEntities()
                     .filter(DrawableEntity.class::isInstance)
                     .map(DrawableEntity.class::cast)
                     .forEach(entity -> {

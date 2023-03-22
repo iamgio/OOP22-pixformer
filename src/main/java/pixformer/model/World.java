@@ -3,10 +3,10 @@ package pixformer.model;
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.score.ScoreManager;
 
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * The environment where entities live, interact and die.
@@ -17,6 +17,11 @@ public interface World extends Updatable {
      * @return the entities living within this world
      */
     Set<Entity> getEntities();
+
+    /**
+     * @return entities within the 'update range' from any player
+     */
+    Stream<Entity> getUpdatableEntities();
 
     /**
      * @return the score manager of the game world

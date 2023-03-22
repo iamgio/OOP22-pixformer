@@ -1,7 +1,5 @@
 package pixformer.model.entity.dynamic;
 
-import java.util.Optional;
-
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
@@ -14,6 +12,8 @@ import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
+import java.util.Optional;
+
 /**
  * The implementation of the enemy Koopa. This class uses the two states of a
  * Koopa: walking and turtle.
@@ -21,7 +21,6 @@ import pixformer.view.entity.RectangleGraphicsComponent;
 public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private KoopaState currentKoopaState;
-    private World world;
 
     /**
      * Create a new Koopa.
@@ -44,8 +43,9 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
     }
 
     private void changeToTurtle() {
-        this.currentKoopaState = new TurtleKoopa(getX(), getY());
-        currentKoopaState.onSpawn(getWorld().get());
+        final KoopaState turtle = new TurtleKoopa(getX(), getY());
+        turtle.onSpawn(getWorld().get());
+        this.currentKoopaState = turtle;
     }
 
     @Override
@@ -80,17 +80,12 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
 
     @Override
     public Optional<World> getWorld() {
-        return Optional.of(world);
+        return currentKoopaState.getWorld();
     }
 
     @Override
     public boolean isSolid() {
         return currentKoopaState.isSolid();
-    }
-
-    @Override
-    public boolean isOnGround() {
-        return currentKoopaState.isOnGround();
     }
 
     @Override
@@ -140,8 +135,7 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
 
     @Override
     public void onSpawn(final World world) {
-        this.world = world;
-        currentKoopaState.onSpawn(getWorld().get());
+        currentKoopaState.onSpawn(world);
     }
 
 }
