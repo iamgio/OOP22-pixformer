@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.score.ScoreManager;
 
 import java.util.Set;
@@ -66,4 +67,11 @@ public interface World extends Updatable {
      * @return the handler of entity collisions for this world
      */
     EntityCollisionManager getCollisionManager();
+
+    /**
+     * End the game because someone have won.
+     *
+     * @param winner player who won the game
+     */
+    void endGame(Player winner);
 }

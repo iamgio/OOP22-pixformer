@@ -4,6 +4,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -132,6 +133,14 @@ public class WorldImpl implements World {
     @Override
     public EntityCollisionManager getCollisionManager() {
         return this.collisionManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endGame(Player winner) {
+        // TODO
     }
 
     /**
