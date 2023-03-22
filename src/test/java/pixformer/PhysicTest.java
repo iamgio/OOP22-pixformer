@@ -1,21 +1,21 @@
 package pixformer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
+import org.junit.jupiter.api.Test;
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.TestEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PhysicTest {
 
     private static final Vector2D gravity = new Vector2D(0, -0.00008);
 
-    private final World world = new WorldImpl();
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private Entity entity;
 
     @BeforeEach

@@ -1,16 +1,17 @@
 package pixformer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.TestEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScoreTest {
 
-    private final World world = new WorldImpl();
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private TestEntity a;
     private TestEntity b;
     private TestEntity c;
