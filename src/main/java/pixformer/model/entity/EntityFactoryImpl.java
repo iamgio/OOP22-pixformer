@@ -11,6 +11,8 @@ import pixformer.model.entity.statics.Barrier;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.entity.statics.Brick;
 import pixformer.model.entity.statics.Surprise;
+import pixformer.view.engine.Color;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 /**
  * {@inheritDoc}.
@@ -113,7 +115,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("fire_flower")
     @Override
     public Entity createFireFlower(final int x, final int y) {
-        return new FlowerPowerupEntity(x, y);
+        return new FlowerPowerupEntity(x, y, e -> new RectangleGraphicsComponent(e, new Color(1, 0, 0)));
     }
 
     /**
@@ -122,6 +124,6 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("mushroom")
     @Override
     public Entity createMushroom(final int x, final int y) {
-        return new MovingPowerupEntity(x, y, new Mushroom());
+        return new MovingPowerupEntity(x, y, new Mushroom(), e -> new RectangleGraphicsComponent(e, new Color(1, 0.5, 0)));
     }
 }
