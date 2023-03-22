@@ -135,14 +135,6 @@ public abstract class AbstractEntity implements MutableEntity {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean isOnGround() {
-        return this.world != null && this.world.getCollisionManager().isCollidingGround(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @OverridingMethodsMustInvokeSuper
     @Override
     public void onSpawn(final World world) {

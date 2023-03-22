@@ -161,40 +161,7 @@ public class WorldImpl implements World {
      * @param entity entity to update position of
      */
     private void updatePosition(final double dt, final MutableEntity entity) {
-        this.handleCollisions(entity);
         entity.setX(entity.getX() + dt * entity.getVelocity().x());
         entity.setY(entity.getY() + dt * entity.getVelocity().y());
-    }
-
-    /**
-     * Handles an entity's velocity and position in case of collisions width solid entities.
-     * @param entity entity to handle collisions for
-     */
-    private void handleCollisions(final MutableEntity entity) {
-        // Ground collision
-        if (entity.getVelocity().y() > 0 && collisionManager.isCollidingGround(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithY(0));
-            entity.setY(Math.floor(entity.getY())); // Fixes intersections.
-        }
-
-        // Ceiling collision
-        if (entity.getVelocity().y() < 0 && collisionManager.isCollidingCeiling(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithY(0));
-            entity.setY(Math.ceil(entity.getY()));
-        }
-
-        // Left collision
-        if (entity.getVelocity().x() < 0 && collisionManager.isCollidingLeftWall(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithX(0));
-            entity.setX(Math.ceil(entity.getX()));
-        }
-
-        // Right collision
-        if (entity.getVelocity().x() > 0 && collisionManager.isCollidingRightWall(entity)) {
-            entity.setVelocity(entity.getVelocity().copyWithX(0));
-            entity.setX(Math.floor(entity.getX()));
-        }
-
-        // TODO reduce repetitions
     }
 }

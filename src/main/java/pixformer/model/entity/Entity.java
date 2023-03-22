@@ -55,12 +55,6 @@ public interface Entity {
     boolean isSolid();
 
     /**
-     * @return whether the entity is touching the ground
-     * @see Entity#isSolid()
-     */
-    boolean isOnGround();
-
-    /**
      * @param other other entity
      * @return distance between the two entities
      */

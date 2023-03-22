@@ -1,6 +1,5 @@
 package pixformer.model.entity.dynamic.player;
 
-import java.util.Optional;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
@@ -10,9 +9,11 @@ import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.powerups.FireFlower;
 import pixformer.model.entity.powerup.powerups.Mushroom;
+import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
-import pixformer.model.input.InputComponent;
+
+import java.util.Optional;
 
 /**
  * The class manages the character used by the player.
@@ -134,6 +135,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public boolean isSprinting() {
         return isSprinting;
+    }
+
+    /**
+     * @return true if the player is touching ground otherwise false.
+     */
+    public boolean isOnGround() {
+        return collisionComponent.getIsOnGround();
     }
 
     /**

@@ -45,47 +45,4 @@ public class EntityCollisionManagerImpl implements EntityCollisionManager {
                 .flatMap(Optional::stream)
                 .collect(Collectors.toUnmodifiableSet());
     }
-
-    /**
-     * @param entity entity to check collisions for
-     * @param side collision side to check collisions for
-     * @return whether the entity is colliding a solid entity on the given side.
-     */
-    private boolean isCollingSolidEntity(Entity entity, CollisionSide side) {
-        return this.findCollisionsFor(entity).stream()
-                .filter(collision -> collision.side() == side)
-                .anyMatch(collision -> collision.entity().isSolid());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isCollidingGround(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.BOTTOM);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isCollidingCeiling(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.TOP);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isCollidingRightWall(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.LEFT); // TODO switch sides
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isCollidingLeftWall(final Entity entity) {
-        return this.isCollingSolidEntity(entity, CollisionSide.RIGHT); // TODO switch sides
-    }
 }
