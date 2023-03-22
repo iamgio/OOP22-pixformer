@@ -27,6 +27,38 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent tileBlock(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent grassBlock(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent brickBlock(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent surpriseBlock(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GraphicsComponent goomba(final Entity entity) {
         return NULL_COMPONENT;
     }

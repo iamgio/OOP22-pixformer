@@ -8,6 +8,9 @@ import pixformer.view.engine.RendererFactory;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+/**
+ * Graphics component for static entities in the game.
+ */
 public abstract class StaticGraphicsComponent extends GraphicsComponent {
 
     /**
@@ -31,7 +34,7 @@ public abstract class StaticGraphicsComponent extends GraphicsComponent {
 
     /**
      * @param factory the factory to create renderers from
-     * @return a list of renderers to apply at the entity
+     * @return the renderer to apply at the entity
      */
     protected abstract Renderer getRenderer(RendererFactory factory);
 }

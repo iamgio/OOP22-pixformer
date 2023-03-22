@@ -1,10 +1,14 @@
 package pixformer.view.entity.statics;
 
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.statics.Surprise;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * Graphics component for the surprise block in the game.
+ */
 public class SurpriseGraphicsComponent extends StaticGraphicsComponent {
 
     private final Surprise surprise;
@@ -14,9 +18,9 @@ public class SurpriseGraphicsComponent extends StaticGraphicsComponent {
      *
      * @param entity entity with this graphic component
      */
-    public SurpriseGraphicsComponent(final Surprise entity) {
+    public SurpriseGraphicsComponent(final Entity entity) {
         super(entity);
-        this.surprise = entity;
+        this.surprise = entity instanceof Surprise ? (Surprise) entity : null;
     }
 
     /**

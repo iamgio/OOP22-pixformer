@@ -1,10 +1,13 @@
 package pixformer.view.entity.statics;
 
-import pixformer.model.entity.statics.Brick;
+import pixformer.model.entity.Entity;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * Graphics component for the brick in the game.
+ */
 public class BrickGraphicsComponent extends StaticGraphicsComponent {
 
     /**
@@ -12,7 +15,7 @@ public class BrickGraphicsComponent extends StaticGraphicsComponent {
      *
      * @param entity entity with this graphic component
      */
-    public BrickGraphicsComponent(final Brick entity) {
+    public BrickGraphicsComponent(final Entity entity) {
         super(entity);
     }
 

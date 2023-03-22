@@ -1,10 +1,13 @@
 package pixformer.view.entity.statics;
 
-import pixformer.model.entity.statics.Block;
+import pixformer.model.entity.Entity;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * Graphics component for the generic block in the game.
+ */
 public class BlockGraphicsComponent extends StaticGraphicsComponent {
 
     /**
@@ -12,7 +15,7 @@ public class BlockGraphicsComponent extends StaticGraphicsComponent {
      *
      * @param entity entity with this graphic component
      */
-    public BlockGraphicsComponent(final Block entity) {
+    public BlockGraphicsComponent(final Entity entity) {
         super(entity);
     }
 
