@@ -1,5 +1,6 @@
 package pixformer;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -48,7 +49,7 @@ final class OnPressedTest {
         final World world = createPrisonAndFallingPlayer(goomba);
         assertTrue(world.getEntities().contains(goomba));
         world.update(DT);
-        assertTrue(!world.getEntities().contains(goomba));
+        assertFalse(world.getEntities().contains(goomba));
     }
 
     @Test

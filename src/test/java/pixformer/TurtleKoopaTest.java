@@ -1,5 +1,6 @@
 package pixformer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ class TurtleKoopaTest {
         final TurtleKoopa koopa = new TurtleKoopa(1, 0);
         world.spawnEntity(new Player(0, 0, 1, 1, 0));
         world.spawnEntity(koopa);
-        assertTrue(koopa.getVelocity().x() == 0);
+        assertEquals(koopa.getVelocity().x(), 0);
         world.update(1);
         assertTrue(koopa.getVelocity().x() > 0);
     }
