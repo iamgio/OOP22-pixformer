@@ -28,7 +28,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("block")
     @Override
     public Entity createTileBlock(final int x, final int y) {
-        return new Block(x, y);
+        return new Block(x, y, graphicsComponentFactory::tileBlock);
     }
 
     /**
@@ -37,7 +37,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("grass")
     @Override
     public Entity createGrassBlock(final int x, final int y) {
-        return new Block(x, y);
+        return new Block(x, y, graphicsComponentFactory::grassBlock);
     }
 
     /**
@@ -46,7 +46,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("brick")
     @Override
     public Entity createBrickBlock(final int x, final int y) {
-        return new Brick(x, y);
+        return new Brick(x, y, graphicsComponentFactory::brickBlock);
     }
 
     /**
@@ -55,7 +55,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @EntityType("surprise")
     @Override
     public Entity createSurpriseBlock(final int x, final int y) {
-        return new Surprise(x, y);
+        return new Surprise(x, y, graphicsComponentFactory::surpriseBlock);
     }
 
     /**
