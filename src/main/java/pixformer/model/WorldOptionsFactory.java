@@ -8,7 +8,7 @@ public final class WorldOptionsFactory {
     /**
      * The distance range from any player in which entities are updated.
      */
-    private static final int DEFAULT_UPDATE_RANGE = 8;
+    private static final int DEFAULT_UPDATE_RANGE = 30;
 
     /**
      * @return the default options for visual gameplay
