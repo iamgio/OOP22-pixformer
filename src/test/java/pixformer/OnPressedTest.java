@@ -19,7 +19,7 @@ import pixformer.model.entity.statics.Block;
  * {@link pixformer.model.entity.dynamic.ActionOnPressedCollisionComponent}
  * works.
  */
-public class OnPressedTest {
+final class OnPressedTest {
 
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
