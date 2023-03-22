@@ -21,7 +21,6 @@ import pixformer.view.entity.RectangleGraphicsComponent;
 public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private KoopaState currentKoopaState;
-    private World world;
 
     /**
      * Create a new Koopa.
@@ -44,8 +43,9 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
     }
 
     private void changeToTurtle() {
-        this.currentKoopaState = new TurtleKoopa(getX(), getY());
-        currentKoopaState.onSpawn(getWorld().get());
+        final KoopaState turtle = new TurtleKoopa(getX(), getY());
+        turtle.onSpawn(getWorld().get());
+        this.currentKoopaState = turtle;
     }
 
     @Override
@@ -80,7 +80,7 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
 
     @Override
     public Optional<World> getWorld() {
-        return Optional.of(world);
+        return currentKoopaState.getWorld();
     }
 
     @Override
@@ -140,8 +140,7 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
 
     @Override
     public void onSpawn(final World world) {
-        this.world = world;
-        currentKoopaState.onSpawn(getWorld().get());
+        currentKoopaState.onSpawn(world);
     }
 
 }

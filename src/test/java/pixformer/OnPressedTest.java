@@ -1,5 +1,6 @@
 package pixformer;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -19,7 +20,7 @@ import pixformer.model.entity.statics.Block;
  * {@link pixformer.model.entity.dynamic.ActionOnPressedCollisionComponent}
  * works.
  */
-public class OnPressedTest {
+final class OnPressedTest {
 
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
@@ -48,7 +49,7 @@ public class OnPressedTest {
         final World world = createPrisonAndFallingPlayer(goomba);
         assertTrue(world.getEntities().contains(goomba));
         world.update(DT);
-        assertTrue(!world.getEntities().contains(goomba));
+        assertFalse(world.getEntities().contains(goomba));
     }
 
     @Test

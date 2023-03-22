@@ -3,7 +3,6 @@ package pixformer.model.entity.collision;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
@@ -26,7 +25,7 @@ public final class BiConsumerCollisionReactor implements CollisionReactor {
      *                  actual reaction to the collision.
      */
     public BiConsumerCollisionReactor(final Map<Predicate<Entity>, BiConsumer<CollisionSide, Entity>> reactions) {
-        this.reactions = reactions;
+        this.reactions = new HashMap<>(reactions);
     }
 
     @Override
