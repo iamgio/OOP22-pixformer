@@ -11,12 +11,26 @@ import java.util.Set;
  */
 public class SolidCollisionComponent extends CollisionComponent {
 
+    private static final double DEFAULT_FRICTION = 1;
+
+    private final double friction;
+
+    /**
+     * Initializes a solid collision component.
+     * @param entity target entity
+     * @param friction friction on the entity when touching the ground
+     */
+    public SolidCollisionComponent(final MutableEntity entity, final double friction) {
+        super(entity);
+        this.friction = friction;
+    }
+
     /**
      * Initializes a solid collision component.
      * @param entity target entity
      */
     public SolidCollisionComponent(final MutableEntity entity) {
-        super(entity);
+        this(entity, DEFAULT_FRICTION);
     }
 
     /**
@@ -69,6 +83,8 @@ public class SolidCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         final MutableEntity entity = super.getEntity();
+
+        entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * this.friction));
 
         // Ground collision
         if (entity.getVelocity().y() > 0 && isCollidingGround(collisions)) {
