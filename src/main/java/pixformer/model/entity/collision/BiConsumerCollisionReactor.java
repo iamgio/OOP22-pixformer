@@ -26,7 +26,7 @@ public final class BiConsumerCollisionReactor implements CollisionReactor {
      *                  actual reaction to the collision.
      */
     public BiConsumerCollisionReactor(final Map<Predicate<Entity>, BiConsumer<CollisionSide, Entity>> reactions) {
-        this.reactions = reactions;
+        this.reactions = new HashMap<>(reactions);
     }
 
     @Override
