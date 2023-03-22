@@ -11,7 +11,7 @@ import pixformer.model.entity.dynamic.TurtleKoopa;
 import pixformer.model.entity.dynamic.player.Player;
 
 class TurtleKoopaTest {
-    
+
     @Test
     void testTurtleMovesBecauseOfPlayer() {
         final World world = new WorldImpl();
