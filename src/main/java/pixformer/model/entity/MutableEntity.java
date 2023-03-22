@@ -3,7 +3,7 @@ package pixformer.model.entity;
 import pixformer.common.Vector2D;
 
 /**
- * An entity whose state can be modified.
+ * An {@link Entity} whose state, position and dimension can be modified.
  */
 public interface MutableEntity extends Entity {
 

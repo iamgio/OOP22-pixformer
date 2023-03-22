@@ -5,7 +5,8 @@ import pixformer.model.entity.MutableEntity;
 import java.util.Set;
 
 /**
- * Collision component for the brick in the game.
+ * A {@link CollisionComponent} component for the brick in the game, specifying behaviours
+ * when something collide with it.
  */
 public class BrickCollisionComponent extends CollisionComponent {
 

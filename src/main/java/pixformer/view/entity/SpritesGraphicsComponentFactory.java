@@ -30,6 +30,9 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
         return new GrassGraphicsComponent(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GraphicsComponent brickBlock(Entity entity) {
         return new BrickGraphicsComponent(entity);

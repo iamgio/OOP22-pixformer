@@ -1,5 +1,8 @@
 package pixformer.model.entity;
 
+/**
+ * Factory for {@link pixformer.model.entity.powerup.PowerUp}.
+ */
 public interface PowerUpFactory {
 
     /**

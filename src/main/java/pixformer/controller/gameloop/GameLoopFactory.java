@@ -16,8 +16,8 @@ import java.util.Set;
  */
 public final class GameLoopFactory {
 
-    private static final int SECONDS_TO_MILLIS = 1_000;
-    private static final int FPS = 30;
+    private static final int SECONDS_TO_MILLIS = 1_000; // millis in a second
+    private static final int FPS = 30; // in-game fps
 
     private final Wrapper<Level> level;
     private final Wrapper<View> view;

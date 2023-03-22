@@ -6,12 +6,12 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.components.Component;
 
 /**
- * {@inheritDoc}.
+ * Physic component for specific {@link pixformer.model.entity.Entity}, which
+ * modify the behaviour of the entity based on the in-game physic.
  */
 public class PhysicsComponent extends Component<MutableEntity> implements Updatable {
 
-    private static final double GRAVITY = 0.00008;
-    private static final double FRICTION = 0.978;
+    private static final double GRAVITY = 0.00008; // gravity force
     private final Vector2D force;
 
     /**
@@ -31,8 +31,5 @@ public class PhysicsComponent extends Component<MutableEntity> implements Updata
     public void update(final double dt) {
         final MutableEntity entity = super.getEntity();
         entity.setVelocity(entity.getVelocity().sum(force));
-        /*if (entity.isOnGround() && entity instanceof Player) {
-            entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * FRICTION));
-        }*/
     }
 }

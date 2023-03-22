@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 /**
+ * {@inheritDoc}.
  * Event manager to implements multiple listeners for the events.
  */
 public class EventManager implements EventSubscriber, EventHandler {

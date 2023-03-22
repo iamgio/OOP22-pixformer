@@ -5,7 +5,7 @@ import pixformer.model.entity.Entity;
 import java.util.List;
 
 /**
- * Class to manage the player's score.
+ * Class to manage multiple {@link Score} for multiple player.
  */
 public interface ScoreManager {
 

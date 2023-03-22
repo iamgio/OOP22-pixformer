@@ -6,7 +6,8 @@ import pixformer.model.entity.statics.Coin;
 import java.util.Set;
 
 /**
- * Collision component for the in-game coin.
+ * A {@link CollisionComponent} component for the in-game coin, specifying behaviours
+ * when something collide with it.
  */
 public class CoinCollisionComponent extends CollisionComponent {
 
