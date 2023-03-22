@@ -1,11 +1,9 @@
 package pixformer.model;
 
-import pixformer.common.Vector2D;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -27,6 +25,8 @@ public class WorldImpl implements World {
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
+
+    private Set<Entity> lazyUserControlledEntity;
 
     /**
      * Create a new World.
@@ -58,13 +58,17 @@ public class WorldImpl implements World {
 
     /**
      * {@inheritDoc}
+     * @implNote lazily evaluated
      */
     @Override
     public Set<Entity> getUserControlledEntities() {
-        return this.entities.stream()
-                .filter(entity -> entity.getInputComponent().isPresent())
-                .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
-                .collect(Collectors.toUnmodifiableSet());
+        if (this.lazyUserControlledEntity == null) {
+            this.lazyUserControlledEntity = this.entities.stream()
+                    .filter(entity -> entity.getInputComponent().isPresent())
+                    .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
+                    .collect(Collectors.toUnmodifiableSet());
+        }
+        return this.lazyUserControlledEntity;
     }
 
     /**
