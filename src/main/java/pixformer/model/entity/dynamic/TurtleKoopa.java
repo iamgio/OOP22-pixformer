@@ -6,20 +6,21 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 
 /**
  * The state of the koopa when it is a turtle.
  */
 public final class TurtleKoopa extends AbstractEntity implements KoopaState, DefaultRectangleBoundingBoxEntity {
-
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
     private final InputComponent inputComponent;
+    private final PhysicsComponent physicsComponent = new PhysicsComponent(this);
 
     /**
      * Create a new TurtleKoopa.
-     * 
+     *
      * @param x its initial x position
      * @param y its initial y position.
      */
@@ -41,6 +42,10 @@ public final class TurtleKoopa extends AbstractEntity implements KoopaState, Def
     @Override
     public Optional<InputComponent> getInputComponent() {
         return Optional.of(inputComponent);
+    }
+    @Override
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(physicsComponent);
     }
 
 }
