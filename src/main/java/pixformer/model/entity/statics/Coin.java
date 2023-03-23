@@ -8,10 +8,12 @@ import pixformer.model.entity.collision.CoinCollisionComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidEntity;
+import pixformer.view.engine.Color;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
 
-public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity  {
+public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
 
     private static final int HEIGHT = 2;
     private static final int WIDTH = 2;

@@ -15,6 +15,6 @@ public class LevelMock extends LevelImpl {
      */
     public LevelMock() {
         super(new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory()))
-                .deserialize(Level.class.getResourceAsStream("/levels/test1.json")));
+                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")));
     }
 }
