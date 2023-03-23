@@ -1,22 +1,22 @@
 package pixformer.model.entity.collision;
 
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Flag;
+import pixformer.model.entity.statics.Pole;
 
 import java.util.Set;
 
 /**
- * Flag collision component, it manages all the interaction with the flag (or pole)
+ * A {@link CollisionComponent}, it manages all the interaction with the {@link Pole}
  * and specify all behaviours.
  */
-public class FlagCollisionComponent extends CollisionComponent {
+public class PoleCollisionComponent extends CollisionComponent {
 
     /**
      * Simple constructor for the FlagCollisionComponent.
      *
      * @param entity target entity for the component
      */
-    public FlagCollisionComponent(final Flag entity) {
+    public PoleCollisionComponent(final Pole entity) {
         super(entity);
     }
 
