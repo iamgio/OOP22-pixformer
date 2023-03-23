@@ -1,8 +1,10 @@
 package pixformer.model.entity.dynamic;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.input.InputComponent;
@@ -16,24 +18,22 @@ public final class TurtleKoopa extends AbstractEntity implements KoopaState, Def
     private static final double HEIGHT = 1;
 
     private final InputComponent inputComponent;
-    private final PhysicsComponent physicsComponent = new PhysicsComponent(this);
+    private final PhysicsComponent physicsComponent;
+    private final CollisionComponent collisionComponent;
 
     /**
      * Create a new TurtleKoopa.
      *
      * @param x its initial x position
      * @param y its initial y position.
+     * @param die called by passing the killer entity, it kills this entity.
      */
-    public TurtleKoopa(final double x, final double y) {
+    public TurtleKoopa(final double x, final double y, final Consumer<Entity> die) {
         super(x, y, WIDTH, HEIGHT);
         inputComponent = new TurtleKoopaInputComponent(this);
+        physicsComponent = new PhysicsComponent(this);
+        collisionComponent = new TurtleKoopaCollisionComponent(this, die);
     }
-
-    @Override
-    public Optional<CollisionComponent> getCollisionComponent() {
-        return ActionOnPressedCollisionComponent.createWithWorldFromEntityForDying(this);
-    }
-
     @Override
     public boolean isWalking() {
         return false;
@@ -46,6 +46,10 @@ public final class TurtleKoopa extends AbstractEntity implements KoopaState, Def
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
+    }
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
     }
 
 }
