@@ -16,4 +16,15 @@ public interface Score {
      * @param points points to add
      */
     void addPoints(int points);
+
+    /**
+     * @return the remaining coins to get in the game
+     */
+    int getRemainingCoins();
+
+    /**
+     * Method to update the coins in the game, used when a player grab
+     * a coin in the game.
+     */
+    void grabCoin();
 }

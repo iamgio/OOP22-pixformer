@@ -13,9 +13,8 @@ import java.util.Map;
  */
 public class ScoreManagerImpl implements ScoreManager {
     private static final int DEFAULT_SCORE_INCREMENT = 100;
-    private static final int DEFAULT_COINS = 3;
+    private static final int DEFAULT_REMAINING_COINS = 3;
     private final Map<Entity, Score> scoreMap;
-    private int coinsNumber;
 
     /**
      * Constructor for the class.
@@ -24,7 +23,6 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     public ScoreManagerImpl(final EventSubscriber eventSubscriber) {
         this.scoreMap = new HashMap<>();
-        this.coinsNumber = DEFAULT_COINS;
         eventSubscriber.addPlayerOnKill(this::increaseScore);
     }
 
@@ -40,7 +38,7 @@ public class ScoreManagerImpl implements ScoreManager {
             scoreMap.put(player, new ScoreImpl(DEFAULT_SCORE_INCREMENT));
         }
         if (entity instanceof Coin) {
-            this.coinsNumber--;
+            scoreMap.get(player).grabCoin();
         }
     }
 
@@ -60,9 +58,15 @@ public class ScoreManagerImpl implements ScoreManager {
         return this.scoreMap.values().stream().map(Score::getPoints).toList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getRemainingCoins() {
-        return this.coinsNumber;
+        return this.scoreMap.values().stream()
+                .map(Score::getRemainingCoins)
+                .filter(i -> i > 0)
+                .reduce(Integer::sum).orElse(DEFAULT_REMAINING_COINS);
     }
 
 }
