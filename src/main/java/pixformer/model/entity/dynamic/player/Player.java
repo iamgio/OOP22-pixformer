@@ -118,9 +118,11 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (this.powerup.isEmpty()) {
-            this.powerup = Optional.of(new PowerUp(powerupBehaviour));
-        } else if (powerupBehaviour.getPriority() >= this.powerup.get().getBehaviour().getPriority()) {
+        if (powerup.isEmpty()) {
+            powerup = Optional.of(new PowerUp(powerupBehaviour));
+        } else if (powerupBehaviour.getPriority() == this.powerup.get().getBehaviour().getPriority()) {
+            powerup.get().setBehaviour(powerupBehaviour);
+        } else if (powerupBehaviour.getPriority() > this.powerup.get().getBehaviour().getPriority()) {
             this.powerup = Optional.of(new PowerUp(powerupBehaviour, powerup));
         }
     }
