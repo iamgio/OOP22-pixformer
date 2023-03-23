@@ -8,6 +8,8 @@ import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.PoleCollisionComponent;
 import pixformer.model.entity.collision.SolidEntity;
+import pixformer.view.engine.Color;
+import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
 
@@ -39,7 +41,7 @@ public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxE
      */
     @Override
     public GraphicsComponent getGraphicsComponent() {
-        return null;
+        return this.graphicsComponent;
     }
 
     /**
