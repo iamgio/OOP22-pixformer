@@ -1,0 +1,87 @@
+{
+  "name": "First level trial",
+  "spawnPointX": 1,
+  "spawnPointY": 2,
+  "entities": [
+    {
+      "type": "grass",
+      "x": 5,
+      "y": 32,
+      "macro": {
+        "type": "fill",
+        "width": 40,
+        "height": 1
+      }
+    },
+    {
+      "type": "block",
+      "x": 11,
+      "y": 31
+    },
+    {
+      "type": "block",
+      "x": 12,
+      "y": 30,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 2
+      }
+    },
+    {
+      "type": "block",
+      "x": 13,
+      "y": 29,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "type": "block",
+      "x": 14,
+      "y": 28,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 4
+      }
+    },
+    {
+      "type": "brick",
+      "x": 19,
+      "y": 26,
+      "macro": {
+        "type": "fill",
+        "width": 3,
+        "height": 1
+      }
+    },
+    {
+      "type": "surprise",
+      "x": 22,
+      "y": 26
+    },
+    {
+      "type": "brick",
+      "x": 23,
+      "y": 26,
+      "macro": {
+        "type": "fill",
+        "width": 2,
+        "height": 1
+      }
+    },
+    {
+      "type": "coin",
+      "x": 29,
+      "y": 29
+    },
+    {
+      "type": "pole",
+      "x": 42,
+      "y": 22
+    }
+  ]
+}
