@@ -37,11 +37,11 @@ public class SurpriseCollisionComponent extends CollisionComponent{
         } else {
             return;
         }
-        for (var collision : collisions) {
+        collisions.forEach(collision -> {
             if (collision.side() == CollisionSide.BOTTOM && entity.getWorld().isPresent() && !entity.hasCollided()) {
-                entity.getWorld().get().addEntityToSpawn(powerupFactory.createMushroom(20, 20));
+                entity.getWorld().get().addEntityToSpawn(powerupFactory.createMushroom((int) super.getEntity().getX(), (int) super.getEntity().getY() - 1));
                 entity.setCollided(true);
             }
-        }
+        });
     }
 }
