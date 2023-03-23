@@ -24,10 +24,10 @@ public class BrickCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
-        for (var collision : collisions) {
+        collisions.forEach(collision -> {
             if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
                 super.getEntity().getWorld().get().dropEntity(this.getEntity());
             }
-        }
+        });
     }
 }
