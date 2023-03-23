@@ -4,7 +4,9 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.powerups.FireFlower;
@@ -21,6 +23,9 @@ public final class FlowerPowerupEntity extends AbstractEntity implements Physica
     private static final double HEIGHT = 1;
 
     private final GraphicsComponent graphicsComponent;
+    private final PhysicsComponent physicsComponent = new PhysicsComponent(this);
+    private final CollisionComponent collisionComponent = new SolidCollisionComponent(this);
+    private final PowerupBehaviour powerupBehaviour = new FireFlower();
     /**
      * Constructor for the AbstractEntity.
      *
@@ -34,7 +39,7 @@ public final class FlowerPowerupEntity extends AbstractEntity implements Physica
 
     @Override
     public PowerupBehaviour getPowerupBehaviour() {
-        return new FireFlower();
+        return powerupBehaviour;
     }
 
     @Override
@@ -44,6 +49,11 @@ public final class FlowerPowerupEntity extends AbstractEntity implements Physica
 
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
-        return Optional.of(new PhysicsComponent(this));
+        return Optional.of(physicsComponent);
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
     }
 }
