@@ -13,7 +13,7 @@ import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
 
-public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity  {
+public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
 
     private static final int HEIGHT = 2;
     private static final int WIDTH = 2;
