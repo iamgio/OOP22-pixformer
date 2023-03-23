@@ -1,5 +1,6 @@
 package pixformer.model.entity.collision;
 
+import pixformer.model.World;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.PowerUpFactory;
 import pixformer.model.entity.dynamic.player.Player;
@@ -42,7 +43,12 @@ public class SurpriseCollisionComponent extends CollisionComponent{
                 .filter(collision -> collision.entity() instanceof Player && collision.side() == CollisionSide.BOTTOM)
                 .forEach(collision -> {
                     if (entity.getWorld().isPresent() && !entity.hasCollided()) {
-                        entity.getWorld().get().addEntityToSpawn(powerupFactory.createMushroom((int) super.getEntity().getX(), (int) super.getEntity().getY() - 1));
+                        World world = entity.getWorld().get();
+                        if (((Player) collision.entity()).getPowerup().isEmpty()) {
+                            world.addEntityToSpawn(powerupFactory.createMushroom((int) entity.getX(), (int) entity.getY() - 1));
+                        } else {
+                            world.addEntityToSpawn(powerupFactory.createFireFlower((int) entity.getX(), (int) entity.getY() - 1));
+                        }
                         entity.setCollided(true);
                     }
         });
