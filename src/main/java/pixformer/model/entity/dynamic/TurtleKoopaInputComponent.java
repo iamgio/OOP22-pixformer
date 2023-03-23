@@ -2,7 +2,6 @@ package pixformer.model.entity.dynamic;
 
 import java.util.function.Consumer;
 
-import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
