@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * In game flag entity, representing the end of the level
  */
-public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
+public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity {
 
     private static final int HEIGHT = 10;
     private static final int WIDTH = 1;
@@ -49,6 +49,6 @@ public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxE
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.empty();
+        return Optional.of(this.collisionComponent);
     }
 }
