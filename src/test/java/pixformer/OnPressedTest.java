@@ -41,9 +41,9 @@ final class OnPressedTest {
         Set.of(
                 entity,
                 new Player(0, 0, 1, 2, 0),
-                new Block(-1, 2),
-                new Block(1, 2),
-                new Block(0, 3)).forEach(world::spawnEntity);
+                factory.createTileBlock(-1, 2),
+                factory.createTileBlock(1, 2),
+                factory.createTileBlock(0, 3)).forEach(world::spawnEntity);
         return world;
     }
 
