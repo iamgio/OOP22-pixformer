@@ -43,8 +43,9 @@ public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangle
     }
 
     private void changeToTurtle() {
-        final KoopaState turtle = new TurtleKoopa(getX(), getY());
-        turtle.onSpawn(getWorld().get());
+        final World world = getWorld().get();
+        final KoopaState turtle = new TurtleKoopa(getX(), getY() + getHeight() - 1, killer -> world.killEntity(this, killer));
+        turtle.onSpawn(world);
         this.currentKoopaState = turtle;
     }
 
