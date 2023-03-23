@@ -172,6 +172,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     @Override
     public Optional<PowerupBehaviour> getPowerupBehaviour() {
-        return Optional.of(powerup.get().getBehaviour());
+        return powerup.isPresent() ? Optional.of(powerup.get().getBehaviour()) : Optional.empty();
     }
 }
