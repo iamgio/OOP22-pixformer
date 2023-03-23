@@ -48,7 +48,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerup = Optional.of(new PowerUp(new FireFlower()));
+        this.powerup = Optional.of(new PowerUp(new FireFlower(), Optional.of(new PowerUp(new Mushroom()))));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
@@ -121,7 +121,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         if (this.powerup.isEmpty()) {
             this.powerup = Optional.of(new PowerUp(powerupBehaviour));
         } else if (powerupBehaviour.getPriority() >= this.powerup.get().getBehaviour().getPriority()) {
-            this.powerup = Optional.of(new PowerUp(powerupBehaviour));
+            this.powerup = Optional.of(new PowerUp(powerupBehaviour, powerup));
         }
     }
 
@@ -150,13 +150,12 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens when Player get damaged.
      */
     public void damaged() {
+        System.out.println(this.getPowerup().toString());
         if (this.powerup.isEmpty()) {
             kill();
-        } else if (this.powerup.get().getBehaviour().getPriority() == 1) {
-            this.powerup = Optional.empty();
-        } else if (this.powerup.get().getBehaviour().getPriority() == 2) {
-            this.powerup = Optional.of(new PowerUp(new Mushroom()));
         }
+
+        this.powerup = powerup.isPresent() ? powerup.get().getPrevious() : Optional.empty();
     }
 
     /**
