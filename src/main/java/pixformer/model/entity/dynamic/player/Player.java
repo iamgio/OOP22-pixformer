@@ -28,7 +28,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private boolean isSprinting;
 
     // Current powerup
-    private Optional<PowerUp> powerup;
+    private PowerUp powerup = new PowerUp();
 
     // Player components
     private final PlayerGraphicsComponent graphicsComponent;
@@ -48,7 +48,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerup = Optional.of(new PowerUp(new FireFlower(), Optional.of(new PowerUp(new Mushroom()))));
+        this.powerup = new PowerUp(new FireFlower(), new PowerUp(new Mushroom()));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
@@ -109,7 +109,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Return current player powerup.
      * @return current player powerup.
      */
-    public Optional<PowerUp> getPowerup() {
+    public PowerUp getPowerup() {
         return this.powerup;
     }
 
@@ -118,12 +118,12 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (powerup.isEmpty()) {
-            powerup = Optional.of(new PowerUp(powerupBehaviour));
-        } else if (powerupBehaviour.getPriority() == this.powerup.get().getBehaviour().getPriority()) {
-            powerup.get().setBehaviour(powerupBehaviour);
-        } else if (powerupBehaviour.getPriority() > this.powerup.get().getBehaviour().getPriority()) {
-            this.powerup = Optional.of(new PowerUp(powerupBehaviour, powerup));
+        if (powerup == null) {
+            powerup = new PowerUp(powerupBehaviour);
+        } else if (powerupBehaviour.getPriority() == this.powerup.getBehaviour().getPriority()) {
+            powerup.setBehaviour(powerupBehaviour);
+        } else if (powerupBehaviour.getPriority() > this.powerup.getBehaviour().getPriority()) {
+            this.powerup = new PowerUp(powerupBehaviour, powerup);
         }
     }
 
@@ -153,11 +153,11 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void damaged() {
         System.out.println(this.getPowerup().toString());
-        if (this.powerup.isEmpty()) {
+        if (this.powerup.getBehaviour() == null) {
             kill();
         }
 
-        this.powerup = powerup.isPresent() ? powerup.get().getPrevious() : Optional.empty();
+        this.powerup = powerup != null ? powerup.getPrevious() : null;
     }
 
     /**
@@ -172,7 +172,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * {@inheritDoc}
      */
     @Override
-    public Optional<PowerupBehaviour> getPowerupBehaviour() {
-        return powerup.isPresent() ? Optional.of(powerup.get().getBehaviour()) : Optional.empty();
+    public PowerupBehaviour getPowerupBehaviour() {
+        return powerup.getBehaviour();
     }
 }

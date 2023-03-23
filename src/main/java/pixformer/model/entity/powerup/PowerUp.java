@@ -1,7 +1,5 @@
 package pixformer.model.entity.powerup;
 
-import java.util.Optional;
-
 /**
  * Class defining the powerup object.
  */
@@ -10,13 +8,13 @@ public class PowerUp {
     // Current powerup ability power
     private PowerupBehaviour behaviour;
 
-    private final Optional<PowerUp> previousPowerup;
+    private PowerUp previousPowerup;
 
     /**
      * @param behaviour current powerup behaviour.
      * @param previous previous powerup.
      */
-    public PowerUp(final PowerupBehaviour behaviour, final Optional<PowerUp> previous) {
+    public PowerUp(final PowerupBehaviour behaviour, final PowerUp previous) {
         this.behaviour = behaviour;
         this.previousPowerup = previous;
     }
@@ -26,11 +24,10 @@ public class PowerUp {
      */
     public PowerUp(final PowerupBehaviour behaviour) {
         this.behaviour = behaviour;
-        previousPowerup = Optional.empty();
     }
 
     public PowerUp() {
-        previousPowerup = Optional.empty();
+
     }
 
     /**
@@ -42,7 +39,7 @@ public class PowerUp {
         return behaviour;
     }
 
-    public Optional<PowerUp> getPrevious() {
+    public PowerUp getPrevious() {
         return previousPowerup;
     }
 
