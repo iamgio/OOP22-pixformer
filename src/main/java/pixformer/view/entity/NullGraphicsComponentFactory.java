@@ -27,7 +27,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent tileBlock(Entity entity) {
+    public GraphicsComponent tileBlock(final Entity entity) {
         return NULL_COMPONENT;
     }
 
@@ -35,7 +35,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent grassBlock(Entity entity) {
+    public GraphicsComponent grassBlock(final Entity entity) {
         return NULL_COMPONENT;
     }
 
@@ -43,7 +43,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent brickBlock(Entity entity) {
+    public GraphicsComponent brickBlock(final Entity entity) {
         return NULL_COMPONENT;
     }
 
@@ -51,7 +51,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent surpriseBlock(Entity entity) {
+    public GraphicsComponent surpriseBlock(final Entity entity) {
         return NULL_COMPONENT;
     }
 
@@ -59,8 +59,16 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent coin(Entity entity) {
-        return null;
+    public GraphicsComponent coin(final Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent pole(final Entity entity) {
+        return NULL_COMPONENT;
     }
 
     /**
