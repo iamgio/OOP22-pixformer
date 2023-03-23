@@ -25,10 +25,12 @@ public class CoinCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(double dt, Set<Collision> collisions) {
-        for (var collision : collisions.stream().filter(x -> x.entity() instanceof Player).toList()) {
-            if (super.getEntity().getWorld().isPresent()) {
-                super.getEntity().getWorld().get().killEntity(super.getEntity(), collision.entity());
-            }
-        }
+        collisions.stream()
+                .filter(collision -> collision.entity() instanceof Player)
+                .forEach(collision ->  {
+                    if (super.getEntity().getWorld().isPresent()) {
+                        super.getEntity().getWorld().get().killEntity(super.getEntity(), collision.entity());
+                    }
+        });
     }
 }

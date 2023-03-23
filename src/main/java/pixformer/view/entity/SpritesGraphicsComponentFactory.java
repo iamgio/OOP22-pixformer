@@ -58,6 +58,14 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent pole(final Entity entity) {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GraphicsComponent goomba(final Entity entity) {
         return new GoombaGraphicsComponent(entity);
     }

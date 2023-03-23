@@ -85,6 +85,15 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     /**
      * {@inheritDoc}
      */
+    @EntityType("pole")
+    @Override
+    public Entity createPole(final int x, final int y) {
+        return new Pole(x, y, graphicsComponentFactory::pole);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @EntityType("goomba")
     @Override
     public Entity createGoomba(final int x, final int y) {

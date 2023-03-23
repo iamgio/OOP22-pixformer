@@ -6,7 +6,7 @@ import pixformer.model.entity.collision.*;
 import java.util.Optional;
 
 /**
- * Surprise block, which contains a power-up.
+ * Surprise block, hittable block which contains a power-up, depending on the player status.
  */
 public class Surprise extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
