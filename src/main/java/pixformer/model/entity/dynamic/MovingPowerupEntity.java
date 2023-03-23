@@ -2,8 +2,7 @@ package pixformer.model.entity.dynamic;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.*;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.entity.collision.*;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 import pixformer.model.entity.powerup.PowerupBehaviour;
@@ -12,6 +11,7 @@ import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -24,9 +24,11 @@ public final class MovingPowerupEntity extends AbstractEntity implements Physica
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
     private static final double VELOCITY = 0.003;
-    private final InputComponent inputComponent;
     private final PowerupBehaviour powerupBehaviour;
+    private final InputComponent inputComponent;
     private final GraphicsComponent graphicsComponent;
+    private final PhysicsComponent physicsComponent = new PhysicsComponent(this);
+    private final CollisionComponent collisionComponent = new SolidCollisionComponent(this);
 
     /**
      * @param x its initial x position
@@ -57,6 +59,11 @@ public final class MovingPowerupEntity extends AbstractEntity implements Physica
     }
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
-        return Optional.of(new PhysicsComponent(this));
+        return Optional.of(physicsComponent);
+    }
+
+    @Override
+    public Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.of(collisionComponent);
     }
 }
