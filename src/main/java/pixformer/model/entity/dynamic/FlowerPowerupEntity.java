@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
- * Represents the entity powerup fire flower.
+ * Represents the entity powerup fire flower. It remains still.
  */
 public final class FlowerPowerupEntity extends AbstractEntity implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity {
     private static final double WIDTH = 1;
