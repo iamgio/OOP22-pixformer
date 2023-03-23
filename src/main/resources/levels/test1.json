@@ -57,6 +57,11 @@
       "type": "surprise",
       "x": 9,
       "y": 28
+    },
+    {
+      "type": "fire_flower",
+      "x": 9,
+      "y": 27
     }
   ]
 }
