@@ -31,6 +31,7 @@ public final class FlowerPowerupEntity extends AbstractEntity implements Physica
      *
      * @param x      X coordinate
      * @param y      Y coordinate
+     * @param graphicsComponent for creating the GraphicsComponent.
      */
     public FlowerPowerupEntity(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
