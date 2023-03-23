@@ -29,6 +29,10 @@ public class PowerUp {
         previousPowerup = Optional.empty();
     }
 
+    public PowerUp() {
+        previousPowerup = Optional.empty();
+    }
+
     /**
      * Get powerup behaviour.
      * 
