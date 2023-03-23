@@ -26,7 +26,7 @@ public class BrickCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
         collisions.forEach(collision -> {
             if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
-                super.getEntity().getWorld().get().dropEntity(this.getEntity());
+                super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
             }
         });
     }

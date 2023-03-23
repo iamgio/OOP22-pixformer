@@ -42,26 +42,30 @@ public interface World extends Updatable {
     void spawnEntity(Entity entity);
 
     /**
-     * Add an entity to spawn in the game world.
+     * Adds an entity to spawn in the game world.
+     * The action is queued to prevent concurrency errors.
      *
      * @param entity entity to spawn
      */
-    void addEntityToSpawn(Entity entity);
+    void queueEntitySpawn(Entity entity);
 
     /**
-     * Destroy an entity in the game world after the entity got killed.
+     * Removes an entity from the game world and
+     * registers the performed kill.
+     * The action is queued to prevent concurrency errors.
      *
-     * @param entity entity to destroy
-     * @param player player who killed the entity
+     * @param killed killed entity
+     * @param killer entity who performed the kill
      */
-    void killEntity(Entity entity, Entity player);
+    void queueEntityKill(Entity killed, Entity killer);
 
     /**
-     * Remove an entity in the game world if the entity dropped out of it.
+     * Removes an entity from the game world.
+     * The action is queued to prevent concurrency errors.
      *
      * @param entity entity to remove
      */
-    void dropEntity(Entity entity);
+    void queueEntityDrop(Entity entity);
 
     /**
      * @return the handler of entity collisions for this world

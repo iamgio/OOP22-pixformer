@@ -14,7 +14,6 @@ import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 
-import java.lang.annotation.Inherited;
 import java.util.Optional;
 
 /**
@@ -163,7 +162,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens on Player death.
      */
     private void kill() {
-        getWorld().get().dropEntity(this);
+        getWorld().get().queueEntityDrop(this);
         //this.graphicsComponent.startDeathAnimation();
     }
 
