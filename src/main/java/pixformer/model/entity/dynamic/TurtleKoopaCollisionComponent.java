@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 /**
  * The collision component for a turtle koopa. The koopa dies when pressed by a player.
  */
-public class TurtleKoopaCollisionComponent extends CollisionComponent {
+public final class TurtleKoopaCollisionComponent extends CollisionComponent {
 
     private final CollisionComponent forDying;
 
