@@ -1,6 +1,7 @@
 package pixformer;
 
 import org.junit.jupiter.api.Test;
+import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
@@ -12,26 +13,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TurtleKoopaTest {
 
-    @Test
-    void testTurtleMovesBecauseOfPlayerLeft() {
+    private void testTurtleMovesBecauseOfPlayer(final Vector2D playerPos, final double sign) {
         final World world = new WorldImpl(WorldOptionsFactory.testOptions());
         final TurtleKoopa koopa = new TurtleKoopa(1, 0, (__) -> { });
-        world.spawnEntity(new Player(0, 0, 1, 1, 0));
+        world.spawnEntity(new Player(playerPos.x(), playerPos.y(), 1, 1, 0));
         world.spawnEntity(koopa);
         assertEquals(koopa.getVelocity().x(), 0);
         world.update(1);
-        assertTrue(koopa.getVelocity().x() > 0);
+        assertEquals(Math.signum(koopa.getVelocity().x()), sign);
+    }
+
+    @Test
+    void testTurtleMovesBecauseOfPlayerLeft() {
+        testTurtleMovesBecauseOfPlayer(new Vector2D(0, 0), +1);
+
     }
 
     @Test
     void testTurtleMovesBecauseOfPlayerRight() {
-        final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-        final TurtleKoopa koopa = new TurtleKoopa(1, 0, (__) -> { });
-        world.spawnEntity(new Player(2, 0, 1, 1, 0));
-        world.spawnEntity(koopa);
-        assertEquals(koopa.getVelocity().x(), 0);
-        world.update(1);
-        assertTrue(koopa.getVelocity().x() < 0);
+        testTurtleMovesBecauseOfPlayer(new Vector2D(2, 0), -1);
     }
 
 }
