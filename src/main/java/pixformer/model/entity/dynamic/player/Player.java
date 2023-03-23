@@ -14,12 +14,13 @@ import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 
+import java.lang.annotation.Inherited;
 import java.util.Optional;
 
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Powerupable {
     // This playerIndex
     private final int playerIndex;
 
@@ -164,5 +165,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private void kill() {
         getWorld().get().dropEntity(this);
         //this.graphicsComponent.startDeathAnimation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<PowerupBehaviour> getPowerupBehaviour() {
+        return Optional.of(powerup.get().getBehaviour());
     }
 }
