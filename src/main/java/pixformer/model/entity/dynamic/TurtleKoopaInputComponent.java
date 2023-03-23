@@ -18,7 +18,7 @@ import pixformer.model.modelinput.HorizontalModelInput;
  */
 public final class TurtleKoopaInputComponent extends AIInputComponent {
 
-    private static final double VELOCITY = 0.02;
+    private static final double VELOCITY = 0.012;
     private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> { };
 
     private final InputComponent wrappedInputComponent;
@@ -28,14 +28,10 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
      */
     public TurtleKoopaInputComponent(final MutableEntity entity) {
         super(entity);
-        wrappedInputComponent = new GoombaAI(getEntity(), this::velocitySetter, VELOCITY,
+        final MutableEntity proxied = new ProxyMutableEntity(entity);
+        wrappedInputComponent = new GoombaAI(getEntity(), proxied::setVelocity, VELOCITY,
                 e -> e instanceof Block || e instanceof Player, NO_ACTION);
     }
-
-    private void velocitySetter(final Vector2D velocity) {
-        getEntity().setVelocity(velocity.copyWithX(VELOCITY));
-    }
-
     @Override
     public void update(final World world) {
         wrappedInputComponent.update(world);
