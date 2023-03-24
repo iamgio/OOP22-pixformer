@@ -30,7 +30,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private static final double CAMERA_Y_OFFSET_SCALE_DIVISOR = 200;
 
     private static final double CAMERA_SCALE_OFFSET = 20;
-    private static final double CAMERA_SCALE_WIDTH_DIVISOR = 800;
+    private static final double CAMERA_SCALE_WIDTH_DIVISOR = 1200;
 
     private static final Color BACKGROUND_COLOR = new Color(0.4, 0.55, 0.95);
 
