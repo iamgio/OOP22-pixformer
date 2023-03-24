@@ -1,20 +1,21 @@
 package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Coin;
 import pixformer.model.event.EventSubscriber;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * {@inheritDoc}.
  */
 public class ScoreManagerImpl implements ScoreManager {
     private static final int DEFAULT_SCORE_INCREMENT = 100;
+    private static final int POLE_POINTS_INCREMENT = 1_000;
     private static final int DEFAULT_REMAINING_COINS = 3;
     private final Map<Entity, Score> scoreMap;
+    private final Set<Entity> winners;
 
     /**
      * Constructor for the class.
@@ -23,6 +24,7 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     public ScoreManagerImpl(final EventSubscriber eventSubscriber) {
         this.scoreMap = new HashMap<>();
+        this.winners = new HashSet<>();
         eventSubscriber.addPlayerOnKill(this::increaseScore);
     }
 
@@ -32,10 +34,11 @@ public class ScoreManagerImpl implements ScoreManager {
      * @param entity entity killed
      */
     private void increaseScore(final Entity player, final Entity entity) {
+        int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
         if (scoreMap.containsKey(player)) {
-            scoreMap.get(player).addPoints(DEFAULT_SCORE_INCREMENT);
+            scoreMap.get(player).addPoints(points);
         } else {
-            scoreMap.put(player, new ScoreImpl(DEFAULT_SCORE_INCREMENT));
+            scoreMap.put(player, new ScoreImpl(points));
         }
         if (entity instanceof Coin) {
             scoreMap.get(player).grabCoin();
@@ -67,6 +70,17 @@ public class ScoreManagerImpl implements ScoreManager {
                 .map(Score::getRemainingCoins)
                 .filter(i -> i > 0)
                 .reduce(Integer::sum).orElse(DEFAULT_REMAINING_COINS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void passedFinishLine(final Player player) {
+        this.winners.add(player);
+        if (!winners.contains(player)) {
+//            this.increaseScore(player, player);
+        }
     }
 
 }
