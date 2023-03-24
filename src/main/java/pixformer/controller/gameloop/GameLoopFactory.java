@@ -55,7 +55,7 @@ public final class GameLoopFactory {
             }
 
             final double cameraPivotX = this.controller.calcEntitiesCommonPointX(playersEntities);
-            final double cameraPivotY = 0; // TODO might be something else?
+            final double cameraPivotY = -this.controller.calcEntitiesCommonPointY(playersEntities);
             view.updateCamera(cameraPivotX, cameraPivotY);
 
             world.getUpdatableEntities()

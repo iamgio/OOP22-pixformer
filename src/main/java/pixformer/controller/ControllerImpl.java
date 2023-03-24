@@ -148,7 +148,20 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public double calcEntitiesCommonPointX(final Set<Entity> entities) {
-        return entities.stream().mapToDouble(Entity::getX).average().orElse(0);
+        return entities.stream().mapToDouble(Entity::getX)
+                .average()
+                .orElse(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double calcEntitiesCommonPointY(final Set<Entity> entities) {
+        final double y = entities.stream().mapToDouble(Entity::getY)
+                .average()
+                .orElse(0);
+        return Math.sqrt(y);
     }
 
     /**

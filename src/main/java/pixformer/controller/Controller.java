@@ -6,6 +6,7 @@ import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
+
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,12 @@ public interface Controller {
      * @return X coordinate of the common point (possibly average) between the given entitites
      */
     double calcEntitiesCommonPointX(Set<Entity> entities);
+
+    /**
+     * @param entities entities to find a common point for
+     * @return Y coordinate of the common point (possibly average) between the given entitites
+     */
+    double calcEntitiesCommonPointY(Set<Entity> entities);
 
     /**
      * @return level files on the filesystem
