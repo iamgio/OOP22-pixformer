@@ -1,33 +1,39 @@
 package pixformer.model.entity.powerup;
 
+import java.util.Optional;
+
 /**
  * Class defining the powerup object.
  */
 public class PowerUp {
 
     // Current powerup ability power
-    private PowerupBehaviour behaviour;
+    private Optional<PowerupBehaviour> behaviour;
 
-    private PowerUp previousPowerup;
+    private Optional<PowerUp> previousPowerup;
 
     /**
      * @param behaviour current powerup behaviour.
      * @param previous previous powerup.
      */
     public PowerUp(final PowerupBehaviour behaviour, final PowerUp previous) {
-        this.behaviour = behaviour;
-        this.previousPowerup = previous;
+        this.behaviour = Optional.of(behaviour);
+        this.previousPowerup = Optional.of(previous);
     }
 
     /**
      * @param behaviour current powerup behaviour.
      */
     public PowerUp(final PowerupBehaviour behaviour) {
-        this.behaviour = behaviour;
+        this.behaviour = Optional.of(behaviour);
+        this.previousPowerup = Optional.empty();
     }
 
+    /**
+     */
     public PowerUp() {
-
+        this.behaviour = Optional.empty();
+        this.previousPowerup = Optional.empty();
     }
 
     /**
@@ -35,16 +41,23 @@ public class PowerUp {
      * 
      * @return powerup behaviour.
      */
-    public PowerupBehaviour getBehaviour() {
+    public Optional<PowerupBehaviour> getBehaviour() {
         return behaviour;
     }
 
-    public PowerUp getPrevious() {
+    /**
+     * @return previous powerup if present.
+     */
+    public Optional<PowerUp> getPrevious() {
         return previousPowerup;
     }
 
-    public void setBehaviour(PowerupBehaviour powerupBehaviour) {
-        this.behaviour = powerupBehaviour;
+    /**
+     * Set the new current powerupBehaviour.
+     * @param powerupBehaviour new current entity powerup.
+     */
+    public void setBehaviour(final PowerupBehaviour powerupBehaviour) {
+        this.behaviour = Optional.of(powerupBehaviour);
     }
 
 }
