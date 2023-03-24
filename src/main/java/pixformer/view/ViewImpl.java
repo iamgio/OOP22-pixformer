@@ -7,7 +7,12 @@ import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
-import pixformer.view.engine.*;
+import pixformer.view.engine.Color;
+import pixformer.view.engine.GameScene;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.engine.SceneInput;
+import pixformer.view.engine.TextRenderer;
+import pixformer.view.engine.ViewLauncher;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
@@ -21,14 +26,18 @@ import java.util.function.Consumer;
 public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
 
     private static final double CAMERA_X_OFFSET = -10;
-    private static final double CAMERA_Y_OFFSET = 0;
-    private static final double CAMERA_SCALE = 15;
+    private static final double CAMERA_Y_OFFSET = 15;
+    private static final double CAMERA_Y_OFFSET_SCALE_DIVISOR = 200;
+
+    private static final double CAMERA_SCALE_OFFSET = 20;
+    private static final double CAMERA_SCALE_WIDTH_DIVISOR = 800;
 
     private static final Color BACKGROUND_COLOR = new Color(0.4, 0.55, 0.95);
 
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
+
     private TextRenderer scoreLabel;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
@@ -84,10 +93,12 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     @Override
     public void updateCamera(final double pivotX, final double pivotY) {
+        // TODO needs better scaling for 4K
+        final double scale = CAMERA_SCALE_OFFSET + getScene().getWidth() / CAMERA_SCALE_WIDTH_DIVISOR;
         final Camera camera = new SimpleCameraBuilder()
                 .withPivot(pivotX, pivotY)
-                .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET)
-                .withScale(CAMERA_SCALE)
+                .withOffset(CAMERA_X_OFFSET, CAMERA_Y_OFFSET + scale / CAMERA_Y_OFFSET_SCALE_DIVISOR)
+                .withScale(scale)
                 .build();
         this.camera.set(camera);
     }

@@ -75,6 +75,22 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
+    public double getWidth() {
+        return getScene().getWidth();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeight() {
+        return getScene().getHeight();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public SceneRenderer getRenderer() {
         return this.renderer.get();
     }

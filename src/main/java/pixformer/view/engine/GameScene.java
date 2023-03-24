@@ -13,6 +13,16 @@ public abstract class GameScene {
     protected final List<BiConsumer<Double, Double>> onResize = new LinkedList<>();
 
     /**
+     * @return width of the scene
+     */
+    public abstract double getWidth();
+
+    /**
+     * @return height of the scene
+     */
+    public abstract double getHeight();
+
+    /**
      * @return the component responsible for rendering this scene
      */
     public abstract SceneRenderer getRenderer();
