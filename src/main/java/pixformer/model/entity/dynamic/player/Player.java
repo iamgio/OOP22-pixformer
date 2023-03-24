@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
+import pixformer.model.entity.powerup.Powerupable;
 import pixformer.model.entity.powerup.powerups.FireFlower;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
@@ -18,7 +19,7 @@ import java.util.Optional;
 /**
  * The class manages the character used by the player.
  */
-public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Powerupable {
     // This playerIndex
     private final int playerIndex;
 
@@ -26,7 +27,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private boolean isSprinting;
 
     // Current powerup
-    private Optional<PowerUp> powerUp;
+    private Optional<PowerUp> powerup;
 
     // Player components
     private final PlayerGraphicsComponent graphicsComponent;
@@ -46,7 +47,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerUp = Optional.of(new PowerUp(new FireFlower()));
+        this.powerup = Optional.of(new PowerUp(new FireFlower()));
 
         this.graphicsComponent = new PlayerGraphicsComponent(this);
         this.physicsComponent = new PlayerPhysicsComponent(this);
@@ -108,7 +109,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @return current player powerup.
      */
     public Optional<PowerUp> getPowerup() {
-        return this.powerUp;
+        return this.powerup;
     }
 
     /**
@@ -116,10 +117,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (this.powerUp.isEmpty()) {
-            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
-        } else if (powerupBehaviour.getPriority() >= this.powerUp.get().getBehaviour().getPriority()) {
-            this.powerUp = Optional.of(new PowerUp(powerupBehaviour));
+        if (this.powerup.isEmpty()) {
+            this.powerup = Optional.of(new PowerUp(powerupBehaviour));
+        } else if (powerupBehaviour.getPriority() >= this.powerup.get().getBehaviour().getPriority()) {
+            this.powerup = Optional.of(new PowerUp(powerupBehaviour));
         }
     }
 
@@ -148,12 +149,12 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens when Player get damaged.
      */
     public void damaged() {
-        if (this.powerUp.isEmpty()) {
+        if (this.powerup.isEmpty()) {
             kill();
-        } else if (this.powerUp.get().getBehaviour().getPriority() == 1) {
-            this.powerUp = Optional.empty();
-        } else if (this.powerUp.get().getBehaviour().getPriority() == 2) {
-            this.powerUp = Optional.of(new PowerUp(new Mushroom()));
+        } else if (this.powerup.get().getBehaviour().getPriority() == 1) {
+            this.powerup = Optional.empty();
+        } else if (this.powerup.get().getBehaviour().getPriority() == 2) {
+            this.powerup = Optional.of(new PowerUp(new Mushroom()));
         }
     }
 
@@ -161,7 +162,15 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens on Player death.
      */
     private void kill() {
-        getWorld().get().dropEntity(this);
+        getWorld().get().queueEntityDrop(this);
         //this.graphicsComponent.startDeathAnimation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<PowerupBehaviour> getPowerupBehaviour() {
+        return powerup.isPresent() ? Optional.of(powerup.get().getBehaviour()) : Optional.empty();
     }
 }

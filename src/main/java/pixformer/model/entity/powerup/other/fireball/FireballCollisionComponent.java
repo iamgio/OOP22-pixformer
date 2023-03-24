@@ -42,12 +42,12 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
         super.update(dt, collisions);
 
         if (despawnCronometer.hasElapsed(ALIVE_TIME)) {
-            world.dropEntity(fireball);
+            world.queueEntityDrop(fireball);
         }
 
         for (final var collisor : collisions) {
             if (collisor.side().isHorizontal() && !(collisor.entity() instanceof Player)) {
-                world.dropEntity(fireball);
+                world.queueEntityDrop(fireball);
             }
         }
 

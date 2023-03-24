@@ -1,7 +1,9 @@
 package pixformer.model.entity.collision;
 
+import pixformer.model.World;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.PowerUpFactory;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Surprise;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
@@ -37,11 +39,18 @@ public class SurpriseCollisionComponent extends CollisionComponent{
         } else {
             return;
         }
-        collisions.forEach(collision -> {
-            if (collision.side() == CollisionSide.BOTTOM && entity.getWorld().isPresent() && !entity.hasCollided()) {
-                entity.getWorld().get().addEntityToSpawn(powerupFactory.createMushroom((int) super.getEntity().getX(), (int) super.getEntity().getY() - 1));
-                entity.setCollided(true);
-            }
+        collisions.stream()
+                .filter(collision -> collision.entity() instanceof Player && collision.side() == CollisionSide.BOTTOM)
+                .forEach(collision -> {
+                    if (entity.getWorld().isPresent() && !entity.hasCollided()) {
+                        World world = entity.getWorld().get();
+                        if (((Player) collision.entity()).getPowerup().isEmpty()) {
+                            world.queueEntitySpawn(powerupFactory.createMushroom((int) entity.getX(), (int) entity.getY() - 1));
+                        } else {
+                            world.queueEntitySpawn(powerupFactory.createFireFlower((int) entity.getX(), (int) entity.getY() - 1));
+                        }
+                        entity.setCollided(true);
+                    }
         });
     }
 }

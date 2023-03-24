@@ -67,6 +67,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         this.scoreLabel = rendererFactory.newText("");
         this.scoreLabel.setColor(new Color(1, 0, 0));
         this.scoreLabel.setFontSize(1);
+        this.scoreLabel.setFontFamily("DejaVu Sans Light");
         this.getScene().add(scoreLabel.at(1, 1));
     }
 

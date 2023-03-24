@@ -3,6 +3,7 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
+import pixformer.view.engine.Color;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.statics.BlockGraphicsComponent;
 import pixformer.view.entity.statics.BrickGraphicsComponent;
@@ -50,8 +51,16 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent coin(Entity entity) {
-        return null;
+    public GraphicsComponent coin(final Entity entity) {
+        return new RectangleGraphicsComponent(entity, new Color(1, 1, 0));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent pole(final Entity entity) {
+        return new RectangleGraphicsComponent(entity, new Color(0, 1, 0));
     }
 
     /**

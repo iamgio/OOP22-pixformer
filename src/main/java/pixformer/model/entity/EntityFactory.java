@@ -50,6 +50,13 @@ public interface EntityFactory {
     /**
      * @param x X coordinate
      * @param y Y coordinate
+     * @return a pole
+     */
+    Entity createPole(int x, int y);
+
+    /**
+     * @param x X coordinate
+     * @param y Y coordinate
      * @return a Goomba entity
      */
     Entity createGoomba(int x, int y);

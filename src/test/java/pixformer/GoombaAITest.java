@@ -7,11 +7,14 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.EntityFactory;
+import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.RectangleBoundingBox;
 import pixformer.model.entity.dynamic.ai.GoombaAI;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.InputComponent;
+import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Optional;
 import java.util.function.DoublePredicate;
@@ -26,6 +29,7 @@ final class GoombaAITest {
     private static final double STEP = 0.002;
     private static final double DT = 1;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
+    private EntityFactory entityFactory;
     // private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
     private final Entity goomba = new AbstractEntity(0, 0, 1, 1) {
 
@@ -46,6 +50,7 @@ final class GoombaAITest {
     @BeforeEach
     void setup() {
         world.spawnEntity(goomba);
+        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
     }
 
     @Test
@@ -61,8 +66,8 @@ final class GoombaAITest {
 
     @Test
     void testFindObstacle() {
-        world.spawnEntity(new Block(X_BLOCK, 0)); // -2, -1
-        world.spawnEntity(new Block(2, 0)); // 1, 2
+        world.spawnEntity(this.entityFactory.createTileBlock((int)X_BLOCK, 0)); // -2, -1
+        world.spawnEntity(this.entityFactory.createTileBlock(2, 0)); // 1, 2
         goUntil(0, i -> i > -1, i -> i - STEP, -1 + STEP);
         goUntil(-1 + STEP, i -> i < 1, i -> i + STEP, 1 - STEP);
         // for (double i = -1 + step; i < 1; i += step) {

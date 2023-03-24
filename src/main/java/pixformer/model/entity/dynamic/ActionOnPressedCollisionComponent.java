@@ -31,7 +31,7 @@ public final class ActionOnPressedCollisionComponent extends SolidCollisionCompo
      */
     static Optional<CollisionComponent> createWithWorldFromEntityForDying(final MutableEntity entity) {
         return entity.getWorld().map(world -> new ActionOnPressedCollisionComponent(entity,
-                (killed, killer) -> world.killEntity(killed, killer)));
+                (killed, killer) -> world.queueEntityKill(killed, killer)));
     }
 
     /**
