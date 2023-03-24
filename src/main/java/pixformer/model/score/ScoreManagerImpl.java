@@ -77,9 +77,9 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     @Override
     public void passedFinishLine(final Player player) {
-        this.winners.add(player);
         if (!winners.contains(player)) {
-//            this.increaseScore(player, player);
+            this.winners.add(player);
+            this.increaseScore(player, player);
         }
     }
 
