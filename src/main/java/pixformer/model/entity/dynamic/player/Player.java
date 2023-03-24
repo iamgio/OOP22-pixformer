@@ -13,8 +13,6 @@ import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
-
-import java.lang.annotation.Inherited;
 import java.util.Optional;
 
 /**
@@ -48,12 +46,12 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        this.powerup = new PowerUp(new FireFlower(), new PowerUp(new Mushroom()));
+        powerup = new PowerUp(new FireFlower(), new PowerUp(new Mushroom()));
 
-        this.graphicsComponent = new PlayerGraphicsComponent(this);
-        this.physicsComponent = new PlayerPhysicsComponent(this);
-        this.collisionComponent = new PlayerCollisionComponent(this);
-        this.inputComponent = new PlayerInputComponent(this);
+        graphicsComponent = new PlayerGraphicsComponent(this);
+        physicsComponent = new PlayerPhysicsComponent(this);
+        collisionComponent = new PlayerCollisionComponent(this);
+        inputComponent = new PlayerInputComponent(this);
     }
 
     /**
@@ -61,15 +59,15 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @return playerIndex
      */
     public int getIndex() {
-        return this.playerIndex;
+        return playerIndex;
     }
 
     /**
      * Set the new inputComponent.
      * @param inputComponent new Player's inputComponent.
      */
-    public void setInputComponent(final PlayerInputComponent inputComponent) {
-        this.inputComponent = inputComponent;
+    public void setInputComponent(final PlayerInputComponent newInputComponent) {
+        inputComponent = newInputComponent;
     }
 
     /**
@@ -77,7 +75,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     @Override
     public Optional<InputComponent> getInputComponent() {
-        return Optional.of(this.inputComponent);
+        return Optional.of(inputComponent);
     }
 
     /**
@@ -85,7 +83,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     @Override
     public GraphicsComponent getGraphicsComponent() {
-        return this.graphicsComponent;
+        return graphicsComponent;
     }
 
     /**
@@ -93,7 +91,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(this.collisionComponent);
+        return Optional.of(collisionComponent);
     }
 
     /**
@@ -102,7 +100,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
-        return Optional.of(this.physicsComponent);
+        return Optional.of(physicsComponent);
     }
 
     /**
@@ -110,7 +108,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @return current player powerup.
      */
     public PowerUp getPowerup() {
-        return this.powerup;
+        return powerup;
     }
 
     /**
@@ -118,12 +116,10 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (powerup == null) {
-            powerup = new PowerUp(powerupBehaviour);
-        } else if (powerupBehaviour.getPriority() == this.powerup.getBehaviour().getPriority()) {
+        if (!powerup.getBehaviour().isPresent() || powerupBehaviour.getPriority() == powerup.getBehaviour().get().getPriority()) {
             powerup.setBehaviour(powerupBehaviour);
-        } else if (powerupBehaviour.getPriority() > this.powerup.getBehaviour().getPriority()) {
-            this.powerup = new PowerUp(powerupBehaviour, powerup);
+        } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
+            powerup = new PowerUp(powerupBehaviour, powerup);
         }
     }
 
@@ -131,7 +127,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Manage the player behaviour when jumping on an enemy.
      */
     public void onEnemyJump() {
-        this.inputComponent.onEnemyJump();
+        inputComponent.onEnemyJump();
     }
 
      /**
@@ -152,12 +148,17 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * Define what happens when Player get damaged.
      */
     public void damaged() {
-        System.out.println(this.getPowerup().toString());
-        if (this.powerup.getBehaviour() == null) {
+        if (powerup.getBehaviour().isEmpty()) {
             kill();
+            return;
         }
 
-        this.powerup = powerup != null ? powerup.getPrevious() : null;
+        if (powerup.getPrevious().isPresent()) {
+            powerup = powerup.getPrevious().get();
+            return;
+        }
+
+        powerup.setBehaviour(null);
     }
 
     /**
@@ -165,14 +166,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     private void kill() {
         getWorld().get().dropEntity(this);
-        //this.graphicsComponent.startDeathAnimation();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public PowerupBehaviour getPowerupBehaviour() {
+    public Optional<PowerupBehaviour> getPowerupBehaviour() {
         return powerup.getBehaviour();
     }
 }

@@ -72,8 +72,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void ability() {
-        if (player.getPowerup() != null && abilityDelay.hasElapsed(ABILITY_COOLDOWN)) {
-            player.getPowerup().getBehaviour().ability(player);
+        if (player.getPowerup().getBehaviour().isPresent() && abilityDelay.hasElapsed(ABILITY_COOLDOWN)) {
+            player.getPowerup().getBehaviour().get().ability(player);
 
             abilityDelay.reset();
             abilityDelay.start();
