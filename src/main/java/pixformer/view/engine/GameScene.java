@@ -1,11 +1,16 @@
 package pixformer.view.engine;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * A scene of the game that contains its drawable content.
  */
 public abstract class GameScene {
+
+    protected final List<BiConsumer<Double, Double>> onResize = new LinkedList<>();
 
     /**
      * @return the component responsible for rendering this scene
@@ -56,5 +61,13 @@ public abstract class GameScene {
      */
     public void remove(final Renderer renderer) {
         this.getRenderer().remove(renderer);
+    }
+
+    /**
+     * Adds an action to be executed when the scene is resized.
+     * @param action action with the new width and the new height as arguments
+     */
+    public void addOnResize(final BiConsumer<Double, Double> action) {
+        this.onResize.add(action);
     }
 }

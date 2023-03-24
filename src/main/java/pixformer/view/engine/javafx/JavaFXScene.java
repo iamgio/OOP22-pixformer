@@ -48,16 +48,19 @@ public class JavaFXScene extends GameScene {
 
         // Makes the canvas resizable by resizing the window
 
-        root.widthProperty().addListener(o -> {
+        super.addOnResize((w, h) -> {
             graphics.get().clear();
-            canvas.setWidth(root.getWidth());
             this.render();
         });
 
+        root.widthProperty().addListener(o -> {
+            canvas.setWidth(root.getWidth());
+            super.onResize.forEach(action -> action.accept(root.getWidth(), root.getHeight()));
+        });
+
         root.heightProperty().addListener(o -> {
-            graphics.get().clear();
             canvas.setHeight(root.getHeight());
-            this.render();
+            super.onResize.forEach(action -> action.accept(root.getWidth(), root.getHeight()));
         });
     }
 
