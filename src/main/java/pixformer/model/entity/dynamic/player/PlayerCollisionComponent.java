@@ -1,11 +1,15 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.time.ChronometerImpl;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
+import pixformer.model.entity.statics.Block;
+import pixformer.model.entity.statics.Brick;
+import pixformer.model.entity.statics.Surprise;
 
 import java.util.Set;
 
@@ -70,9 +74,22 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }
 
-            if (collisor.side() == CollisionSide.TOP) {
+            if (collisor.side() == CollisionSide.TOP && isABlock(collisor.entity())) {
                 this.player.setVelocity(player.getVelocity().copyWithY(PUSH_DOWN_FORCE));
             }
         }
+    }
+
+    /**
+     * Check if an entity is a type of Block.
+     * @param entity player is colliding with.
+     * @return true if the entity is a type of block otherwise false.
+     */
+    private boolean isABlock(final Entity entity) {
+        if (entity instanceof Block || entity instanceof Brick || entity instanceof Surprise) {
+            return true;
+        }
+
+        return false;
     }
 }
