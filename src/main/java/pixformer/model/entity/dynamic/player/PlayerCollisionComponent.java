@@ -18,7 +18,6 @@ import java.util.Set;
  */
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
-    private static final double PUSH_DOWN_FORCE = 0.005;
 
     private final Player player;
 
@@ -73,23 +72,6 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }
-
-            if (collisor.side() == CollisionSide.TOP && isABlock(collisor.entity())) {
-                this.player.setVelocity(player.getVelocity().copyWithY(PUSH_DOWN_FORCE));
-            }
         }
-    }
-
-    /**
-     * Check if an entity is a type of Block.
-     * @param entity player is colliding with.
-     * @return true if the entity is a type of block otherwise false.
-     */
-    private boolean isABlock(final Entity entity) {
-        if (entity instanceof Block || entity instanceof Brick || entity instanceof Surprise) {
-            return true;
-        }
-
-        return false;
     }
 }
