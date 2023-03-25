@@ -64,7 +64,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
 
     /**
      * Set the new inputComponent.
-     * @param inputComponent new Player's inputComponent.
+     * @param newInputComponent new Player's inputComponent.
      */
     public void setInputComponent(final PlayerInputComponent newInputComponent) {
         inputComponent = newInputComponent;

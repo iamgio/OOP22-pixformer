@@ -44,7 +44,7 @@ public class SurpriseCollisionComponent extends CollisionComponent{
                 .forEach(collision -> {
                     if (entity.getWorld().isPresent() && !entity.hasCollided()) {
                         World world = entity.getWorld().get();
-                        if (((Player) collision.entity()).getPowerup().isEmpty()) {
+                        if (((Player) collision.entity()).getPowerup().getBehaviour().isEmpty()) {
                             world.addEntityToSpawn(powerupFactory.createMushroom((int) entity.getX(), (int) entity.getY() - 1));
                         } else {
                             world.addEntityToSpawn(powerupFactory.createFireFlower((int) entity.getX(), (int) entity.getY() - 1));
