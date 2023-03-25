@@ -139,8 +139,8 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void endGame(Player winner) {
-        // TODO
+    public void endGame(final Player player) {
+        this.scoreManager.passedFinishLine(player);
     }
 
     /**
