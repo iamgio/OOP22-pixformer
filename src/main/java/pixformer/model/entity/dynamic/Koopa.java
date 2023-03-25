@@ -18,7 +18,7 @@ import java.util.Optional;
  * The implementation of the enemy Koopa. This class uses the two states of a
  * Koopa: walking and turtle.
  */
-public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public final class Koopa implements KoopaState, DrawableEntity, DefaultRectangleBoundingBoxEntity, Enemy {
 
     private KoopaState currentKoopaState;
 

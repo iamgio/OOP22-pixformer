@@ -7,7 +7,7 @@ import pixformer.model.entity.collision.CollisionComponent;
 /**
  * The state of the koopa which walks normally and behaves like a goomba.
  */
-public final class WalkingKoopa extends Enemy implements KoopaState {
+public final class WalkingKoopa extends EnemyImpl implements KoopaState {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;

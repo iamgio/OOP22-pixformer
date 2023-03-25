@@ -10,13 +10,15 @@ import java.util.Optional;
 /**
  * The enemy goomba.
  */
-public final class Goomba extends Enemy implements DrawableEntity {
+public final class Goomba extends EnemyImpl implements DrawableEntity {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
     private final GraphicsComponent graphicsComponent;
+
+    private final CollisionComponent collisionComponent = new GoombaCollisionComponent(this);
 
     /**
      * Create a new Goomba.
@@ -37,7 +39,7 @@ public final class Goomba extends Enemy implements DrawableEntity {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return ActionOnPressedCollisionComponent.createWithWorldFromEntityForDying(this);
+        return Optional.of(collisionComponent);
     }
 
 }
