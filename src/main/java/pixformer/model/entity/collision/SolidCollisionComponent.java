@@ -12,6 +12,7 @@ import java.util.Set;
 public class SolidCollisionComponent extends CollisionComponent {
 
     private static final double DEFAULT_FRICTION = 1;
+    private static final double PUSH_DOWN_FORCE = 0.005;
 
     private final double friction;
 
@@ -94,7 +95,7 @@ public class SolidCollisionComponent extends CollisionComponent {
 
         // Ceiling collision
         if (entity.getVelocity().y() < 0 && isCollidingCeiling(collisions)) {
-            entity.setVelocity(entity.getVelocity().copyWithY(0));
+            entity.setVelocity(entity.getVelocity().copyWithY(PUSH_DOWN_FORCE));
             entity.setY(Math.ceil(entity.getY()));
         }
 
