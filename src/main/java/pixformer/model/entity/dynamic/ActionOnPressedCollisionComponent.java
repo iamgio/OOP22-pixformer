@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * A collision component which makes its entity die when it collides from the
@@ -31,21 +32,16 @@ public final class ActionOnPressedCollisionComponent extends SolidCollisionCompo
      */
     static Optional<CollisionComponent> createWithWorldFromEntityForDying(final MutableEntity entity) {
         return entity.getWorld().map(world -> new ActionOnPressedCollisionComponent(entity,
-                (killed, killer) -> world.killEntity(killed, killer)));
+                killer -> world.killEntity(entity, killer)));
     }
 
     /**
      * @param entity to be controlled.
      * @param action the consumer to which will be passed this entity.
      */
-    public ActionOnPressedCollisionComponent(final MutableEntity entity, final BiConsumer<Entity, Entity> action) {
+    public ActionOnPressedCollisionComponent(final MutableEntity entity, final Consumer<Entity> action) {
         super(entity);
-        reactor = new BiConsumerCollisionReactor(Map.of(
-                Player.class::isInstance, (c, e) -> {
-                    if (c == CollisionSide.TOP) {
-                        action.accept(entity, e);
-                    }
-                }));
+        reactor = new ActionOnPressedCollisionReactor(action);
     }
 
     @Override

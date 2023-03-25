@@ -28,7 +28,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState {
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new ActionOnPressedCollisionComponent(this, (e, ee) -> changeToTurtle.run()));
+        return Optional.of(new ActionOnPressedCollisionComponent(this, e -> changeToTurtle.run()));
     }
 
     @Override
