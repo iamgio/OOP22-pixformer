@@ -31,6 +31,9 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         this.player = player;
     }
 
+    /**
+     * @return true if player is touching ground, other false.
+     */
     public boolean getIsOnGround() {
         return isOnGround;
     }
