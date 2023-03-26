@@ -2,26 +2,29 @@ package pixformer.view.entity.player;
 
 import java.util.List;
 
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.engine.Renderer;
+import pixformer.view.engine.RendererFactory;
 
 public class PlayerSpriteFactory {
     public PlayerAnimation getPlayerAnimation() {
         return new PlayerAnimation() {
 
             @Override
-            public List<Renderer> getIdleRenderer() {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'getIdleRenderer'");
+            public List<Renderer> getIdleRenderer(final RendererFactory factoryl, final Player player) {
+                return List.of(
+                    
+                );
             }
 
             @Override
-            public List<Renderer> getWalkRenderer() {
+            public List<Renderer> getWalkRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getWalkRenderer'");
             }
 
             @Override
-            public List<Renderer> getRunRenderer() {
+            public List<Renderer> getRunRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getRunRenderer'");
             }
@@ -33,19 +36,19 @@ public class PlayerSpriteFactory {
         return new PlayerAnimation() {
 
             @Override
-            public List<Renderer> getIdleRenderer() {
+            public List<Renderer> getIdleRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getIdleRenderer'");
             }
 
             @Override
-            public List<Renderer> getWalkRenderer() {
+            public List<Renderer> getWalkRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getWalkRenderer'");
             }
 
             @Override
-            public List<Renderer> getRunRenderer() {
+            public List<Renderer> getRunRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getRunRenderer'");
             }
@@ -57,19 +60,19 @@ public class PlayerSpriteFactory {
         return new PlayerAnimation() {
 
             @Override
-            public List<Renderer> getIdleRenderer() {
+            public List<Renderer> getIdleRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getIdleRenderer'");
             }
 
             @Override
-            public List<Renderer> getWalkRenderer() {
+            public List<Renderer> getWalkRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getWalkRenderer'");
             }
 
             @Override
-            public List<Renderer> getRunRenderer() {
+            public List<Renderer> getRunRenderer(final RendererFactory factoryl, final Player player) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'getRunRenderer'");
             }
