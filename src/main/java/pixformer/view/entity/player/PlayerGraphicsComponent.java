@@ -19,6 +19,7 @@ import pixformer.view.entity.CachedAnimatedGraphicsComponent;
  */
 public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
     private static final long SWITCH_TIME = 200;
+    private static final double IDLE_VELOCITY = 0.000_001;
 
     private final Player player;
 
@@ -54,15 +55,15 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
             animation = spriteFactory.getFireFlowerPlayerAnimation();
         }
 
-        if (player.getVelocity().y() < 0) {
+        if (player.getVelocity().y() != 0) {
             return animation.getJumpRenderer(factory, player);
         }
 
-        if(player.getVelocity().x() > PlayerInputComponent.BASE_SPEED_LIMIT) {
+        if(Math.abs(player.getVelocity().x()) > PlayerInputComponent.BASE_SPEED_LIMIT) {
             return animation.getRunRenderer(factory, player);
         }
 
-        if (player.getVelocity().x() > 0) {
+        if (player.getVelocity().x() > IDLE_VELOCITY) {
             return animation.getWalkRenderer(factory, player);
         }
 
