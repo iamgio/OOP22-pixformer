@@ -27,9 +27,9 @@ public class FireballGraphicsComponent extends CachedAnimatedGraphicsComponent {
     @Override
     protected List<Renderer> createRenderers(RendererFactory factory) {
         return List.of(
-            factory.newImage("/sprites/player/fireball_1.png", getEntity().getWidth(), getEntity().getHeight()),
-            factory.newImage("/sprites/player/fireball_2.png", getEntity().getWidth(), getEntity().getHeight()),
-            factory.newImage("/sprites/player/fireball_3.png", getEntity().getWidth(), getEntity().getHeight())
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_1.png", getEntity().getWidth(), getEntity().getHeight()),
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_2.png", getEntity().getWidth(), getEntity().getHeight()),
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_3.png", getEntity().getWidth(), getEntity().getHeight())
         );
     }
 
