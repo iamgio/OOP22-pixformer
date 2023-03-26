@@ -15,7 +15,7 @@ class TurtleKoopaTest {
 
     private void testTurtleMovesBecauseOfPlayer(final Vector2D playerPos, final double sign) {
         final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-        final TurtleKoopa koopa = new TurtleKoopa(1, 0, (__) -> { });
+        final TurtleKoopa koopa = new TurtleKoopa(1, 0, (__, ___) -> { });
         world.spawnEntity(new Player(playerPos.x(), playerPos.y(), 1, 1, 0));
         world.spawnEntity(koopa);
         assertEquals(koopa.getVelocity().x(), 0);
