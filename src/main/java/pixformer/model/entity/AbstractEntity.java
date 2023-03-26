@@ -140,4 +140,16 @@ public abstract class AbstractEntity implements MutableEntity {
     public void onSpawn(final World world) {
         this.world = world;
     }
+
+    @Override
+    public void update(final double dt) {
+        MutableEntity.super.update(dt);
+
+        // Fall kill
+        getWorld().ifPresent(world -> {
+            if (getY() >= world.getOptions().yFallThreshold()) {
+                world.queueEntityDrop(this);
+            }
+        });
+    }
 }

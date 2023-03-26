@@ -25,6 +25,11 @@ public interface World extends Updatable {
     Stream<Entity> getUpdatableEntities();
 
     /**
+     * @return this world's options
+     */
+    WorldOptions getOptions();
+
+    /**
      * @return the score manager of the game world
      */
     ScoreManager getScoreManager();

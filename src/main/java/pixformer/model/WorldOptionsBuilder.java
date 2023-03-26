@@ -6,6 +6,7 @@ package pixformer.model;
 public class WorldOptionsBuilder {
 
     private int updateRange;
+    private int yFallThreshold;
 
     /**
      * Sets a new update range.
@@ -18,9 +19,19 @@ public class WorldOptionsBuilder {
     }
 
     /**
+     * Sets a new Y fall threshold.
+     * @param yFallThreshold the minimum Y coordinate where entities are killed.
+     * @return this for concatenation
+     */
+    public WorldOptionsBuilder withYFallThreshold(final int yFallThreshold) {
+        this.yFallThreshold = yFallThreshold;
+        return this;
+    }
+
+    /**
      * @return a new {@link WorldOptions} instance with the specified properties.
      */
     public WorldOptions build() {
-        return new WorldOptions(updateRange);
+        return new WorldOptions(updateRange, yFallThreshold);
     }
 }
