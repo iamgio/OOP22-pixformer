@@ -32,8 +32,7 @@ public class ScoreImpl implements Score {
     }
 
     /**
-     * @param points points contained in the new score
-     * @return a new Score with updated points quantity
+     * {@inheritDoc}
      */
     @Override
     public Score copyWithPoints(final int points) {
@@ -41,8 +40,7 @@ public class ScoreImpl implements Score {
     }
 
     /**
-     * @param points points to add at the old score
-     * @return a new Score with an updated points quantity
+     * {@inheritDoc}
      */
     @Override
     public Score copyAddPoints(final int points) {
@@ -50,8 +48,7 @@ public class ScoreImpl implements Score {
     }
 
     /**
-     * @param coins coins contained in the new Score
-     * @return a new Score with an updated number of coins
+     * {@inheritDoc}
      */
     @Override
     public Score copyWithCoins(final int coins) {
@@ -59,8 +56,7 @@ public class ScoreImpl implements Score {
     }
 
     /**
-     * @param coins coins to add to the old coins values
-     * @return a new Score with an updated number of coins
+     * {@inheritDoc}
      */
     @Override
     public Score copyAddCoins(final int coins) {
