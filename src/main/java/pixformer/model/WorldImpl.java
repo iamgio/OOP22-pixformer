@@ -1,7 +1,6 @@
 package pixformer.model;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.entity.dynamic.player.Player;
@@ -97,6 +96,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public WorldOptions getOptions() {
+        return this.options;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
@@ -124,7 +131,10 @@ public class WorldImpl implements World {
      */
     @Override
     public void queueEntityDrop(final Entity entity) {
-        this.commandQueue.add(() -> this.entities.remove(entity));
+        this.commandQueue.add(() -> {
+            this.entities.remove(entity);
+            entity.onDespawn(this);
+        });
     }
 
     /**
@@ -148,6 +158,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
+        this.commandQueue.forEach(Runnable::run);
+        this.commandQueue.clear();
+
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
@@ -157,21 +170,7 @@ public class WorldImpl implements World {
             });
             entity.getInputComponent().ifPresent(ai -> ai.update(this));
 
-            if (entity instanceof MutableEntity mutableEntity) {
-                updatePosition(dt, mutableEntity);
-            }
+            entity.update(dt);
         });
-        this.commandQueue.forEach(Runnable::run);
-        this.commandQueue.clear();
-    }
-
-    /**
-     * Updates an entity's position depending on its velocity and possible nearby solid entities.
-     * @param dt dela time
-     * @param entity entity to update position of
-     */
-    private void updatePosition(final double dt, final MutableEntity entity) {
-        entity.setX(entity.getX() + dt * entity.getVelocity().x());
-        entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
 }
