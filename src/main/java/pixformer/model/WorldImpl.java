@@ -131,7 +131,10 @@ public class WorldImpl implements World {
      */
     @Override
     public void queueEntityDrop(final Entity entity) {
-        this.commandQueue.add(() -> this.entities.remove(entity));
+        this.commandQueue.add(() -> {
+            this.entities.remove(entity);
+            entity.onDespawn(this);
+        });
     }
 
     /**

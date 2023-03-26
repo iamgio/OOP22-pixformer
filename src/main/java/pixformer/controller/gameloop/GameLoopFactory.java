@@ -9,6 +9,7 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -52,6 +53,11 @@ public final class GameLoopFactory {
             view.update(dt);
             if (this.controller.getGameLoopManager().isRunning()) {
                 world.update(dt);
+            }
+
+            // Game over check
+            if (playersEntities.stream().map(Entity::getWorld).allMatch(Optional::isEmpty)) {
+                this.controller.getLevelManager().endCurrentLevel();
             }
 
             final double cameraPivotX = this.controller.calcEntitiesCommonPointX(playersEntities);

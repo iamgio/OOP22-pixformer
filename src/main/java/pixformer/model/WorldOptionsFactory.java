@@ -13,7 +13,7 @@ public final class WorldOptionsFactory {
     /**
      * The minimum Y coordinate where entities are killed.
      */
-    private static final int DEFAULT_Y_FALL_THRESHOLD = 100;
+    private static final int DEFAULT_Y_FALL_THRESHOLD = 50;
 
     /**
      * @return the default options for visual gameplay

@@ -98,4 +98,13 @@ public interface Entity extends Updatable {
     default void onSpawn(final World world) {
 
     }
+
+    /**
+     * Called when this entity is removed from a game world.
+     *
+     * @param world game world the entity despawned from
+     */
+    default void onDespawn(final World world) {
+
+    }
 }
