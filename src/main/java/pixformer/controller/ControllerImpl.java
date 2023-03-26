@@ -15,6 +15,7 @@ import pixformer.model.LevelImpl;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.score.Score;
 import pixformer.view.View;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
@@ -126,7 +127,7 @@ public final class ControllerImpl implements Controller {
     public List<Integer> getScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores();
+            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::getPoints).toList();
         }
         return new ArrayList<>();
     }

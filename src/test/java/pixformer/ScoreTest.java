@@ -30,9 +30,9 @@ public class ScoreTest {
     void testScore() {
         world.queueEntityKill(this.a, this.c);
         world.update(1);
-        assertEquals(100, world.getScoreManager().getScore(this.c));
+        assertEquals(100, world.getScoreManager().getScore(this.c).getPoints());
         world.queueEntityKill(this.b, this.c);
         world.update(1);
-        assertEquals(200, world.getScoreManager().getScore(this.c));
+        assertEquals(200, world.getScoreManager().getScore(this.c).getPoints());
     }
 }

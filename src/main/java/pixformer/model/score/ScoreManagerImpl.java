@@ -13,7 +13,6 @@ import java.util.*;
 public class ScoreManagerImpl implements ScoreManager {
     private static final int DEFAULT_SCORE_INCREMENT = 100;
     private static final int POLE_POINTS_INCREMENT = 1_000;
-    private static final int DEFAULT_REMAINING_COINS = 3;
     private final Map<Entity, Score> scoreMap;
     private final Set<Entity> winners;
 
@@ -36,12 +35,12 @@ public class ScoreManagerImpl implements ScoreManager {
     private void increaseScore(final Entity player, final Entity entity) {
         int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
         if (scoreMap.containsKey(player)) {
-            scoreMap.get(player).addPoints(points);
+            scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
         } else {
-            scoreMap.put(player, new ScoreImpl(points));
+            scoreMap.put(player, new ScoreImpl(points, 0));
         }
         if (entity instanceof Coin) {
-            scoreMap.get(player).grabCoin();
+            scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
         }
     }
 
@@ -49,27 +48,27 @@ public class ScoreManagerImpl implements ScoreManager {
      * {@inheritDoc}
      */
     @Override
-    public int getScore(final Entity entity) {
-        return this.scoreMap.getOrDefault(entity, new ScoreImpl(0)).getPoints();
+    public Score getScore(final Entity entity) {
+        return this.scoreMap.getOrDefault(entity, new ScoreImpl(0, 0));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Integer> getAllScores() {
-        return this.scoreMap.values().stream().map(Score::getPoints).toList();
+    public List<Score> getAllScores() {
+        return this.scoreMap.values().stream().toList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getRemainingCoins() {
+    public int getTotalCoins() {
         return this.scoreMap.values().stream()
-                .map(Score::getRemainingCoins)
+                .map(Score::getCoins)
                 .filter(i -> i > 0)
-                .reduce(Integer::sum).orElse(DEFAULT_REMAINING_COINS);
+                .reduce(Integer::sum).orElse(0);
     }
 
     /**
