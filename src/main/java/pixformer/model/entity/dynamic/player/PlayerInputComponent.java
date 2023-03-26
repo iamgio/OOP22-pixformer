@@ -19,8 +19,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private static final float MAX_JUMP_DURATION = 0.01f;
 
     // Speed-limits of the player
-    private static final float BASE_SPEED_LIMIT = 0.01f;
-    private static final float SPRINT_SPEED_LIMIT = 0.02f;
+    public static final float BASE_SPEED_LIMIT = 0.01f;
+    public static final float SPRINT_SPEED_LIMIT = 0.02f;
 
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
