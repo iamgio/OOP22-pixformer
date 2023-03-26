@@ -18,8 +18,11 @@ import java.util.Set;
  */
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
+    private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
 
     private final Player player;
+    private final double baseWidth;
+    private final double baseHeight;
 
     private boolean isOnGround = false;
 
@@ -32,6 +35,8 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     protected PlayerCollisionComponent(final Player player) {
         super(player);
         this.player = player;
+        this.baseHeight = player.getHeight();
+        this.baseWidth = player.getHeight();
     }
 
     /**
@@ -72,6 +77,20 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }
+        }
+        
+        checkPlayerSize();
+    }
+
+    private void checkPlayerSize() {
+        double previousHeight = player.getHeight();
+
+        player.setHeight(player.getPowerupBehaviour().isEmpty() ? baseHeight : baseHeight * BIG_PLAYER_SIZE_MULTIPLIER);
+
+        if(previousHeight > player.getHeight()) {
+            player.setY(player.getY() + previousHeight - player.getHeight());
+        } else if (previousHeight < player.getHeight()) {
+            player.setY(player.getY() - previousHeight + player.getHeight());
         }
     }
 }
