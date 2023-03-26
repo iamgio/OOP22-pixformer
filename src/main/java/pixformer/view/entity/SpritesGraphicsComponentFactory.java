@@ -3,7 +3,6 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
-import pixformer.view.engine.Color;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.statics.*;
 
