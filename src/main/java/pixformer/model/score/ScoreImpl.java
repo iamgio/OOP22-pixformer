@@ -4,18 +4,15 @@ package pixformer.model.score;
  * {@inheritDoc}.
  */
 public class ScoreImpl implements Score {
-
-    private static final int DEFAULT_COINS_NUMBER = 3;
-
     private int points;
     private int coinsNumber;
 
     /**
      * Constructor for the class.
      */
-    public ScoreImpl(final int points) {
+    public ScoreImpl(final int points, final int coinsNumber) {
         this.points = points;
-        this.coinsNumber = DEFAULT_COINS_NUMBER;
+        this.coinsNumber = coinsNumber >= 0 ? coinsNumber : 0;
     }
 
     /**
@@ -30,23 +27,43 @@ public class ScoreImpl implements Score {
      * {@inheritDoc}
      */
     @Override
-    public void addPoints(final int points) {
-        this.points += points;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getRemainingCoins() {
+    public int getCoins() {
         return this.coinsNumber;
     }
 
     /**
-     * {@inheritDoc}
+     * @param points points contained in the new score
+     * @return a new Score with updated points quantity
      */
     @Override
-    public void grabCoin() {
-        this.coinsNumber--;
+    public Score copyWithPoints(final int points) {
+        return new ScoreImpl(points, this.coinsNumber);
+    }
+
+    /**
+     * @param points points to add at the old score
+     * @return a new Score with an updated points quantity
+     */
+    @Override
+    public Score copyAddPoints(final int points) {
+        return new ScoreImpl(this.points + points, this.coinsNumber);
+    }
+
+    /**
+     * @param coins coins contained in the new Score
+     * @return a new Score with an updated number of coins
+     */
+    @Override
+    public Score copyWithCoins(final int coins) {
+        return new ScoreImpl(this.points, coins);
+    }
+
+    /**
+     * @param coins coins to add to the old coins values
+     * @return a new Score with an updated number of coins
+     */
+    @Override
+    public Score copyAddCoins(final int coins) {
+        return new ScoreImpl(this.points, this.coinsNumber + coins);
     }
 }

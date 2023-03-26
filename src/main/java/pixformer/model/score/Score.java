@@ -11,20 +11,15 @@ public interface Score {
     int getPoints();
 
     /**
-     * Method to update the score adding a new value to the old value.
-     *
-     * @param points points to add
-     */
-    void addPoints(int points);
-
-    /**
      * @return the remaining coins to get in the game
      */
-    int getRemainingCoins();
+    int getCoins();
 
-    /**
-     * Method to update the coins in the game, used when a player grab
-     * a coin in the game.
-     */
-    void grabCoin();
+    Score copyWithPoints(int points);
+
+    Score copyAddPoints(int points);
+
+    Score copyWithCoins(int coins);
+
+    Score copyAddCoins(int coins);
 }
