@@ -41,4 +41,13 @@ public interface MutableEntity extends Entity {
      * @param velocity the new velocity
      */
     void setVelocity(Vector2D velocity);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    default void update(final double dt) {
+        setX(getX() + dt * getVelocity().x());
+        setY(getY() + dt * getVelocity().y());
+    }
 }
