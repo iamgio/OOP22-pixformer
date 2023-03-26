@@ -12,7 +12,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState {
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
     private static final double HEIGHT = 2;
-    private final Runnable changeToTurtle;
+    private final CollisionComponent collisionComponent;
 
     /**
      * Construct a WalkingKoopa.
@@ -23,12 +23,12 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState {
      */
     public WalkingKoopa(final double x, final double y, final Runnable changeToTurtle) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
-        this.changeToTurtle = changeToTurtle;
+        this.collisionComponent = new ActionOnPressedCollisionComponent(this, e -> changeToTurtle.run());
     }
 
     @Override
     public Optional<CollisionComponent> getCollisionComponent() {
-        return Optional.of(new ActionOnPressedCollisionComponent(this, e -> changeToTurtle.run()));
+        return Optional.of(collisionComponent);
     }
 
     @Override
