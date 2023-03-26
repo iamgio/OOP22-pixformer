@@ -5,7 +5,6 @@ import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
-import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
@@ -17,13 +16,10 @@ import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
 
-import java.util.Optional;
-import java.util.function.Consumer;
-
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
+public final class ViewImpl implements View {
 
     private static final double CAMERA_X_OFFSET = -10;
     private static final double CAMERA_Y_OFFSET = 5;
@@ -39,8 +35,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final ObservableWritableWrapper<Camera> camera;
 
     private TextRenderer scoreLabel;
-
-    private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
      * Initializes the default view.
@@ -145,15 +139,5 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
             counter++;
             this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
-        final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
-        controllerCommand = Optional.empty();
-        return tmp;
     }
 }
