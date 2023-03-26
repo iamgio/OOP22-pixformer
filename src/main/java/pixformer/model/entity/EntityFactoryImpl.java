@@ -61,7 +61,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("surprise")
     @Override
     public Entity createSurpriseBlock(final int x, final int y) {
-        return new Surprise(x, y, graphicsComponentFactory::surpriseBlock);
+        return new Surprise(x, y, graphicsComponentFactory::surpriseBlock, this);
     }
 
     /**
