@@ -1,47 +1,72 @@
 package pixformer.view.entity.player;
 
 import pixformer.view.engine.Color;
-import pixformer.model.entity.GraphicsComponent;
+
+import java.util.List;
+import java.util.Optional;
+
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.view.engine.GameScene;
-import pixformer.view.engine.RectangleRenderer;
+import pixformer.model.entity.dynamic.player.PlayerInputComponent;
+import pixformer.model.entity.powerup.PowerupBehaviour;
+import pixformer.model.entity.powerup.powerups.FireFlower;
+import pixformer.model.entity.powerup.powerups.Mushroom;
+import pixformer.view.engine.Renderer;
+import pixformer.view.engine.RendererFactory;
+import pixformer.view.entity.CachedAnimatedGraphicsComponent;
 
 /**
  * Implementation of GraphicComponent for a Player entity.
  */
-public class PlayerGraphicsComponent extends GraphicsComponent {
-    private final double width;
-    private final double height;
+public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
+    private static final long SWITCH_TIME = 200;
 
-    private boolean isAlive = true;
+    private final Player player;
 
     /**
      * 
      * @param player Player entity who will be displayed.
      */
     public PlayerGraphicsComponent(final Player player) {
-        super(player);
-        this.width = player.getWidth();
-        this.height = player.getHeight();
+        super(player, SWITCH_TIME);
+        this.player = player;
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
+     * @implNote it saves the new renderers on cache at initialization
      */
     @Override
-    public void update(final GameScene scene) {
-        if (this.isAlive) {
-            final RectangleRenderer playerShape = scene.getRendererFactory().newRectangle(width, height);
-            playerShape.setColor(new Color(1, 1, 1));
-            scene.getGraphics().draw(playerShape);
-        }
+    protected List<Renderer> getRenderers(final RendererFactory factory) {
+        return createRenderers(factory);
     }
 
-    /**
-     * Describe what happens on Player death.
-     */
-    public void startDeathAnimation() {
-        isAlive = false;
+    @Override
+    protected List<Renderer> createRenderers(RendererFactory factory) {
+        PlayerSpriteFactory spriteFactory = new PlayerSpriteFactory();
+        PlayerAnimation animation = spriteFactory.getPlayerAnimation();
+
+        Optional<PowerupBehaviour> currentPowerup = player.getPowerup().getBehaviour();
+        if(currentPowerup.isEmpty()){
+            animation = spriteFactory.getPlayerAnimation();
+        } else if (currentPowerup.get() instanceof Mushroom) {
+            animation = spriteFactory.getMushroomPlayerAnimation();
+        } else if (currentPowerup.get() instanceof FireFlower) {
+            animation = spriteFactory.getFireFlowerPlayerAnimation();
+        }
+
+        if (player.getVelocity().y() < 0) {
+            return animation.getJumpRenderer(factory, player);
+        }
+
+        if(player.getVelocity().x() > PlayerInputComponent.BASE_SPEED_LIMIT) {
+            return animation.getRunRenderer(factory, player);
+        }
+
+        if (player.getVelocity().x() > 0) {
+            return animation.getWalkRenderer(factory, player);
+        }
+
+        return animation.getIdleRenderer(factory, player);
     }
 
 }
