@@ -1,10 +1,12 @@
 package pixformer.view.entity.player;
 
 import pixformer.view.engine.Color;
+import pixformer.view.engine.GameScene;
 
 import java.util.List;
 import java.util.Optional;
 
+import pixformer.common.Vector2D;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerInputComponent;
 import pixformer.model.entity.powerup.PowerupBehaviour;
@@ -19,9 +21,11 @@ import pixformer.view.entity.CachedAnimatedGraphicsComponent;
  */
 public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
     private static final long SWITCH_TIME = 200;
-    private static final double IDLE_VELOCITY = 0.000_001;
+    private static final double IDLE_VELOCITY = 0.000_000_1;
 
     private final Player player;
+    private PlayerState previousState;
+    private List<Renderer> renderers;
 
     /**
      * 
@@ -30,6 +34,7 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
     public PlayerGraphicsComponent(final Player player) {
         super(player, SWITCH_TIME);
         this.player = player;
+        this.previousState = new PlayerState(player.getPowerupBehaviour(), player.getVelocity());
     }
 
     /**
@@ -38,7 +43,14 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
      */
     @Override
     protected List<Renderer> getRenderers(final RendererFactory factory) {
-        return createRenderers(factory);
+        PlayerState newState = getNewPlayerState(player);
+
+        if (!previousState.equals(newState) || renderers == null) {
+            renderers = createRenderers(factory);
+        }
+
+        previousState = newState;
+        return renderers;
     }
 
     @Override
@@ -63,11 +75,33 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
             return animation.getRunRenderer(factory, player);
         }
 
-        if (player.getVelocity().x() > IDLE_VELOCITY) {
+        if (Math.abs(player.getVelocity().x()) > IDLE_VELOCITY) {
             return animation.getWalkRenderer(factory, player);
         }
 
         return animation.getIdleRenderer(factory, player);
+    }
+
+    private PlayerState getNewPlayerState(final Player player) {
+        double fixedX = 0;
+        double fixedY = 0;
+
+        if (Math.abs(player.getVelocity().x()) > PlayerInputComponent.BASE_SPEED_LIMIT) {
+            fixedX = 2;
+        } else if (Math.abs(player.getVelocity().x()) > IDLE_VELOCITY) {
+            fixedX = 1;
+        }
+
+        fixedX *= Math.signum(player.getVelocity().x());
+
+        if(player.getVelocity().y() > 0) {
+            fixedY = 1;
+        } else if (player.getVelocity().y() < 0) {
+            fixedY = -1;
+        }
+
+        Vector2D fixedVelocity = new Vector2D(fixedX, fixedY);
+        return new PlayerState(player.getPowerupBehaviour(), fixedVelocity);
     }
 
 }
