@@ -1,6 +1,7 @@
 package pixformer.model.entity.dynamic;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import pixformer.model.entity.AbstractEntity;
@@ -28,11 +29,11 @@ public final class TurtleKoopa extends AbstractEntity implements KoopaState, Def
      * @param y its initial y position.
      * @param die called by passing the killer entity, it kills this entity.
      */
-    public TurtleKoopa(final double x, final double y, final Consumer<Entity> die) {
+    public TurtleKoopa(final double x, final double y, final BiConsumer<Entity, Entity> die) {
         super(x, y, WIDTH, HEIGHT);
         inputComponent = new TurtleKoopaInputComponent(this);
         physicsComponent = new PhysicsComponent(this);
-        collisionComponent = new TurtleKoopaCollisionComponent(this, die);
+        collisionComponent = new TurtleKoopaCollisionComponent(this, killer -> die.accept(this, killer));
     }
     @Override
     public boolean isWalking() {
