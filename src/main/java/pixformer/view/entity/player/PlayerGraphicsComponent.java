@@ -1,8 +1,5 @@
 package pixformer.view.entity.player;
 
-import pixformer.view.engine.Color;
-import pixformer.view.engine.GameScene;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -53,13 +50,16 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
         return renderers;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected List<Renderer> createRenderers(RendererFactory factory) {
+    protected List<Renderer> createRenderers(final RendererFactory factory) {
         PlayerSpriteFactory spriteFactory = new PlayerSpriteFactory();
         PlayerAnimation animation = spriteFactory.getPlayerAnimation();
 
         Optional<PowerupBehaviour> currentPowerup = player.getPowerup().getBehaviour();
-        if(currentPowerup.isEmpty()){
+        if (currentPowerup.isEmpty()) {
             animation = spriteFactory.getPlayerAnimation();
         } else if (currentPowerup.get() instanceof Mushroom) {
             animation = spriteFactory.getMushroomPlayerAnimation();
@@ -71,7 +71,7 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
             return animation.getJumpRenderer(factory, player);
         }
 
-        if(Math.abs(player.getVelocity().x()) > PlayerInputComponent.BASE_SPEED_LIMIT) {
+        if (Math.abs(player.getVelocity().x()) > PlayerInputComponent.BASE_SPEED_LIMIT) {
             return animation.getRunRenderer(factory, player);
         }
 
@@ -94,7 +94,7 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
 
         fixedX *= Math.signum(player.getVelocity().x());
 
-        if(player.getVelocity().y() > 0) {
+        if (player.getVelocity().y() > 0) {
             fixedY = 1;
         } else if (player.getVelocity().y() < 0) {
             fixedY = -1;

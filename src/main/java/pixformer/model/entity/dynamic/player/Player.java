@@ -14,7 +14,6 @@ import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 
-import java.lang.StackWalker.Option;
 import java.util.Optional;
 
 /**
@@ -40,8 +39,8 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * 
      * @param x      X position of the player.
      * @param y      Y position of the player.
-     * @param width  Width of the player.
-     * @param height Height of the player.
+     * @param width  Width of the base player.
+     * @param height Height of the base player.
      * @param playerIndex Index of this player istance.
      */
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {

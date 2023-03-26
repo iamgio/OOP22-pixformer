@@ -2,11 +2,7 @@ package pixformer.view.entity.powerups.fireball;
 
 import java.util.List;
 
-import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.powerup.other.fireball.Fireball;
-import pixformer.view.engine.Color;
-import pixformer.view.engine.GameScene;
-import pixformer.view.engine.RectangleRenderer;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.CachedAnimatedGraphicsComponent;
@@ -24,12 +20,18 @@ public class FireballGraphicsComponent extends CachedAnimatedGraphicsComponent {
         super(fireball, SWITCH_TIME);
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
-    protected List<Renderer> createRenderers(RendererFactory factory) {
+    protected List<Renderer> createRenderers(final RendererFactory factory) {
         return List.of(
-            factory.newImage("/sprites/player/powerups/other/fireball/fireball_1.png", getEntity().getWidth(), getEntity().getHeight()),
-            factory.newImage("/sprites/player/powerups/other/fireball/fireball_2.png", getEntity().getWidth(), getEntity().getHeight()),
-            factory.newImage("/sprites/player/powerups/other/fireball/fireball_3.png", getEntity().getWidth(), getEntity().getHeight())
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_1.png",
+             getEntity().getWidth(), getEntity().getHeight()),
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_2.png",
+             getEntity().getWidth(), getEntity().getHeight()),
+            factory.newImage("/sprites/player/powerups/other/fireball/fireball_3.png",
+             getEntity().getWidth(), getEntity().getHeight())
         );
     }
 

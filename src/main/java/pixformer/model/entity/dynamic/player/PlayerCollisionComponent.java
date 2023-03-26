@@ -1,15 +1,11 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.time.ChronometerImpl;
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
-import pixformer.model.entity.statics.Block;
-import pixformer.model.entity.statics.Brick;
-import pixformer.model.entity.statics.Surprise;
 
 import java.util.Set;
 
@@ -21,7 +17,6 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
 
     private final Player player;
-    private final double baseWidth;
     private final double baseHeight;
 
     private boolean isOnGround = false;
@@ -36,7 +31,6 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         super(player);
         this.player = player;
         this.baseHeight = player.getHeight();
-        this.baseWidth = player.getHeight();
     }
 
     /**
@@ -65,7 +59,8 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
 
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
-                if (invulnerabilityChronometer.getTimeElapsed() == 0 || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
+                if (invulnerabilityChronometer.getTimeElapsed() == 0 || 
+                invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
 
                     this.player.damaged();
 
@@ -78,7 +73,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }
         }
-        
+
         checkPlayerSize();
     }
 
@@ -87,7 +82,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
         player.setHeight(player.getPowerupBehaviour().isEmpty() ? baseHeight : baseHeight * BIG_PLAYER_SIZE_MULTIPLIER);
 
-        if(previousHeight > player.getHeight()) {
+        if (previousHeight > player.getHeight()) {
             player.setY(player.getY() + previousHeight - player.getHeight());
         } else if (previousHeight < player.getHeight()) {
             player.setY(player.getY() - previousHeight + player.getHeight());

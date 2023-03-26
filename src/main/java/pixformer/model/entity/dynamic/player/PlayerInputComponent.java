@@ -18,8 +18,14 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Max duration of a jump
     private static final float MAX_JUMP_DURATION = 0.01f;
 
-    // Speed-limits of the player
+    /**
+     * Max speed limit of a walking player.
+     */
     public static final float BASE_SPEED_LIMIT = 0.01f;
+
+    /**
+     * Max speed limit of a sprinting player.
+     */
     public static final float SPRINT_SPEED_LIMIT = 0.02f;
 
     // Ability cooldown in milliseconds

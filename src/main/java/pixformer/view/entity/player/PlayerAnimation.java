@@ -7,8 +7,31 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 
 public interface PlayerAnimation {
-    List<Renderer> getIdleRenderer(final RendererFactory factory, final Player player);
-    List<Renderer> getWalkRenderer(final RendererFactory factory, final Player player);
-    List<Renderer> getRunRenderer(final RendererFactory factory, final Player player);
-    List<Renderer> getJumpRenderer(final RendererFactory factory, final Player player);
+    /**
+     * @param factory the factory to create renders from.
+     * @param player the player to animate.
+     * @return an animation of a player in idle state.
+     */
+    List<Renderer> getIdleRenderer(RendererFactory factory, Player player);
+
+    /**
+     * @param factory the factory to create renders from.
+     * @param player the player to animate.
+     * @return an animation of a player in walking state.
+     */
+    List<Renderer> getWalkRenderer(RendererFactory factory, Player player);
+
+    /**
+     * @param factory the factory to create renders from.
+     * @param player the player to animate.
+     * @return an animation of a player in running state.
+     */
+    List<Renderer> getRunRenderer(RendererFactory factory, Player player);
+
+    /**
+     * @param factory the factory to create renders from.
+     * @param player the player to animate.
+     * @return an animation of a player in jumping state.
+     */
+    List<Renderer> getJumpRenderer(RendererFactory factory, Player player);
 }
