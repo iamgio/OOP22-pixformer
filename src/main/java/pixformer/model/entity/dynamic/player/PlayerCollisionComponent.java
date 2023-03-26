@@ -15,6 +15,7 @@ import java.util.Set;
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
     private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
+    private static final double PLAYER_FRICTION = 0.968;
 
     private final Player player;
     private final double baseHeight;
@@ -28,7 +29,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
      * @param player Player entity whose collisions will be managed.
      */
     protected PlayerCollisionComponent(final Player player) {
-        super(player);
+        super(player, PLAYER_FRICTION);
         this.player = player;
         this.baseHeight = player.getHeight();
     }

@@ -18,7 +18,7 @@ import pixformer.view.entity.CachedAnimatedGraphicsComponent;
  */
 public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
     private static final long SWITCH_TIME = 200;
-    private static final double IDLE_VELOCITY = 0.000_000_1;
+    private static final double IDLE_VELOCITY = 0.000_1;
 
     private final Player player;
     private PlayerState previousState;
