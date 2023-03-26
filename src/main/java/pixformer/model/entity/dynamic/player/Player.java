@@ -13,6 +13,8 @@ import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
+
+import java.lang.StackWalker.Option;
 import java.util.Optional;
 
 /**
@@ -117,7 +119,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
         if (!powerup.getBehaviour().isPresent() || powerupBehaviour.getPriority() == powerup.getBehaviour().get().getPriority()) {
-            powerup.setBehaviour(powerupBehaviour);
+            powerup.setBehaviour(Optional.of(powerupBehaviour));
         } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
@@ -158,7 +160,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
             return;
         }
 
-        powerup.setBehaviour(null);
+        powerup.setBehaviour(Optional.empty());
     }
 
     /**

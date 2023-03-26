@@ -56,8 +56,8 @@ public class PowerUp {
      * Set the new current powerupBehaviour.
      * @param powerupBehaviour new current entity powerup.
      */
-    public void setBehaviour(final PowerupBehaviour powerupBehaviour) {
-        this.behaviour = Optional.of(powerupBehaviour);
+    public void setBehaviour(final Optional<PowerupBehaviour> powerupBehaviour) {
+        this.behaviour = powerupBehaviour;
     }
 
 }
