@@ -9,7 +9,6 @@ import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.Koopa;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Block;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
@@ -52,6 +51,7 @@ final class OnPressedTest {
         final Entity goomba = factory.createGoomba(0, 2);
         final World world = createPrisonAndFallingPlayer(goomba);
         assertTrue(world.getEntities().contains(goomba));
+        world.update(DT);
         world.update(DT);
         assertFalse(world.getEntities().contains(goomba));
     }

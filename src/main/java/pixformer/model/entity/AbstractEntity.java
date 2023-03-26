@@ -157,7 +157,6 @@ public abstract class AbstractEntity implements MutableEntity {
         // Fall kill
         getWorld().ifPresent(world -> {
             if (getY() >= world.getOptions().yFallThreshold()) {
-                System.out.println("drop");
                 world.queueEntityDrop(this);
             }
         });
