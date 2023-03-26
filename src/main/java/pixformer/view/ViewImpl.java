@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
 
     private static final double CAMERA_X_OFFSET = -10;
-    private static final double CAMERA_Y_OFFSET = 15;
+    private static final double CAMERA_Y_OFFSET = 5;
     private static final double CAMERA_Y_OFFSET_SCALE_DIVISOR = 200;
 
     private static final double CAMERA_SCALE_OFFSET = 20;
