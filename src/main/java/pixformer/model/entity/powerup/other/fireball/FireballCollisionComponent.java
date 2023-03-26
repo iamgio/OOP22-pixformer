@@ -5,6 +5,7 @@ import pixformer.model.World;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.statics.Coin;
 
 import java.util.Set;
 
@@ -19,6 +20,8 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
     private final World world;
 
     private final ChronometerImpl despawnCronometer = new ChronometerImpl();
+
+    private final Set<Class<?>> collisionIgnoreEntities = Set.of(Player.class, Coin.class);
 
     /**
      * 
@@ -46,7 +49,8 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
         }
 
         for (final var collisor : collisions) {
-            if (collisor.side().isHorizontal() && !(collisor.entity() instanceof Player)) {
+            if (collisor.side().isHorizontal() && 
+                collisionIgnoreEntities.stream().noneMatch(c -> c.isInstance(collisor.entity()))) {
                 world.queueEntityDrop(fireball);
             }
         }
