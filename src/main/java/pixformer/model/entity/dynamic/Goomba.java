@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * The enemy goomba.
  */
-public final class Goomba extends EnemyImpl implements DrawableEntity {
+public final class Goomba extends EnemyImpl implements DrawableEntity, Enemy {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;

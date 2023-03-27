@@ -19,7 +19,7 @@ public class GoombaCollisionComponent extends CollisionComponent {
     public GoombaCollisionComponent(final MutableEntity entity) {
         super(entity);
         this.solidCollisionComponent = new SolidCollisionComponent(entity);
-        final Consumer<Entity> kill = killer -> entity.getWorld().get().killEntity(entity, killer);
+        final Consumer<Entity> kill = killer -> entity.getWorld().get().queueEntityKill(entity, killer);
         this.collisionReactor = CollisionReactorFactory.compose(
             new ActionOnPressedCollisionReactor(kill),
             new DieByTurtleCollisionReactor(kill)
