@@ -27,8 +27,7 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
      */
     public TurtleKoopaInputComponent(final MutableEntity entity) {
         super(entity);
-        final MutableEntity proxied = new ProxyMutableEntity(entity);
-        wrappedInputComponent = new GoombaAI(getEntity(), proxied::setVelocity, VELOCITY,
+        wrappedInputComponent = new GoombaAI(getEntity(), new OnlyXVelocitySetter(entity), VELOCITY,
                 e -> e instanceof Block || e instanceof Player, NO_ACTION);
     }
     @Override

@@ -47,7 +47,7 @@ public final class MovingPowerupEntity extends AbstractEntity
     public MovingPowerupEntity(final double x, final double y, final PowerupBehaviour powerupBehaviour,
                                final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
-        final Consumer<Vector2D> setter = new ProxyMutableEntity(this)::setVelocity;
+        final Consumer<Vector2D> setter = new OnlyXVelocitySetter(this);
         inputComponent = new GoombaAI(this, setter, VELOCITY, Entity::isSolid, HorizontalModelInput::right);
         this.powerupBehaviour = powerupBehaviour;
         this.graphicsComponent = graphicsComponent.apply(this);
