@@ -23,5 +23,6 @@ public class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         super.update(dt, collisions);
+        reactor.react(collisions);
     }
 }
