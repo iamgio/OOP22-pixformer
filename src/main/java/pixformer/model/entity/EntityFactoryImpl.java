@@ -107,7 +107,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     }
 
     public Entity createTurtleKoopa(final double x, final double y) {
-        return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::walkingKoopa);
+        return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
     }
 
     /**
