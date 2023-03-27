@@ -9,8 +9,7 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.statics.Block;
-import pixformer.view.entity.SpritesGraphicsComponentFactory;
+import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
 
@@ -35,7 +34,7 @@ public class CollisionsTest {
     @BeforeEach
     void setup() {
         this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
+        this.entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
         this.entity = new TestEntity(0, 0);
         world.spawnEntity(entity);
     }

@@ -1,7 +1,6 @@
 package pixformer.model;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
 import pixformer.model.entity.dynamic.player.Player;
@@ -12,6 +11,8 @@ import pixformer.model.score.ScoreManagerImpl;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,11 +24,10 @@ public class WorldImpl implements World {
 
     private final WorldOptions options;
     private final Set<Entity> entities;
-    private final Set<Entity> killedEntities;
-    private final Set<Entity> toSpawnEntities;
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
+    private final List<Runnable> commandQueue;
 
     private Set<Entity> lazyUserControlledEntity;
 
@@ -39,8 +39,7 @@ public class WorldImpl implements World {
     public WorldImpl(final WorldOptions options) {
         this.options = options;
         this.entities = new HashSet<>();
-        this.killedEntities = new HashSet<>();
-        this.toSpawnEntities = new HashSet<>();
+        this.commandQueue = new LinkedList<>();
         this.collisionManager = new EntityCollisionManagerImpl(this);
         this.eventManager = new EventManager();
         this.scoreManager = new ScoreManagerImpl(this.eventManager);
@@ -97,6 +96,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public WorldOptions getOptions() {
+        return this.options;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void spawnEntity(final Entity entity) {
         this.entities.add(entity);
         entity.onSpawn(this);
@@ -106,25 +113,28 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void addEntityToSpawn(final Entity entity) {
-        this.toSpawnEntities.add(entity);
+    public void queueEntitySpawn(final Entity entity) {
+        this.commandQueue.add(() -> spawnEntity(entity));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void killEntity(final Entity entity, final Entity player) {
-        this.killedEntities.add(entity);
-        eventManager.killed(entity, player);
+    public void queueEntityKill(final Entity killed, final Entity killer) {
+        this.queueEntityDrop(killed);
+        eventManager.killed(killed, killer);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void dropEntity(final Entity entity) {
-        this.killedEntities.add(entity);
+    public void queueEntityDrop(final Entity entity) {
+        this.commandQueue.add(() -> {
+            this.entities.remove(entity);
+            entity.onDespawn(this);
+        });
     }
 
     /**
@@ -139,8 +149,8 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void endGame(Player winner) {
-        // TODO
+    public void endGame(final Player player) {
+        this.scoreManager.passedFinishLine(player);
     }
 
     /**
@@ -148,6 +158,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
+        this.commandQueue.forEach(Runnable::run);
+        this.commandQueue.clear();
+
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
@@ -157,24 +170,7 @@ public class WorldImpl implements World {
             });
             entity.getInputComponent().ifPresent(ai -> ai.update(this));
 
-            if (entity instanceof MutableEntity mutableEntity) {
-                updatePosition(dt, mutableEntity);
-            }
+            entity.update(dt);
         });
-        this.entities.removeAll(this.killedEntities);
-        for (var entity : this.toSpawnEntities) {
-            spawnEntity(entity);
-        }
-        this.toSpawnEntities.clear();
-    }
-
-    /**
-     * Updates an entity's position depending on its velocity and possible nearby solid entities.
-     * @param dt dela time
-     * @param entity entity to update position of
-     */
-    private void updatePosition(final double dt, final MutableEntity entity) {
-        entity.setX(entity.getX() + dt * entity.getVelocity().x());
-        entity.setY(entity.getY() + dt * entity.getVelocity().y());
     }
 }

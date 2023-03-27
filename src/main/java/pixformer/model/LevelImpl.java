@@ -75,9 +75,9 @@ public class LevelImpl implements Level {
     @Override
     public void setup(final int playersAmount) {
         this.data.entities().forEach(this.world::spawnEntity);
-        // TODO put player at spawn point from level data
+
         IntStream.range(0, playersAmount).forEach(i -> {
-            Entity player = this.createPlayer(i);
+            Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
             this.world.spawnEntity(player);
 
             player.getInputComponent().ifPresent(inputComponent -> {
@@ -90,8 +90,7 @@ public class LevelImpl implements Level {
      * @param playerIndex index of the player, starting from 0
      * @return a new player entity
      */
-    private Entity createPlayer(final int playerIndex) {
-        //return new TestEntity(playerIndex * 5);
-         return new Player(8, 15, 1, 1, playerIndex);
+    private Entity createPlayer(final int playerIndex, final double startX, final double startY) {
+         return new Player(startX, startY, 1, 1, playerIndex);
     }
 }

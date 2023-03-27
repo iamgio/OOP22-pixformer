@@ -14,9 +14,11 @@ import java.util.Set;
  */
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
-    private static final double PUSH_DOWN_FORCE = 0.005;
+    private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
+    private static final double PLAYER_FRICTION = 0.968;
 
     private final Player player;
+    private final double baseHeight;
 
     private boolean isOnGround = false;
 
@@ -27,10 +29,14 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
      * @param player Player entity whose collisions will be managed.
      */
     protected PlayerCollisionComponent(final Player player) {
-        super(player);
+        super(player, PLAYER_FRICTION);
         this.player = player;
+        this.baseHeight = player.getHeight();
     }
 
+    /**
+     * @return true if player is touching ground, other false.
+     */
     public boolean getIsOnGround() {
         return isOnGround;
     }
@@ -47,14 +53,15 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
         for (final var collisor : collisions) {
 
-            if (collisor.entity() instanceof Enemy && collisor.side().isVertical()) {
+            if (collisor.entity() instanceof Enemy && collisor.side() == CollisionSide.BOTTOM) {
                 this.player.onEnemyJump();
             } else if (isCollidingGround(collisions)) {
                 isOnGround = true;
             }
 
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
-                if (invulnerabilityChronometer.getTimeElapsed() == 0 || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
+                if (invulnerabilityChronometer.getTimeElapsed() == 0 || 
+                invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
 
                     this.player.damaged();
 
@@ -66,10 +73,20 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }
+        }
 
-            if (collisor.side() == CollisionSide.TOP) {
-                this.player.setVelocity(player.getVelocity().copyWithY(PUSH_DOWN_FORCE));
-            }
+        checkPlayerSize();
+    }
+
+    private void checkPlayerSize() {
+        double previousHeight = player.getHeight();
+
+        player.setHeight(player.getPowerupBehaviour().isEmpty() ? baseHeight : baseHeight * BIG_PLAYER_SIZE_MULTIPLIER);
+
+        if (previousHeight > player.getHeight()) {
+            player.setY(player.getY() + previousHeight - player.getHeight());
+        } else if (previousHeight < player.getHeight()) {
+            player.setY(player.getY() - previousHeight + player.getHeight());
         }
     }
 }

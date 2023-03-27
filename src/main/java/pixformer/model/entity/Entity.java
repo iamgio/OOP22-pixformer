@@ -1,5 +1,6 @@
 package pixformer.model.entity;
 
+import pixformer.common.Updatable;
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.BoundingBox;
@@ -12,7 +13,7 @@ import java.util.Optional;
 /**
  * In-Game entity.
  */
-public interface Entity {
+public interface Entity extends Updatable {
 
     /**
      * @return the world this entity lives in, if it exists
@@ -95,6 +96,15 @@ public interface Entity {
      * @param world game world the entity spawned on
      */
     default void onSpawn(final World world) {
+
+    }
+
+    /**
+     * Called when this entity is removed from a game world.
+     *
+     * @param world game world the entity despawned from
+     */
+    default void onDespawn(final World world) {
 
     }
 }

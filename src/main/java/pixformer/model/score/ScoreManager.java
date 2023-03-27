@@ -1,6 +1,7 @@
 package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.List;
 
@@ -12,16 +13,21 @@ public interface ScoreManager {
     /**
      * @return the score of the player
      */
-    int getScore(Entity entity);
+    Score getScore(Entity entity);
 
     /**
-     * @return a list containing the ordered scores of each player
+     * @return a list containing the scores of each player
      */
-    List<Integer> getAllScores();
+    List<Score> getAllScores();
 
     /**
      * @return the remaining coins in the game
      */
-    int getRemainingCoins();
+    int getTotalCoins();
+
+    /**
+     * Method to manage when a player hit the finish line.
+     */
+    void passedFinishLine(Player player);
 
 }

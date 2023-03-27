@@ -12,6 +12,7 @@ import pixformer.model.*;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.score.Score;
 import pixformer.view.View;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
@@ -123,7 +124,7 @@ public final class ControllerImpl implements Controller {
     public List<Integer> getScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores();
+            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::getPoints).toList();
         }
         return new ArrayList<>();
     }
@@ -145,7 +146,20 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public double calcEntitiesCommonPointX(final Set<Entity> entities) {
-        return entities.stream().mapToDouble(Entity::getX).average().orElse(0);
+        return entities.stream().mapToDouble(Entity::getX)
+                .average()
+                .orElse(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double calcEntitiesCommonPointY(final Set<Entity> entities) {
+        final double y = entities.stream().mapToDouble(Entity::getY)
+                .average()
+                .orElse(0);
+        return Math.sqrt(y);
     }
 
     /**

@@ -28,11 +28,11 @@ public class ScoreTest {
 
     @Test
     void testScore() {
-        world.killEntity(this.a, this.c);
+        world.queueEntityKill(this.a, this.c);
         world.update(1);
-        assertEquals(100, world.getScoreManager().getScore(this.c));
-        world.killEntity(this.b, this.c);
+        assertEquals(100, world.getScoreManager().getScore(this.c).getPoints());
+        world.queueEntityKill(this.b, this.c);
         world.update(1);
-        assertEquals(200, world.getScoreManager().getScore(this.c));
+        assertEquals(200, world.getScoreManager().getScore(this.c).getPoints());
     }
 }

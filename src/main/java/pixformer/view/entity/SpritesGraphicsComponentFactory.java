@@ -3,12 +3,9 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
-import pixformer.view.engine.Color;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
-import pixformer.view.entity.statics.BlockGraphicsComponent;
-import pixformer.view.entity.statics.BrickGraphicsComponent;
-import pixformer.view.entity.statics.GrassGraphicsComponent;
-import pixformer.view.entity.statics.SurpriseGraphicsComponent;
+import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
+import pixformer.view.entity.statics.*;
 
 /**
  * A factory of graphics component represented by sprite images.
@@ -52,7 +49,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      */
     @Override
     public GraphicsComponent coin(final Entity entity) {
-        return new RectangleGraphicsComponent(entity, new Color(1, 1, 0));
+        return new CoinGraphicsComponent(entity);
     }
 
     /**
@@ -60,7 +57,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      */
     @Override
     public GraphicsComponent pole(final Entity entity) {
-        return new RectangleGraphicsComponent(entity, new Color(0, 1, 0));
+        return new PoleGraphicsComponent(entity);
     }
 
     /**
@@ -69,5 +66,13 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public GraphicsComponent goomba(final Entity entity) {
         return new GoombaGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent fireFlower(final Entity entity) {
+        return new FireFlowerGraphicsComponent(entity);
     }
 }

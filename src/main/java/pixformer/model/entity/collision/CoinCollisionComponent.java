@@ -29,7 +29,7 @@ public class CoinCollisionComponent extends CollisionComponent {
                 .filter(collision -> collision.entity() instanceof Player)
                 .forEach(collision ->  {
                     if (super.getEntity().getWorld().isPresent()) {
-                        super.getEntity().getWorld().get().killEntity(super.getEntity(), collision.entity());
+                        super.getEntity().getWorld().get().queueEntityKill(super.getEntity(), collision.entity());
                     }
         });
     }

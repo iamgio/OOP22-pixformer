@@ -9,9 +9,12 @@ import pixformer.view.engine.RendererFactory;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 /**
- * Graphics component for static entities in the game.
+ * A graphics component that uses the same renderer throughout its life,
+ * to save on performance by caching it.
  */
 public abstract class StaticGraphicsComponent extends GraphicsComponent {
+
+    private Renderer renderer;
 
     /**
      * Instantiates a graphics component for a static entity.
@@ -28,7 +31,9 @@ public abstract class StaticGraphicsComponent extends GraphicsComponent {
     @OverridingMethodsMustInvokeSuper
     @Override
     public void update(final GameScene scene) {
-        final Renderer renderer = this.getRenderer(scene.getRendererFactory());
+        if (this.renderer == null) {
+            this.renderer = this.getRenderer(scene.getRendererFactory());
+        }
         scene.getGraphics().draw(renderer);
     }
 

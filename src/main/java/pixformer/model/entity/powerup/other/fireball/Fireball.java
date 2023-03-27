@@ -27,7 +27,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      * @param speed Fireball constant speed.
      */
     public Fireball(final Entity entity, final float speed) {
-        super(entity.getX(), entity.getY(), entity.getWidth() / 2, entity.getHeight() / 2);
+        super(entity.getX(), entity.getY(), entity.getHeight() / 3, entity.getHeight() / 3);
 
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
