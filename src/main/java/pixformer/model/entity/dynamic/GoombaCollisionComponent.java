@@ -11,24 +11,21 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class GoombaCollisionComponent extends CollisionComponent {
-
-    private final SolidCollisionComponent solidCollisionComponent;
+public class GoombaCollisionComponent extends SolidCollisionComponent {
     private final CollisionReactor collisionReactor;
 
     public GoombaCollisionComponent(final MutableEntity entity) {
         super(entity);
-        this.solidCollisionComponent = new SolidCollisionComponent(entity);
         final Consumer<Entity> kill = killer -> entity.getWorld().get().queueEntityKill(entity, killer);
-        this.collisionReactor = CollisionReactorFactory.compose(
+        this.collisionReactor = CollisionReactorFactory.compose(Set.of(
             new ActionOnPressedCollisionReactor(kill),
             new DieByTurtleCollisionReactor(kill)
-        );
+        ));
     }
 
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
-        solidCollisionComponent.update(dt, collisions);
+        super.update(dt, collisions);
         collisionReactor.react(collisions);
     }
 
