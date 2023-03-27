@@ -3,12 +3,10 @@ package pixformer.model.entity.dynamic;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.Collision;
-import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class GoombaCollisionComponent extends SolidCollisionComponent {
@@ -19,6 +17,7 @@ public class GoombaCollisionComponent extends SolidCollisionComponent {
         final Consumer<Entity> kill = killer -> entity.getWorld().get().queueEntityKill(entity, killer);
         this.collisionReactor = CollisionReactorFactory.compose(Set.of(
             new ActionOnPressedCollisionReactor(kill),
+            new MakeJumpOnPressedCollisionReactor(),
             new DieByTurtleCollisionReactor(kill)
         ));
     }
