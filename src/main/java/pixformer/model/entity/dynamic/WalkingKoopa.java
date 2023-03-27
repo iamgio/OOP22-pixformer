@@ -36,7 +36,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
         this.turtleFactory = turtleFactory;
         this.die = die;
-        this.collisionComponent = new ActionOnPressedCollisionComponent(this, this::changeToTurtle);
+        this.collisionComponent = new WalkingKoopaCollisionComponent(this, this::changeToTurtle);
         this.graphicsComponent = graphicsComponent.apply(this);
     }
 
