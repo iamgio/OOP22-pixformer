@@ -83,6 +83,22 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent walkingKoopa(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent turtleKoopa(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GraphicsComponent fireFlower(Entity entity) {
         return NULL_COMPONENT;
     }
