@@ -52,4 +52,10 @@ public interface GraphicsComponentFactory {
      * @return a new fire flower graphics component
      */
     GraphicsComponent fireFlower(Entity entity);
+
+    /**
+     * @param entity target of the graphics component
+     * @return a new walking koopa graphics component
+     */
+    GraphicsComponent walkingKoopa(Entity entity);
 }

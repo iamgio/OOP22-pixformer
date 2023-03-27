@@ -3,6 +3,7 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
+import pixformer.view.engine.Color;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
 import pixformer.view.entity.statics.*;
@@ -74,5 +75,10 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public GraphicsComponent fireFlower(final Entity entity) {
         return new FireFlowerGraphicsComponent(entity);
+    }
+
+    @Override
+    public GraphicsComponent walkingKoopa(final Entity entity) {
+        return new RectangleGraphicsComponent(entity, new Color(0, 1, 0));
     }
 }
