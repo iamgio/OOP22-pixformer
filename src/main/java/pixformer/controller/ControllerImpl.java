@@ -189,8 +189,9 @@ public final class ControllerImpl implements Controller {
 //            final EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
 //            final LevelData data = new JsonLevelDataDeserializer(entityFactory).deserialize(inputStream);
 //            return new LevelImpl(data);
-            return new SpawnDespawnLevel(world -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
-                    .deserialize(inputStream));
+            final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
+            return new SpawnDespawnLevel(() -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                    .deserialize(inputStream), world);
         } catch (IOException e) {
             throw new IllegalStateException("Could not get level data from file");
         }

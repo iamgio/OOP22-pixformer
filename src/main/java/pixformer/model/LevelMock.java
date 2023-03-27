@@ -19,8 +19,9 @@ public class LevelMock implements Level {
      * Test level.
      */
     public LevelMock() {
-        inner = new LevelImpl(new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), getWorld()))
-                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")));
+        final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
+        inner = new SpawnDespawnLevel(() -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")), world);
     }
 
     @Override
