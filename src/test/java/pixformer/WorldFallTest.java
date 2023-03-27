@@ -21,7 +21,7 @@ public class WorldFallTest {
     @BeforeEach
     void setup() {
         this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
+        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
         Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
         world.spawnEntity(entity);
     }

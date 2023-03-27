@@ -50,7 +50,7 @@ final class GoombaAITest {
     @BeforeEach
     void setup() {
         world.spawnEntity(goomba);
-        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
+        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
     }
 
     @Test
