@@ -2,7 +2,11 @@ package pixformer.model.entity;
 
 import pixformer.controller.deserialization.level.EntityType;
 import pixformer.model.World;
-import pixformer.model.entity.dynamic.*;
+import pixformer.model.entity.dynamic.enemy.goomba.Goomba;
+import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.WalkingKoopa;
+import pixformer.model.entity.dynamic.powerup.FlowerPowerupEntity;
+import pixformer.model.entity.dynamic.powerup.MovingPowerupEntity;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.entity.statics.Coin;
 import pixformer.model.entity.statics.Brick;

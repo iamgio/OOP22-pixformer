@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.reactor;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.Collision;

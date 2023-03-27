@@ -1,8 +1,7 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy.koopa;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import pixformer.model.entity.*;
 import pixformer.model.entity.collision.CollisionComponent;

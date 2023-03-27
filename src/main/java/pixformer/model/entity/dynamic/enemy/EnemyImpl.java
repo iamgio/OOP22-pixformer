@@ -1,11 +1,11 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy;
 
 import java.util.Optional;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 

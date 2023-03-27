@@ -7,10 +7,9 @@ import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.entity.dynamic.Koopa;
-import pixformer.model.entity.dynamic.KoopaState;
-import pixformer.model.entity.dynamic.TurtleKoopa;
-import pixformer.model.entity.dynamic.WalkingKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
+import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.WalkingKoopa;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 

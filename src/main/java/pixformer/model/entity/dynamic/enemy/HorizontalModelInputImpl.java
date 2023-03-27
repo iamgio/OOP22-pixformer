@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy;
 
 import java.util.function.Consumer;
 

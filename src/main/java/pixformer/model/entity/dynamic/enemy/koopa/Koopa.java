@@ -1,4 +1,6 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy.koopa;
+
+import pixformer.model.entity.dynamic.enemy.Enemy;
 
 /**
  * Tagging interface which must be implemented by Koopas.

@@ -1,10 +1,11 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy.koopa;
 
 import java.util.function.Consumer;
 
 import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
+import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;

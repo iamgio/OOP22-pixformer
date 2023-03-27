@@ -1,9 +1,11 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy.goomba;
 
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.dynamic.enemy.Enemy;
+import pixformer.model.entity.dynamic.enemy.EnemyImpl;
 
 import java.util.Optional;
 

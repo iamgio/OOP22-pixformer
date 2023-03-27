@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.enemy;
 
 /**
  * Tag interface for all enemies of the game.

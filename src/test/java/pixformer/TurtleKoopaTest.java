@@ -6,7 +6,7 @@ import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.entity.dynamic.TurtleKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 

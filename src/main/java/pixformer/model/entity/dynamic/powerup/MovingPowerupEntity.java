@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.powerup;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
@@ -10,14 +10,13 @@ import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
+import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.input.InputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.physics.PhysicsComponent;
-import pixformer.model.entity.GraphicsComponentRetriever;
-import pixformer.model.entity.Entity;
 
 import java.util.Optional;
 import java.util.function.Consumer;

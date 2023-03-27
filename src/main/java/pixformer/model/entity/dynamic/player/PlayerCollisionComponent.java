@@ -4,7 +4,7 @@ import pixformer.common.time.ChronometerImpl;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
-import pixformer.model.entity.dynamic.Enemy;
+import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 
 import java.util.Set;
