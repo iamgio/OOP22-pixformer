@@ -11,7 +11,7 @@ import java.util.Set;
 public class BrickCollisionComponent extends CollisionComponent {
 
     /**
-     * Simple constructor for the BrickCollisionComponent
+     * Simple constructor for the BrickCollisionComponent.
      *
      * @param entity entity with this collision component
      */

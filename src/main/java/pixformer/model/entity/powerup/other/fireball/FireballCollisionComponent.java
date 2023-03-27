@@ -49,8 +49,8 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
         }
 
         for (final var collisor : collisions) {
-            if (collisor.side().isHorizontal() && 
-                collisionIgnoreEntities.stream().noneMatch(c -> c.isInstance(collisor.entity()))) {
+            if (collisor.side().isHorizontal()
+                    && collisionIgnoreEntities.stream().noneMatch(c -> c.isInstance(collisor.entity()))) {
                 world.queueEntityDrop(fireball);
             }
         }

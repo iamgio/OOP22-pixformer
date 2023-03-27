@@ -6,6 +6,9 @@ import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 
+/**
+ * Class to get all animations for specific movement pattern.
+ */
 public interface PlayerAnimation {
     /**
      * @param factory the factory to create renders from.

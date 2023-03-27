@@ -150,6 +150,9 @@ public abstract class AbstractEntity implements MutableEntity {
         this.world = null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final double dt) {
         MutableEntity.super.update(dt);

@@ -7,14 +7,11 @@ import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.PoleCollisionComponent;
-import pixformer.model.entity.collision.SolidEntity;
-import pixformer.view.engine.Color;
-import pixformer.view.entity.RectangleGraphicsComponent;
 
 import java.util.Optional;
 
 /**
- * In game flag entity, representing the end of the level
+ * In game flag entity, representing the end of the level.
  */
 public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity {
 
@@ -29,6 +26,7 @@ public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxE
      *
      * @param x X coordinate
      * @param y Y coordinate
+     * @param graphicsComponent retriever for the graphics component of the entity
      */
     public Pole(final int x, final int y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);

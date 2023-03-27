@@ -5,6 +5,9 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * {@link pixformer.model.entity.GraphicsComponent} for the pole in-game entity.
+ */
 public class PoleGraphicsComponent extends StaticGraphicsComponent {
 
     /**

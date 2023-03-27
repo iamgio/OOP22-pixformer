@@ -31,7 +31,7 @@ public class SurpriseGraphicsComponent extends GraphicsComponent {
      * {@inheritDoc}
      */
     @Override
-    public void update(GameScene scene) {
+    public void update(final GameScene scene) {
         final GraphicsComponent graphicsComponent =
                 getEntity() instanceof Surprise surprise && surprise.hasCollided()
                         ? this.usedGraphicsComponent

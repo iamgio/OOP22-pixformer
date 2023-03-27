@@ -13,12 +13,12 @@ import pixformer.model.entity.powerup.powerups.FireFlower;
 import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * Represents the entity powerup fire flower. It remains still.
  */
-public final class FlowerPowerupEntity extends AbstractEntity implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity {
+public final class FlowerPowerupEntity extends AbstractEntity
+        implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity {
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
@@ -31,6 +31,7 @@ public final class FlowerPowerupEntity extends AbstractEntity implements Physica
      *
      * @param x      X coordinate
      * @param y      Y coordinate
+     * @param graphicsComponent retriever for the graphics component
      */
     public FlowerPowerupEntity(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);

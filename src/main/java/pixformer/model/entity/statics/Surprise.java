@@ -1,7 +1,15 @@
 package pixformer.model.entity.statics;
 
-import pixformer.model.entity.*;
-import pixformer.model.entity.collision.*;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
+import pixformer.model.entity.PowerUpFactory;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.entity.collision.SurpriseCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.Optional;
@@ -25,8 +33,10 @@ public class Surprise extends AbstractEntity implements DefaultRectangleBounding
      * @param x X coordinate
      * @param y Y coordinate
      * @param graphicsComponent graphics component of the surprise
+     * @param entityFactory factory for the power-up to spawn
      */
-    public Surprise(final double x, final double y, final GraphicsComponentRetriever graphicsComponent, final PowerUpFactory entityFactory) {
+    public Surprise(final double x, final double y, final GraphicsComponentRetriever graphicsComponent,
+                    final PowerUpFactory entityFactory) {
         super(x, y, WIDTH, HEIGHT);
         this.hasCollided = false;
         this.entityFactory = entityFactory;

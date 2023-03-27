@@ -11,7 +11,8 @@ import java.util.List;
 public interface ScoreManager {
 
     /**
-     * @return the score of the player
+     * @param entity entity to see the score
+     * @return the score of a specific player
      */
     Score getScore(Entity entity);
 
@@ -27,6 +28,7 @@ public interface ScoreManager {
 
     /**
      * Method to manage when a player hit the finish line.
+     * @param player player who passed the end flag
      */
     void passedFinishLine(Player player);
 

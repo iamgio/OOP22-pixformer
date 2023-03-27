@@ -83,7 +83,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent fireFlower(Entity entity) {
+    public GraphicsComponent fireFlower(final Entity entity) {
         return NULL_COMPONENT;
     }
 }

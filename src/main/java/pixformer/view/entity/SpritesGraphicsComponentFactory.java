@@ -5,7 +5,12 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
-import pixformer.view.entity.statics.*;
+import pixformer.view.entity.statics.BlockGraphicsComponent;
+import pixformer.view.entity.statics.CoinGraphicsComponent;
+import pixformer.view.entity.statics.PoleGraphicsComponent;
+import pixformer.view.entity.statics.GrassGraphicsComponent;
+import pixformer.view.entity.statics.SurpriseGraphicsComponent;
+import pixformer.view.entity.statics.BrickGraphicsComponent;
 
 /**
  * A factory of graphics component represented by sprite images.
@@ -32,7 +37,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent brickBlock(Entity entity) {
+    public GraphicsComponent brickBlock(final Entity entity) {
         return new BrickGraphicsComponent(entity);
     }
 

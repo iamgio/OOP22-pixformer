@@ -14,6 +14,11 @@ import java.util.Set;
  */
 public abstract class CollisionComponent extends Component<MutableEntity> {
 
+    /**
+     * Simple constructor for sub-classes.
+     *
+     * @param entity target of the collision component
+     */
     protected CollisionComponent(final MutableEntity entity) {
         super(entity);
     }
