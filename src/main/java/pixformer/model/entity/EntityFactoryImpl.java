@@ -1,11 +1,9 @@
 package pixformer.model.entity;
 
 import pixformer.controller.deserialization.level.EntityType;
-import pixformer.model.entity.dynamic.FlowerPowerupEntity;
-import pixformer.model.entity.dynamic.Goomba;
-import pixformer.model.entity.dynamic.Koopa;
+import pixformer.model.World;
+import pixformer.model.entity.dynamic.*;
 import pixformer.model.entity.statics.*;
-import pixformer.model.entity.dynamic.MovingPowerupEntity;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.entity.statics.Barrier;
 import pixformer.model.entity.statics.Block;
@@ -14,18 +12,25 @@ import pixformer.model.entity.statics.Surprise;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 /**
  * {@inheritDoc}.
  */
 public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
 
     private final GraphicsComponentFactory graphicsComponentFactory;
+    private final Consumer<Entity> addEntityToWorld;
+    private final BiConsumer<Entity, Entity> removeEntityFromWorld;
 
     /**
      * @param graphicsComponentFactory the factory to get the graphics components from
      */
-    public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory) {
+    public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory, final World world) {
         this.graphicsComponentFactory = graphicsComponentFactory;
+        this.addEntityToWorld = world::addEntityToSpawn;
+        this.removeEntityFromWorld = world::killEntity;
     }
 
     /**
@@ -100,13 +105,17 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
         return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
 
+    private Entity createTurtleKoopa(final double x, final double y) {
+        return new TurtleKoopa(x, y, removeEntityFromWorld);
+    }
+
     /**
      * {@inheritDoc}
      */
     @EntityType("koopa")
     @Override
     public Entity createKoopa(final int x, final int y) {
-        return new Koopa(x, y);
+        return new WalkingKoopa(x, y, (xx, yy) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy)), removeEntityFromWorld);
     }
 
     /**
