@@ -158,9 +158,6 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.commandQueue.forEach(Runnable::run);
-        this.commandQueue.clear();
-
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
@@ -172,5 +169,7 @@ public class WorldImpl implements World {
 
             entity.update(dt);
         });
+        this.commandQueue.forEach(Runnable::run);
+        this.commandQueue.clear();
     }
 }
