@@ -24,7 +24,7 @@ public class CoinCollisionComponent extends CollisionComponent {
      * {@inheritDoc}
      */
     @Override
-    public void update(double dt, Set<Collision> collisions) {
+    public void update(final double dt, final Set<Collision> collisions) {
         collisions.stream()
                 .filter(collision -> collision.entity() instanceof Player)
                 .forEach(collision ->  {

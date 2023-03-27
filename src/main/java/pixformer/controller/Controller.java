@@ -74,7 +74,7 @@ public interface Controller {
     List<File> getLevelFiles();
 
     /**
-     * Parses and extracts data from a level file
+     * Parses and extracts data from a level file.
      * @param levelFile level file to parse
      * @return a new level instance loaded from the file
      * @throws IllegalStateException if the file could not be turned into a level

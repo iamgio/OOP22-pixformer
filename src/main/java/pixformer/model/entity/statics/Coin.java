@@ -10,6 +10,9 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 
 import java.util.Optional;
 
+/**
+ * In-game coin, a simple entity that give points to the player.
+ */
 public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
 
     private static final int HEIGHT = 1;
@@ -24,7 +27,7 @@ public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxE
      * @param y Y coordinate
      * @param graphicsComponent retriever for the graphics component for the entity
      */
-    public Coin (final int x, final int y, final GraphicsComponentRetriever graphicsComponent) {
+    public Coin(final int x, final int y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
         this.graphicsComponent = graphicsComponent.apply(this);
         this.collisionComponent = new CoinCollisionComponent(this);

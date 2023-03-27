@@ -48,14 +48,21 @@ public interface GraphicsComponentFactory {
     GraphicsComponent goomba(Entity entity);
 
     /**
+     * @param entity target entity
+     * @return a new Graphics component for the koopa in default state
+     */
+    GraphicsComponent walkingKoopa(Entity entity);
+
+    /**
+     * @param entity target entity
+     * @return a new Graphics component for the koopa in shell state
+     */
+    GraphicsComponent turtleKoopa(Entity entity);
+
+    /**
      * @param entity target of the graphics component
      * @return a new fire flower graphics component
      */
     GraphicsComponent fireFlower(Entity entity);
 
-    /**
-     * @param entity target of the graphics component
-     * @return a new walking koopa graphics component
-     */
-    GraphicsComponent walkingKoopa(Entity entity);
 }

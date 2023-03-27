@@ -4,7 +4,10 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
-import pixformer.model.entity.collision.*;
+import pixformer.model.entity.collision.BrickCollisionComponent;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.collision.SolidEntity;
 
 import java.util.Optional;
 

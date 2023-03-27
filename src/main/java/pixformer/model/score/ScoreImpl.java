@@ -9,6 +9,9 @@ public class ScoreImpl implements Score {
 
     /**
      * Constructor for the class.
+     *
+     * @param points points of the class
+     * @param coinsNumber coins of the class
      */
     public ScoreImpl(final int points, final int coinsNumber) {
         this.points = points;

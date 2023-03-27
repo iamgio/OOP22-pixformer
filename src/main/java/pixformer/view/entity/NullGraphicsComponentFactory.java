@@ -4,6 +4,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
 import pixformer.view.engine.GameScene;
+import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
 
 /**
  * A graphics component factory that does not actually draw any content.
@@ -83,12 +84,24 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent fireFlower(Entity entity) {
+    public GraphicsComponent fireFlower(final Entity entity) {
         return NULL_COMPONENT;
     }
 
+    /**
+     * {@inheritDoc}
+    */
     @Override
     public GraphicsComponent walkingKoopa(final Entity entity) {
         return NULL_COMPONENT;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent turtleKoopa(final Entity entity) {
+        return NULL_COMPONENT;
+    }
+
 }

@@ -5,8 +5,15 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
+import pixformer.view.entity.enemies.TurtleGraphicsComponent;
+import pixformer.view.entity.enemies.WalkingKoopaGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
-import pixformer.view.entity.statics.*;
+import pixformer.view.entity.statics.BlockGraphicsComponent;
+import pixformer.view.entity.statics.CoinGraphicsComponent;
+import pixformer.view.entity.statics.PoleGraphicsComponent;
+import pixformer.view.entity.statics.GrassGraphicsComponent;
+import pixformer.view.entity.statics.SurpriseGraphicsComponent;
+import pixformer.view.entity.statics.BrickGraphicsComponent;
 
 /**
  * A factory of graphics component represented by sprite images.
@@ -33,7 +40,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent brickBlock(Entity entity) {
+    public GraphicsComponent brickBlock(final Entity entity) {
         return new BrickGraphicsComponent(entity);
     }
 
@@ -73,12 +80,24 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent walkingKoopa(final Entity entity) {
+        return new WalkingKoopaGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent turtleKoopa(Entity entity) {
+        return new TurtleGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GraphicsComponent fireFlower(final Entity entity) {
         return new FireFlowerGraphicsComponent(entity);
     }
 
-    @Override
-    public GraphicsComponent walkingKoopa(final Entity entity) {
-        return new RectangleGraphicsComponent(entity, new Color(0, 1, 0));
-    }
 }

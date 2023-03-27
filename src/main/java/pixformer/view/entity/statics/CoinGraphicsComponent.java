@@ -5,6 +5,9 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * {@link pixformer.model.entity.GraphicsComponent} for the coin in the game.
+ */
 public class CoinGraphicsComponent extends StaticGraphicsComponent {
 
     /**
@@ -12,7 +15,7 @@ public class CoinGraphicsComponent extends StaticGraphicsComponent {
      *
      * @param entity entity with this graphic component
      */
-    public CoinGraphicsComponent (final Entity entity) {
+    public CoinGraphicsComponent(final Entity entity) {
         super(entity);
     }
 

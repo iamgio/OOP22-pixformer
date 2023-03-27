@@ -92,6 +92,8 @@ public class LevelImpl implements Level {
 
     /**
      * @param playerIndex index of the player, starting from 0
+     * @param startX x coordinate start position
+     * @param startY y coordinate start position
      * @return a new player entity
      */
     private Entity createPlayer(final int playerIndex, final double startX, final double startY) {

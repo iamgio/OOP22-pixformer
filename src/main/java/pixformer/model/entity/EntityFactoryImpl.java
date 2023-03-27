@@ -3,12 +3,13 @@ package pixformer.model.entity;
 import pixformer.controller.deserialization.level.EntityType;
 import pixformer.model.World;
 import pixformer.model.entity.dynamic.*;
-import pixformer.model.entity.statics.*;
 import pixformer.model.entity.powerup.powerups.Mushroom;
-import pixformer.model.entity.statics.Barrier;
-import pixformer.model.entity.statics.Block;
+import pixformer.model.entity.statics.Coin;
 import pixformer.model.entity.statics.Brick;
+import pixformer.model.entity.statics.Block;
 import pixformer.model.entity.statics.Surprise;
+import pixformer.model.entity.statics.Barrier;
+import pixformer.model.entity.statics.Pole;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
 

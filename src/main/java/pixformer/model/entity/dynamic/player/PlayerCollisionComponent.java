@@ -60,8 +60,8 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
 
             if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
-                if (invulnerabilityChronometer.getTimeElapsed() == 0 || 
-                invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
+                if (invulnerabilityChronometer.getTimeElapsed() == 0
+                        || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
 
                     this.player.damaged();
 

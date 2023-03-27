@@ -4,6 +4,8 @@ import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidCollisionComponent;
@@ -23,8 +25,8 @@ import java.util.function.Consumer;
 /**
  * Represents a powerUp entity which moves. It moves like a Goomba but its first direction is right.
  */
-public final class MovingPowerupEntity extends AbstractEntity implements PhysicalPowerup,
-        DefaultRectangleBoundingBoxEntity, DrawableEntity, SolidEntity {
+public final class MovingPowerupEntity extends AbstractEntity
+        implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity, SolidEntity {
 
 
     private static final double WIDTH = 1;
@@ -39,8 +41,8 @@ public final class MovingPowerupEntity extends AbstractEntity implements Physica
     /**
      * @param x its initial x position
      * @param y its initial y position
-     * @param powerupBehaviour which this entity will represent.
-     * @param graphicsComponent which can get the the right graphicsComponent.
+     * @param powerupBehaviour which this entity will represent
+     * @param graphicsComponent retriever for the graphics component of the entity
      */
     public MovingPowerupEntity(final double x, final double y, final PowerupBehaviour powerupBehaviour,
                                final GraphicsComponentRetriever graphicsComponent) {

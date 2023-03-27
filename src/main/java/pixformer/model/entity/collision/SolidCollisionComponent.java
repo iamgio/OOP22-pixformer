@@ -49,7 +49,7 @@ public class SolidCollisionComponent extends CollisionComponent {
      * @param collisions collisions the entity is involved in
      * @return whether the entity is colliding a solid entity on the bottom side.
      */
-    protected boolean isCollidingGround(Set<Collision> collisions) {
+    protected boolean isCollidingGround(final Set<Collision> collisions) {
         return this.isCollingSolidEntity(collisions, CollisionSide.BOTTOM);
     }
 
@@ -57,7 +57,7 @@ public class SolidCollisionComponent extends CollisionComponent {
      * @param collisions collisions the entity is involved in
      * @return whether the entity is colliding a solid entity on the top side.
      */
-    protected boolean isCollidingCeiling(Set<Collision> collisions) {
+    protected boolean isCollidingCeiling(final Set<Collision> collisions) {
         return this.isCollingSolidEntity(collisions, CollisionSide.TOP);
     }
 
@@ -65,7 +65,7 @@ public class SolidCollisionComponent extends CollisionComponent {
      * @param collisions collisions the entity is involved in
      * @return whether the entity is colliding a solid entity on the left side.
      */
-    protected boolean isCollidingLeftWall(Set<Collision> collisions) {
+    protected boolean isCollidingLeftWall(final Set<Collision> collisions) {
         return this.isCollingSolidEntity(collisions, CollisionSide.RIGHT); // TODO swap
     }
 
@@ -73,7 +73,7 @@ public class SolidCollisionComponent extends CollisionComponent {
      * @param collisions collisions the entity is involved in
      * @return whether the entity is colliding a solid entity on the right side.
      */
-    protected boolean isCollidingRightWall(Set<Collision> collisions) {
+    protected boolean isCollidingRightWall(final Set<Collision> collisions) {
         return this.isCollingSolidEntity(collisions, CollisionSide.LEFT);
     }
 
