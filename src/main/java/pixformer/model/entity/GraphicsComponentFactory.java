@@ -46,4 +46,10 @@ public interface GraphicsComponentFactory {
      * @return a new Goomba graphics component
      */
     GraphicsComponent goomba(Entity entity);
+
+    /**
+     * @param entity target of the graphics component
+     * @return a new fire flower graphics component
+     */
+    GraphicsComponent fireFlower(Entity entity);
 }

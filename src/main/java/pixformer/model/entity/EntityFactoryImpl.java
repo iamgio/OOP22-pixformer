@@ -124,7 +124,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("fire_flower")
     @Override
     public Entity createFireFlower(final int x, final int y) {
-        return new FlowerPowerupEntity(x, y, e -> new RectangleGraphicsComponent(e, new Color(1, 0, 0)));
+        return new FlowerPowerupEntity(x, y, graphicsComponentFactory::fireFlower);
     }
 
     /**

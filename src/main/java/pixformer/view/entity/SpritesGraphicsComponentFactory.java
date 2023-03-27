@@ -4,6 +4,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
+import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
 import pixformer.view.entity.statics.*;
 
 /**
@@ -65,5 +66,13 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public GraphicsComponent goomba(final Entity entity) {
         return new GoombaGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent fireFlower(final Entity entity) {
+        return new FireFlowerGraphicsComponent(entity);
     }
 }
