@@ -12,9 +12,17 @@ import pixformer.model.entity.dynamic.reactor.MakeJumpOnPressedCollisionReactor;
 import java.util.Set;
 import java.util.function.Consumer;
 
+/**
+ * The collision component for walking koopa.
+ */
 public class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
 
     private final CollisionReactor reactor;
+
+    /**
+     * @param entity to be controlled.
+     * @param changeToTurtle when invoked it transforms {@code entity} into a turtle koopa.
+     */
     public WalkingKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> changeToTurtle) {
         super(entity);
         reactor = CollisionReactorFactory.compose(Set.of(
