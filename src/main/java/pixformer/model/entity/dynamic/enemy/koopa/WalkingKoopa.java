@@ -2,6 +2,7 @@ package pixformer.model.entity.dynamic.enemy.koopa;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
@@ -21,7 +22,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
     private final CollisionComponent collisionComponent;
     private final GraphicsComponent graphicsComponent;
     private final BiConsumer<Double, Double> turtleFactory;
-    private final BiConsumer<Entity, Entity> die;
+    private final Consumer<Entity> dieBy;
 
     /**
      * Construct a WalkingKoopa.
@@ -36,8 +37,8 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
                         final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
         this.turtleFactory = turtleFactory;
-        this.die = die;
-        this.collisionComponent = new WalkingKoopaCollisionComponent(this, this::changeToTurtle);
+        this.dieBy = killer -> die.accept(this, killer);
+        this.collisionComponent = new WalkingKoopaCollisionComponent(this, this::changeToTurtle, dieBy);
         this.graphicsComponent = graphicsComponent.apply(this);
     }
 
@@ -52,7 +53,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
     }
 
     private void changeToTurtle(final Entity killer) {
-        this.die.accept(this, killer);
+        this.dieBy.accept(killer);
         turtleFactory.accept(getX(), getY() + getHeight() - 1);
     }
 

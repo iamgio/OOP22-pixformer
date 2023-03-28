@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.reactor.CollisionReactorFactory;
 import pixformer.model.entity.dynamic.reactor.ActionOnPressedCollisionReactor;
+import pixformer.model.entity.dynamic.reactor.DieForFireCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.MakeJumpOnPressedCollisionReactor;
 
 import java.util.Set;
@@ -22,12 +23,14 @@ public class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
     /**
      * @param entity to be controlled.
      * @param changeToTurtle when invoked it transforms {@code entity} into a turtle koopa.
+     * @param dieBy consume the killer, kills the controlled entity.
      */
-    public WalkingKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> changeToTurtle) {
+    public WalkingKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> changeToTurtle, final Consumer<Entity> dieBy) {
         super(entity);
         reactor = CollisionReactorFactory.compose(Set.of(
                 new ActionOnPressedCollisionReactor(changeToTurtle),
-                new MakeJumpOnPressedCollisionReactor()
+                new MakeJumpOnPressedCollisionReactor(),
+                new DieForFireCollisionReactor(dieBy)
         ));
     }
 

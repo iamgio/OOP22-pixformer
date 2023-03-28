@@ -5,10 +5,7 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
-import pixformer.model.entity.dynamic.reactor.CollisionReactorFactory;
-import pixformer.model.entity.dynamic.reactor.ActionOnPressedCollisionReactor;
-import pixformer.model.entity.dynamic.reactor.DieByTurtleCollisionReactor;
-import pixformer.model.entity.dynamic.reactor.MakeJumpOnPressedCollisionReactor;
+import pixformer.model.entity.dynamic.reactor.*;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -29,6 +26,7 @@ public final class TurtleKoopaCollisionComponent extends SolidCollisionComponent
         reactor = CollisionReactorFactory.compose(Set.of(
                 new ActionOnPressedCollisionReactor(die),
                 new DieByTurtleCollisionReactor(die),
+                new DieForFireCollisionReactor(die),
                 new MakeJumpOnPressedCollisionReactor()
         ));
     }
