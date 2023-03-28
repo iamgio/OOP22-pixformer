@@ -14,6 +14,7 @@ import pixformer.model.entity.statics.Barrier;
 import pixformer.model.entity.statics.Pole;
 import pixformer.view.engine.Color;
 import pixformer.view.entity.RectangleGraphicsComponent;
+import pixformer.model.entity.dynamic.player.Player;
 
 /**
  * {@inheritDoc}.
@@ -115,8 +116,10 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
      */
     @EntityType("player")
     @Override
-    public Entity createMainCharacter(final int x, final int y) {
-        return null;
+    public Player createMainCharacter(final int x, final int y) {
+        Player player = new Player(x, y);
+        player.setGraphicsComponent(graphicsComponentFactory.player(player));
+        return player;
     }
 
     /**

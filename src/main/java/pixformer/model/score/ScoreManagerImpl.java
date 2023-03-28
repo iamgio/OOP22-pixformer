@@ -41,7 +41,7 @@ public class ScoreManagerImpl implements ScoreManager {
         if (scoreMap.containsKey(player)) {
             scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
         } else {
-            scoreMap.put(player, new ScoreImpl(points, 0));
+            scoreMap.put(player, new Score(points, 0));
         }
         if (entity instanceof Coin) {
             scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
@@ -53,7 +53,7 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     @Override
     public Score getScore(final Entity entity) {
-        return this.scoreMap.getOrDefault(entity, new ScoreImpl(0, 0));
+        return this.scoreMap.getOrDefault(entity, new Score(0, 0));
     }
 
     /**
@@ -70,7 +70,7 @@ public class ScoreManagerImpl implements ScoreManager {
     @Override
     public int getTotalCoins() {
         return this.scoreMap.values().stream()
-                .map(Score::getCoins)
+                .map(Score::coinsNumber)
                 .filter(i -> i > 0)
                 .reduce(Integer::sum).orElse(0);
     }
