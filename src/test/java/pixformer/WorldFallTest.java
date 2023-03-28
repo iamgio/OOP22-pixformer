@@ -32,9 +32,9 @@ public class WorldFallTest {
         assertFalse(world.getEntities().isEmpty());
         world.update(DT);
         assertFalse(world.getEntities().isEmpty());
-        world.update(DT);
-        assertFalse(world.getEntities().isEmpty());
         world.update(DT); // Threshold reached: entity is killed
+        assertTrue(world.getEntities().isEmpty());
+        world.update(DT);
         assertTrue(world.getEntities().isEmpty());
         world.update(DT);
         assertTrue(world.getEntities().isEmpty());
