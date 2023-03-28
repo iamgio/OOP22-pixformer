@@ -3,6 +3,7 @@ package pixformer.model.entity.dynamic.player;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
@@ -20,6 +21,9 @@ import java.util.Optional;
  * The class manages the character used by the player.
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Powerupable {
+    static final double WIDTH = 1.0;
+    static final double HEIGHT = 1.0;
+
     // This playerIndex
     private final int playerIndex;
 
@@ -30,7 +34,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private PowerUp powerup = new PowerUp();
 
     // Player components
-    private final PlayerGraphicsComponent graphicsComponent;
+    private PlayerGraphicsComponent graphicsComponent;
     private final PlayerPhysicsComponent physicsComponent;
     private final PlayerCollisionComponent collisionComponent;
     private PlayerInputComponent inputComponent;
@@ -56,6 +60,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
+     * @param x X position of the player.
+     * @param y Y position of the player.
+     */
+    public Player(final int x, final int y) {
+        this(x,y, WIDTH, HEIGHT, 0);
+    }
+
+    /**
      * Return this entity player index.
      * @return playerIndex
      */
@@ -69,6 +81,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void setInputComponent(final PlayerInputComponent newInputComponent) {
         inputComponent = newInputComponent;
+    }
+
+    /**
+     * Set the new graphicsComponent.
+     * @param newGraphicsComponent new Player's graphicsComponent.
+     */
+    public void setGraphicsComponent(final PlayerGraphicsComponent newGraphicsComponent) {
+        this.graphicsComponent = newGraphicsComponent;
     }
 
     /**
