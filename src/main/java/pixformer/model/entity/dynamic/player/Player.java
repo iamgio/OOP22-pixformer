@@ -63,7 +63,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param x X position of the player.
      * @param y Y position of the player.
      */
-    public Player(final int x, final int y) {
+    public Player(final double x, final double y) {
         this(x,y, WIDTH, HEIGHT, 0);
     }
 

@@ -15,9 +15,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private boolean jumpKey;
     private boolean sprintKey;
 
-    // Max duration of a jump
-    private static final float MAX_JUMP_DURATION = 0.01f;
-
     /**
      * Max speed limit of a walking player.
      */
@@ -27,6 +24,13 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Max speed limit of a sprinting player.
      */
     public static final float SPRINT_SPEED_LIMIT = 0.02f;
+
+    private static final float SPEED = 0.000_15f;
+
+    // Max duration of a jump
+    private static final float MAX_JUMP_DURATION = 0.023f;
+
+    private static final float JUMP_FORCE = 0.0015f;
 
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
@@ -62,7 +66,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(-PlayerPhysicsComponent.SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(-SPEED, 0)));
     }
 
     /**
@@ -70,7 +74,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(PlayerPhysicsComponent.SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(SPEED, 0)));
     }
 
     /**
@@ -95,7 +99,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         if (currentPlayerJump > 0) {
             forceJump();
-            currentPlayerJump -= PlayerPhysicsComponent.JUMP_FORCE;
+            currentPlayerJump -= JUMP_FORCE;
         }
     }
 
@@ -112,7 +116,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-
+        System.out.println(player.getVelocity().x() + " " + player.getVelocity().y());
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
@@ -132,6 +136,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
 
+        player.setVelocity(player.getVelocity().copyWithY(Math.abs(player.getVelocity().y()) > 0.014 ? 0.014 * Math.signum(player.getVelocity().y()) : player.getVelocity().y()));
+
         sprintKey = false;
     }
 
@@ -147,7 +153,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Apply jump force to the player.
      */
     private void forceJump() {
-        player.setVelocity(new Vector2D(player.getVelocity().x(), -PlayerPhysicsComponent.JUMP_FORCE * ON_ENEMY_JUMP_MULTIPLIER));
+        player.setVelocity(new Vector2D(player.getVelocity().x(), -JUMP_FORCE * ON_ENEMY_JUMP_MULTIPLIER));
     }
 
     /**
