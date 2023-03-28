@@ -31,6 +31,7 @@ public class JavaFXGraphics implements Graphics {
      * @param graphics graphics to draw on
      */
     public JavaFXGraphics(final GraphicsContext graphics) {
+        graphics.setImageSmoothing(false);
         this.graphics = new SimpleWrapper<>(graphics);
     }
 

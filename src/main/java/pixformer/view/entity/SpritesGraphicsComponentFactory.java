@@ -3,10 +3,11 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
-import pixformer.view.engine.Color;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.enemies.TurtleGraphicsComponent;
 import pixformer.view.entity.enemies.WalkingKoopaGraphicsComponent;
+import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
 import pixformer.view.entity.statics.BlockGraphicsComponent;
 import pixformer.view.entity.statics.CoinGraphicsComponent;
@@ -100,4 +101,11 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
         return new FireFlowerGraphicsComponent(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PlayerGraphicsComponent player(final Player player) {
+        return new PlayerGraphicsComponent(player);
+    }
 }
