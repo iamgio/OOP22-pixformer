@@ -89,7 +89,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent turtleKoopa(Entity entity) {
+    public GraphicsComponent turtleKoopa(final Entity entity) {
         return new TurtleGraphicsComponent(entity);
     }
 

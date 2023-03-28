@@ -69,7 +69,7 @@ public interface GraphicsComponentFactory {
     GraphicsComponent fireFlower(Entity entity);
 
     /**
-     * @param entity target of the graphics component
+     * @param player target of the graphics component
      * @return a new player graphics component
      */
     PlayerGraphicsComponent player(Player player);
