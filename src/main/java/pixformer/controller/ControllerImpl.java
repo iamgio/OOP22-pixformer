@@ -127,7 +127,7 @@ public final class ControllerImpl implements Controller {
     public List<Integer> getScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::getPoints).toList();
+            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::points).toList();
         }
         return new ArrayList<>();
     }

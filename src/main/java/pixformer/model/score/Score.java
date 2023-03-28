@@ -1,41 +1,43 @@
 package pixformer.model.score;
 
 /**
- * Score class to manage the in-game score of the user.
+ * In-game score, record for all the score features in the game.
  */
-public interface Score {
+public record Score(int points, int coinsNumber) {
 
     /**
-     * @return the score of the user
+     * Method to get a new Score with the same coins but different points.
+     *
+     * @return a new Score with updated points
      */
-    int getPoints();
+    public Score copyWithPoints(final int points) {
+        return new Score(points, this.coinsNumber);
+    }
 
     /**
-     * @return the remaining coins to get in the game
+     * Method to get a new Score with the same coins but different points.
+     *
+     * @return a new Score with added points from the old value
      */
-    int getCoins();
+    public Score copyAddPoints(final int points) {
+        return new Score(this.points + points, this.coinsNumber);
+    }
 
     /**
-     * @param points points contained in the new score
-     * @return a new Score with updated points quantity
+     * Method to get a new Score with the same points but different coins.
+     *
+     * @return a new Score with updated coins
      */
-    Score copyWithPoints(int points);
+    public Score copyWithCoins(final int coins) {
+        return new Score(this.points, coins);
+    }
 
     /**
-     * @param points points to add at the old score
-     * @return a new Score with an updated points quantity
+     * Method to get a new Score with the same points but different coins.
+     *
+     * @return a new Score with an updated value added from the old value
      */
-    Score copyAddPoints(int points);
-
-    /**
-     * @param coins coins contained in the new Score
-     * @return a new Score with an updated number of coins
-     */
-    Score copyWithCoins(int coins);
-
-    /**
-     * @param coins coins to add to the old coins values
-     * @return a new Score with an updated number of coins
-     */
-    Score copyAddCoins(int coins);
+    public Score copyAddCoins(final int coins) {
+        return new Score(this.points, this.coinsNumber + coins);
+    }
 }
