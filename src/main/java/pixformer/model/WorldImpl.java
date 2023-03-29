@@ -151,6 +151,7 @@ public class WorldImpl implements World {
     @Override
     public void endGame(final Player player) {
         this.scoreManager.passedFinishLine(player);
+        this.queueEntityDrop(player);
     }
 
     /**
