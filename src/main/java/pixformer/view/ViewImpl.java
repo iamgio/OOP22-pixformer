@@ -37,9 +37,10 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
-
-    private TextRenderer scoreLabel;
-    private TextRenderer coinsLabel;
+//    private TextRenderer playerLabel;
+//    private TextRenderer scoreLabel;
+//    private TextRenderer coinsLabel;
+    private TextRenderer infoLabel;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
@@ -74,16 +75,10 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
 
-        this.scoreLabel = rendererFactory.newText("");
-        this.scoreLabel.setColor(new Color(1, 0, 0));
-        this.scoreLabel.setFontSize(1);
-        this.scoreLabel.setFontFamily("DejaVu Sans Light");
-        this.coinsLabel = rendererFactory.newText("");
-        this.coinsLabel.setColor(new Color(1, 0, 0));
-        this.coinsLabel.setFontSize(1);
-        this.coinsLabel.setFontFamily("DejaVu Sans Light");
-        this.getScene().add(scoreLabel.at(1, 1));
-        this.getScene().add(coinsLabel.at(1, 1));
+        this.infoLabel = rendererFactory.newText("");
+        this.infoLabel.setFontFamily("Impact");
+        this.infoLabel.setFontSize(1);
+        this.getScene().add(infoLabel.at(1, 1));
     }
 
     /**
@@ -142,14 +137,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     private void updateTextRenderer() {
         int counter = 0;
-        this.scoreLabel.setText("");
-        this.coinsLabel.setText("");
+        this.infoLabel.setText("");
         var coinsList = this.controller.getPlayersCoins();
-        for (var x : this.controller.getPlayersScore()) {
+        for (var points : this.controller.getPlayersScore()) {
             var coins = coinsList.get(counter);
             counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "Player " + counter + " points = " + x + "      ");
-            this.scoreLabel.setText(this.scoreLabel.getText() + "Player " + counter + " coins = " + coins + "\n");
+            String label = "PLAYER " + counter + "    ";
+            label += "POINTS = " + points + "  ";
+            label += "COINS = " + coins + "\n";
+            this.infoLabel.setText(label);
         }
     }
 

@@ -6,7 +6,7 @@ package pixformer.view.engine;
 public abstract class TextRenderer extends PositionableRenderer {
 
     private String text;
-    private Color color = Color.BLACK;
+    private Color color = Color.WHITE;
     private String fontFamily;
     private double fontSize;
 
