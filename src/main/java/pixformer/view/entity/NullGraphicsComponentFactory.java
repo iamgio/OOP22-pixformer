@@ -91,6 +91,14 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent redMushroom(Entity entity) {
+        return NULL_COMPONENT;
+    }
+
+    /**
+     * {@inheritDoc}
     */
     @Override
     public GraphicsComponent walkingKoopa(final Entity entity) {
@@ -105,6 +113,9 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
         return NULL_COMPONENT;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlayerGraphicsComponent player(final Player player) {
         return new PlayerGraphicsComponent(player);
