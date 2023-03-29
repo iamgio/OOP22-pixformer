@@ -148,8 +148,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         for (var x : this.controller.getPlayersScore()) {
             var coins = coinsList.get(counter);
             counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + x);
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + coins);
+            this.scoreLabel.setText(this.scoreLabel.getText() + "Player " + counter + " points = " + x + "      ");
+            this.scoreLabel.setText(this.scoreLabel.getText() + "Player " + counter + " coins = " + coins + "\n");
         }
     }
 
