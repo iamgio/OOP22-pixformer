@@ -25,7 +25,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     public static final float SPRINT_SPEED_LIMIT = 0.02f;
 
-    private static final float SPEED = 0.000_15f;
+    private static final float SPEED = 0.000_25f;
 
     // Max duration of a jump
     private static final float MAX_JUMP_DURATION = 0.023f;
