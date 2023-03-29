@@ -34,13 +34,12 @@ class TurtleKoopaTest {
 
     @Test
     void testTurtleMovesBecauseOfPlayerLeft() {
-        testTurtleMovesBecauseOfPlayer(new Vector2D(0, 0), +1);
-
+        testTurtleMovesBecauseOfPlayer(new Vector2D(0, -1), +1);
     }
 
     @Test
     void testTurtleMovesBecauseOfPlayerRight() {
-        testTurtleMovesBecauseOfPlayer(new Vector2D(2, 0), -1);
+        testTurtleMovesBecauseOfPlayer(new Vector2D(2, -1), -1);
     }
 
 }
