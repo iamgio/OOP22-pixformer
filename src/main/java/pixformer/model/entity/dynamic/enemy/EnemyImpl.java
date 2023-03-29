@@ -15,6 +15,7 @@ import pixformer.model.physics.PhysicsComponent;
 public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, Enemy {
 
     private final GoombaAI ai;
+    private final double velocityModule;
 
     /**
      * Create a Goomba at position ({@code x}, {@code y}).
@@ -27,6 +28,7 @@ public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundin
      */
     public EnemyImpl(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
+        this.velocityModule = velocity;
         // joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
         ai = new GoombaAI(this, this::fixVelocity, velocity);
     }
@@ -37,9 +39,11 @@ public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundin
     }
 
     private void fixVelocity(final Vector2D velocity) {
-        final Vector2D current = super.getVelocity();
-        final Vector2D newVelocity = new Vector2D(velocity.x(), current.y());
-        this.setVelocity(newVelocity);
+        final double newX = velocity.x();
+        final double oldX = getVelocity().x();
+        setVelocity(getVelocity().copyWithX(oldX > 0 ?
+                Math.min(velocityModule, newX) : Math.max(-velocityModule, newX)
+        ));
     }
 
     @Override
