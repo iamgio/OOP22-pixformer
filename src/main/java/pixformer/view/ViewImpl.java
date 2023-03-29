@@ -39,6 +39,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final ObservableWritableWrapper<Camera> camera;
 
     private TextRenderer scoreLabel;
+    private TextRenderer coinsLabel;
 
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
@@ -77,7 +78,12 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         this.scoreLabel.setColor(new Color(1, 0, 0));
         this.scoreLabel.setFontSize(1);
         this.scoreLabel.setFontFamily("DejaVu Sans Light");
+        this.coinsLabel = rendererFactory.newText("");
+        this.coinsLabel.setColor(new Color(1, 0, 0));
+        this.coinsLabel.setFontSize(1);
+        this.coinsLabel.setFontFamily("DejaVu Sans Light");
         this.getScene().add(scoreLabel.at(1, 1));
+        this.getScene().add(coinsLabel.at(1, 1));
     }
 
     /**
@@ -115,19 +121,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
 
         scene.getInputs().stream()
                 .map(SceneInput::getMappedCommands).forEach(commands -> {
-                    commands.forEach(command -> {
-                        command.accept(new ControllerInputImpl(controller));
-                    });
+                    commands.forEach(command -> command.accept(new ControllerInputImpl(controller)));
                 });
 
         if (this.controller.getGameLoopManager().isRunning()) {
             scene.getInputs().stream()
                     .map(SceneInput::getMappedPolling)
-                    .forEach(actions -> {
-                        actions.forEach(action -> {
-                            this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
-                        });
-                    });
+                    .forEach(actions -> actions.forEach(action -> {
+                        this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+                    }));
         }
 
         this.updateTextRenderer();
@@ -141,9 +143,13 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private void updateTextRenderer() {
         int counter = 0;
         this.scoreLabel.setText("");
-        for (var x : this.controller.getScore()) {
+        this.coinsLabel.setText("");
+        var coinsList = this.controller.getPlayersCoins();
+        for (var x : this.controller.getPlayersScore()) {
+            var coins = coinsList.get(counter);
             counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
+            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + x);
+            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + coins);
         }
     }
 
