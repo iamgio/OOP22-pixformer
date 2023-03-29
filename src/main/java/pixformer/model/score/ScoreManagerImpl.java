@@ -37,14 +37,16 @@ public class ScoreManagerImpl implements ScoreManager {
      * @param entity entity killed
      */
     private void increaseScore(final Entity player, final Entity entity) {
-        int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
-        if (scoreMap.containsKey(player)) {
-            scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
-        } else {
-            scoreMap.put(player, new Score(points, 0));
-        }
-        if (entity instanceof Coin) {
-            scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
+        if (player instanceof Player) {
+            int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
+            if (scoreMap.containsKey(player)) {
+                scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
+            } else {
+                scoreMap.put(player, new Score(points, 0));
+            }
+            if (entity instanceof Coin) {
+                scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
+            }
         }
     }
 
