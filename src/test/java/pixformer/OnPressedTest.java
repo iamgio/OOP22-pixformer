@@ -1,5 +1,6 @@
 package pixformer;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
@@ -28,8 +29,14 @@ final class OnPressedTest {
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
     private static final double DT = (double) SECONDS_TO_MILLIS / FPS * 30;
-    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private final EntityFactory factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+    private World world;
+    private EntityFactory factory;
+
+    @BeforeEach
+    void setup() {
+        world = new WorldImpl(WorldOptionsFactory.testOptions());
+        factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+    }
 
     private World createPrisonAndFallingPlayer(final Entity entity) {
         /*
