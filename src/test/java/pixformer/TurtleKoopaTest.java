@@ -16,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TurtleKoopaTest {
 
-    private static final double FLOOR_HEIGHT = 1;
+    private static final int FLOOR_HEIGHT = 1;
 
     private void testTurtleMovesBecauseOfPlayer(final Vector2D playerPos, final double sign) {
         final World world = new WorldImpl(WorldOptionsFactory.testOptions());
         final EntityFactoryImpl factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
         final TurtleKoopa koopa = (TurtleKoopa) factory.createTurtleKoopa(1, 0);
-        for (int i = -10; i < 10; i++) {
-            world.spawnEntity(factory.createTurtleKoopa(i, FLOOR_HEIGHT));
+        for (int i = 0; i < 10; i++) {
+            world.spawnEntity(factory.createTileBlock(i, FLOOR_HEIGHT));
         }
         world.spawnEntity(new Player(playerPos.x(), playerPos.y(), 1, 1, 0));
         world.spawnEntity(koopa);
