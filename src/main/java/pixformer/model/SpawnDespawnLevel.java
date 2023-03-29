@@ -1,27 +1,18 @@
 package pixformer.model;
 
-import pixformer.controller.deserialization.level.JsonLevelDataDeserializer;
-import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.controller.deserialization.level.LevelDataDeserializer;
 import pixformer.model.modelinput.CompleteModelInput;
-import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-/**
- * @deprecated test
- */
-@Deprecated
-public class LevelMock implements Level {
+public class SpawnDespawnLevel implements Level {
 
     private final Level inner;
 
-    /**
-     * Test level.
-     */
-    public LevelMock() {
-        final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
-        inner = new SpawnDespawnLevel(() -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
-                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")), world);
+    public SpawnDespawnLevel(final Supplier<LevelData> deserializer, final World world) {
+        inner = new LevelImpl(deserializer.get(), world);
     }
 
     @Override

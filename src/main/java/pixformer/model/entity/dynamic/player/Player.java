@@ -3,7 +3,6 @@ package pixformer.model.entity.dynamic.player;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
@@ -64,7 +63,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param y Y position of the player.
      */
     public Player(final int x, final int y) {
-        this(x,y, WIDTH, HEIGHT, 0);
+        this(x, y, WIDTH, HEIGHT, 0);
     }
 
     /**

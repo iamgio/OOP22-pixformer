@@ -2,6 +2,9 @@ package pixformer.model.score;
 
 /**
  * In-game score, record for all the score features in the game.
+ *
+ * @param points points of the score
+ * @param coinsNumber number of coins token
  */
 public record Score(int points, int coinsNumber) {
 

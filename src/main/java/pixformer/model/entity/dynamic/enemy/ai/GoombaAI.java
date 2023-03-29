@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.ai;
+package pixformer.model.entity.dynamic.enemy.ai;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -11,7 +11,7 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BiConsumerCollisionReactor;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
+import pixformer.model.entity.dynamic.enemy.HorizontalModelInputImpl;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.entity.collision.CollisionSide;

@@ -7,20 +7,20 @@ import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.TestEntity;
+import pixformer.model.entity.dynamic.player.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PhysicTest {
 
-    private static final Vector2D gravity = new Vector2D(0, -0.00008);
+    private static final Vector2D gravity = new Vector2D(0, 0.00008);
 
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private Entity entity;
 
     @BeforeEach
     void setup() {
-        this.entity = new TestEntity(0);
+        this.entity = new Player(0, 14, 1, 1, 0);
         world.spawnEntity(this.entity);
     }
 
