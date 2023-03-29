@@ -11,8 +11,7 @@ import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.RectangleBoundingBox;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
-import pixformer.model.entity.statics.Block;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.input.InputComponent;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
@@ -50,7 +49,7 @@ final class GoombaAITest {
     @BeforeEach
     void setup() {
         world.spawnEntity(goomba);
-        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
+        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
     }
 
     @Test

@@ -7,7 +7,9 @@ import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.entity.dynamic.Koopa;
+import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
+import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.WalkingKoopa;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
@@ -26,11 +28,10 @@ final class OnPressedTest {
     private static final int SECONDS_TO_MILLIS = 1_000;
     private static final int FPS = 30;
     private static final double DT = (double) SECONDS_TO_MILLIS / FPS * 30;
-
-    private final EntityFactory factory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
+    private final EntityFactory factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
 
     private World createPrisonAndFallingPlayer(final Entity entity) {
-        final World world = new WorldImpl(WorldOptionsFactory.testOptions());
         /*
          * p
          * p
@@ -58,10 +59,10 @@ final class OnPressedTest {
 
     @Test
     void testIfKoopaChangesState() {
-        final Koopa koopa = (Koopa) factory.createKoopa(0, 2);
+        final KoopaState koopa = (KoopaState) factory.createKoopa(0, 2);
         final World world = createPrisonAndFallingPlayer(koopa);
-        assertTrue(koopa.isWalking());
+        assertTrue(world.getEntities().stream().anyMatch(WalkingKoopa.class::isInstance));
         world.update(DT);
-        assertTrue(koopa.isTurtle());
+        assertTrue(world.getEntities().stream().anyMatch(TurtleKoopa.class::isInstance));
     }
 }
