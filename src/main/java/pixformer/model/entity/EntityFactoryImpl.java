@@ -14,8 +14,6 @@ import pixformer.model.entity.statics.Block;
 import pixformer.model.entity.statics.Surprise;
 import pixformer.model.entity.statics.Barrier;
 import pixformer.model.entity.statics.Pole;
-import pixformer.view.engine.Color;
-import pixformer.view.entity.RectangleGraphicsComponent;
 import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.function.BiConsumer;
@@ -150,6 +148,6 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("mushroom")
     @Override
     public Entity createMushroom(final int x, final int y) {
-        return new MovingPowerupEntity(x, y, new Mushroom(), e -> new RectangleGraphicsComponent(e, new Color(1, 0.5, 0)));
+        return new MovingPowerupEntity(x, y, new Mushroom(), graphicsComponentFactory::redMushroom);
     }
 }

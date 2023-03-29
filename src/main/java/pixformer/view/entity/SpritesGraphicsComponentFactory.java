@@ -9,6 +9,7 @@ import pixformer.view.entity.enemies.TurtleGraphicsComponent;
 import pixformer.view.entity.enemies.WalkingKoopaGraphicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
+import pixformer.view.entity.powerup.MushroomGraphicsComponent;
 import pixformer.view.entity.statics.BlockGraphicsComponent;
 import pixformer.view.entity.statics.CoinGraphicsComponent;
 import pixformer.view.entity.statics.PoleGraphicsComponent;
@@ -99,6 +100,14 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public GraphicsComponent fireFlower(final Entity entity) {
         return new FireFlowerGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent redMushroom(final Entity entity) {
+        return new MushroomGraphicsComponent(entity);
     }
 
     /**
