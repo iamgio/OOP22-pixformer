@@ -37,11 +37,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
-//    private TextRenderer playerLabel;
-//    private TextRenderer scoreLabel;
-//    private TextRenderer coinsLabel;
     private TextRenderer infoLabel;
-
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
@@ -136,16 +132,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * Update the scoreLabel, with all players score, during the game.
      */
     private void updateTextRenderer() {
-        int counter = 0;
         this.infoLabel.setText("");
+        var scoresList = this.controller.getPlayersScore();
         var coinsList = this.controller.getPlayersCoins();
-        for (var points : this.controller.getPlayersScore()) {
-            var coins = coinsList.get(counter);
-            counter++;
-            String label = "PLAYER " + counter + "    ";
-            label += "POINTS = " + points + "  ";
-            label += "COINS = " + coins + "\n";
-            this.infoLabel.setText(label);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < scoresList.size(); i++) {
+            stringBuilder.append("PLAYER ").append(i + 1).append("    ");
+            stringBuilder.append("POINTS = ").append(scoresList.get(i)).append("  ");
+            stringBuilder.append("COINS = ").append(coinsList.get(i)).append("\n");
+            this.infoLabel.setText(stringBuilder.toString());
         }
     }
 
