@@ -2,9 +2,14 @@ package pixformer.model.entity.dynamic.enemy.goomba;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
-import pixformer.model.entity.*;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
+import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
@@ -15,7 +20,7 @@ import java.util.Optional;
 /**
  * The enemy goomba.
  */
-public final class Goomba implements DrawableEntity, MutableEntity {
+public final class Goomba implements DrawableEntity, MutableEntity, Enemy {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
