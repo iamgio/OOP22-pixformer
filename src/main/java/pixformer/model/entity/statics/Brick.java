@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Brick block, common brick block which can be destroyed from the bottom.
  */
-public class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
+public final class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;

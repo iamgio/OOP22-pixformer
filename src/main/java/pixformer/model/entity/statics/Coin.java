@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * In-game coin, a simple entity that give points to the player.
  */
-public class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
+public final class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
 
     private static final int HEIGHT = 1;
     private static final int WIDTH = 1;

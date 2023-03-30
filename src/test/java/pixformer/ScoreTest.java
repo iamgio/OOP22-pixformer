@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Class to test the increment of the score.
  */
-public final class ScoreTest {
+final class ScoreTest {
 
     private static final int DEFAULT_SCORE_INCREMENT = 100;
     private static final int BASE_Y = 10;

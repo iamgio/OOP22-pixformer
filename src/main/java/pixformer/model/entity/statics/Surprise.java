@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * Surprise block, hittable block which contains a power-up, depending on the player status.
  */
-public class Surprise extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
+public final class Surprise extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;

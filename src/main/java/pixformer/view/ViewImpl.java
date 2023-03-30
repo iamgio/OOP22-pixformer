@@ -16,6 +16,7 @@ import pixformer.view.engine.ViewLauncher;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
+import pixformer.view.engine.internationalization.Lang;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -135,12 +136,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         this.infoLabel.setText("");
         final var scoresList = this.controller.getPlayersScore();
         final var coinsList = this.controller.getPlayersCoins();
-        final StringBuilder stringBuilder = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder(128);
+        final Lang lang = Lang.getInstance();
         for (int i = 0; i < scoresList.size(); i++) {
             // Building the string with the score of all players
-            stringBuilder.append("Player ").append(i + 1).append("    ");
-            stringBuilder.append(scoresList.get(i)).append(" coins").append("  ");
-            stringBuilder.append(coinsList.get(i)).append(" points").append("\n");
+            // consecutive append calls make the code more understandable
+            stringBuilder.append(lang.get("score.player")).append(i + 1).append("    "); // NOPMD : see above
+            stringBuilder.append(scoresList.get(i)).append(lang.get("score.points")).append("  "); // NOPMD : see above
+            stringBuilder.append(coinsList.get(i)).append(lang.get("score.coins")).append("\n"); // NOPMD : see above
             this.infoLabel.setText(stringBuilder.toString());
         }
     }
