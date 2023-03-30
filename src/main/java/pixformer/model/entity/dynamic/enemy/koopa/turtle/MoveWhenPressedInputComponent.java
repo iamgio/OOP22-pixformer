@@ -11,7 +11,7 @@ import pixformer.model.entity.dynamic.player.Player;
 /**
  * An input component which makes the controlled entity move when pressed from the top.
  */
-public class MoveWhenPressedInputComponent extends InputComponent {
+public final class MoveWhenPressedInputComponent extends InputComponent {
 
     private final CollisionReactor collisionReactor;
 
