@@ -5,10 +5,17 @@ import pixformer.model.modelinput.CompleteModelInput;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * A Level which use a World given by argument in the constructor.
+ */
 public final class WorldAcceptingLevel implements Level {
 
     private final Level inner;
 
+    /**
+     * @param deserializer which supply the LevelData
+     * @param world which will be populated.
+     */
     public WorldAcceptingLevel(final Supplier<LevelData> deserializer, final World world) {
         inner = new LevelImpl(deserializer.get(), world);
     }
