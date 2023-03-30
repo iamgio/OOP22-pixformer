@@ -6,6 +6,13 @@ package pixformer.model;
 public final class WorldOptionsFactory {
 
     /**
+     * Private constructor for utility class.
+     */
+    private WorldOptionsFactory() {
+
+    }
+
+    /**
      * The distance range from any player in which entities are updated.
      */
     private static final int DEFAULT_UPDATE_RANGE = 30;

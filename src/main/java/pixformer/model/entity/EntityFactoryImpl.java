@@ -29,7 +29,10 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     private final BiConsumer<Entity, Entity> removeEntityFromWorld;
 
     /**
+     * Simple constructor for the Entity facotry
+     *
      * @param graphicsComponentFactory the factory to get the graphics components from
+     * @param world world where the entities live in
      */
     public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory, final World world) {
         this.graphicsComponentFactory = graphicsComponentFactory;
@@ -119,7 +122,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("koopa")
     @Override
     public Entity createKoopa(final int x, final int y) {
-        return new WalkingKoopa(x, y, (xx, yy) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy)), removeEntityFromWorld, graphicsComponentFactory::walkingKoopa);
+        return new WalkingKoopa(x, y,
+                (xx, yy) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy)), removeEntityFromWorld, graphicsComponentFactory::walkingKoopa);
     }
 
     /**

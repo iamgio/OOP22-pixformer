@@ -3,7 +3,6 @@ package pixformer.model;
 import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.score.ScoreManager;
 
 import java.util.Set;

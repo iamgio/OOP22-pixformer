@@ -31,8 +31,8 @@ public class PoleCollisionComponent extends CollisionComponent {
                 .map(entity -> (Player) entity).forEach(player -> {
                     if (player.getWorld().isPresent()) {
                         player.setVelocity(player.getVelocity().copyWithX(0));
-                        player.setVelocity(player.getVelocity().y() > 0 ?
-                                player.getVelocity() : player.getVelocity().copyWithY(0));
+                        player.setVelocity(player.getVelocity().y() > 0
+                                ? player.getVelocity() : player.getVelocity().copyWithY(0));
                         player.getWorld().get().endGame(player);
                     }
                 });
