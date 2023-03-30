@@ -10,7 +10,7 @@ import pixformer.model.modelinput.CompleteModelInput;
  * @deprecated test
  */
 @Deprecated
-public class TestInputComponent extends UserInputComponent implements CompleteModelInput {
+public final class TestInputComponent extends UserInputComponent implements CompleteModelInput {
 
     public TestInputComponent(AbstractEntity testEntity) {
         super(testEntity);

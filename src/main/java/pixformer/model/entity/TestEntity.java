@@ -13,7 +13,7 @@ import java.util.Optional;
  * @deprecated test
  */
 @Deprecated
-public class TestEntity extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public final class TestEntity extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
 
     private static final double SIZE = 1; // Test values
 
@@ -66,7 +66,7 @@ public class TestEntity extends AbstractEntity implements DrawableEntity, Defaul
     /**
      * @param hasCollided new colliding status
      */
-    public void setHasCollided(boolean hasCollided) {
+    public void setHasCollided(final boolean hasCollided) {
         this.hasCollided = hasCollided;
     }
 

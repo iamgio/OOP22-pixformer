@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 /**
  * Velocity setter which does not change the x component of the current velocity.
  */
-public class OnlyXVelocitySetter implements Consumer<Vector2D> {
+public final class OnlyXVelocitySetter implements Consumer<Vector2D> {
 
     private final Consumer<Vector2D> inner;
 
