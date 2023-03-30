@@ -112,6 +112,9 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
         return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Entity createTurtleKoopa(final double x, final double y) {
         return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
