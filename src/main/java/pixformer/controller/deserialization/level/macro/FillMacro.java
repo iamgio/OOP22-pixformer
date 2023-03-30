@@ -1,14 +1,13 @@
 package pixformer.controller.deserialization.level.macro;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.MutableEntity;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
 /**
- * A macro that copies a {@link MutableEntity} in a given rectangle area.
+ * A macro that copies a {@link pixformer.model.entity.MutableEntity} in a given rectangle area.
  */
 public class FillMacro implements EntityMacro {
 
