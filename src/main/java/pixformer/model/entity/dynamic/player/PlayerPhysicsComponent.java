@@ -8,9 +8,6 @@ import pixformer.model.physics.PhysicsComponent;
  */
 public class PlayerPhysicsComponent extends PhysicsComponent {
 
-    static final float SPEED = 0.000_11f;
-    static final float JUMP_FORCE = 0.000_8f;
-
     /**
      * 
      * @param entity Entity linked to the component
