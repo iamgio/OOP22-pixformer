@@ -9,6 +9,7 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
+import java.util.logging.Logger;
 import java.util.Optional;
 import java.util.Set;
 
@@ -77,7 +78,9 @@ public final class GameLoopFactory {
                 try {
                     Thread.sleep(period - dt);
                 } catch (final InterruptedException ex) {
-                    ex.printStackTrace();
+                    final Logger logger = Logger.getLogger(this.getClass().getName());
+                    // ex.printStackTrace();
+                    logger.log(java.util.logging.Level.FINE, ex.toString());
                 }
             }
         };

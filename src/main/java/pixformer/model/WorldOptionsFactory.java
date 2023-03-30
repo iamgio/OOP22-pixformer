@@ -6,13 +6,6 @@ package pixformer.model;
 public final class WorldOptionsFactory {
 
     /**
-     * Private constructor for utility class.
-     */
-    private WorldOptionsFactory() {
-
-    }
-
-    /**
      * The distance range from any player in which entities are updated.
      */
     private static final int DEFAULT_UPDATE_RANGE = 30;
@@ -21,6 +14,13 @@ public final class WorldOptionsFactory {
      * The minimum Y coordinate where entities are killed.
      */
     private static final int DEFAULT_Y_FALL_THRESHOLD = 50;
+
+    /**
+     * Private constructor for utility class.
+     */
+    private WorldOptionsFactory() {
+
+    }
 
     /**
      * @return the default options for visual gameplay

@@ -89,7 +89,7 @@ public class LevelImpl implements Level {
         this.data.entities().forEach(this.world::spawnEntity);
 
         IntStream.range(0, playersAmount).forEach(i -> {
-            Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
+            final Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
             this.world.spawnEntity(player);
 
             player.getInputComponent().ifPresent(inputComponent -> {
