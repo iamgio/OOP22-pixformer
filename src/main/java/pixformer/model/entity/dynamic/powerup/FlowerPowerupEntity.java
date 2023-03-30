@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.powerup;
 
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;

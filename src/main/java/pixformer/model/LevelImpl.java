@@ -23,10 +23,14 @@ public class LevelImpl implements Level {
     /**
      * @param data level data
      */
-    public LevelImpl(final LevelData data) {
+    public LevelImpl(final LevelData data, final World world) {
         this.data = data;
-        this.world = new WorldImpl(WorldOptionsFactory.defaultOptions());
+        this.world = world;
         this.players = new ArrayList<>();
+    }
+
+    public LevelImpl(final LevelData data) {
+        this(data, new WorldImpl(WorldOptionsFactory.defaultOptions()));
     }
 
     /**

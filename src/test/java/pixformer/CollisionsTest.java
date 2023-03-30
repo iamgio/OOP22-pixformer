@@ -34,7 +34,7 @@ public class CollisionsTest {
     @BeforeEach
     void setup() {
         this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        this.entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
+        this.entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
         this.entity = new TestEntity(0, 0);
         world.spawnEntity(entity);
     }

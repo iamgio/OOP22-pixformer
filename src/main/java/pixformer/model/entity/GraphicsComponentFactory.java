@@ -69,6 +69,12 @@ public interface GraphicsComponentFactory {
     GraphicsComponent fireFlower(Entity entity);
 
     /**
+     * @param entity entity target of the graphics component
+     * @return a new redMushroom graphics component
+     */
+    GraphicsComponent redMushroom(Entity entity);
+
+    /**
      * @param player target of the graphics component
      * @return a new player graphics component
      */

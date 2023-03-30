@@ -24,6 +24,6 @@ public class BlockGraphicsComponent extends StaticGraphicsComponent {
      */
     @Override
     protected Renderer getRenderer(final RendererFactory factory) {
-        return factory.newImage("/sprites/blocks/block.png", getEntity().getWidth(), getEntity().getHeight());
+        return factory.newImage("/sprites/blocks/marble.png", getEntity().getWidth(), getEntity().getHeight());
     }
 }

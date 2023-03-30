@@ -37,9 +37,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
-
-    private TextRenderer scoreLabel;
-
+    private TextRenderer infoLabel;
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
@@ -73,11 +71,10 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
 
-        this.scoreLabel = rendererFactory.newText("");
-        this.scoreLabel.setColor(new Color(1, 0, 0));
-        this.scoreLabel.setFontSize(1);
-        this.scoreLabel.setFontFamily("DejaVu Sans Light");
-        this.getScene().add(scoreLabel.at(1, 1));
+        this.infoLabel = rendererFactory.newText("");
+        this.infoLabel.setFontFamily("Impact");
+        this.infoLabel.setFontSize(1);
+        this.getScene().add(infoLabel.at(1, 1));
     }
 
     /**
@@ -115,19 +112,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
 
         scene.getInputs().stream()
                 .map(SceneInput::getMappedCommands).forEach(commands -> {
-                    commands.forEach(command -> {
-                        command.accept(new ControllerInputImpl(controller));
-                    });
+                    commands.forEach(command -> command.accept(new ControllerInputImpl(controller)));
                 });
 
         if (this.controller.getGameLoopManager().isRunning()) {
             scene.getInputs().stream()
                     .map(SceneInput::getMappedPolling)
-                    .forEach(actions -> {
-                        actions.forEach(action -> {
-                            this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
-                        });
-                    });
+                    .forEach(actions -> actions.forEach(action -> {
+                        this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+                    }));
         }
 
         this.updateTextRenderer();
@@ -139,11 +132,16 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * Update the scoreLabel, with all players score, during the game.
      */
     private void updateTextRenderer() {
-        int counter = 0;
-        this.scoreLabel.setText("");
-        for (var x : this.controller.getScore()) {
-            counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
+        this.infoLabel.setText("");
+        var scoresList = this.controller.getPlayersScore();
+        var coinsList = this.controller.getPlayersCoins();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < scoresList.size(); i++) {
+            // Building the string with the score of all players
+            stringBuilder.append("Player ").append(i + 1).append("    ");
+            stringBuilder.append(scoresList.get(i)).append(" coins").append("  ");
+            stringBuilder.append(coinsList.get(i)).append(" points").append("\n");
+            this.infoLabel.setText(stringBuilder.toString());
         }
     }
 

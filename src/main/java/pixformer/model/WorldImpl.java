@@ -149,8 +149,9 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void endGame(final Player player) {
+    public void endGame(final Entity player) {
         this.scoreManager.passedFinishLine(player);
+        this.queueEntityDrop(player);
     }
 
     /**
@@ -158,9 +159,6 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.commandQueue.forEach(Runnable::run);
-        this.commandQueue.clear();
-
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
@@ -172,5 +170,7 @@ public class WorldImpl implements World {
 
             entity.update(dt);
         });
+        this.commandQueue.forEach(Runnable::run);
+        this.commandQueue.clear();
     }
 }

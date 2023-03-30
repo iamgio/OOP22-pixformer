@@ -21,7 +21,7 @@ public class WorldFallTest {
     @BeforeEach
     void setup() {
         this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
+        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
         Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
         world.spawnEntity(entity);
     }
@@ -32,9 +32,9 @@ public class WorldFallTest {
         assertFalse(world.getEntities().isEmpty());
         world.update(DT);
         assertFalse(world.getEntities().isEmpty());
-        world.update(DT);
-        assertFalse(world.getEntities().isEmpty());
         world.update(DT); // Threshold reached: entity is killed
+        assertTrue(world.getEntities().isEmpty());
+        world.update(DT);
         assertTrue(world.getEntities().isEmpty());
         world.update(DT);
         assertTrue(world.getEntities().isEmpty());
