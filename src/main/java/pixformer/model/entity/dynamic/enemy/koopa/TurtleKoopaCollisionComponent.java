@@ -24,7 +24,6 @@ public final class TurtleKoopaCollisionComponent extends SolidCollisionComponent
     public TurtleKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> die) {
         super(entity);
         reactor = CollisionReactorFactory.compose(Set.of(
-                new ActionOnPressedCollisionReactor(die),
                 new DieByTurtleCollisionReactor(die),
                 new DieForFireCollisionReactor(die),
                 new MakeJumpOnPressedCollisionReactor()
