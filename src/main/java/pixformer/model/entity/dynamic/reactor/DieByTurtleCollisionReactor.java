@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 /**
  * Reactor which makes an entity die for be hit by a turtle koopa.
  */
-public class DieByTurtleCollisionReactor implements CollisionReactor {
+public final class DieByTurtleCollisionReactor implements CollisionReactor {
 
     private final CollisionReactor innerReactor;
 
