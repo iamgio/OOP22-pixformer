@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 /**
  * A collision reactor that makes the entity die when hit by a fireball.
  */
-public class DieForFireCollisionReactor implements CollisionReactor {
+public final class DieForFireCollisionReactor implements CollisionReactor {
 
     private final CollisionReactor inner;
 

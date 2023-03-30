@@ -31,6 +31,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
      * @param y             its initial x position.
      * @param turtleFactory for creating a turtle koopa.
      * @param die           for killing the entity.
+     * @param graphicsComponent graphics component retriever for the koopa
      */
     public WalkingKoopa(final double x, final double y, final BiConsumer<Double, Double> turtleFactory,
                         final BiConsumer<Entity, Entity> die,

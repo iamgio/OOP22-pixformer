@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 /**
  * The collision component for walking koopa.
  */
-public class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
+public final class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
 
     private final CollisionReactor reactor;
 
@@ -25,7 +25,8 @@ public class WalkingKoopaCollisionComponent extends SolidCollisionComponent {
      * @param changeToTurtle when invoked it transforms {@code entity} into a turtle koopa.
      * @param dieBy consume the killer, kills the controlled entity.
      */
-    public WalkingKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> changeToTurtle, final Consumer<Entity> dieBy) {
+    public WalkingKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> changeToTurtle,
+                                          final Consumer<Entity> dieBy) {
         super(entity);
         reactor = CollisionReactorFactory.compose(Set.of(
                 new ActionOnPressedCollisionReactor(changeToTurtle),

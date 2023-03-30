@@ -19,7 +19,7 @@ public final class ActionOnPressedCollisionReactor implements CollisionReactor {
     /**
      * @param action consumer which accepts the colliding entity.
      */
-    public ActionOnPressedCollisionReactor(Consumer<Entity> action) {
+    public ActionOnPressedCollisionReactor(final Consumer<Entity> action) {
         innerReactor = new SingleCollisionReactor(
             collision -> collision.entity() instanceof Player && collision.side() == CollisionSide.TOP,
             action
