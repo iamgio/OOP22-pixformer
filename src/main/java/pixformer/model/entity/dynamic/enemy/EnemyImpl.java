@@ -12,7 +12,7 @@ import pixformer.model.physics.PhysicsComponent;
 /**
  * The default implementation of an enemy.
  */
-public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, Enemy {
+public final class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, Enemy {
 
     private final GoombaAI ai;
     private final double velocityModule;
