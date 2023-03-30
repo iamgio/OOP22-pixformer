@@ -20,10 +20,7 @@ public class DieForFireCollisionReactor implements CollisionReactor {
      * @param dieBy consume the killer entity and kill the entity.
      */
     public DieForFireCollisionReactor(final Consumer<Entity> dieBy) {
-        inner = new SingleCollisionReactor(
-                collision -> collision.entity() instanceof Fireball,
-                killer -> dieBy.accept(((Projectile)killer).getShooter())
-        );
+        inner = new DieByProjectileCollisionReactor(Fireball.class::isInstance, dieBy);
     }
 
     @Override
