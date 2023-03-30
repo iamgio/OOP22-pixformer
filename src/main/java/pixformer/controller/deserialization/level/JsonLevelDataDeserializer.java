@@ -6,7 +6,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import pixformer.controller.deserialization.level.macro.EntityMacro;
 import pixformer.controller.deserialization.level.macro.FillMacro;
 import pixformer.controller.deserialization.level.macro.NoMacro;
@@ -54,7 +53,7 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
     @Override
     public LevelData deserialize(final JsonElement json,
                                  final Type typeOfT,
-                                 final JsonDeserializationContext context) throws JsonParseException {
+                                 final JsonDeserializationContext context) {
         final JsonObject object = json.getAsJsonObject();
 
         final String name = object.get("name").getAsString();
