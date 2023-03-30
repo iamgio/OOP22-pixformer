@@ -133,7 +133,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
 
-        player.setVelocity(player.getVelocity().copyWithY(Math.abs(player.getVelocity().y()) > 0.014 ? 0.014 * Math.signum(player.getVelocity().y()) : player.getVelocity().y()));
+        player.setVelocity(player.getVelocity().copyWithY(Math.abs(player.getVelocity().y()) > 0.014 ?
+                0.014 * Math.signum(player.getVelocity().y()) : player.getVelocity().y()));
 
         sprintKey = false;
     }
