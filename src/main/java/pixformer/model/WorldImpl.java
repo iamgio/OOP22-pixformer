@@ -3,7 +3,6 @@ package pixformer.model;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
