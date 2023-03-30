@@ -20,7 +20,7 @@ public class LevelMock implements Level {
      */
     public LevelMock() {
         final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
-        inner = new SpawnDespawnLevel(() -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+        inner = new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
                 .deserialize(Level.class.getResourceAsStream("/levels/test2.json")), world);
     }
 

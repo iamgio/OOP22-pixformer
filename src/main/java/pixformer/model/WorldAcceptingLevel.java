@@ -5,11 +5,11 @@ import pixformer.model.modelinput.CompleteModelInput;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public final class SpawnDespawnLevel implements Level {
+public final class WorldAcceptingLevel implements Level {
 
     private final Level inner;
 
-    public SpawnDespawnLevel(final Supplier<LevelData> deserializer, final World world) {
+    public WorldAcceptingLevel(final Supplier<LevelData> deserializer, final World world) {
         inner = new LevelImpl(deserializer.get(), world);
     }
 

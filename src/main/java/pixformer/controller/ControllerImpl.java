@@ -13,7 +13,7 @@ import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
-import pixformer.model.SpawnDespawnLevel;
+import pixformer.model.WorldAcceptingLevel;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.score.Score;
@@ -206,7 +206,7 @@ public final class ControllerImpl implements Controller {
 //            final LevelData data = new JsonLevelDataDeserializer(entityFactory).deserialize(inputStream);
 //            return new LevelImpl(data);
             final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
-            return new SpawnDespawnLevel(() -> new JsonLevelDataDeserializer(
+            return new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
                     new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
                     .deserialize(inputStream), world);
         } catch (IOException e) {
