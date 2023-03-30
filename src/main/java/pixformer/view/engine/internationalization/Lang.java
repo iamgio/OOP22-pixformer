@@ -11,24 +11,14 @@ public final class Lang {
     private static final String BUNDLE_PATH = "lang/lang";
     private static final Lang INSTANCE = new Lang();
 
+    private final Locale locale;
     private ResourceBundle bundle;
-    private Locale locale;
 
     /**
      * @return the unique instance of this internationalization helper
      */
     public static Lang getInstance() {
-        return new Lang(INSTANCE.getLocale(), INSTANCE.bundle);
-    }
-
-    /**
-     * Initializes a custom internationalization.
-     * @param locale target locale
-     * @param bundle resource bundle to use
-     */
-    private Lang(final Locale locale, final ResourceBundle bundle) {
-        this.locale = locale;
-        this.bundle = bundle;
+        return INSTANCE;
     }
 
     /**
@@ -36,7 +26,7 @@ public final class Lang {
      * @param locale target locale
      */
     private Lang(final Locale locale) {
-        this.locale = Locale.ENGLISH;
+        this.locale = locale;
         this.update();
     }
 
@@ -45,21 +35,6 @@ public final class Lang {
      */
     private Lang() {
         this(Locale.ENGLISH);
-    }
-
-    /**
-     * @return current locale target
-     */
-    public Locale getLocale() {
-        return this.locale;
-    }
-
-    /**
-     * Sets a new locale target.
-     * @param locale new locale
-     */
-    public void setLocale(final Locale locale) {
-        this.locale = locale;
     }
 
     /**
