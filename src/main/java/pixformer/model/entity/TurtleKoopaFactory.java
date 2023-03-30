@@ -8,7 +8,8 @@ public interface TurtleKoopaFactory {
     /**
      * @param x X coordinate
      * @param y Y coordinate
+     * @param shooter who shot this turtle.
      * @return a Turtle Koopa entity
      */
-    Entity createTurtleKoopa(double x, double y);
+    Entity createTurtleKoopa(double x, double y, Entity shooter);
 }

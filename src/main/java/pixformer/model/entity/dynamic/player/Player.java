@@ -62,8 +62,8 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param x X position of the player.
      * @param y Y position of the player.
      */
-    public Player(final int x, final int y) {
-        this(x, y, WIDTH, HEIGHT, 0);
+    public Player(final double x, final double y) {
+        this(x,y, WIDTH, HEIGHT, 0);
     }
 
     /**
@@ -141,13 +141,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
-    }
-
-    /**
-     * Manage the player behaviour when jumping on an enemy.
-     */
-    public void onEnemyJump() {
-        inputComponent.onEnemyJump();
     }
 
      /**

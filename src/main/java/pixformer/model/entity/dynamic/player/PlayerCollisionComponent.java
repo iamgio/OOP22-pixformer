@@ -15,7 +15,7 @@ import java.util.Set;
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
     private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
-    private static final double PLAYER_FRICTION = 0.968;
+    private static final double PLAYER_FRICTION = 0.978;
 
     private final Player player;
     private final double baseHeight;
@@ -46,16 +46,13 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
-
         super.update(dt, collisions);
 
         isOnGround = false;
 
         for (final var collisor : collisions) {
 
-            if (collisor.entity() instanceof Enemy && collisor.side() == CollisionSide.BOTTOM) {
-                this.player.onEnemyJump();
-            } else if (isCollidingGround(collisions)) {
+            if (isCollidingGround(collisions)) {
                 isOnGround = true;
             }
 

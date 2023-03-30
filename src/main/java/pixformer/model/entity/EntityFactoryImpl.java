@@ -3,8 +3,8 @@ package pixformer.model.entity;
 import pixformer.controller.deserialization.level.EntityType;
 import pixformer.model.World;
 import pixformer.model.entity.dynamic.enemy.goomba.Goomba;
-import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
-import pixformer.model.entity.dynamic.enemy.koopa.WalkingKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
+import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
 import pixformer.model.entity.dynamic.powerup.FlowerPowerupEntity;
 import pixformer.model.entity.dynamic.powerup.MovingPowerupEntity;
 import pixformer.model.entity.powerup.powerups.Mushroom;
@@ -116,8 +116,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
      * {@inheritDoc}
      */
     @Override
-    public Entity createTurtleKoopa(final double x, final double y) {
-        return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
+    public Entity createTurtleKoopa(final double x, final double y, final Entity shooter) {
+        return new TurtleKoopa(x, y, shooter, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
     }
 
     /**
@@ -128,7 +128,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     public Entity createKoopa(final int x, final int y) {
         return new WalkingKoopa(
                 x, y,
-                (xx, yy) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy)), removeEntityFromWorld,
+                (xx, yy, shooter) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy, shooter)),
+                removeEntityFromWorld,
                 graphicsComponentFactory::walkingKoopa
         );
     }

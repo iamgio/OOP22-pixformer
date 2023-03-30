@@ -1,11 +1,10 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
-import pixformer.model.entity.dynamic.reactor.ActionOnPressedCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.CollisionReactorFactory;
 import pixformer.model.entity.dynamic.reactor.DieByTurtleCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.DieForFireCollisionReactor;
@@ -28,12 +27,11 @@ public final class TurtleKoopaCollisionComponent extends SolidCollisionComponent
      */
     public TurtleKoopaCollisionComponent(final MutableEntity entity, final Consumer<Entity> die) {
         super(entity);
-        Set<CollisionReactor> reactors = new java.util.HashSet<>();
-        reactors.add(new ActionOnPressedCollisionReactor(die));
-        reactors.add(new DieByTurtleCollisionReactor(die));
-        reactors.add(new DieForFireCollisionReactor(die));
-        reactors.add(new MakeJumpOnPressedCollisionReactor());
-        reactor = CollisionReactorFactory.compose(reactors);
+        reactor = CollisionReactorFactory.compose(Set.of(
+                new DieByTurtleCollisionReactor(die),
+                new DieForFireCollisionReactor(die),
+                new MakeJumpOnPressedCollisionReactor()
+        ));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
 import java.util.function.Consumer;
 
@@ -22,6 +22,7 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
     private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> { };
 
     private final InputComponent wrappedInputComponent;
+    private final InputComponent moveWhenPressed;
 
     /**
      * @param entity to be controlled.
@@ -30,10 +31,12 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
         super(entity);
         wrappedInputComponent = new GoombaAI(getEntity(), new OnlyXVelocitySetter(entity), VELOCITY,
                 e -> e instanceof Block || (e instanceof Player && entity.getVelocity().x() == 0), NO_ACTION);
+        moveWhenPressed = new MoveWhenPressedInputComponent(entity, VELOCITY);
     }
     @Override
     public void update(final World world) {
         wrappedInputComponent.update(world);
+        moveWhenPressed.update(world);
     }
 
 }

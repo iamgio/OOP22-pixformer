@@ -8,24 +8,24 @@ import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
 
 import java.util.Collection;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
- * Reactor which makes an entity die for be hit by a turtle koopa.
+ * CollisionReactor which reacts to collision from any direction of {@link Projectile}.
  */
-public final class DieByTurtleCollisionReactor implements CollisionReactor {
+public final class DieByProjectileCollisionReactor implements CollisionReactor {
 
-    private final CollisionReactor innerReactor;
+    private final CollisionReactor inner;
 
     /**
+     * @param whichEntities determines to which entity this reactor should react
      * @param dieBy consumer which accepts as argument the killer entity.
      */
-    public DieByTurtleCollisionReactor(final Consumer<Entity> dieBy) {
-        innerReactor = new DieByProjectileCollisionReactor(Koopa.class::isInstance, dieBy);
-    }
-
-    @Override
-    public void react(final Collection<Collision> collisions) {
-        innerReactor.react(collisions);
+    public DieByProjectileCollisionReactor(final Predicate<Entity> whichEntities, final Consumer<Entity> dieBy) {
+        inner = new SingleCollisionReactor(
+            collision -> collision.entity() instanceof Projectile && whichEntities.test(collision.entity()),
+            killer -> dieBy.accept(getShooterIfProjectile(killer))
+        );
     }
 
     /**
@@ -38,5 +38,10 @@ public final class DieByTurtleCollisionReactor implements CollisionReactor {
             return projectile.getShooter();
         }
         return entity;
+    }
+
+    @Override
+    public void react(final Collection<Collision> collisions) {
+        inner.react(collisions);
     }
 }
