@@ -5,8 +5,8 @@ package pixformer.view.engine.camera;
  */
 public class SimpleCameraBuilder {
 
-    private double pivotX = 0;
-    private double pivotY = 0;
+    private double pivotX;
+    private double pivotY;
     private double scale = 1;
 
     /**
