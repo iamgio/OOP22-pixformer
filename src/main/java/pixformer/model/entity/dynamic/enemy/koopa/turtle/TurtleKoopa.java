@@ -31,8 +31,9 @@ public final class TurtleKoopa extends AbstractEntity implements DefaultRectangl
     /**
      * Create a new TurtleKoopa.
      *
-     * @param x its initial x position
+     * @param x its initial x position.
      * @param y its initial y position.
+     * @param shooter who shot this entity.
      * @param die called by passing the killer entity, it kills this entity.
      * @param graphicsComponentRetriever for retrieving the {@link GraphicsComponent} for this entity.
      */
