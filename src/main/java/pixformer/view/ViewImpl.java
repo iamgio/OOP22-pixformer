@@ -37,10 +37,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
-
-    private TextRenderer scoreLabel;
-    private TextRenderer coinsLabel;
-
+    private TextRenderer infoLabel;
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
@@ -74,16 +71,10 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
 
-        this.scoreLabel = rendererFactory.newText("");
-        this.scoreLabel.setColor(new Color(1, 0, 0));
-        this.scoreLabel.setFontSize(1);
-        this.scoreLabel.setFontFamily("DejaVu Sans Light");
-        this.coinsLabel = rendererFactory.newText("");
-        this.coinsLabel.setColor(new Color(1, 0, 0));
-        this.coinsLabel.setFontSize(1);
-        this.coinsLabel.setFontFamily("DejaVu Sans Light");
-        this.getScene().add(scoreLabel.at(1, 1));
-        this.getScene().add(coinsLabel.at(1, 1));
+        this.infoLabel = rendererFactory.newText("");
+        this.infoLabel.setFontFamily("Impact");
+        this.infoLabel.setFontSize(1);
+        this.getScene().add(infoLabel.at(1, 1));
     }
 
     /**
@@ -141,15 +132,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * Update the scoreLabel, with all players score, during the game.
      */
     private void updateTextRenderer() {
-        int counter = 0;
-        this.scoreLabel.setText("");
-        this.coinsLabel.setText("");
+        this.infoLabel.setText("");
+        var scoresList = this.controller.getPlayersScore();
         var coinsList = this.controller.getPlayersCoins();
-        for (var x : this.controller.getPlayersScore()) {
-            var coins = coinsList.get(counter);
-            counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + x);
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\tPlayer " + counter + " = " + coins);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < scoresList.size(); i++) {
+            stringBuilder.append("PLAYER ").append(i + 1).append("    ");
+            stringBuilder.append("POINTS = ").append(scoresList.get(i)).append("  ");
+            stringBuilder.append("COINS = ").append(coinsList.get(i)).append("\n");
+            this.infoLabel.setText(stringBuilder.toString());
         }
     }
 
