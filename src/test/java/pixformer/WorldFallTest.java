@@ -12,7 +12,10 @@ import pixformer.view.entity.NullGraphicsComponentFactory;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WorldFallTest {
+/**
+ * Test for the fall from the world of the entities.
+ */
+public final class WorldFallTest {
 
     private static final double DT = 5000;
 

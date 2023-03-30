@@ -15,14 +15,17 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CollisionsTest {
+/**
+ * Test for collisions.
+ */
+public final class CollisionsTest {
 
     private static class TestEntity extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
 
         private static final int WIDTH = 2;
         private static final int HEIGHT = 2;
 
-        public TestEntity(final double x, final double y) {
+        TestEntity(final double x, final double y) {
             super(x, y, WIDTH, HEIGHT);
         }
     }

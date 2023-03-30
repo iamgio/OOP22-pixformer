@@ -5,14 +5,12 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
-import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.enemy.koopa.TurtleKoopa;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TurtleKoopaTest {
 

@@ -11,27 +11,32 @@ import pixformer.model.entity.dynamic.player.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PhysicTest {
+/**
+ * Physic test for the entity.
+ */
+public final class PhysicTest {
 
-    private static final Vector2D gravity = new Vector2D(0, 0.00008);
+    private static final Vector2D GRAVITY = new Vector2D(0, 0.00008);
+    private static final int PLAYER_SPAWN_Y = 14;
+    private static final double DELTA = 0.001;
 
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private Entity entity;
 
     @BeforeEach
     void setup() {
-        this.entity = new Player(0, 14, 1, 1, 0);
+        this.entity = new Player(0, PLAYER_SPAWN_Y, 1, 1, 0);
         world.spawnEntity(this.entity);
     }
 
     @Test
     void testDrop() {
         world.update(1);
-        assertEquals(gravity.x(), entity.getX());
-        assertEquals(15 + gravity.y(), entity.getY(), 0.001);
+        assertEquals(GRAVITY.x(), entity.getX());
+        assertEquals(PLAYER_SPAWN_Y + 1 + GRAVITY.y(), entity.getY(), DELTA);
         world.update(1);
-        assertEquals(gravity.x(), entity.getX());
-        assertEquals(15 + (3 * gravity.y()), entity.getY(), 0.001);
+        assertEquals(GRAVITY.x(), entity.getX());
+        assertEquals(PLAYER_SPAWN_Y + 1 + (3 * GRAVITY.y()), entity.getY(), DELTA);
     }
 
 }

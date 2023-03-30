@@ -114,7 +114,7 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public GameLoop createGameLoop(final View view) {
-        Optional<Level> currentLevel = this.levelManager.get().getCurrentLevel();
+        final Optional<Level> currentLevel = this.levelManager.get().getCurrentLevel();
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }

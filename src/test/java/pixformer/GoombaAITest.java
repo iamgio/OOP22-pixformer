@@ -65,7 +65,7 @@ final class GoombaAITest {
 
     @Test
     void testFindObstacle() {
-        world.spawnEntity(this.entityFactory.createTileBlock((int)X_BLOCK, 0)); // -2, -1
+        world.spawnEntity(this.entityFactory.createTileBlock((int) X_BLOCK, 0)); // -2, -1
         world.spawnEntity(this.entityFactory.createTileBlock(2, 0)); // 1, 2
         goUntil(0, i -> i > -1, i -> i - STEP, -1 + STEP);
         goUntil(-1 + STEP, i -> i < 1, i -> i + STEP, 1 - STEP);
