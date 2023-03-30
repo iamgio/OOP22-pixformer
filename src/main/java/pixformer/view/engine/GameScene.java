@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
  */
 public abstract class GameScene {
 
-    protected final List<BiConsumer<Double, Double>> onResize = new LinkedList<>();
+    private final List<BiConsumer<Double, Double>> onResize = new LinkedList<>();
 
     /**
      * @return width of the scene
@@ -79,5 +79,12 @@ public abstract class GameScene {
      */
     public void addOnResize(final BiConsumer<Double, Double> action) {
         this.onResize.add(action);
+    }
+
+    /**
+     * @return on resize actions with the new width and new height as arguments
+     */
+    protected List<BiConsumer<Double, Double>> getOnResize() {
+        return this.onResize;
     }
 }
