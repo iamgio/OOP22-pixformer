@@ -20,7 +20,7 @@ public interface Wrapper<T> {
      * Runs an action with the unwrapped value.
      * @param action action to run
      */
-    default void unwrap(Consumer<T> action) {
+    default void unwrap(final Consumer<T> action) {
         action.accept(get());
     }
 }
