@@ -8,6 +8,9 @@ import pixformer.model.entity.dynamic.reactor.SingleCollisionReactor;
 import pixformer.model.input.InputComponent;
 import pixformer.model.entity.dynamic.player.Player;
 
+/**
+ * An input component which makes the controlled entity move when pressed from the top.
+ */
 public class MoveWhenPressedInputComponent extends InputComponent {
 
     private final CollisionReactor collisionReactor;
@@ -16,13 +19,13 @@ public class MoveWhenPressedInputComponent extends InputComponent {
      * Instantiates an input component.
      *
      * @param entity target entity
+     * @param velocity given to the entity when pressed
      */
     public MoveWhenPressedInputComponent(final MutableEntity entity, final double velocity) {
         super(entity);
         collisionReactor = new SingleCollisionReactor(
                 collision -> collision.side() == CollisionSide.TOP &&
-                        collision.entity() instanceof Player
-                        && entity.getVelocity().x() == 0,
+                        collision.entity() instanceof Player && entity.getVelocity().x() == 0,
                 e -> getEntity().setVelocity(getEntity().getVelocity().copyWithX(velocity))
         );
     }
