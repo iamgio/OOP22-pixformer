@@ -18,7 +18,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameScene createGameScene() {
-        var scene = new PixformerJavaFXGameScene();
+        final var scene = new PixformerJavaFXGameScene();
         scene.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             // TODO remove
             if (e.getCode() == KeyCode.ENTER) {
@@ -33,7 +33,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
      */
     @Override
     public GameScene createMenuScene() {
-        var menu = new PixformerJavaFXMainMenuScene(this.getController());
+        final var menu = new PixformerJavaFXMainMenuScene(this.getController());
         menu.addOnLevelSelect(level -> this.getController().getLevelManager().start(level, menu.getPlayersAmount()));
         return menu;
     }
