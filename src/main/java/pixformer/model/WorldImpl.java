@@ -72,7 +72,7 @@ public class WorldImpl implements World {
                     .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
                     .collect(Collectors.toUnmodifiableSet());
         }
-        return this.lazyUserControlledEntity;
+        return Collections.unmodifiableSet(this.lazyUserControlledEntity);
     }
 
     /**

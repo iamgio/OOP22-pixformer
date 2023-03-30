@@ -10,7 +10,7 @@ import pixformer.model.entity.collision.SolidEntity;
 /**
  * Standard block in the world, indestructible block in the world.
  */
-public class Block extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
+public final class Block extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;

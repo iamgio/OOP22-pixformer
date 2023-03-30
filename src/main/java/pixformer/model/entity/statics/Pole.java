@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * In game flag entity, representing the end of the level.
  */
-public class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity {
+public final class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity {
 
     private static final int HEIGHT = 10;
     private static final int WIDTH = 1;
