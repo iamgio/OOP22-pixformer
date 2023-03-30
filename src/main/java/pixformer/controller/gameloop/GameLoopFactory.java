@@ -9,9 +9,9 @@ import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
 
-import java.util.logging.Logger;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Factory of available game loops.
@@ -22,7 +22,7 @@ public final class GameLoopFactory {
     private static final int FPS = 30; // in-game fps
 
     private final Wrapper<Level> level;
-    private final Wrapper<View> view;
+    private final View view;
 
     private final Controller controller;
 
@@ -35,7 +35,7 @@ public final class GameLoopFactory {
      */
     public GameLoopFactory(final Level level, final Controller controller, final View view) {
         this.level = new SimpleWrapper<>(level);
-        this.view = new SimpleWrapper<>(view);
+        this.view = view;
         this.controller = controller;
     }
 
@@ -43,9 +43,7 @@ public final class GameLoopFactory {
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        final View view = this.view.get();
-
-        view.setup();
+        view.init();
 
         final World world = this.level.get().getWorld();
         final Set<Entity> playersEntities = world.getUserControlledEntities();
