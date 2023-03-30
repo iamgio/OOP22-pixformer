@@ -52,9 +52,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
         for (final var collisor : collisions) {
 
-            if (collisor.entity() instanceof Enemy && collisor.side() == CollisionSide.BOTTOM) {
-                this.player.onEnemyJump();
-            } else if (isCollidingGround(collisions)) {
+            if (isCollidingGround(collisions)) {
                 isOnGround = true;
             }
 

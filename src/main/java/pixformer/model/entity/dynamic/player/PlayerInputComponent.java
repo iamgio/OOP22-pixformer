@@ -35,9 +35,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
 
-    // On enemy jump cooldown in milliseconds
-    private static final long ON_ENEMY_JUMP_COOLDOWN = 500;
-
     // Force multiplier applied to the jumpforce when jumping on an enemy
     private static final int ON_ENEMY_JUMP_MULTIPLIER = 7;
 
@@ -168,18 +165,5 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     private void resetJumping() {
         this.currentPlayerJump = MAX_JUMP_DURATION;
-    }
-
-    /**
-     * Force a jump on player.
-     */
-    public void onEnemyJump() {
-
-        if (onEnemyJumpDelay.hasElapsed(ON_ENEMY_JUMP_COOLDOWN)) {
-            resetJumping();
-            forceJump();
-            onEnemyJumpDelay.reset();
-            onEnemyJumpDelay.start();
-        }
     }
 }

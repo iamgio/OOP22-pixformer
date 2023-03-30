@@ -143,13 +143,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         }
     }
 
-    /**
-     * Manage the player behaviour when jumping on an enemy.
-     */
-    public void onEnemyJump() {
-        inputComponent.onEnemyJump();
-    }
-
      /**
      * @return True if is sprinting.
      */
