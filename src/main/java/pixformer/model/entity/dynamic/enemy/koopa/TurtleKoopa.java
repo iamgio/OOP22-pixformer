@@ -16,7 +16,8 @@ import pixformer.model.physics.PhysicsComponent;
 /**
  * The state of the koopa when it is a turtle.
  */
-public final class TurtleKoopa extends AbstractEntity implements KoopaState, DefaultRectangleBoundingBoxEntity, DrawableEntity, Koopa {
+public final class TurtleKoopa extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity,
+        Koopa {
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
 
@@ -32,7 +33,8 @@ public final class TurtleKoopa extends AbstractEntity implements KoopaState, Def
      * @param y its initial y position.
      * @param die called by passing the killer entity, it kills this entity.
      */
-    public TurtleKoopa(final double x, final double y, final BiConsumer<Entity, Entity> die, final GraphicsComponentRetriever graphicsComponentRetriever) {
+    public TurtleKoopa(final double x, final double y, final BiConsumer<Entity, Entity> die,
+                       final GraphicsComponentRetriever graphicsComponentRetriever) {
         super(x, y, WIDTH, HEIGHT);
         inputComponent = new TurtleKoopaInputComponent(this);
         physicsComponent = new PhysicsComponent(this);
