@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
 import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;

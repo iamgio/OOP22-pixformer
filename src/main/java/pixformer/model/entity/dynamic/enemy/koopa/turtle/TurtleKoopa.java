@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -6,6 +6,8 @@ import java.util.function.BiConsumer;
 import pixformer.model.entity.*;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
+import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 

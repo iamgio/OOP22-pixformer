@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.walking;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;

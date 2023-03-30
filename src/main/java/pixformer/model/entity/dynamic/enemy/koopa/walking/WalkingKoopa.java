@@ -1,4 +1,4 @@
-package pixformer.model.entity.dynamic.enemy.koopa;
+package pixformer.model.entity.dynamic.enemy.koopa.walking;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -11,6 +11,8 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
+import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
+import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
 
 /**
  * The state of the koopa which walks normally and behaves like a goomba.
