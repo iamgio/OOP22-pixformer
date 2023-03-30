@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 /**
  * {@inheritDoc}.
  */
-public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
+public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleKoopaFactory {
 
     private final GraphicsComponentFactory graphicsComponentFactory;
     private final Consumer<Entity> addEntityToWorld;
@@ -111,6 +111,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     public Entity createGoomba(final int x, final int y) {
         return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
+
+    @Override
     public Entity createTurtleKoopa(final double x, final double y) {
         return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
     }
