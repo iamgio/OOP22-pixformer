@@ -16,9 +16,8 @@ import java.util.Set;
 public final class GameLoopFactory {
 
     private final Level level;
-    private final View view;
-
     private final Controller controller;
+    private final View view;
 
     /**
      * Instantiates a new game loop factory.
