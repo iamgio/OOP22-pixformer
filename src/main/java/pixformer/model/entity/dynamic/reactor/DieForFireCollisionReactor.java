@@ -1,6 +1,7 @@
 package pixformer.model.entity.dynamic.reactor;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.powerup.other.fireball.Fireball;
@@ -19,9 +20,7 @@ public class DieForFireCollisionReactor implements CollisionReactor {
      * @param dieBy consume the killer entity and kill the entity.
      */
     public DieForFireCollisionReactor(final Consumer<Entity> dieBy) {
-        inner = new SingleCollisionReactor(
-                collision -> collision.entity() instanceof Fireball, dieBy
-        );
+        inner = new DieByProjectileCollisionReactor(Fireball.class::isInstance, dieBy);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import pixformer.common.TriConsumer;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
@@ -21,7 +22,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
     private static final double HEIGHT = 2;
     private final CollisionComponent collisionComponent;
     private final GraphicsComponent graphicsComponent;
-    private final BiConsumer<Double, Double> turtleFactory;
+    private final TriConsumer<Double, Double, Entity> turtleFactory;
     private final Consumer<Entity> dieBy;
 
     /**
@@ -32,7 +33,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
      * @param turtleFactory for creating a turtle koopa.
      * @param die           for killing the entity.
      */
-    public WalkingKoopa(final double x, final double y, final BiConsumer<Double, Double> turtleFactory,
+    public WalkingKoopa(final double x, final double y, final TriConsumer<Double, Double, Entity> turtleFactory,
                         final BiConsumer<Entity, Entity> die,
                         final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
@@ -54,7 +55,7 @@ public final class WalkingKoopa extends EnemyImpl implements KoopaState, Drawabl
 
     private void changeToTurtle(final Entity killer) {
         this.dieBy.accept(killer);
-        turtleFactory.accept(getX(), getY() + getHeight() - 1);
+        turtleFactory.accept(getX(), getY() + getHeight() - 1, killer);
     }
 
     @Override
