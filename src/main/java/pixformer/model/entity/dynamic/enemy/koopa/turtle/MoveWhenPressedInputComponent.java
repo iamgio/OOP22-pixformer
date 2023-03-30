@@ -24,8 +24,9 @@ public class MoveWhenPressedInputComponent extends InputComponent {
     public MoveWhenPressedInputComponent(final MutableEntity entity, final double velocity) {
         super(entity);
         collisionReactor = new SingleCollisionReactor(
-                collision -> collision.side() == CollisionSide.TOP &&
-                        collision.entity() instanceof Player && entity.getVelocity().x() == 0,
+                collision -> collision.side() == CollisionSide.TOP
+                        && collision.entity() instanceof Player
+                        && entity.getVelocity().x() == 0,
                 e -> getEntity().setVelocity(getEntity().getVelocity().copyWithX(velocity))
         );
     }
