@@ -137,9 +137,10 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         var coinsList = this.controller.getPlayersCoins();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < scoresList.size(); i++) {
-            stringBuilder.append("PLAYER ").append(i + 1).append("    ");
-            stringBuilder.append("POINTS = ").append(scoresList.get(i)).append("  ");
-            stringBuilder.append("COINS = ").append(coinsList.get(i)).append("\n");
+            // Building the string with the score of all players
+            stringBuilder.append("Player ").append(i + 1).append("    ");
+            stringBuilder.append(scoresList.get(i)).append(" coins").append("  ");
+            stringBuilder.append(coinsList.get(i)).append(" points").append("\n");
             this.infoLabel.setText(stringBuilder.toString());
         }
     }

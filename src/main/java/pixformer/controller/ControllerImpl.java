@@ -10,7 +10,6 @@ import pixformer.controller.level.LevelManager;
 import pixformer.controller.level.LevelManagerImpl;
 import pixformer.model.*;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.score.Score;
 import pixformer.view.View;

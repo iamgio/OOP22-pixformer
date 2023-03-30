@@ -21,7 +21,7 @@ public class ScoreManagerImpl implements ScoreManager {
     private final Set<Entity> winners;
 
     /**
-     * Constructor for the class.
+     * Simple constructor for the score manager.
      *
      * @param eventSubscriber subscriber for the score manager
      */
@@ -38,6 +38,8 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     private void increaseScore(final Entity player, final Entity entity) {
         if (player instanceof Player) {
+            // Choosing the quantity of points to assign at the player, depending if it has hit
+            // a generic entity or the pole, in the second case we pass the player itself as the killed
             int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
             if (scoreMap.containsKey(player)) {
                 scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
@@ -87,5 +89,4 @@ public class ScoreManagerImpl implements ScoreManager {
             this.increaseScore(player, player);
         }
     }
-
 }
