@@ -5,7 +5,7 @@ import pixformer.model.modelinput.CompleteModelInput;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class SpawnDespawnLevel implements Level {
+public final class SpawnDespawnLevel implements Level {
 
     private final Level inner;
 
