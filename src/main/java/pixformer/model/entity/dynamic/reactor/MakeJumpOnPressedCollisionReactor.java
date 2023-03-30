@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * A collision reactor which makes the entity which press on the controlled entity jump.
  */
-public class MakeJumpOnPressedCollisionReactor implements CollisionReactor {
+public final class MakeJumpOnPressedCollisionReactor implements CollisionReactor {
 
     private static final double JUMP_FORCE = 0.000_8 * 7;
     private final CollisionReactor inner = new ActionOnPressedCollisionReactor(
