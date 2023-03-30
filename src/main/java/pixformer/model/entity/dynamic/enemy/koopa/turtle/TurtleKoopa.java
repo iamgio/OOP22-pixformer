@@ -36,7 +36,7 @@ public final class TurtleKoopa extends AbstractEntity implements DefaultRectangl
      * @param die called by passing the killer entity, it kills this entity.
      * @param graphicsComponentRetriever for retrieving the {@link GraphicsComponent} for this entity.
      */
-    public TurtleKoopa(final double x, final double y,final Entity shooter, final BiConsumer<Entity, Entity> die,
+    public TurtleKoopa(final double x, final double y, final Entity shooter, final BiConsumer<Entity, Entity> die,
                        final GraphicsComponentRetriever graphicsComponentRetriever) {
         super(x, y, WIDTH, HEIGHT);
         this.shooter = shooter;
