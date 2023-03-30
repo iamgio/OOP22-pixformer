@@ -1,7 +1,6 @@
 package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.List;
 

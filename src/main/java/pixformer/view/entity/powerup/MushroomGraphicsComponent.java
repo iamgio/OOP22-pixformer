@@ -5,10 +5,13 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * A {@link pixformer.model.entity.GraphicsComponent} for the mushroom in the game.
+ */
 public class MushroomGraphicsComponent extends StaticGraphicsComponent {
 
     /**
-     * Simple constructor for the graphics component of the mushroom
+     * Simple constructor for the graphics component of the mushroom.
      *
      * @param entity entity target of the graphics component
      */

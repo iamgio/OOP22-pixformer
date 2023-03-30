@@ -21,7 +21,10 @@ public class LevelImpl implements Level {
     private final List<CompleteModelInput> players;
 
     /**
+     * Constructor for the level.
+     *
      * @param data level data
+     * @param world world
      */
     public LevelImpl(final LevelData data, final World world) {
         this.data = data;
@@ -29,6 +32,11 @@ public class LevelImpl implements Level {
         this.players = new ArrayList<>();
     }
 
+    /**
+     * Constructor for the level.
+     *
+     * @param data level data
+     */
     public LevelImpl(final LevelData data) {
         this(data, new WorldImpl(WorldOptionsFactory.defaultOptions()));
     }

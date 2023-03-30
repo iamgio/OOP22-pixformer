@@ -93,7 +93,7 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent redMushroom(Entity entity) {
+    public GraphicsComponent redMushroom(final Entity entity) {
         return NULL_COMPONENT;
     }
 
