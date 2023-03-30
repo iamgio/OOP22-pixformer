@@ -25,7 +25,7 @@ public class FillMacro implements EntityMacro {
 
     /**
      * {@inheritDoc}
-     * @throws IllegalArgumentException if the provided entity is not an instance of {@link MutableEntity}
+     * @throws IllegalArgumentException if the provided entity is not an instance of {@link pixformer.model.entity.MutableEntity}
      */
     @Override
     public Set<Entity> apply(final Supplier<Entity> entitySupplier) {
@@ -35,7 +35,6 @@ public class FillMacro implements EntityMacro {
                 entities.addAll(new TranslateMacro(x, y).apply(entitySupplier));
             }
         }
-        entities.stream().map(Entity::getY).forEach(System.out::println);
         return entities;
     }
 }
