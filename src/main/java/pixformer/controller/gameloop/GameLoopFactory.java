@@ -1,7 +1,5 @@
 package pixformer.controller.gameloop;
 
-import pixformer.common.wrap.SimpleWrapper;
-import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.World;
@@ -21,7 +19,7 @@ public final class GameLoopFactory {
     private static final int SECONDS_TO_MILLIS = 1_000; // millis in a second
     private static final int FPS = 30; // in-game fps
 
-    private final Wrapper<Level> level;
+    private final Level level;
     private final View view;
 
     private final Controller controller;
@@ -34,7 +32,7 @@ public final class GameLoopFactory {
      * @param view       game view
      */
     public GameLoopFactory(final Level level, final Controller controller, final View view) {
-        this.level = new SimpleWrapper<>(level);
+        this.level = level;
         this.view = view;
         this.controller = controller;
     }
@@ -45,7 +43,7 @@ public final class GameLoopFactory {
     public GameLoop defaultLoop() {
         view.init();
 
-        final World world = this.level.get().getWorld();
+        final World world = level.getWorld();
         final Set<Entity> playersEntities = world.getUserControlledEntities();
 
         return dt -> {

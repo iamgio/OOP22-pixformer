@@ -79,7 +79,7 @@ public final class ControllerImpl implements Controller {
 
     private void setupLevelChangeActions() {
         getLevelManager().addOnLevelStart((level, playersAmount) -> {
-            level.setup(playersAmount);
+            level.init(playersAmount);
             this.getGameLoopManager().start();
         });
         getLevelManager().addOnLevelEnd(level -> this.getGameLoopManager().stop());

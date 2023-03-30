@@ -41,7 +41,7 @@ public final class WorldAcceptingLevel implements Level {
     }
 
     @Override
-    public void setup(final int playersAmount) {
-        inner.setup(playersAmount);
+    public void init(final int playersAmount) {
+        inner.init(playersAmount);
     }
 }

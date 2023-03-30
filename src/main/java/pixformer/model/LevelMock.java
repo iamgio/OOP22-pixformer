@@ -46,7 +46,7 @@ public final class LevelMock implements Level {
     }
 
     @Override
-    public void setup(final int playersAmount) {
-        inner.setup(playersAmount);
+    public void init(final int playersAmount) {
+        inner.init(playersAmount);
     }
 }

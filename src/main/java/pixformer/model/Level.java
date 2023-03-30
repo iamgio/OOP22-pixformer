@@ -34,5 +34,5 @@ public interface Level {
      * Sets up the game world.
      * @param playersAmount amount of players to add to the game world
      */
-    void setup(int playersAmount);
+    void init(int playersAmount);
 }
