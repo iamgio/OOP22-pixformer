@@ -9,15 +9,11 @@ import pixformer.view.View;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Logger;
 
 /**
  * Factory of available game loops.
  */
 public final class GameLoopFactory {
-
-    private static final int SECONDS_TO_MILLIS = 1_000; // millis in a second
-    private static final int FPS = 30; // in-game fps
 
     private final Level level;
     private final View view;
@@ -68,17 +64,6 @@ public final class GameLoopFactory {
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                         entity.getGraphicsComponent().update(view.getScene());
                     });
-
-            final long period = SECONDS_TO_MILLIS / FPS;
-            if (dt < period) {
-                try {
-                    Thread.sleep(period - dt);
-                } catch (final InterruptedException ex) {
-                    final Logger logger = Logger.getLogger(this.getClass().getName());
-                    // ex.printStackTrace();
-                    logger.log(java.util.logging.Level.FINE, ex.toString());
-                }
-            }
         };
     }
 }

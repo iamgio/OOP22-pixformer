@@ -9,8 +9,8 @@ public interface GameLoop {
      * Called at a fixed rate, and responsible for model updating and view
      * rendering.
      * 
-     * @param now current time in milliseconds
+     * @param dt current delta time in milliseconds
      */
-    void loop(long now);
+    void loop(long dt);
 
 }
