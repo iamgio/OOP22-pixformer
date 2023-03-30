@@ -40,7 +40,7 @@ public class ScoreManagerImpl implements ScoreManager {
         if (player instanceof Player) {
             // Choosing the quantity of points to assign at the player, depending if it has hit
             // a generic entity or the pole, in the second case we pass the player itself as the killed
-            int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
+            final int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
             if (scoreMap.containsKey(player)) {
                 scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
             } else {

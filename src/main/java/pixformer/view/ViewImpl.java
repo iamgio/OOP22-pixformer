@@ -133,9 +133,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     private void updateTextRenderer() {
         this.infoLabel.setText("");
-        var scoresList = this.controller.getPlayersScore();
-        var coinsList = this.controller.getPlayersCoins();
-        StringBuilder stringBuilder = new StringBuilder();
+        final var scoresList = this.controller.getPlayersScore();
+        final var coinsList = this.controller.getPlayersCoins();
+        final StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < scoresList.size(); i++) {
             // Building the string with the score of all players
             stringBuilder.append("Player ").append(i + 1).append("    ");
