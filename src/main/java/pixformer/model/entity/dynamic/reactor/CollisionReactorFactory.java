@@ -9,9 +9,9 @@ import java.util.Collection;
  */
 public final class CollisionReactorFactory {
 
-    private static final CollisionReactor DO_NOTHING = collisions -> {};
+    private static final CollisionReactor DO_NOTHING = collisions -> { };
 
-    private CollisionReactorFactory() {}
+    private CollisionReactorFactory() { }
 
     /**
      * @param a CollisionReactor
@@ -26,7 +26,8 @@ public final class CollisionReactorFactory {
     }
 
     /**
-     * An iterative generalization of {@link CollisionReactorFactory#compose(CollisionReactor, CollisionReactor)}
+     * An iterative generalization of {@link CollisionReactorFactory#compose(CollisionReactor, CollisionReactor)}.
+     *
      * @param reactors to be merged
      * @return a CollisionReactor which reacts like the {@code reactors} combined.
      */
