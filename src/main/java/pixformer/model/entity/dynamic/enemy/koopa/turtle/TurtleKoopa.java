@@ -3,7 +3,12 @@ package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-import pixformer.model.entity.*;
+import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.GraphicsComponentRetriever;
+import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
