@@ -109,8 +109,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
         return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
 
-    public Entity createTurtleKoopa(final double x, final double y) {
-        return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
+    public Entity createTurtleKoopa(final double x, final double y, final Entity shooter) {
+        return new TurtleKoopa(x, y, shooter, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
     }
 
     /**
@@ -119,7 +119,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     @EntityType("koopa")
     @Override
     public Entity createKoopa(final int x, final int y) {
-        return new WalkingKoopa(x, y, (xx, yy) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy)), removeEntityFromWorld, graphicsComponentFactory::walkingKoopa);
+        return new WalkingKoopa(x, y, (xx, yy, shooter) -> addEntityToWorld.accept(createTurtleKoopa(xx, yy, shooter)), removeEntityFromWorld, graphicsComponentFactory::walkingKoopa);
     }
 
     /**
