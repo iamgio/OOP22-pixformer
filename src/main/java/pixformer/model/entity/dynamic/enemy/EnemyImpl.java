@@ -41,8 +41,8 @@ public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundin
     private void fixVelocity(final Vector2D velocity) {
         final double newX = velocity.x();
         final double oldX = getVelocity().x();
-        setVelocity(getVelocity().copyWithX(oldX > 0 ?
-                Math.min(velocityModule, newX) : Math.max(-velocityModule, newX)
+        setVelocity(getVelocity().copyWithX(oldX > 0
+                ? Math.min(velocityModule, newX) : Math.max(-velocityModule, newX)
         ));
     }
 
