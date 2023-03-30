@@ -79,8 +79,8 @@ public class ScoreManagerImpl implements ScoreManager {
      * {@inheritDoc}
      */
     @Override
-    public void passedFinishLine(final Player player) {
-        if (!winners.contains(player)) {
+    public void passedFinishLine(final Entity player) {
+        if (player instanceof Player && !winners.contains(player)) {
             this.winners.add(player);
             this.increaseScore(player, player);
         }

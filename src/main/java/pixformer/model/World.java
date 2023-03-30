@@ -82,5 +82,5 @@ public interface World extends Updatable {
      *
      * @param winner player who won the game
      */
-    void endGame(Player winner);
+    void endGame(Entity winner);
 }

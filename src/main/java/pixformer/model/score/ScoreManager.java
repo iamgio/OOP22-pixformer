@@ -30,6 +30,6 @@ public interface ScoreManager {
      * Method to manage when a player hit the finish line.
      * @param player player who passed the end flag
      */
-    void passedFinishLine(Player player);
+    void passedFinishLine(Entity player);
 
 }

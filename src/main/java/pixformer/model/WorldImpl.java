@@ -149,7 +149,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void endGame(final Player player) {
+    public void endGame(final Entity player) {
         this.scoreManager.passedFinishLine(player);
         this.queueEntityDrop(player);
     }
