@@ -29,7 +29,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     private final BiConsumer<Entity, Entity> removeEntityFromWorld;
 
     /**
-     * Simple constructor for the Entity facotry
+     * Simple constructor for the Entity factory.
      *
      * @param graphicsComponentFactory the factory to get the graphics components from
      * @param world world where the entities live in
@@ -111,7 +111,6 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory {
     public Entity createGoomba(final int x, final int y) {
         return new Goomba(x, y, graphicsComponentFactory::goomba);
     }
-
     public Entity createTurtleKoopa(final double x, final double y) {
         return new TurtleKoopa(x, y, removeEntityFromWorld, graphicsComponentFactory::turtleKoopa);
     }
