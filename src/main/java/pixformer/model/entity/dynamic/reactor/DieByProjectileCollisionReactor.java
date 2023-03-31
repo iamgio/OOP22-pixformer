@@ -4,7 +4,6 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
-import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
 
 import java.util.Collection;
 import java.util.function.Consumer;

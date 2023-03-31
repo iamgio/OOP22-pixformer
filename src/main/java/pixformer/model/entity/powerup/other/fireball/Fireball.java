@@ -2,7 +2,11 @@ package pixformer.model.entity.powerup.other.fireball;
 
 import java.util.Optional;
 
-import pixformer.model.entity.*;
+import pixformer.model.entity.AbstractEntity;
+import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
+import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;

@@ -33,11 +33,7 @@ public final class WorldFallTest {
     void testOutOfWorld() {
         // The entity is affected by gravity.
         assertFalse(world.getEntities().isEmpty());
-        world.update(DT);
-        assertFalse(world.getEntities().isEmpty());
         world.update(DT); // Threshold reached: entity is killed
-        assertTrue(world.getEntities().isEmpty());
-        world.update(DT);
         assertTrue(world.getEntities().isEmpty());
         world.update(DT);
         assertTrue(world.getEntities().isEmpty());

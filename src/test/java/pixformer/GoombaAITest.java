@@ -28,7 +28,7 @@ final class GoombaAITest {
     private static final double STEP = 0.002;
     private static final double DT = 1;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private EntityFactory entityFactory;
+    private EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
     // private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
     private final Entity goomba = new AbstractEntity(0, 0, 1, 1) {
 

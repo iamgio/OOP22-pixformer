@@ -6,20 +6,23 @@ import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
+import pixformer.model.input.InputComponent;
+import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;
 
 /**
  * The enemy goomba.
  */
-public final class Goomba extends EnemyImpl implements DrawableEntity {
+public final class Goomba extends EnemyImpl implements DrawableEntity, Enemy {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
     private static final double HEIGHT = 1;
-
     private final GraphicsComponent graphicsComponent;
-
+    private final InputComponent inputComponent;
+    private final PhysicsComponent physicsComponent;
     private final CollisionComponent collisionComponent = new GoombaCollisionComponent(this);
 
     /**
@@ -32,6 +35,8 @@ public final class Goomba extends EnemyImpl implements DrawableEntity {
     public Goomba(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
         this.graphicsComponent = graphicsComponent.apply(this);
+        this.inputComponent = new GoombaAI(this, super::fixVelocity, INITIAL_VELOCITY);
+        this.physicsComponent = new PhysicsComponent(this);
     }
 
     @Override
@@ -44,4 +49,13 @@ public final class Goomba extends EnemyImpl implements DrawableEntity {
         return Optional.of(collisionComponent);
     }
 
+    @Override
+    public Optional<PhysicsComponent> getPhysicsComponent() {
+        return Optional.of(physicsComponent);
+    }
+
+    @Override
+    public Optional<InputComponent> getInputComponent() {
+        return Optional.of(inputComponent);
+    }
 }
