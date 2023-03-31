@@ -3,7 +3,6 @@ package pixformer.model.entity.dynamic.enemy.goomba;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
@@ -16,7 +15,7 @@ import java.util.Optional;
 /**
  * The enemy goomba.
  */
-public final class Goomba extends EnemyImpl implements DrawableEntity, MutableEntity, Enemy {
+public final class Goomba extends EnemyImpl implements DrawableEntity, Enemy {
 
     private static final double INITIAL_VELOCITY = 0.002; // calcoli fatti a mano
     private static final double WIDTH = 1;
