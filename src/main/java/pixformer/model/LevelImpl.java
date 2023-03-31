@@ -85,6 +85,22 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
+    public Optional<CompleteModelInput> getPlayer3() {
+        return this.getPlayer(2);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer4() {
+        return this.getPlayer(3);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void init(final int playersAmount) {
         this.data.entities().forEach(this.world::spawnEntity);
 
