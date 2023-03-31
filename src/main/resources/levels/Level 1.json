@@ -169,14 +169,86 @@
         "height": 1
       }
     },
+
     {
-      "type": "grass",
+      "type": "block",
       "x": 108,
       "y": 19,
       "macro": {
         "type": "fill",
         "width": 1,
-        "height": 32
+        "height": 5
+      }
+    },
+    {
+      "type": "block",
+      "x": 109,
+      "y": 20,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 4
+      }
+    },
+    {
+      "type": "block",
+      "x": 110,
+      "y": 21,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "type": "block",
+      "x": 111,
+      "y": 22,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 2
+      }
+    },
+    {
+      "type": "block",
+      "x": 112,
+      "y": 23
+    },
+
+    {
+      "type": "grass",
+      "x": 108,
+      "y": 24,
+      "macro": {
+        "type": "fill",
+        "width": 5,
+        "height": 4
+      }
+    },
+    {
+      "type": "block",
+      "x": 113,
+      "y": 27
+    },
+    {
+      "type": "grass",
+      "x": 108,
+      "y": 28,
+      "macro": {
+        "type": "fill",
+        "width": 30,
+        "height": 23
+      }
+    },
+    {
+      "type": "coin",
+      "x": 114,
+      "y": 24,
+      "macro": {
+        "type": "fill",
+        "width": 4,
+        "height": 4
       }
     }
   ]
