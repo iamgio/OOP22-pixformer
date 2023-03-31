@@ -115,7 +115,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-        System.out.println(player.getVelocity().x() + " " + player.getVelocity().y());
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();

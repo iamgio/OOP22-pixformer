@@ -10,7 +10,7 @@ public class PowerUp {
     // Current powerup ability power
     private Optional<PowerupBehaviour> behaviour;
 
-    private Optional<PowerUp> previousPowerup;
+    private final Optional<PowerUp> previousPowerup;
 
     /**
      * @param behaviour current powerup behaviour.
@@ -33,7 +33,7 @@ public class PowerUp {
      */
     public PowerUp() {
         this.behaviour = Optional.empty();
-        this.previousPowerup = Optional.empty();
+        previousPowerup = Optional.empty();
     }
 
     /**

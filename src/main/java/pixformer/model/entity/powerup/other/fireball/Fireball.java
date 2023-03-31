@@ -33,7 +33,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
 
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
-        physicsComponent = new pixformer.model.entity.powerup.other.fireball.FireballPhysicsComponent(this);
+        physicsComponent = new FireballPhysicsComponent(this);
 
         this.speed = speed;
         this.shooter = entity;
