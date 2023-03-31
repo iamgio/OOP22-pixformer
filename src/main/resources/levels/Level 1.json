@@ -254,16 +254,36 @@
     {
       "type": "coin",
       "x": 114,
-      "y": 24,
+      "y": 25,
       "macro": {
         "type": "fill",
         "width": 4,
-        "height": 4
+        "height": 3
+      }
+    },
+    {
+      "type": "brick",
+      "x": 113,
+      "y": 23,
+      "macro": {
+        "type": "fill",
+        "width": 6,
+        "height": 1
       }
     },
     {
       "type": "grass",
-      "x": 143,
+      "x": 119,
+      "y": 23,
+      "macro": {
+        "type": "fill",
+        "width": 6,
+        "height": 1
+      }
+    },
+    {
+      "type": "grass",
+      "x": 133,
       "y": 24,
       "macro": {
         "type": "fill",
@@ -273,7 +293,7 @@
     },
     {
       "type": "block",
-      "x": 143,
+      "x": 133,
       "y": 23,
       "macro": {
         "type": "fill",
@@ -283,7 +303,7 @@
     },
     {
       "type": "block",
-      "x": 144,
+      "x": 134,
       "y": 22,
       "macro": {
         "type": "fill",
@@ -293,7 +313,7 @@
     },
     {
       "type": "block",
-      "x": 145,
+      "x": 135,
       "y": 21,
       "macro": {
         "type": "fill",
@@ -303,7 +323,7 @@
     },
     {
       "type": "block",
-      "x": 146,
+      "x": 136,
       "y": 20,
       "macro": {
         "type": "fill",
@@ -313,7 +333,7 @@
     },
     {
       "type": "block",
-      "x": 147,
+      "x": 137,
       "y": 19,
       "macro": {
         "type": "fill",
@@ -323,7 +343,7 @@
     },
     {
       "type": "block",
-      "x": 148,
+      "x": 138,
       "y": 18,
       "macro": {
         "type": "fill",
@@ -333,7 +353,7 @@
     },
     {
       "type": "block",
-      "x": 149,
+      "x": 139,
       "y": 17,
       "macro": {
         "type": "fill",
@@ -343,17 +363,17 @@
     },
     {
       "type": "block",
-      "x": 150,
+      "x": 140,
       "y": 16
     },
     {
       "type": "pole",
-      "x": 170,
+      "x": 160,
       "y": 18
     },
     {
       "type": "barrier",
-      "x": 171,
+      "x": 161,
       "y": 0,
       "macro": {
         "type": "fill",
