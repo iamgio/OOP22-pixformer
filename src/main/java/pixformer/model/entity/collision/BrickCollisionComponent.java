@@ -30,7 +30,7 @@ public class BrickCollisionComponent extends CollisionComponent {
                     if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
                         super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
                         MutableEntity entity = (MutableEntity) collision.entity();
-                        entity.setVelocity(entity.getVelocity().copyWithY(-entity.getVelocity().y()));
+                        entity.setVelocity(entity.getVelocity().copyWithY(-entity.getVelocity().y() / 2));
                     }
         });
     }
