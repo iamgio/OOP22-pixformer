@@ -16,6 +16,7 @@ import pixformer.view.engine.ViewLauncher;
 import pixformer.view.engine.camera.Camera;
 import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
+import pixformer.view.engine.internationalization.Lang;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -37,9 +38,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Controller controller;
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
-
-    private TextRenderer scoreLabel;
-
+    private TextRenderer infoLabel;
     private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
@@ -69,15 +68,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
+    public void init() {
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
 
-        this.scoreLabel = rendererFactory.newText("");
-        this.scoreLabel.setColor(new Color(1, 0, 0));
-        this.scoreLabel.setFontSize(1);
-        this.scoreLabel.setFontFamily("DejaVu Sans Light");
-        this.getScene().add(scoreLabel.at(1, 1));
+        this.infoLabel = rendererFactory.newText("");
+        this.infoLabel.setFontFamily("Impact");
+        this.infoLabel.setFontSize(1);
+        this.getScene().add(infoLabel.at(1, 1));
     }
 
     /**
@@ -115,19 +113,15 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
 
         scene.getInputs().stream()
                 .map(SceneInput::getMappedCommands).forEach(commands -> {
-                    commands.forEach(command -> {
-                        command.accept(new ControllerInputImpl(controller));
-                    });
+                    commands.forEach(command -> command.accept(new ControllerInputImpl(controller)));
                 });
 
         if (this.controller.getGameLoopManager().isRunning()) {
             scene.getInputs().stream()
                     .map(SceneInput::getMappedPolling)
-                    .forEach(actions -> {
-                        actions.forEach(action -> {
-                            this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
-                        });
-                    });
+                    .forEach(actions -> actions.forEach(action -> {
+                        this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
+                    }));
         }
 
         this.updateTextRenderer();
@@ -139,11 +133,18 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * Update the scoreLabel, with all players score, during the game.
      */
     private void updateTextRenderer() {
-        int counter = 0;
-        this.scoreLabel.setText("");
-        for (var x : this.controller.getScore()) {
-            counter++;
-            this.scoreLabel.setText(this.scoreLabel.getText() + "\nPlayer " + counter + " = " + x);
+        this.infoLabel.setText("");
+        final var scoresList = this.controller.getPlayersScore();
+        final var coinsList = this.controller.getPlayersCoins();
+        final StringBuilder stringBuilder = new StringBuilder(128);
+        final Lang lang = Lang.getInstance();
+        for (int i = 0; i < scoresList.size(); i++) {
+            // Building the string with the score of all players
+            // consecutive append calls make the code more understandable
+            stringBuilder.append(lang.get("score.player")).append(i + 1).append("    "); // NOPMD : see above
+            stringBuilder.append(scoresList.get(i)).append(lang.get("score.points")).append("  "); // NOPMD : see above
+            stringBuilder.append(coinsList.get(i)).append(lang.get("score.coins")).append("\n"); // NOPMD : see above
+            this.infoLabel.setText(stringBuilder.toString());
         }
     }
 
@@ -152,6 +153,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     @Override
     public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
+        // TODO should be removed?
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;

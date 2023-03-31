@@ -16,6 +16,13 @@ public final class WorldOptionsFactory {
     private static final int DEFAULT_Y_FALL_THRESHOLD = 50;
 
     /**
+     * Private constructor for utility class.
+     */
+    private WorldOptionsFactory() {
+
+    }
+
+    /**
      * @return the default options for visual gameplay
      */
     public static WorldOptions defaultOptions() {

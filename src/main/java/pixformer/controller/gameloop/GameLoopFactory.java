@@ -1,7 +1,5 @@
 package pixformer.controller.gameloop;
 
-import pixformer.common.wrap.SimpleWrapper;
-import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.model.Level;
 import pixformer.model.World;
@@ -17,13 +15,9 @@ import java.util.Set;
  */
 public final class GameLoopFactory {
 
-    private static final int SECONDS_TO_MILLIS = 1_000; // millis in a second
-    private static final int FPS = 30; // in-game fps
-
-    private final Wrapper<Level> level;
-    private final Wrapper<View> view;
-
+    private final Level level;
     private final Controller controller;
+    private final View view;
 
     /**
      * Instantiates a new game loop factory.
@@ -33,8 +27,8 @@ public final class GameLoopFactory {
      * @param view       game view
      */
     public GameLoopFactory(final Level level, final Controller controller, final View view) {
-        this.level = new SimpleWrapper<>(level);
-        this.view = new SimpleWrapper<>(view);
+        this.level = level;
+        this.view = view;
         this.controller = controller;
     }
 
@@ -42,11 +36,9 @@ public final class GameLoopFactory {
      * @return a new default game loop
      */
     public GameLoop defaultLoop() {
-        final View view = this.view.get();
+        view.init();
 
-        view.setup();
-
-        final World world = this.level.get().getWorld();
+        final World world = level.getWorld();
         final Set<Entity> playersEntities = world.getUserControlledEntities();
 
         return dt -> {
@@ -71,15 +63,6 @@ public final class GameLoopFactory {
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                         entity.getGraphicsComponent().update(view.getScene());
                     });
-
-            final long period = SECONDS_TO_MILLIS / FPS;
-            if (dt < period) {
-                try {
-                    Thread.sleep(period - dt);
-                } catch (final InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
         };
     }
 }

@@ -5,6 +5,9 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.StaticGraphicsComponent;
 
+/**
+ * A {@link pixformer.model.entity.GraphicsComponent} for the shell of the koopa.
+ */
 public class TurtleGraphicsComponent extends StaticGraphicsComponent {
 
 
@@ -13,7 +16,7 @@ public class TurtleGraphicsComponent extends StaticGraphicsComponent {
      *
      * @param entity the target entity
      */
-    public TurtleGraphicsComponent(Entity entity) {
+    public TurtleGraphicsComponent(final Entity entity) {
         super(entity);
     }
 

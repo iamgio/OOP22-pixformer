@@ -20,7 +20,7 @@ public class SimpleWritableWrapper<T> implements WritableWrapper<T> {
      * Instantiates the wrapped value to its default initial value, commonly <tt>null</tt>.
      */
     public SimpleWritableWrapper() {
-
+        // This constructor is intentionally empty. Nothing special is needed here.
     }
 
     /**

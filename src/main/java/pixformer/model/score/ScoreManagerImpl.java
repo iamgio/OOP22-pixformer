@@ -5,11 +5,11 @@ import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Coin;
 import pixformer.model.event.EventSubscriber;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * {@inheritDoc}.
@@ -21,7 +21,7 @@ public class ScoreManagerImpl implements ScoreManager {
     private final Set<Entity> winners;
 
     /**
-     * Constructor for the class.
+     * Simple constructor for the score manager.
      *
      * @param eventSubscriber subscriber for the score manager
      */
@@ -37,14 +37,18 @@ public class ScoreManagerImpl implements ScoreManager {
      * @param entity entity killed
      */
     private void increaseScore(final Entity player, final Entity entity) {
-        int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
-        if (scoreMap.containsKey(player)) {
-            scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
-        } else {
-            scoreMap.put(player, new ScoreImpl(points, 0));
-        }
-        if (entity instanceof Coin) {
-            scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
+        if (player instanceof Player) {
+            // Choosing the quantity of points to assign at the player, depending if it has hit
+            // a generic entity or the pole, in the second case we pass the player itself as the killed
+            final int points = !entity.equals(player) ? DEFAULT_SCORE_INCREMENT : POLE_POINTS_INCREMENT / winners.size();
+            if (scoreMap.containsKey(player)) {
+                scoreMap.put(player, scoreMap.get(player).copyAddPoints(points));
+            } else {
+                scoreMap.put(player, new Score(points, 0));
+            }
+            if (entity instanceof Coin) {
+                scoreMap.put(player, scoreMap.get(player).copyAddCoins(1));
+            }
         }
     }
 
@@ -53,7 +57,7 @@ public class ScoreManagerImpl implements ScoreManager {
      */
     @Override
     public Score getScore(final Entity entity) {
-        return this.scoreMap.getOrDefault(entity, new ScoreImpl(0, 0));
+        return this.scoreMap.getOrDefault(entity, new Score(0, 0));
     }
 
     /**
@@ -70,7 +74,7 @@ public class ScoreManagerImpl implements ScoreManager {
     @Override
     public int getTotalCoins() {
         return this.scoreMap.values().stream()
-                .map(Score::getCoins)
+                .map(Score::coinsNumber)
                 .filter(i -> i > 0)
                 .reduce(Integer::sum).orElse(0);
     }
@@ -79,11 +83,10 @@ public class ScoreManagerImpl implements ScoreManager {
      * {@inheritDoc}
      */
     @Override
-    public void passedFinishLine(final Player player) {
-        if (!winners.contains(player)) {
+    public void passedFinishLine(final Entity player) {
+        if (player instanceof Player && !winners.contains(player)) {
             this.winners.add(player);
             this.increaseScore(player, player);
         }
     }
-
 }

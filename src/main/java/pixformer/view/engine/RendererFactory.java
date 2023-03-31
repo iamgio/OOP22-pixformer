@@ -39,7 +39,7 @@ public interface RendererFactory {
      * @param height height of the image
      * @return a new image renderer
      */
-    default PositionableRenderer newImage(String resourcePath, double width, double height) {
+    default PositionableRenderer newImage(final String resourcePath, final double width, final double height) {
         return this.newImage(resourcePath, width, height, false);
     }
 }

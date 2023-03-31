@@ -11,7 +11,7 @@ public interface View extends Updatable {
     /**
      * Set-ups the scene.
      */
-    void setup();
+    void init();
 
     /**
      * @return the active game scene

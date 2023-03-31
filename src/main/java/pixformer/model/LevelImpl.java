@@ -21,12 +21,24 @@ public class LevelImpl implements Level {
     private final List<CompleteModelInput> players;
 
     /**
+     * Constructor for the level.
+     *
+     * @param data level data
+     * @param world world
+     */
+    public LevelImpl(final LevelData data, final World world) {
+        this.data = data;
+        this.world = world;
+        this.players = new ArrayList<>();
+    }
+
+    /**
+     * Constructor for the level.
+     *
      * @param data level data
      */
     public LevelImpl(final LevelData data) {
-        this.data = data;
-        this.world = new WorldImpl(WorldOptionsFactory.defaultOptions());
-        this.players = new ArrayList<>();
+        this(data, new WorldImpl(WorldOptionsFactory.defaultOptions()));
     }
 
     /**
@@ -73,11 +85,11 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
-    public void setup(final int playersAmount) {
+    public void init(final int playersAmount) {
         this.data.entities().forEach(this.world::spawnEntity);
 
         IntStream.range(0, playersAmount).forEach(i -> {
-            Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
+            final Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
             this.world.spawnEntity(player);
 
             player.getInputComponent().ifPresent(inputComponent -> {

@@ -3,7 +3,6 @@ package pixformer.model;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -73,7 +72,7 @@ public class WorldImpl implements World {
                     .filter(entity -> entity.getInputComponent().get() instanceof UserInputComponent)
                     .collect(Collectors.toUnmodifiableSet());
         }
-        return this.lazyUserControlledEntity;
+        return Collections.unmodifiableSet(this.lazyUserControlledEntity);
     }
 
     /**
@@ -149,8 +148,9 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void endGame(final Player player) {
+    public void endGame(final Entity player) {
         this.scoreManager.passedFinishLine(player);
+        this.queueEntityDrop(player);
     }
 
     /**
@@ -158,9 +158,6 @@ public class WorldImpl implements World {
      */
     @Override
     public void update(final double dt) {
-        this.commandQueue.forEach(Runnable::run);
-        this.commandQueue.clear();
-
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
                 physicsComponent.update(dt);
@@ -172,5 +169,7 @@ public class WorldImpl implements World {
 
             entity.update(dt);
         });
+        this.commandQueue.forEach(Runnable::run);
+        this.commandQueue.clear();
     }
 }

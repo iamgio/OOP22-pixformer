@@ -1,5 +1,8 @@
 package pixformer.model.entity;
 
+import pixformer.model.entity.dynamic.player.Player;
+import pixformer.view.entity.player.PlayerGraphicsComponent;
+
 /**
  * A factory for {@link GraphicsComponent} implementation for different entities.
  */
@@ -64,4 +67,16 @@ public interface GraphicsComponentFactory {
      * @return a new fire flower graphics component
      */
     GraphicsComponent fireFlower(Entity entity);
+
+    /**
+     * @param entity entity target of the graphics component
+     * @return a new redMushroom graphics component
+     */
+    GraphicsComponent redMushroom(Entity entity);
+
+    /**
+     * @param player target of the graphics component
+     * @return a new player graphics component
+     */
+    PlayerGraphicsComponent player(Player player);
 }

@@ -35,7 +35,7 @@ public class EntityFactoryLookupDecorator {
      * @throws java.util.NoSuchElementException if no entity with the given type was found
      */
     public Supplier<Entity> fromType(final String type, final BiFunction<String, Class<?>, Object> argumentMapper) {
-        Method factoryMethod = Stream.of(factory.getClass().getMethods())
+        final Method factoryMethod = Stream.of(factory.getClass().getMethods())
                 .filter(method -> method.isAnnotationPresent(EntityType.class))
                 .filter(method -> method.getAnnotation(EntityType.class).value().equals(type))
                 .findFirst().orElseThrow();

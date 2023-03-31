@@ -1,16 +1,17 @@
-package pixformer.model.entity.dynamic;
+package pixformer.model.entity.dynamic.powerup;
 
 import pixformer.common.Vector2D;
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.entity.dynamic.ai.GoombaAI;
+import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.powerup.PhysicalPowerup;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.input.InputComponent;
@@ -45,7 +46,7 @@ public final class MovingPowerupEntity extends AbstractEntity
     public MovingPowerupEntity(final double x, final double y, final PowerupBehaviour powerupBehaviour,
                                final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
-        final Consumer<Vector2D> setter = new ProxyMutableEntity(this)::setVelocity;
+        final Consumer<Vector2D> setter = new OnlyXVelocitySetter(this);
         inputComponent = new GoombaAI(this, setter, VELOCITY, Entity::isSolid, HorizontalModelInput::right);
         this.powerupBehaviour = powerupBehaviour;
         this.graphicsComponent = graphicsComponent.apply(this);

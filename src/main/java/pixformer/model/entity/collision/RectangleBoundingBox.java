@@ -27,12 +27,12 @@ public class RectangleBoundingBox implements BoundingBox {
                                                     final double x1, final double y1,
                                                     final double x2, final double y2) {
         if (other instanceof RectangleBoundingBox rectangle) {
-            double dx = (x1 + this.width / 2) - (x2 + rectangle.width / 2);
-            double dy = (y1 + this.height / 2) - (y2 + rectangle.height / 2);
-            double width = (this.width + rectangle.width) / 2;
-            double height = (this.height + rectangle.height) / 2;
-            double crossWidth = width * dy;
-            double crossHeight = height * dx;
+            final double dx = x1 + this.width / 2 - (x2 + rectangle.width / 2);
+            final double dy = y1 + this.height / 2 - (y2 + rectangle.height / 2);
+            final double width = (this.width + rectangle.width) / 2;
+            final double height = (this.height + rectangle.height) / 2;
+            final double crossWidth = width * dy;
+            final double crossHeight = height * dx;
 
             if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
                 if (crossWidth > crossHeight) {

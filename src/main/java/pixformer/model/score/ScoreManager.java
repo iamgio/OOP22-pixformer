@@ -1,7 +1,6 @@
 package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.List;
 
@@ -30,6 +29,6 @@ public interface ScoreManager {
      * Method to manage when a player hit the finish line.
      * @param player player who passed the end flag
      */
-    void passedFinishLine(Player player);
+    void passedFinishLine(Entity player);
 
 }

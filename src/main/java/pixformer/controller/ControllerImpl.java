@@ -10,10 +10,11 @@ import pixformer.controller.level.LevelManager;
 import pixformer.controller.level.LevelManagerImpl;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
-import pixformer.model.LevelData;
-import pixformer.model.LevelImpl;
+import pixformer.model.World;
+import pixformer.model.WorldAcceptingLevel;
+import pixformer.model.WorldImpl;
+import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.score.Score;
 import pixformer.view.View;
@@ -78,7 +79,7 @@ public final class ControllerImpl implements Controller {
 
     private void setupLevelChangeActions() {
         getLevelManager().addOnLevelStart((level, playersAmount) -> {
-            level.setup(playersAmount);
+            level.init(playersAmount);
             this.getGameLoopManager().start();
         });
         getLevelManager().addOnLevelEnd(level -> this.getGameLoopManager().stop());
@@ -113,7 +114,7 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public GameLoop createGameLoop(final View view) {
-        Optional<Level> currentLevel = this.levelManager.get().getCurrentLevel();
+        final Optional<Level> currentLevel = this.levelManager.get().getCurrentLevel();
         if (currentLevel.isEmpty()) {
             throw new IllegalStateException("Current level is not set.");
         }
@@ -124,10 +125,22 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public List<Integer> getScore() {
+    public List<Integer> getPlayersScore() {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::getPoints).toList();
+            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::points).toList();
+        }
+        return new ArrayList<>();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Integer> getPlayersCoins() {
+        final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
+        if (level != null) {
+            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::coinsNumber).toList();
         }
         return new ArrayList<>();
     }
@@ -189,11 +202,12 @@ public final class ControllerImpl implements Controller {
     @Override
     public Level getLevelFromFile(final File levelFile) {
         try (FileInputStream inputStream = new FileInputStream(levelFile)) {
-            final EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory());
-            final LevelData data = new JsonLevelDataDeserializer(entityFactory).deserialize(inputStream);
-            return new LevelImpl(data);
+            final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
+            return new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
+                    new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                    .deserialize(inputStream), world);
         } catch (IOException e) {
-            throw new IllegalStateException("Could not get level data from file");
+            throw new IllegalStateException("Could not get level data from file", e);
         }
     }
 }

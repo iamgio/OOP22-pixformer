@@ -3,16 +3,19 @@ package pixformer.view.entity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentFactory;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.view.entity.enemies.GoombaGraphicsComponent;
 import pixformer.view.entity.enemies.TurtleGraphicsComponent;
 import pixformer.view.entity.enemies.WalkingKoopaGraphicsComponent;
+import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
+import pixformer.view.entity.powerup.MushroomGraphicsComponent;
 import pixformer.view.entity.statics.BlockGraphicsComponent;
-import pixformer.view.entity.statics.CoinGraphicsComponent;
-import pixformer.view.entity.statics.PoleGraphicsComponent;
-import pixformer.view.entity.statics.GrassGraphicsComponent;
-import pixformer.view.entity.statics.SurpriseGraphicsComponent;
 import pixformer.view.entity.statics.BrickGraphicsComponent;
+import pixformer.view.entity.statics.CoinGraphicsComponent;
+import pixformer.view.entity.statics.GrassGraphicsComponent;
+import pixformer.view.entity.statics.PoleGraphicsComponent;
+import pixformer.view.entity.statics.SurpriseGraphicsComponent;
 
 /**
  * A factory of graphics component represented by sprite images.
@@ -87,7 +90,7 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
      * {@inheritDoc}
      */
     @Override
-    public GraphicsComponent turtleKoopa(Entity entity) {
+    public GraphicsComponent turtleKoopa(final Entity entity) {
         return new TurtleGraphicsComponent(entity);
     }
 
@@ -97,5 +100,21 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public GraphicsComponent fireFlower(final Entity entity) {
         return new FireFlowerGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent redMushroom(final Entity entity) {
+        return new MushroomGraphicsComponent(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PlayerGraphicsComponent player(final Player player) {
+        return new PlayerGraphicsComponent(player);
     }
 }

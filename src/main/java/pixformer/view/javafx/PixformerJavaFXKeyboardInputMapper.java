@@ -35,6 +35,7 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Optional<Consumer<ControllerInput>> mapController(final KeyCode input) {
         final Consumer<ControllerInput> command = switch (input) {
             case P -> ControllerInput::pause;

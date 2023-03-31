@@ -1,7 +1,5 @@
 package pixformer.controller.level;
 
-import pixformer.common.wrap.SimpleWritableWrapper;
-import pixformer.common.wrap.WritableWrapper;
 import pixformer.model.Level;
 
 import java.util.LinkedList;
@@ -16,17 +14,17 @@ import java.util.function.Consumer;
  */
 public class LevelManagerImpl implements LevelManager {
 
-    private final WritableWrapper<Level> level = new SimpleWritableWrapper<>();
-
     private final List<BiConsumer<Level, Integer>> onStart = new LinkedList<>();
     private final List<Consumer<Level>> onEnd = new LinkedList<>();
+
+    private Level level;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<Level> getCurrentLevel() {
-        return Optional.ofNullable(this.level.get());
+        return Optional.ofNullable(this.level);
     }
 
     /**
@@ -34,7 +32,7 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public void start(final Level level, final int playersAmount) {
-        this.level.set(Objects.requireNonNull(level));
+        this.level = Objects.requireNonNull(level);
         this.onStart.forEach(action -> action.accept(level, playersAmount));
     }
 
@@ -52,14 +50,14 @@ public class LevelManagerImpl implements LevelManager {
      */
     @Override
     public void endCurrentLevel() {
-        final Level level = this.level.get();
+        final Level level = this.level;
 
         if (level == null) {
             throw new IllegalStateException("No level to end.");
         }
 
         this.onEnd.forEach(action -> action.accept(level));
-        this.level.set(null);
+        this.level = null;
     }
 
     /**

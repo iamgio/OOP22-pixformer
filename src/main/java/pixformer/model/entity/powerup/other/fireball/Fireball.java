@@ -1,25 +1,27 @@
 package pixformer.model.entity.powerup.other.fireball;
 
-import java.util.Optional;
-
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
+import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 
+import java.util.Optional;
+
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
-public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity {
+public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Projectile {
     private final float speed;
 
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
     private final PhysicsComponent physicsComponent;
+    private final Entity shooter;
 
     /**
      * 
@@ -34,6 +36,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         physicsComponent = new pixformer.model.entity.powerup.other.fireball.FireballPhysicsComponent(this);
 
         this.speed = speed;
+        this.shooter = entity;
     }
 
     /**
@@ -67,5 +70,10 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
      */
     public float getSpeed() {
         return this.speed;
+    }
+
+    @Override
+    public Entity getShooter() {
+        return shooter;
     }
 }

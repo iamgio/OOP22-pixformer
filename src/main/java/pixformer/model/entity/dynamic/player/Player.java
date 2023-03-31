@@ -20,6 +20,9 @@ import java.util.Optional;
  * The class manages the character used by the player.
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Powerupable {
+    static final double WIDTH = 1.0;
+    static final double HEIGHT = 1.0;
+
     // This playerIndex
     private final int playerIndex;
 
@@ -30,7 +33,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     private PowerUp powerup = new PowerUp();
 
     // Player components
-    private final PlayerGraphicsComponent graphicsComponent;
+    private PlayerGraphicsComponent graphicsComponent;
     private final PlayerPhysicsComponent physicsComponent;
     private final PlayerCollisionComponent collisionComponent;
     private PlayerInputComponent inputComponent;
@@ -56,6 +59,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
+     * @param x X position of the player.
+     * @param y Y position of the player.
+     */
+    public Player(final double x, final double y) {
+        this(x,y, WIDTH, HEIGHT, 0);
+    }
+
+    /**
      * Return this entity player index.
      * @return playerIndex
      */
@@ -69,6 +80,14 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public void setInputComponent(final PlayerInputComponent newInputComponent) {
         inputComponent = newInputComponent;
+    }
+
+    /**
+     * Set the new graphicsComponent.
+     * @param newGraphicsComponent new Player's graphicsComponent.
+     */
+    public void setGraphicsComponent(final PlayerGraphicsComponent newGraphicsComponent) {
+        this.graphicsComponent = newGraphicsComponent;
     }
 
     /**
@@ -122,13 +141,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
-    }
-
-    /**
-     * Manage the player behaviour when jumping on an enemy.
-     */
-    public void onEnemyJump() {
-        inputComponent.onEnemyJump();
     }
 
      /**

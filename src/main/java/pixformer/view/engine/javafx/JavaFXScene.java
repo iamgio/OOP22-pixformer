@@ -55,12 +55,12 @@ public class JavaFXScene extends GameScene {
 
         root.widthProperty().addListener(o -> {
             canvas.setWidth(root.getWidth());
-            super.onResize.forEach(action -> action.accept(root.getWidth(), root.getHeight()));
+            super.getOnResize().forEach(action -> action.accept(root.getWidth(), root.getHeight()));
         });
 
         root.heightProperty().addListener(o -> {
             canvas.setHeight(root.getHeight());
-            super.onResize.forEach(action -> action.accept(root.getWidth(), root.getHeight()));
+            super.getOnResize().forEach(action -> action.accept(root.getWidth(), root.getHeight()));
         });
     }
 

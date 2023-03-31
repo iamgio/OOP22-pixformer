@@ -43,9 +43,14 @@ public interface Controller {
     GameLoop createGameLoop(View view);
 
     /**
-     * @return the score of all the players
+     * @return the list containing the score of all the players
      */
-    List<Integer> getScore();
+    List<Integer> getPlayersScore();
+
+    /**
+     * @return the list containing the number of coins of all players
+     */
+    List<Integer> getPlayersCoins();
 
     /**
      * Applies supported boundaries to a given amount of players.

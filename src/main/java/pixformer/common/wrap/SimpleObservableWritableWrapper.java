@@ -25,7 +25,7 @@ public class SimpleObservableWritableWrapper<T> extends SimpleWritableWrapper<T>
      * Instantiates the wrapped value to its default initial value, commonly <tt>null</tt>.
      */
     public SimpleObservableWritableWrapper() {
-
+        // This constructor is intentionally empty. Nothing special is needed here.
     }
 
     /**

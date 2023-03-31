@@ -1,8 +1,4 @@
-package pixformer.model.entity.dynamic.ai;
-
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+package pixformer.model.entity.dynamic.enemy.ai;
 
 import pixformer.common.Vector2D;
 import pixformer.model.World;
@@ -10,11 +6,15 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.BiConsumerCollisionReactor;
 import pixformer.model.entity.collision.CollisionReactor;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.EntityCollisionManager;
-import pixformer.model.entity.dynamic.HorizontalModelInputImpl;
+import pixformer.model.entity.dynamic.enemy.HorizontalModelInputImpl;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
-import pixformer.model.entity.collision.CollisionSide;
+
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * A general AI which makes the entity go left until death or it gets into a

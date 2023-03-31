@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class JavaFXGameLoopManager implements GameLoopManager {
 
+    private static final int SECONDS_TO_MILLIS = 1_000; // millis in a second
+    private static final int FPS = 30; // in-game fps
+
     private final Wrapper<ViewLauncher> viewLauncher;
 
     private long lastFrameTime;
@@ -63,9 +66,23 @@ public class JavaFXGameLoopManager implements GameLoopManager {
         currentTimer = new AnimationTimer() {
             @Override
             public void handle(final long now) {
-                long delta = getLastFrameTime() != 0 ? now - getLastFrameTime() : 0;
+                final long delta = getLastFrameTime() != 0 ? now - getLastFrameTime() : 0;
                 setLastFrameTime(now);
-                loop.loop(TimeUnit.NANOSECONDS.toMillis(delta));
+
+                final long dt = TimeUnit.NANOSECONDS.toMillis(delta);
+                loop.loop(dt);
+                sleep(dt);
+            }
+
+            private void sleep(final long dt) {
+                final long period = SECONDS_TO_MILLIS / FPS;
+                if (dt < period) {
+                    try {
+                        Thread.sleep(period - dt);
+                    } catch (final InterruptedException e) {
+                        throw new IllegalStateException(e);
+                    }
+                }
             }
         };
 

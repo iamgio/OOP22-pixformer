@@ -2,19 +2,51 @@ package pixformer.model;
 
 import pixformer.controller.deserialization.level.JsonLevelDataDeserializer;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.modelinput.CompleteModelInput;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
+
+import java.util.Optional;
 
 /**
  * @deprecated test
  */
 @Deprecated
-public class LevelMock extends LevelImpl {
+public final class LevelMock implements Level {
+
+    private final Level inner;
 
     /**
      * Test level.
      */
     public LevelMock() {
-        super(new JsonLevelDataDeserializer(new EntityFactoryImpl(new SpritesGraphicsComponentFactory()))
-                .deserialize(Level.class.getResourceAsStream("/levels/Level 1.json")));
+        final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
+        inner = new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
+                new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                .deserialize(Level.class.getResourceAsStream("/levels/Level 1.json")), world);
+    }
+
+    @Override
+    public LevelData getData() {
+        return inner.getData();
+    }
+
+    @Override
+    public World getWorld() {
+        return inner.getWorld();
+    }
+
+    @Override
+    public Optional<CompleteModelInput> getPlayer1() {
+        return inner.getPlayer1();
+    }
+
+    @Override
+    public Optional<CompleteModelInput> getPlayer2() {
+        return inner.getPlayer2();
+    }
+
+    @Override
+    public void init(final int playersAmount) {
+        inner.init(playersAmount);
     }
 }

@@ -12,7 +12,10 @@ import pixformer.view.entity.NullGraphicsComponentFactory;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WorldFallTest {
+/**
+ * Test for the fall from the world of the entities.
+ */
+public final class WorldFallTest {
 
     private static final double DT = 5000;
 
@@ -21,7 +24,7 @@ public class WorldFallTest {
     @BeforeEach
     void setup() {
         this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory());
+        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
         Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
         world.spawnEntity(entity);
     }
@@ -29,10 +32,6 @@ public class WorldFallTest {
     @Test
     void testOutOfWorld() {
         // The entity is affected by gravity.
-        assertFalse(world.getEntities().isEmpty());
-        world.update(DT);
-        assertFalse(world.getEntities().isEmpty());
-        world.update(DT);
         assertFalse(world.getEntities().isEmpty());
         world.update(DT); // Threshold reached: entity is killed
         assertTrue(world.getEntities().isEmpty());

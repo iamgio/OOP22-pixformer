@@ -29,7 +29,7 @@ public class TranslateMacro implements EntityMacro {
      */
     @Override
     public Set<Entity> apply(final Supplier<Entity> entitySupplier) {
-        Entity entity = entitySupplier.get();
+        final Entity entity = entitySupplier.get();
         if (entity instanceof MutableEntity mutableEntity) {
             mutableEntity.setX(mutableEntity.getX() + this.x);
             mutableEntity.setY(mutableEntity.getY() + this.y);

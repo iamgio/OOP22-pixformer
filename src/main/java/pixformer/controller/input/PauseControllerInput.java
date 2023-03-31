@@ -8,12 +8,6 @@ import pixformer.controller.GameLoopManager;
 public class PauseControllerInput {
 
     /**
-     * Constructor for the PauseController.
-     */
-    public PauseControllerInput() {
-    }
-
-    /**
      * Pause/unpause the game.
      * 
      * @param gameLoopManager manager for the gameloop to control
