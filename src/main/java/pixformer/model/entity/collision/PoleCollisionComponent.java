@@ -27,7 +27,7 @@ public class PoleCollisionComponent extends CollisionComponent {
     public void update(final double dt, final Set<Collision> collisions) {
         collisions.stream()
                 .map(Collision::entity)
-                .filter(entity -> entity instanceof Player)
+                .filter(Player.class::isInstance)
                 .map(entity -> (Player) entity).forEach(player -> {
                     if (player.getWorld().isPresent()) {
                         player.setVelocity(player.getVelocity().copyWithX(0));
