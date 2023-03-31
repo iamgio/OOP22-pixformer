@@ -24,10 +24,14 @@ public class BrickCollisionComponent extends CollisionComponent {
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
-        collisions.forEach(collision -> {
-            if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
-                super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
-            }
+        collisions.stream()
+                .filter(collision -> collision.entity() instanceof MutableEntity)
+                .forEach(collision -> {
+                    if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
+                        super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
+                        MutableEntity entity = (MutableEntity) collision.entity();
+                        entity.setVelocity(entity.getVelocity().copyWithY(-entity.getVelocity().y()));
+                    }
         });
     }
 }
