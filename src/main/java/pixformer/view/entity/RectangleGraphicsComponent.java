@@ -12,7 +12,7 @@ import pixformer.view.engine.RectangleRenderer;
  */
 public class RectangleGraphicsComponent extends GraphicsComponent {
 
-    private Color color;
+    private final Color color;
 
     /**
      * Instantiates a graphics component for a test entity.
