@@ -5,11 +5,11 @@
   "entities": [
     {
       "type": "grass",
-      "x": 5,
+      "x": 0,
       "y": 32,
       "macro": {
         "type": "fill",
-        "width": 40,
+        "width": 45,
         "height": 1
       }
     },
