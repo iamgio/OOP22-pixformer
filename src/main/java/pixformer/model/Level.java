@@ -31,6 +31,16 @@ public interface Level {
     Optional<CompleteModelInput> getPlayer2();
 
     /**
+     * @return player 3 if it exists
+     */
+    Optional<CompleteModelInput> getPlayer3();
+
+    /**
+     * @return player 4 if it exists
+     */
+    Optional<CompleteModelInput> getPlayer4();
+
+    /**
      * Sets up the game world.
      * @param playersAmount amount of players to add to the game world
      */
