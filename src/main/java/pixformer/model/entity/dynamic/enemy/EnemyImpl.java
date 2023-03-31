@@ -1,20 +1,14 @@
 package pixformer.model.entity.dynamic.enemy;
 
-import java.util.Optional;
 
 import pixformer.common.Vector2D;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
-import pixformer.model.input.InputComponent;
-import pixformer.model.physics.PhysicsComponent;
 
 /**
  * The default implementation of an enemy.
  */
-public final class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, Enemy {
-
-    private final GoombaAI ai;
+public class EnemyImpl extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, Enemy {
     private final double velocityModule;
 
     /**
@@ -29,26 +23,17 @@ public final class EnemyImpl extends AbstractEntity implements DefaultRectangleB
     public EnemyImpl(final double x, final double y, final double width, final double height, final double velocity) {
         super(x, y, width, height);
         this.velocityModule = velocity;
-        // joystick = new HorizontalModelInputImpl(this::fixVelocity, velocity);
-        ai = new GoombaAI(this, this::fixVelocity, velocity);
     }
 
-    @Override
-    public final Optional<InputComponent> getInputComponent() {
-        return Optional.of(ai);
-    }
-
-    private void fixVelocity(final Vector2D velocity) {
+    /**
+     * Velocity setter which guarantees that the velocity module of this entity will be less than {@code velocity}.
+     * @param velocity the new value of the velocity.
+     */
+    protected final void fixVelocity(final Vector2D velocity) {
         final double newX = velocity.x();
         final double oldX = getVelocity().x();
         setVelocity(getVelocity().copyWithX(oldX > 0
                 ? Math.min(velocityModule, newX) : Math.max(-velocityModule, newX)
         ));
     }
-
-    @Override
-    public final Optional<PhysicsComponent> getPhysicsComponent() {
-        return Optional.of(new PhysicsComponent(this));
-    }
-
 }
