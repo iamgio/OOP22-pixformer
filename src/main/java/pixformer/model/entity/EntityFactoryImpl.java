@@ -151,7 +151,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     @EntityType("fire_flower")
     @Override
     public Entity createFireFlower(final int x, final int y) {
-        return new FlowerPowerupEntity(x, y, graphicsComponentFactory::fireFlower);
+        return new FlowerPowerupEntity(x, y, removeEntityFromWorld, graphicsComponentFactory::fireFlower);
     }
 
     /**
@@ -160,6 +160,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     @EntityType("mushroom")
     @Override
     public Entity createMushroom(final int x, final int y) {
-        return new MovingPowerupEntity(x, y, new Mushroom(), graphicsComponentFactory::redMushroom);
+        return new MovingPowerupEntity(x, y, removeEntityFromWorld, new Mushroom(),
+                graphicsComponentFactory::redMushroom);
     }
 }

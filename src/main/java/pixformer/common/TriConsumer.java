@@ -25,11 +25,10 @@
 package pixformer.common;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * Represents an operation that accepts three input arguments and returns no
- * result.  This is the two-arity specialization of {@link Consumer}.
+ * result.  This is the two-arity specialization of {@link java.util.function.Consumer}.
  * Unlike most other functional interfaces, {@code BiConsumer} is expected
  * to operate via side-effects.
  *
@@ -38,8 +37,9 @@ import java.util.function.Consumer;
  *
  * @param <T> the type of the first argument to the operation
  * @param <U> the type of the second argument to the operation
+ * @param <V> the type of the third argument to the operation
  *
- * @see Consumer
+ * @see java.util.function.Consumer;
  */
 @FunctionalInterface
 public interface TriConsumer<T, U, V> {
@@ -67,8 +67,8 @@ public interface TriConsumer<T, U, V> {
      */
     default TriConsumer<T, U, V> andThen(final TriConsumer<? super T, ? super U, ? super V> after) {
         Objects.requireNonNull(after);
-        return (t, u ,v) -> {
-            accept(t, u ,v);
+        return (t, u, v) -> {
+            accept(t, u, v);
             after.accept(t, u, v);
         };
     }

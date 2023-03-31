@@ -30,7 +30,9 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
     public TurtleKoopaInputComponent(final MutableEntity entity) {
         super(entity);
         wrappedInputComponent = new GoombaAI(getEntity(), new OnlyXVelocitySetter(entity), VELOCITY,
-                e -> e instanceof Block || (e instanceof Player && entity.getVelocity().x() == 0), NO_ACTION);
+                e -> e instanceof Block || e instanceof Player && entity.getVelocity().x() == 0,
+                NO_ACTION
+        );
         moveWhenPressed = new MoveWhenPressedInputComponent(entity, VELOCITY);
     }
     @Override

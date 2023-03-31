@@ -7,7 +7,9 @@ import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.EntityFactory;
+import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,11 +23,12 @@ final class PhysicTest {
     private static final double DELTA = 0.001;
 
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
+    private final EntityFactory entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
     private Entity entity;
 
     @BeforeEach
     void setup() {
-        this.entity = new Player(0, PLAYER_SPAWN_Y, 1, 1, 0);
+        this.entity = entityFactory.createMainCharacter(0, PLAYER_SPAWN_Y);
         world.spawnEntity(this.entity);
     }
 
@@ -33,10 +36,10 @@ final class PhysicTest {
     void testDrop() {
         world.update(1);
         assertEquals(GRAVITY.x(), entity.getX());
-        assertEquals(PLAYER_SPAWN_Y + 1 + GRAVITY.y(), entity.getY(), DELTA);
+        assertEquals(PLAYER_SPAWN_Y - 1 + GRAVITY.y(), entity.getY(), DELTA);
         world.update(1);
         assertEquals(GRAVITY.x(), entity.getX());
-        assertEquals(PLAYER_SPAWN_Y + 1 + (3 * GRAVITY.y()), entity.getY(), DELTA);
+        assertEquals(PLAYER_SPAWN_Y - 1 + (3 * GRAVITY.y()), entity.getY(), DELTA);
     }
 
 }
