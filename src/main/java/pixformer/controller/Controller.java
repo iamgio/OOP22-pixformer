@@ -53,6 +53,11 @@ public interface Controller {
     List<Integer> getPlayersCoins();
 
     /**
+     * @return the score-based sorted index list of all the player
+     */
+    List<Integer> getIndexedLeaderboard();
+
+    /**
      * Applies supported boundaries to a given amount of players.
      * @param playersAmount raw, unchecked, amount of players
      * @return the supported amount of players that matches the given value:

@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.entity.collision.EntityCollisionManagerImpl;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
@@ -142,6 +143,15 @@ public class WorldImpl implements World {
     @Override
     public EntityCollisionManager getCollisionManager() {
         return this.collisionManager;
+    }
+
+    @Override
+    public List<Integer> getIndexLeaderboard() {
+        return this.lazyUserControlledEntity.stream()
+                .filter(Player.class::isInstance)
+                .map(Player.class::cast)
+                .sorted((a, b) -> scoreManager.getScore(a).points() - scoreManager.getScore(b).points())
+                .map(Player::getIndex).toList();
     }
 
     /**

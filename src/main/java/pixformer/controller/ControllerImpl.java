@@ -149,6 +149,17 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
+    public List<Integer> getIndexedLeaderboard() {
+        if(this.levelManager.get().getCurrentLevel().isPresent()) {
+            return this.levelManager.get().getCurrentLevel().get().getWorld().getIndexLeaderboard();
+        }
+        return List.of();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int correctSupportedPlayersAmount(final int playersAmount) {
         if (playersAmount < MIN_PLAYERS_AMOUNT) {
             return MIN_PLAYERS_AMOUNT;
