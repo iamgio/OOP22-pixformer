@@ -80,10 +80,8 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
         player.setHeight(player.getPowerupBehaviour().isEmpty() ? baseHeight : baseHeight * BIG_PLAYER_SIZE_MULTIPLIER);
 
-        if (previousHeight > player.getHeight()) {
+        if (previousHeight != player.getHeight()) {
             player.setY(player.getY() + previousHeight - player.getHeight());
-        } else if (previousHeight < player.getHeight()) {
-            player.setY(player.getY() - previousHeight + player.getHeight());
         }
     }
 }
