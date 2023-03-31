@@ -68,7 +68,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      * {@inheritDoc}
      */
     @Override
-    public void setup() {
+    public void init() {
         final RendererFactory rendererFactory = this.getScene().getRendererFactory();
         this.getScene().add(rendererFactory.newSolidBackground(BACKGROUND_COLOR));
 
@@ -153,6 +153,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     @Override
     public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
+        // TODO should be removed?
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;

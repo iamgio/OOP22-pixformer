@@ -85,7 +85,7 @@ public class LevelImpl implements Level {
      * {@inheritDoc}
      */
     @Override
-    public void setup(final int playersAmount) {
+    public void init(final int playersAmount) {
         this.data.entities().forEach(this.world::spawnEntity);
 
         IntStream.range(0, playersAmount).forEach(i -> {
