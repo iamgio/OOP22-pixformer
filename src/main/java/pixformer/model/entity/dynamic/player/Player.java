@@ -123,21 +123,18 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
-     * Return current player powerup.
-     * @return current player powerup.
-     */
-    public PowerUp getPowerup() {
-        return powerup;
-    }
-
-    /**
      * Set the new Powerup for the player.
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (!powerup.getBehaviour().isPresent() || powerupBehaviour.getPriority() == powerup.getBehaviour().get().getPriority()) {
-            powerup.setBehaviour(Optional.of(powerupBehaviour));
-        } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
+
+        if (powerup.getBehaviour().isPresent()) {
+            if (powerup.getBehaviour().get().getPriority() == powerupBehaviour.getPriority()) {
+                powerup = new PowerUp(powerupBehaviour, powerup.getPrevious().get());
+            } else if (powerup.getBehaviour().get().getPriority() > powerupBehaviour.getPriority()) {
+                powerup = new PowerUp(powerupBehaviour, powerup);
+            }
+        } else {
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
     }
@@ -162,15 +159,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public void damaged() {
         if (powerup.getBehaviour().isEmpty()) {
             kill();
-            return;
-        }
-
-        if (powerup.getPrevious().isPresent()) {
+        } else {
             powerup = powerup.getPrevious().get();
-            return;
         }
-
-        powerup.setBehaviour(Optional.empty());
     }
 
     /**
@@ -186,5 +177,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     @Override
     public Optional<PowerupBehaviour> getPowerupBehaviour() {
         return powerup.getBehaviour();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PowerUp getPowerup() {
+        return powerup;
     }
 }

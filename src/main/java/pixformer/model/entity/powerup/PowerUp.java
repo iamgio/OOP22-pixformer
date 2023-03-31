@@ -52,12 +52,4 @@ public class PowerUp {
         return previousPowerup;
     }
 
-    /**
-     * Set the new current powerupBehaviour.
-     * @param powerupBehaviour new current entity powerup.
-     */
-    public void setBehaviour(final Optional<PowerupBehaviour> powerupBehaviour) {
-        this.behaviour = powerupBehaviour;
-    }
-
 }
