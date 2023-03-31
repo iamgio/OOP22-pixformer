@@ -32,7 +32,9 @@ public class SurpriseCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         collisions.stream()
-                .filter(collision -> collision.entity() instanceof Player && collision.side() == CollisionSide.BOTTOM)
+                .filter(collision -> collision.entity() instanceof Player player
+                        && collision.side() == CollisionSide.BOTTOM
+                        && player.getVelocity().y() < 0)
                 .forEach(collision -> consumer.accept(collision.entity()));
     }
 }
