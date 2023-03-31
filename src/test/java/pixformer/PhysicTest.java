@@ -33,10 +33,10 @@ final class PhysicTest {
     void testDrop() {
         world.update(1);
         assertEquals(GRAVITY.x(), entity.getX());
-        assertEquals(PLAYER_SPAWN_Y + 1 + GRAVITY.y(), entity.getY(), DELTA);
+        assertEquals(PLAYER_SPAWN_Y - 1  + GRAVITY.y(), entity.getY(), DELTA);
         world.update(1);
         assertEquals(GRAVITY.x(), entity.getX());
-        assertEquals(PLAYER_SPAWN_Y + 1 + (3 * GRAVITY.y()), entity.getY(), DELTA);
+        assertEquals(PLAYER_SPAWN_Y - 1 + (3 * GRAVITY.y()), entity.getY(), DELTA);
     }
 
 }
