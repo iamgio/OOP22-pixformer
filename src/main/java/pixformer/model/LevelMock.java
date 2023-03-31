@@ -73,19 +73,6 @@ public final class LevelMock implements Level {
         return inner.getPlayer4();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<CompleteModelInput> getPlayer3() {
-        return inner.getPlayer3();
-    }
-
-    @Override
-    public Optional<CompleteModelInput> getPlayer4() {
-        return inner.getPlayer4();
-    }
-
     @Override
     public void init(final int playersAmount) {
         inner.init(playersAmount);
