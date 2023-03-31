@@ -4,6 +4,16 @@
   "spawnPointY": 28,
   "entities": [
     {
+      "type": "barrier",
+      "x": -5,
+      "y": 0,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 33
+      }
+    },
+    {
       "type": "grass",
       "x": -20,
       "y": 33,
@@ -340,6 +350,16 @@
       "type": "pole",
       "x": 170,
       "y": 18
+    },
+    {
+      "type": "barrier",
+      "x": 171,
+      "y": 0,
+      "macro": {
+        "type": "fill",
+        "width": 1,
+        "height": 28
+      }
     }
   ]
 }
