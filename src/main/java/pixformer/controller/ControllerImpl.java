@@ -38,7 +38,7 @@ public final class ControllerImpl implements Controller {
     private static final String LEVELS_SUBFOLDER_NAME = "levels";
 
     private static final int MIN_PLAYERS_AMOUNT = 1;
-    private static final int MAX_PLAYERS_AMOUNT = 8;
+    private static final int MAX_PLAYERS_AMOUNT = 4;
 
     private final GameSettings settings;
     private final Wrapper<LevelManager> levelManager;
