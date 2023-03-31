@@ -8,8 +8,6 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.Powerupable;
-import pixformer.model.entity.powerup.powerups.FireFlower;
-import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
@@ -50,12 +48,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        powerup = new PowerUp(new FireFlower(), new PowerUp(new Mushroom()));
 
         graphicsComponent = new PlayerGraphicsComponent(this);
         physicsComponent = new PlayerPhysicsComponent(this);
         collisionComponent = new PlayerCollisionComponent(this);
         inputComponent = new PlayerInputComponent(this);
+
+        powerup = new PowerUp();
     }
 
     /**
@@ -63,7 +62,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param y Y position of the player.
      */
     public Player(final double x, final double y) {
-        this(x,y, WIDTH, HEIGHT, 0);
+        this(x, y, WIDTH, HEIGHT, 0);
     }
 
     /**
