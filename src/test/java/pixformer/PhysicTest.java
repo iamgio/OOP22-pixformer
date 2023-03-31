@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 final class PhysicTest {
 
-    private static final Vector2D GRAVITY = new Vector2D(0, 0.000_08);
+    private static final Vector2D GRAVITY = new Vector2D(0, 0.000_5);
     private static final int PLAYER_SPAWN_Y = 14;
     private static final double DELTA = 0.001;
 
