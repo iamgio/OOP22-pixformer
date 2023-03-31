@@ -38,7 +38,7 @@ public final class ControllerImpl implements Controller {
     private static final String LEVELS_SUBFOLDER_NAME = "levels";
 
     private static final int MIN_PLAYERS_AMOUNT = 1;
-    private static final int MAX_PLAYERS_AMOUNT = 8;
+    private static final int MAX_PLAYERS_AMOUNT = 4;
 
     private final GameSettings settings;
     private final Wrapper<LevelManager> levelManager;
@@ -162,7 +162,9 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public double calcEntitiesCommonPointX(final Set<Entity> entities) {
-        return entities.stream().mapToDouble(Entity::getX)
+        return entities.stream()
+                .filter(e -> e.getWorld().isPresent())
+                .mapToDouble(Entity::getX)
                 .average()
                 .orElse(0);
     }
@@ -172,7 +174,9 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public double calcEntitiesCommonPointY(final Set<Entity> entities) {
-        final double y = entities.stream().mapToDouble(Entity::getY)
+        final double y = entities.stream()
+                .filter(e -> e.getWorld().isPresent())
+                .mapToDouble(Entity::getY)
                 .average()
                 .orElse(0);
         return Math.sqrt(y);

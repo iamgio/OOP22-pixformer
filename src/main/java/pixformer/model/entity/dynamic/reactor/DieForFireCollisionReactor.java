@@ -1,7 +1,6 @@
 package pixformer.model.entity.dynamic.reactor;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.powerup.other.fireball.Fireball;

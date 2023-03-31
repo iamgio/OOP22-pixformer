@@ -45,7 +45,7 @@ public final class Surprise extends AbstractEntity implements DefaultRectangleBo
     }
 
     private void powerupSpawnBehaviour(final Entity entity) {
-        if (entity instanceof Player player && getWorld().isPresent()) {
+        if (entity instanceof Player player && getWorld().isPresent() && !this.hasCollided) {
             if (player.getPowerupBehaviour().isEmpty()) {
                 getWorld().get().queueEntitySpawn(entityFactory.createMushroom((int) getX(), (int) getY() - 1));
             } else {

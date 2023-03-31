@@ -15,6 +15,11 @@ import java.util.stream.IntStream;
  */
 public class LevelImpl implements Level {
 
+    private static final int PLAYER_1_INDEX = 0;
+    private static final int PLAYER_2_INDEX = 1;
+    private static final int PLAYER_3_INDEX = 2;
+    private static final int PLAYER_4_INDEX = 3;
+
     private final LevelData data;
     private final World world;
 
@@ -70,7 +75,7 @@ public class LevelImpl implements Level {
      */
     @Override
     public Optional<CompleteModelInput> getPlayer1() {
-        return this.getPlayer(0);
+        return this.getPlayer(PLAYER_1_INDEX);
     }
 
     /**
@@ -78,7 +83,23 @@ public class LevelImpl implements Level {
      */
     @Override
     public Optional<CompleteModelInput> getPlayer2() {
-        return this.getPlayer(1);
+        return this.getPlayer(PLAYER_2_INDEX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer3() {
+        return this.getPlayer(PLAYER_3_INDEX);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer4() {
+        return this.getPlayer(PLAYER_4_INDEX);
     }
 
     /**

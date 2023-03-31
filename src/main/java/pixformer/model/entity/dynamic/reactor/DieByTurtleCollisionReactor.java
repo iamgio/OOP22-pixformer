@@ -1,7 +1,6 @@
 package pixformer.model.entity.dynamic.reactor;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
@@ -20,7 +19,13 @@ public final class DieByTurtleCollisionReactor implements CollisionReactor {
      * @param dieBy consumer which accepts as argument the killer entity.
      */
     public DieByTurtleCollisionReactor(final Consumer<Entity> dieBy) {
-        innerReactor = new DieByProjectileCollisionReactor(Koopa.class::isInstance, dieBy);
+        innerReactor = new DieByProjectileCollisionReactor(Koopa.class::isInstance,
+                turtle ->  {
+                    if (turtle.getVelocity().x() != 0) {
+                        dieBy.accept(turtle);
+                    }
+                }
+        );
     }
 
     @Override
@@ -28,15 +33,4 @@ public final class DieByTurtleCollisionReactor implements CollisionReactor {
         innerReactor.react(collisions);
     }
 
-    /**
-     * @param entity the candidate to be a {@link Projectile}
-     * @return the shooter of the {@code entity} if {@code entity} is a {@link Projectile},
-     * otherwise return {@code entity}.
-     */
-    private Entity getShooterIfProjectile(final Entity entity) {
-        if (entity instanceof Projectile projectile) {
-            return projectile.getShooter();
-        }
-        return entity;
-    }
 }
