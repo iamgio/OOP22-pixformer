@@ -19,7 +19,13 @@ public final class DieByTurtleCollisionReactor implements CollisionReactor {
      * @param dieBy consumer which accepts as argument the killer entity.
      */
     public DieByTurtleCollisionReactor(final Consumer<Entity> dieBy) {
-        innerReactor = new DieByProjectileCollisionReactor(Koopa.class::isInstance, dieBy);
+        innerReactor = new DieByProjectileCollisionReactor(Koopa.class::isInstance,
+                turtle ->  {
+                    if (turtle.getVelocity().x() == 0) {
+                        dieBy.accept(turtle);
+                    }
+                }
+        );
     }
 
     @Override
