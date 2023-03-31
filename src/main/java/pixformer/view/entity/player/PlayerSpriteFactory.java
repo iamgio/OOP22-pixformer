@@ -21,7 +21,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getIdleRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/mario_small_idle.png",
-                     player.getWidth(), player.getHeight())
+                        player.getWidth(), player.getHeight(),
+                        player.getVelocity().x() < 0)
                 );
             }
 
@@ -29,11 +30,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getWalkRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/mario_small_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/mario_small_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/mario_small_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -41,11 +45,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getRunRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/mario_small_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/mario_small_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/mario_small_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -53,7 +60,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getJumpRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/mario_small_jump.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -70,7 +78,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getIdleRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_idle.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -78,11 +87,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getWalkRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -90,11 +102,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getRunRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -102,7 +117,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getJumpRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/mushroom/mario_big_jump.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -119,7 +135,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getIdleRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_idle.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -127,11 +144,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getWalkRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -139,11 +159,14 @@ public class PlayerSpriteFactory {
             public List<Renderer> getRunRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_1.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_2.png",
-                     player.getWidth(), player.getHeight()),
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0),
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_walk_3.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
@@ -151,7 +174,8 @@ public class PlayerSpriteFactory {
             public List<Renderer> getJumpRenderer(final RendererFactory factory, final Player player) {
                 return List.of(
                     factory.newImage("/sprites/player/powerups/fireflower/mario_flower_jump.png",
-                     player.getWidth(), player.getHeight())
+                     player.getWidth(), player.getHeight(),
+                     player.getVelocity().x() < 0)
                 );
             }
 
