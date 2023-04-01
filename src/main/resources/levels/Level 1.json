@@ -58,6 +58,22 @@
         "height": 2
       }
     },
+    {
+      "type": "goomba",
+      "x": 22,
+      "y": 32
+    },
+    {
+      "type": "koopa",
+      "x": 39,
+      "y": 28
+    },
+
+    {
+      "type": "coin",
+      "x": 45,
+      "y": 24
+    },
 
     {
       "type": "grass",
@@ -95,6 +111,11 @@
       "y": 20
     },
     {
+      "type": "goomba",
+      "x": 58,
+      "y": 16
+    },
+    {
       "type": "grass",
       "x": 60,
       "y": 16,
@@ -118,6 +139,21 @@
       "type": "coin",
       "x": 66,
       "y": 24,
+      "macro": {
+        "type": "fill",
+        "width": 2,
+        "height": 1
+      }
+    },
+    {
+      "type": "koopa",
+      "x": 70,
+      "y": 25
+    },
+    {
+      "type": "goomba",
+      "x": 80,
+      "y": 25,
       "macro": {
         "type": "fill",
         "width": 2,
@@ -225,6 +261,11 @@
       "x": 112,
       "y": 23
     },
+    {
+      "type": "goomba",
+      "x": 110,
+      "y": 20
+    },
 
     {
       "type": "grass",
@@ -260,6 +301,11 @@
         "width": 4,
         "height": 3
       }
+    },
+    {
+      "type": "koopa",
+      "x": 125,
+      "y": 26
     },
     {
       "type": "brick",
