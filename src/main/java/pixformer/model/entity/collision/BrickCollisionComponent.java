@@ -1,6 +1,7 @@
 package pixformer.model.entity.collision;
 
 import pixformer.model.entity.MutableEntity;
+import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.Set;
 
@@ -25,12 +26,13 @@ public class BrickCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         collisions.stream()
-                .filter(collision -> collision.entity() instanceof MutableEntity entity && entity.getVelocity().y() < 0)
+                .filter(collision -> collision.entity() instanceof Player entity && entity.getVelocity().y() < 0)
                 .forEach(collision -> {
-                    if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()) {
-                        super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
-                        MutableEntity entity = (MutableEntity) collision.entity();
+                    if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()
+                            && ((Player) collision.entity()).getPowerupBehaviour().isPresent()) {
+                        Player entity = (Player) collision.entity();
                         entity.setVelocity(entity.getVelocity().copyWithY(entity.getVelocity().y() / 2));
+                        super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
                     }
         });
     }
