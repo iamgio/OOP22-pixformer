@@ -16,8 +16,6 @@ import java.util.Optional;
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
 public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Projectile {
-    private final float speed;
-
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
     private final PhysicsComponent physicsComponent;
@@ -35,7 +33,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
         physicsComponent = new FireballPhysicsComponent(this);
 
-        this.speed = speed;
+        this.setVelocity(getVelocity().copyWithX(speed));
         this.shooter = entity;
     }
 
@@ -62,14 +60,6 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
-    }
-
-    /**
-     * 
-     * @return current fireball speed.
-     */
-    public float getSpeed() {
-        return this.speed;
     }
 
     /**
