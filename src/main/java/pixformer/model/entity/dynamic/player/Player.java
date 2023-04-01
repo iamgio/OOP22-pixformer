@@ -8,8 +8,6 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.Powerupable;
-import pixformer.model.entity.powerup.powerups.FireFlower;
-import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
@@ -50,12 +48,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         super(x, y, width, height);
 
         this.playerIndex = playerIndex;
-        powerup = new PowerUp(new FireFlower(), new PowerUp(new Mushroom()));
 
         graphicsComponent = new PlayerGraphicsComponent(this);
         physicsComponent = new PlayerPhysicsComponent(this);
         collisionComponent = new PlayerCollisionComponent(this);
         inputComponent = new PlayerInputComponent(this);
+
+        powerup = new PowerUp();
     }
 
     /**
@@ -124,21 +123,18 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     }
 
     /**
-     * Return current player powerup.
-     * @return current player powerup.
-     */
-    public PowerUp getPowerup() {
-        return powerup;
-    }
-
-    /**
      * Set the new Powerup for the player.
      * @param powerupBehaviour the new powerup.
      */
     public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-        if (!powerup.getBehaviour().isPresent() || powerupBehaviour.getPriority() == powerup.getBehaviour().get().getPriority()) {
-            powerup.setBehaviour(Optional.of(powerupBehaviour));
-        } else if (powerupBehaviour.getPriority() > powerup.getBehaviour().get().getPriority()) {
+
+        if (powerup.getBehaviour().isPresent()) {
+            if (powerup.getBehaviour().get().getPriority() == powerupBehaviour.getPriority()) {
+                powerup = new PowerUp(powerupBehaviour, powerup.getPrevious().get());
+            } else if (powerup.getBehaviour().get().getPriority() > powerupBehaviour.getPriority()) {
+                powerup = new PowerUp(powerupBehaviour, powerup);
+            }
+        } else {
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
     }
@@ -154,7 +150,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @return true if the player is touching ground otherwise false.
      */
     public boolean isOnGround() {
-        return collisionComponent.getIsOnGround();
+        return collisionComponent.isOnGround();
     }
 
     /**
@@ -163,15 +159,9 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     public void damaged() {
         if (powerup.getBehaviour().isEmpty()) {
             kill();
-            return;
-        }
-
-        if (powerup.getPrevious().isPresent()) {
+        } else {
             powerup = powerup.getPrevious().get();
-            return;
         }
-
-        powerup.setBehaviour(Optional.empty());
     }
 
     /**
@@ -187,5 +177,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     @Override
     public Optional<PowerupBehaviour> getPowerupBehaviour() {
         return powerup.getBehaviour();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PowerUp getPowerup() {
+        return powerup;
     }
 }

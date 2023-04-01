@@ -1,9 +1,9 @@
 package pixformer.model.entity.dynamic.enemy;
 
-import java.util.function.Consumer;
-
 import pixformer.common.Vector2D;
 import pixformer.model.modelinput.HorizontalModelInput;
+
+import java.util.function.Consumer;
 
 /**
  * An HorizontalInputComponent which make the entity move left or right at the

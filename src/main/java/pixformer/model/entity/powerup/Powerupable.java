@@ -12,4 +12,9 @@ public interface Powerupable {
      */
     Optional<PowerupBehaviour> getPowerupBehaviour();
 
+    /**
+     * @return current player powerup.
+     */
+    PowerUp getPowerup();
+
 }

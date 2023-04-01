@@ -19,7 +19,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     private final Player player;
     private final double baseHeight;
 
-    private boolean isOnGround = false;
+    private boolean isOnGround;
 
     private final ChronometerImpl invulnerabilityChronometer = new ChronometerImpl();
 
@@ -36,7 +36,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     /**
      * @return true if player is touching ground, other false.
      */
-    public boolean getIsOnGround() {
+    public boolean isOnGround() {
         return isOnGround;
     }
 
@@ -55,15 +55,15 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
                 isOnGround = true;
             }
 
-            if (collisor.entity() instanceof Enemy && collisor.side().isHorizontal()) {
-                if (invulnerabilityChronometer.getTimeElapsed() == 0
-                        || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME)) {
+            if (collisor.entity() instanceof Enemy 
+                && collisor.side().isHorizontal()
+                && (invulnerabilityChronometer.getTimeElapsed() == 0
+                    || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME))) {
 
                     this.player.damaged();
 
                     invulnerabilityChronometer.reset();
                     invulnerabilityChronometer.start();
-                }
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
@@ -75,7 +75,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     }
 
     private void checkPlayerSize() {
-        double previousHeight = player.getHeight();
+        final double previousHeight = player.getHeight();
 
         player.setHeight(player.getPowerupBehaviour().isEmpty() ? baseHeight : baseHeight * BIG_PLAYER_SIZE_MULTIPLIER);
 

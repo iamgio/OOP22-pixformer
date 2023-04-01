@@ -22,27 +22,55 @@ public final class LevelMock implements Level {
         final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
         inner = new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
                 new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
-                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")), world);
+                .deserialize(Level.class.getResourceAsStream("/levels/Level 1.json")), world);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LevelData getData() {
         return inner.getData();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public World getWorld() {
         return inner.getWorld();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<CompleteModelInput> getPlayer1() {
         return inner.getPlayer1();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<CompleteModelInput> getPlayer2() {
         return inner.getPlayer2();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer3() {
+        return inner.getPlayer3();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer4() {
+        return inner.getPlayer4();
     }
 
     @Override

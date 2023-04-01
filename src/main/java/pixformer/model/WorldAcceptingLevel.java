@@ -20,24 +20,52 @@ public final class WorldAcceptingLevel implements Level {
         inner = new LevelImpl(deserializer.get(), world);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LevelData getData() {
         return inner.getData();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public World getWorld() {
         return inner.getWorld();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<CompleteModelInput> getPlayer1() {
         return inner.getPlayer1();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<CompleteModelInput> getPlayer2() {
         return inner.getPlayer2();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer3() {
+        return inner.getPlayer3();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<CompleteModelInput> getPlayer4() {
+        return inner.getPlayer4();
     }
 
     @Override

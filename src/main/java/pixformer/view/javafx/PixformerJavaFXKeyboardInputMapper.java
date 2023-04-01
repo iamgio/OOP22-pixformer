@@ -26,7 +26,24 @@ public class PixformerJavaFXKeyboardInputMapper implements InputMapper<KeyCode> 
             case SHIFT -> level -> level.getPlayer1().ifPresent(CompleteModelInput::ability);
             case CONTROL -> level -> level.getPlayer1().ifPresent(CompleteModelInput::sprint);
 
-            case W -> level -> level.getPlayer2().ifPresent(CompleteModelInput::jump);
+            case LEFT -> level -> level.getPlayer2().ifPresent(CompleteModelInput::left);
+            case RIGHT -> level -> level.getPlayer2().ifPresent(CompleteModelInput::right);
+            case UP -> level -> level.getPlayer2().ifPresent(CompleteModelInput::jump);
+            case MINUS -> level -> level.getPlayer2().ifPresent(CompleteModelInput::ability);
+            case PERIOD -> level -> level.getPlayer2().ifPresent(CompleteModelInput::sprint);
+
+            case J -> level -> level.getPlayer3().ifPresent(CompleteModelInput::left);
+            case L -> level -> level.getPlayer3().ifPresent(CompleteModelInput::right);
+            case I -> level -> level.getPlayer3().ifPresent(CompleteModelInput::jump);
+            case N -> level -> level.getPlayer3().ifPresent(CompleteModelInput::ability);
+            case B -> level -> level.getPlayer3().ifPresent(CompleteModelInput::sprint);
+
+            case NUMPAD4 -> level -> level.getPlayer4().ifPresent(CompleteModelInput::left);
+            case NUMPAD6 -> level -> level.getPlayer4().ifPresent(CompleteModelInput::right);
+            case NUMPAD8 -> level -> level.getPlayer4().ifPresent(CompleteModelInput::jump);
+            case NUMPAD2 -> level -> level.getPlayer4().ifPresent(CompleteModelInput::ability);
+            case NUMPAD1 -> level -> level.getPlayer4().ifPresent(CompleteModelInput::sprint);
+
             default -> null;
         };
         return Optional.ofNullable(action);

@@ -1,7 +1,5 @@
 package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
-import java.util.function.Consumer;
-
 import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
@@ -11,6 +9,8 @@ import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
+
+import java.util.function.Consumer;
 
 /**
  * The InputComponet of the TurtleKoopa. Makes the entity goes like a goomba but

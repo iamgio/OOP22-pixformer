@@ -1,8 +1,8 @@
 package pixformer.model.entity.statics;
 
-import pixformer.model.entity.Entity;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
+import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.PowerUpFactory;

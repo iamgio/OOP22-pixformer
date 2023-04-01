@@ -29,7 +29,7 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
      * @param world Instance of current world spawn.
      */
     protected FireballCollisionComponent(final Fireball fireball, final World world) {
-        super(fireball);
+        super(fireball, 0);
         this.fireball = fireball;
         this.world = world;
 

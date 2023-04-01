@@ -25,6 +25,8 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     public static final float SPRINT_SPEED_LIMIT = 0.02f;
 
+    private static final float FALLING_SPEED_LIMIT = 0.014f;
+
     private static final float SPEED = 0.000_25f;
 
     // Max duration of a jump
@@ -113,7 +115,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void update(final World world) {
-        System.out.println(player.getVelocity().x() + " " + player.getVelocity().y());
         // Jump management
         if (!jumpKey && isJumping()) {
             stopJumping();
@@ -132,9 +133,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         // Player speed limit and sprint management
 
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
-
-        player.setVelocity(player.getVelocity().copyWithY(Math.abs(player.getVelocity().y()) > 0.014 ?
-                0.014 * Math.signum(player.getVelocity().y()) : player.getVelocity().y()));
+        VelocitySetterFactory.limitFallingSpeed(player, FALLING_SPEED_LIMIT);
 
         sprintKey = false;
     }

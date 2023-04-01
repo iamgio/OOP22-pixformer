@@ -3,6 +3,7 @@ package pixformer.view.entity.player;
 import java.util.List;
 import java.util.Optional;
 
+
 import pixformer.common.Vector2D;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerInputComponent;
@@ -40,7 +41,7 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
      */
     @Override
     protected List<Renderer> getRenderers(final RendererFactory factory) {
-        PlayerState newState = getNewPlayerState(player);
+        final PlayerState newState = getNewPlayerState(player);
 
         if (!previousState.equals(newState) || renderers == null) {
             renderers = createRenderers(factory);
@@ -55,10 +56,10 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
      */
     @Override
     protected List<Renderer> createRenderers(final RendererFactory factory) {
-        PlayerSpriteFactory spriteFactory = new PlayerSpriteFactory();
+        final PlayerSpriteFactory spriteFactory = new PlayerSpriteFactory();
         PlayerAnimation animation = spriteFactory.getPlayerAnimation();
 
-        Optional<PowerupBehaviour> currentPowerup = player.getPowerup().getBehaviour();
+        final Optional<PowerupBehaviour> currentPowerup = player.getPowerup().getBehaviour();
         if (currentPowerup.isEmpty()) {
             animation = spriteFactory.getPlayerAnimation();
         } else if (currentPowerup.get() instanceof Mushroom) {
@@ -100,7 +101,7 @@ public class PlayerGraphicsComponent extends CachedAnimatedGraphicsComponent {
             fixedY = -1;
         }
 
-        Vector2D fixedVelocity = new Vector2D(fixedX, fixedY);
+        final Vector2D fixedVelocity = new Vector2D(fixedX, fixedY);
         return new PlayerState(player.getPowerupBehaviour(), fixedVelocity);
     }
 

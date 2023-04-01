@@ -5,11 +5,11 @@ import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.statics.Coin;
 import pixformer.model.event.EventSubscriber;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * {@inheritDoc}.

@@ -8,32 +8,32 @@ import java.util.Optional;
 public class PowerUp {
 
     // Current powerup ability power
-    private Optional<PowerupBehaviour> behaviour;
+    private PowerupBehaviour behaviour;
 
-    private Optional<PowerUp> previousPowerup;
+    private final PowerUp previousPowerup;
 
     /**
      * @param behaviour current powerup behaviour.
      * @param previous previous powerup.
      */
     public PowerUp(final PowerupBehaviour behaviour, final PowerUp previous) {
-        this.behaviour = Optional.of(behaviour);
-        this.previousPowerup = Optional.of(previous);
+        this.behaviour = behaviour;
+        this.previousPowerup = previous;
     }
 
     /**
      * @param behaviour current powerup behaviour.
      */
     public PowerUp(final PowerupBehaviour behaviour) {
-        this.behaviour = Optional.of(behaviour);
-        this.previousPowerup = Optional.empty();
+        this.behaviour = behaviour;
+        this.previousPowerup = null;
     }
 
     /**
      */
     public PowerUp() {
-        this.behaviour = Optional.empty();
-        this.previousPowerup = Optional.empty();
+        this.behaviour = null;
+        previousPowerup = null;
     }
 
     /**
@@ -42,22 +42,14 @@ public class PowerUp {
      * @return powerup behaviour.
      */
     public Optional<PowerupBehaviour> getBehaviour() {
-        return behaviour;
+        return behaviour == null ? Optional.empty() : Optional.of(behaviour);
     }
 
     /**
      * @return previous powerup if present.
      */
     public Optional<PowerUp> getPrevious() {
-        return previousPowerup;
-    }
-
-    /**
-     * Set the new current powerupBehaviour.
-     * @param powerupBehaviour new current entity powerup.
-     */
-    public void setBehaviour(final Optional<PowerupBehaviour> powerupBehaviour) {
-        this.behaviour = powerupBehaviour;
+        return previousPowerup == null ? Optional.empty() : Optional.of(previousPowerup);
     }
 
 }
