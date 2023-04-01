@@ -43,14 +43,16 @@ public interface Controller {
     GameLoop createGameLoop(View view);
 
     /**
-     * @return the list containing the score of all the players
+     * @param playerIndex index of the player
+     * @return the points of the player with a certain index
      */
-    List<Integer> getPlayersScore();
+    int getPlayerPointsByIndex(int playerIndex);
 
     /**
-     * @return the list containing the number of coins of all players
+     * @param playerIndex index of the player
+     * @return the coins of the player with a certain index
      */
-    List<Integer> getPlayersCoins();
+    int getPlayerCoinsByIndex(int playerIndex);
 
     /**
      * @return the score-based sorted index list of all the player
