@@ -55,7 +55,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         collisionComponent = new PlayerCollisionComponent(this);
         inputComponent = new PlayerInputComponent(this);
 
-        powerup = new PowerUp(new Mushroom(), new PowerUp());
+        powerup = new PowerUp();
     }
 
     /**
