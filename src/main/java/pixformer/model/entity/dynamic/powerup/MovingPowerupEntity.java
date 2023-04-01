@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  * Represents a powerUp entity which moves. It moves like a Goomba but its first direction is right.
  */
 public final class MovingPowerupEntity extends AbstractEntity
-        implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity, SolidEntity {
+        implements PhysicalPowerup, DefaultRectangleBoundingBoxEntity, DrawableEntity {
 
 
     private static final double WIDTH = 1;
