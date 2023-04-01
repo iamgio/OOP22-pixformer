@@ -134,17 +134,14 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     private void updateTextRenderer() {
         this.infoLabel.setText("");
-        final var scoresList = this.controller.getPlayersScore();
-        final var coinsList = this.controller.getPlayersCoins();
-        final StringBuilder stringBuilder = new StringBuilder(128);
+        final var leaderboard = this.controller.getIndexedLeaderboard();
         final Lang lang = Lang.getInstance();
-        for (int i = 0; i < scoresList.size(); i++) {
-            // Building the string with the score of all players
-            // consecutive append calls make the code more understandable
-            stringBuilder.append(lang.get("score.player")).append(i + 1).append("    "); // NOPMD : see above
-            stringBuilder.append(scoresList.get(i)).append(lang.get("score.points")).append("  "); // NOPMD : see above
-            stringBuilder.append(coinsList.get(i)).append(lang.get("score.coins")).append("\n"); // NOPMD : see above
-            this.infoLabel.setText(stringBuilder.toString());
+        for (var i : leaderboard) {
+            String text = lang.get("score.label");
+            text = text.replace("{i}", i + 1 + "");
+            text = text.replace("{p}", controller.getPlayerPointsByIndex(i) + "");
+            text = text.replace("{c}", controller.getPlayerCoinsByIndex(i) + "");
+            this.infoLabel.setText(text);
         }
     }
 
