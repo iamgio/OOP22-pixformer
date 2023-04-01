@@ -64,6 +64,17 @@ public class ScoreManagerImpl implements ScoreManager {
      * {@inheritDoc}
      */
     @Override
+    public Score getScoreByIndex(final int playerIndex) {
+        return scoreMap.entrySet().stream()
+                .filter(entry -> entry.getKey() instanceof Player player && player.getIndex() == playerIndex)
+                .map(Map.Entry::getValue)
+                .findAny().orElse(new Score(0, 0));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Score> getAllScores() {
         return this.scoreMap.values().stream().toList();
     }
