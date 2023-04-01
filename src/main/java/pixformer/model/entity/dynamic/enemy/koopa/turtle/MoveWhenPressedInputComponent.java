@@ -4,9 +4,9 @@ import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.CollisionSide;
+import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.reactor.SingleCollisionReactor;
 import pixformer.model.input.InputComponent;
-import pixformer.model.entity.dynamic.player.Player;
 
 /**
  * An input component which makes the controlled entity move when pressed from the top.

@@ -5,8 +5,8 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
-import pixformer.model.entity.dynamic.reactor.CollisionReactorFactory;
 import pixformer.model.entity.dynamic.reactor.ActionOnPressedCollisionReactor;
+import pixformer.model.entity.dynamic.reactor.CollisionReactorFactory;
 import pixformer.model.entity.dynamic.reactor.DieForFireCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.MakeJumpOnPressedCollisionReactor;
 

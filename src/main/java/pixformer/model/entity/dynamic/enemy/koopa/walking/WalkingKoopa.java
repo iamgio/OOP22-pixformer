@@ -1,9 +1,5 @@
 package pixformer.model.entity.dynamic.enemy.koopa.walking;
 
-import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 import pixformer.common.TriConsumer;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
@@ -15,6 +11,10 @@ import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
+
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * The state of the koopa which walks normally and behaves like a goomba.

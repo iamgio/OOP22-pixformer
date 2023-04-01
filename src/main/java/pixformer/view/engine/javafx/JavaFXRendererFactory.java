@@ -46,6 +46,6 @@ public class JavaFXRendererFactory implements RendererFactory {
     public PositionableRenderer newImage(final String resourcePath,
                                          final double width, final double height, final boolean flipX) {
         final var inputStream = Objects.requireNonNull(getClass().getResourceAsStream(resourcePath));
-        return new JavaFXImageRenderer(new Image(inputStream), flipX ? -width : width, height);
+        return new JavaFXImageRenderer(new Image(inputStream), width, height, flipX);
     }
 }

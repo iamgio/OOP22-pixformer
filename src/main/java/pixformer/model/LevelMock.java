@@ -22,7 +22,7 @@ public final class LevelMock implements Level {
         final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
         inner = new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
                 new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
-                .deserialize(Level.class.getResourceAsStream("/levels/test2.json")), world);
+                .deserialize(Level.class.getResourceAsStream("/levels/Level 1.json")), world);
     }
 
     /**
