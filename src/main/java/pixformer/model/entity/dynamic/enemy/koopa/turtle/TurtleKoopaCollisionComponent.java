@@ -10,7 +10,6 @@ import pixformer.model.entity.dynamic.reactor.DieByTurtleCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.DieForFireCollisionReactor;
 import pixformer.model.entity.dynamic.reactor.MakeJumpOnPressedCollisionReactor;
 
-
 import java.util.Set;
 import java.util.function.Consumer;
 

@@ -1,8 +1,5 @@
 package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
-import java.util.Optional;
-import java.util.function.BiConsumer;
-
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
@@ -14,6 +11,9 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
+
+import java.util.Optional;
+import java.util.function.BiConsumer;
 
 /**
  * The state of the koopa when it is a turtle.
