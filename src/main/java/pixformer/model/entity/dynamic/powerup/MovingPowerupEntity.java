@@ -8,7 +8,6 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.collision.SolidEntity;
 import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
 import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.powerup.PhysicalPowerup;
