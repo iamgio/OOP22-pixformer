@@ -35,7 +35,6 @@ final class GoombaAITest {
     private static final double DT = 1;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
-    private Entity goomba;
     private final Function<Vector2D, MutableEntity> goombaFactory = v -> new AbstractEntity(v.x(), v.y(), 1, 1) {
 
         private final Optional<InputComponent> ai = Optional.of(new GoombaInputComponent(this));
@@ -55,6 +54,7 @@ final class GoombaAITest {
             return Optional.of(new SolidCollisionComponent(this));
         }
     };
+    private Entity goomba = goombaFactory.apply(new Vector2D(0, 0));
 
     @BeforeEach
     void setup() {
