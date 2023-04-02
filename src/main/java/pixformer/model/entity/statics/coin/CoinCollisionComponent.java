@@ -1,7 +1,8 @@
-package pixformer.model.entity.collision;
+package pixformer.model.entity.statics.coin;
 
+import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Coin;
 
 import java.util.Set;
 

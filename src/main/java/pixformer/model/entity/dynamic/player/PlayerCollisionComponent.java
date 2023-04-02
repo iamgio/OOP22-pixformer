@@ -20,6 +20,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     private final double baseHeight;
 
     private boolean isOnGround;
+    private boolean isTouchingAbove;
 
     private final ChronometerImpl invulnerabilityChronometer = new ChronometerImpl();
 
@@ -41,20 +42,23 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     }
 
     /**
+     * @return true if player is touching ground, other false.
+     */
+    public boolean isTouchingAbove() {
+        return isTouchingAbove;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         super.update(dt, collisions);
 
-        isOnGround = false;
+        isTouchingAbove = isCollidingCeiling(collisions);
+        isOnGround = isCollidingGround(collisions);
 
         for (final var collisor : collisions) {
-
-            if (isCollidingGround(collisions)) {
-                isOnGround = true;
-            }
-
             if (collisor.entity() instanceof Enemy 
                 && collisor.side().isHorizontal()
                 && (invulnerabilityChronometer.getTimeElapsed() == 0

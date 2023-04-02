@@ -1,37 +1,36 @@
-package pixformer.model.entity.statics;
+package pixformer.model.entity.statics.pole;
 
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
-import pixformer.model.entity.collision.BrickCollisionComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
-import pixformer.model.entity.collision.SolidEntity;
 
 import java.util.Optional;
 
 /**
- * Brick block, common brick block which can be destroyed from the bottom.
+ * In game flag entity, representing the end of the level.
  */
-public final class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
+public final class Pole extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity {
 
-    private static final double WIDTH = 1;
-    private static final double HEIGHT = 1;
+    private static final int HEIGHT = 10;
+    private static final int WIDTH = 1;
+
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
 
     /**
-     * Simple constructor of the Block.
-     * 
+     * Simple constructor for the flag.
+     *
      * @param x X coordinate
      * @param y Y coordinate
-     * @param graphicsComponent graphics component of the brick
+     * @param graphicsComponent retriever for the graphics component of the entity
      */
-    public Brick(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
+    public Pole(final int x, final int y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
-        this.collisionComponent = new BrickCollisionComponent(this);
         this.graphicsComponent = graphicsComponent.apply(this);
+        this.collisionComponent = new PoleCollisionComponent(this);
     }
 
     /**

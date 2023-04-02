@@ -8,6 +8,7 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.Powerupable;
+import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
@@ -18,8 +19,8 @@ import java.util.Optional;
  * The class manages the character used by the player.
  */
 public class Player extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Powerupable {
-    static final double WIDTH = 1.0;
-    static final double HEIGHT = 1.0;
+    static final double WIDTH = 0.94;
+    static final double HEIGHT = 1;
 
     // This playerIndex
     private final int playerIndex;
@@ -45,7 +46,7 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      * @param playerIndex Index of this player istance.
      */
     public Player(final double x, final double y, final double width, final double height, final int playerIndex) {
-        super(x, y, width, height);
+        super(x, y, WIDTH, HEIGHT);
 
         this.playerIndex = playerIndex;
 
@@ -131,10 +132,15 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
         if (powerup.getBehaviour().isPresent()) {
             if (powerup.getBehaviour().get().getPriority() == powerupBehaviour.getPriority()) {
                 powerup = new PowerUp(powerupBehaviour, powerup.getPrevious().get());
-            } else if (powerup.getBehaviour().get().getPriority() > powerupBehaviour.getPriority()) {
+            } else if (powerup.getBehaviour().get().getPriority() < powerupBehaviour.getPriority()) {
                 powerup = new PowerUp(powerupBehaviour, powerup);
             }
         } else {
+
+            if (powerupBehaviour.getPriority() > 1) {
+                powerup = new PowerUp(new Mushroom(), powerup);
+            }
+
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
     }
@@ -151,6 +157,13 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
      */
     public boolean isOnGround() {
         return collisionComponent.isOnGround();
+    }
+
+    /**
+     * @return true if the player is touching ground otherwise false.
+     */
+    public boolean isTouchingAbove() {
+        return collisionComponent.isTouchingAbove();
     }
 
     /**

@@ -125,24 +125,35 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public List<Integer> getPlayersScore() {
+    public int getPlayerPointsByIndex(final int playerIndex) {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::points).toList();
+            return level.getWorld().getScoreManager().getScoreByIndex(playerIndex).points();
         }
-        return new ArrayList<>();
+        return 0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Integer> getPlayersCoins() {
+    public int getPlayerCoinsByIndex(int playerIndex) {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
-            return level.getWorld().getScoreManager().getAllScores().stream().map(Score::coinsNumber).toList();
+            return level.getWorld().getScoreManager().getScoreByIndex(playerIndex).coinsNumber();
         }
-        return new ArrayList<>();
+        return 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Integer> getIndexedLeaderboard() {
+        if(this.levelManager.get().getCurrentLevel().isPresent()) {
+            return this.levelManager.get().getCurrentLevel().get().getWorld().getIndexLeaderboard();
+        }
+        return List.of();
     }
 
     /**

@@ -16,6 +16,12 @@ public interface ScoreManager {
     Score getScore(Entity entity);
 
     /**
+     * @param playerIndex index of the player
+     * @return the score of the player with a certain index
+     */
+    Score getScoreByIndex(int playerIndex);
+
+    /**
      * @return a list containing the scores of each player
      */
     List<Score> getAllScores();

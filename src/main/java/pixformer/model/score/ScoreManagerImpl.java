@@ -2,7 +2,7 @@ package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Coin;
+import pixformer.model.entity.statics.coin.Coin;
 import pixformer.model.event.EventSubscriber;
 
 import java.util.HashMap;
@@ -58,6 +58,17 @@ public class ScoreManagerImpl implements ScoreManager {
     @Override
     public Score getScore(final Entity entity) {
         return this.scoreMap.getOrDefault(entity, new Score(0, 0));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Score getScoreByIndex(final int playerIndex) {
+        return scoreMap.entrySet().stream()
+                .filter(entry -> entry.getKey() instanceof Player player && player.getIndex() == playerIndex)
+                .map(Map.Entry::getValue)
+                .findAny().orElse(new Score(0, 0));
     }
 
     /**

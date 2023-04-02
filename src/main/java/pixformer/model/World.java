@@ -5,6 +5,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.score.ScoreManager;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -75,6 +76,11 @@ public interface World extends Updatable {
      * @return the handler of entity collisions for this world
      */
     EntityCollisionManager getCollisionManager();
+
+    /**
+     * @return the indexed leaderboard
+     */
+    List<Integer> getIndexLeaderboard();
 
     /**
      * End the game because someone have won.
