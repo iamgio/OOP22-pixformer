@@ -2,24 +2,28 @@ package pixformer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
-import pixformer.model.entity.AbstractEntity;
-import pixformer.model.entity.Entity;
-import pixformer.model.entity.EntityFactory;
-import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.entity.*;
 import pixformer.model.entity.collision.BoundingBox;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.RectangleBoundingBox;
+import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaInputComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Optional;
+import java.util.Vector;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleUnaryOperator;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class GoombaAITest {
 
@@ -29,10 +33,10 @@ final class GoombaAITest {
     private static final double DT = 1;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
-    // private final Enemy goomba = new Enemy(0, 0, 1, 1, step);
-    private final Entity goomba = new AbstractEntity(0, 0, 1, 1) {
+    private Entity goomba;
+    private final Function<Vector2D, MutableEntity> goombaFactory = v -> new AbstractEntity(v.x(), v.y(), 1, 1) {
 
-        private final Optional<InputComponent> ai = Optional.of(new GoombaAI(this, this::setVelocity, STEP));
+        private final Optional<InputComponent> ai = Optional.of(new GoombaInputComponent(this));
 
         @Override
         public BoundingBox getBoundingBox() {
@@ -44,10 +48,15 @@ final class GoombaAITest {
             return ai;
         }
 
+        @Override
+        public Optional<CollisionComponent> getCollisionComponent() {
+            return Optional.of(new SolidCollisionComponent(this));
+        }
     };
 
     @BeforeEach
     void setup() {
+        goomba = goombaFactory.apply(new Vector2D(0, 0));
         world.spawnEntity(goomba);
         this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
     }
@@ -77,6 +86,30 @@ final class GoombaAITest {
         // world.update(dt);
         // assertEquals(1 - step, goomba.getX(), DELTA);
         // assertEquals(0, goomba.getY());
+    }
+
+    @Test
+    void testFallAndMove() {
+        final int goombaInitialY = -200;
+        final int goombaFinalY = -1;
+        final int initialYVelocity = 1;
+        final int floorHeight = 0;
+        createFloor(floorHeight);
+        final MutableEntity goomba = goombaFactory.apply(new Vector2D(0, goombaInitialY));
+        goomba.setVelocity(new Vector2D(0, initialYVelocity));
+        world.spawnEntity(goomba);
+        for (int i = goombaInitialY; i < goombaFinalY; i++) {
+            world.update(DT);
+        }
+        assertTrue(goomba.getVelocity().x() < 0);
+        assertEquals(goombaFinalY, goomba.getY(), DELTA);
+    }
+
+    private void createFloor(final int height) {
+        final int width = 1000;
+        for (int i = 0; i < width; i++) {
+            world.spawnEntity(this.entityFactory.createTileBlock(i, height));
+        }
     }
 
     private void goUntil(
