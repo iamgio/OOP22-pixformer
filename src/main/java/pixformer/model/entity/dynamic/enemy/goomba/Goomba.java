@@ -6,7 +6,7 @@ import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
-import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
+import pixformer.model.entity.dynamic.enemy.ai.GoombaInputComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 
@@ -35,7 +35,7 @@ public final class Goomba extends EnemyImpl implements DrawableEntity, Enemy {
     public Goomba(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT, INITIAL_VELOCITY);
         this.graphicsComponent = graphicsComponent.apply(this);
-        this.inputComponent = new GoombaAI(this, super::fixVelocity, INITIAL_VELOCITY);
+        this.inputComponent = new GoombaInputComponent(this);
         this.physicsComponent = new PhysicsComponent(this);
     }
 

@@ -2,10 +2,8 @@ package pixformer.model.entity.dynamic.enemy.koopa.turtle;
 
 import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
-import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
-import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
+import pixformer.model.entity.dynamic.enemy.ai.GeneralAIInputComponent;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Block;
 import pixformer.model.input.AIInputComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
@@ -19,7 +17,8 @@ import java.util.function.Consumer;
 public final class TurtleKoopaInputComponent extends AIInputComponent {
 
     private static final double VELOCITY = 0.012;
-    private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> { };
+    private static final Consumer<HorizontalModelInput> NO_ACTION = (c) -> {
+    };
 
     private final InputComponent wrappedInputComponent;
     private final InputComponent moveWhenPressed;
@@ -29,12 +28,16 @@ public final class TurtleKoopaInputComponent extends AIInputComponent {
      */
     public TurtleKoopaInputComponent(final MutableEntity entity) {
         super(entity);
-        wrappedInputComponent = new GoombaAI(getEntity(), new OnlyXVelocitySetter(entity), VELOCITY,
-                e -> e instanceof Block || e instanceof Player && entity.getVelocity().x() == 0,
-                NO_ACTION
+        wrappedInputComponent = new GeneralAIInputComponent(
+                entity,
+                VELOCITY,
+                NO_ACTION,
+                collision -> entity.getVelocity().x() == 0 && collision.entity() instanceof Player
+                        || collision.entity().isSolid()
         );
         moveWhenPressed = new MoveWhenPressedInputComponent(entity, VELOCITY);
     }
+
     @Override
     public void update(final World world) {
         wrappedInputComponent.update(world);
