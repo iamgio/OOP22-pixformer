@@ -6,7 +6,7 @@ import pixformer.model.modelinput.HorizontalModelInput;
 import java.util.function.Consumer;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
 public class SimpleAIInputComponent extends GeneralAIInputComponent {
 
