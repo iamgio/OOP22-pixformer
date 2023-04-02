@@ -8,46 +8,21 @@ import pixformer.model.modelinput.HorizontalModelInput;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * A collision reactor which moves the entity right when finding an obstacle at its left
- * and moves left when finding an obstacle at its right.
+ * A collision reactor which moves the entity right when finding a solid entity at its left
+ * and moves left when finding a solid entity at its right.
  */
-public final class SimpleAICollisionReactor implements CollisionReactor {
-
-    private Consumer<HorizontalModelInput> currentBehaviour;
-    private final Consumer<HorizontalModelInput> initialBehavior;
-    private final HorizontalModelInput joystick;
+public final class SimpleAICollisionReactor extends GeneralAICollisionReactor {
 
     /**
-     * @param joystick for controlling the entity.
+     * @param joystick        to control the entity's movements.
+     * @param initialBehavior the behaviour which the entity will have when spawned.
      */
     public SimpleAICollisionReactor(final HorizontalModelInput joystick,
                                     final Consumer<HorizontalModelInput> initialBehavior) {
-        this.initialBehavior = initialBehavior;
-        this.joystick = joystick;
-    }
-
-    @Override
-    public void react(final Collection<Collision> collisions) {
-        final var horizontals = collisions.stream()
-                .filter(collision -> collision.entity().isSolid())
-                .map(Collision::side)
-                .filter(CollisionSide::isHorizontal)
-                .collect(Collectors.toSet());
-        if (horizontals.isEmpty() && currentBehaviour == null) {
-            currentBehaviour = initialBehavior;
-        }
-        if (horizontals.contains(CollisionSide.LEFT) && !horizontals.contains(CollisionSide.RIGHT)) {
-            currentBehaviour = HorizontalModelInput::left;
-        }
-        if (horizontals.contains(CollisionSide.RIGHT) && !horizontals.contains(CollisionSide.LEFT)) {
-            currentBehaviour = HorizontalModelInput::right;
-        }
-        if (horizontals.contains(CollisionSide.RIGHT) && horizontals.contains(CollisionSide.LEFT)) {
-            currentBehaviour = null;
-        }
-        Optional.ofNullable(currentBehaviour).ifPresent(b -> b.accept(joystick));
+        super(joystick, initialBehavior, collision -> collision.entity().isSolid());
     }
 }

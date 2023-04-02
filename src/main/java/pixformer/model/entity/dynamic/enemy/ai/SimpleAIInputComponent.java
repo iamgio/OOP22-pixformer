@@ -11,10 +11,9 @@ import pixformer.model.modelinput.HorizontalModelInput;
 import java.util.function.Consumer;
 
 /**
- * An AI which makes the controlled entity goes left and right.
+ * {@inheritDoc}
  */
-public class SimpleAIInputComponent extends AIInputComponent {
-    private final CollisionReactor collisionReactor;
+public class SimpleAIInputComponent extends GeneralAIInputComponent {
 
     /**
      * @param entity to be controlled.
@@ -25,14 +24,6 @@ public class SimpleAIInputComponent extends AIInputComponent {
             final MutableEntity entity,
             final double velocityModule,
             final Consumer<HorizontalModelInput> initialBehaviour) {
-        super(entity);
-        final var joystick = new HorizontalModelInputImpl(new OnlyXVelocitySetter(entity), velocityModule);
-        collisionReactor = new SimpleAICollisionReactor(joystick, initialBehaviour);
-    }
-
-    @Override
-    public void update(final World world) {
-        final var collisions = world.getCollisionManager().findCollisionsFor(getEntity());
-        collisionReactor.react(collisions);
+        super(entity, velocityModule,  initialBehaviour, collision -> collision.entity().isSolid());
     }
 }
