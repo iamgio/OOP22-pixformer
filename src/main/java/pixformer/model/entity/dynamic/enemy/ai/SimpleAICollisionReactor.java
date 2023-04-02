@@ -1,42 +1,53 @@
 package pixformer.model.entity.dynamic.enemy.ai;
 
-import pixformer.model.World;
-import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.CollisionReactor;
-import pixformer.model.input.AIInputComponent;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.modelinput.HorizontalModelInput;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * An AI which makes the controlled entity goes left and right.
+ * A collision reactor which moves the entity right when finding an obstacle at its left
+ * and moves left when finding an obstacle at its right.
  */
-public class SimpleAICollisionReactor implements CollisionReactor {
-    private final CollisionReactor collisionReactor;
+public final class SimpleAICollisionReactor implements CollisionReactor {
+
+    private Consumer<HorizontalModelInput> currentBehaviour;
+    private final Consumer<HorizontalModelInput> initialBehavior;
+    private final HorizontalModelInput joystick;
 
     /**
-     * @param entity to be controlled.
-     * @param velocityModule module of the velocity to be given to the {@code entity}
-     * @param reactorConstructor the constructor of the reactor which will decide the directions.
-     * @param initialBehaviour of the {@code entity}.
+     * @param joystick for controlling the entity.
      */
-    public SimpleAICollisionReactor(
-            final MutableEntity entity,
-            final double velocityModule,
-            final Function<HorizontalModelInput, CollisionReactor> reactorConstructor,
-            final Consumer<HorizontalModelInput> initialBehaviour) {
-        final HorizontalModelInput joystick = new MaxedVelocityHorizontalModelInput(
-                entity, Math.abs(velocityModule)
-        );
-        collisionReactor = reactorConstructor.apply(joystick);
-        initialBehaviour.accept(joystick);
+    public SimpleAICollisionReactor(final HorizontalModelInput joystick,
+                                    final Consumer<HorizontalModelInput> initialBehavior) {
+        this.initialBehavior = initialBehavior;
+        this.joystick = joystick;
     }
 
     @Override
     public void react(final Collection<Collision> collisions) {
-        collisionReactor.react(collisions);
+        final var horizontals = collisions.stream()
+                .filter(collision -> collision.entity().isSolid())
+                .map(Collision::side)
+                .filter(CollisionSide::isHorizontal)
+                .collect(Collectors.toSet());
+        if (horizontals.isEmpty() && currentBehaviour == null) {
+            currentBehaviour = initialBehavior;
+        }
+        if (horizontals.contains(CollisionSide.LEFT) && !horizontals.contains(CollisionSide.RIGHT)) {
+            currentBehaviour = HorizontalModelInput::left;
+        }
+        if (horizontals.contains(CollisionSide.RIGHT) && !horizontals.contains(CollisionSide.LEFT)) {
+            currentBehaviour = HorizontalModelInput::right;
+        }
+        if (horizontals.contains(CollisionSide.RIGHT) && horizontals.contains(CollisionSide.LEFT)) {
+            currentBehaviour = null;
+        }
+        Optional.ofNullable(currentBehaviour).ifPresent(b -> b.accept(joystick));
     }
 }
