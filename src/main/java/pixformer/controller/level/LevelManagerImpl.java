@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * Implementation of a {@link LevelManager}.
@@ -15,7 +14,7 @@ import java.util.function.Consumer;
 public class LevelManagerImpl implements LevelManager {
 
     private final List<BiConsumer<Level, Integer>> onStart = new LinkedList<>();
-    private final List<Consumer<Level>> onEnd = new LinkedList<>();
+    private final List<BiConsumer<Level, List<Integer>>> onEnd = new LinkedList<>();
 
     private Level level;
 
@@ -56,7 +55,7 @@ public class LevelManagerImpl implements LevelManager {
             throw new IllegalStateException("No level to end.");
         }
 
-        this.onEnd.forEach(action -> action.accept(level));
+        this.onEnd.forEach(action -> action.accept(level, level.getWorld().getIndexLeaderboard()));
         this.level = null;
     }
 
@@ -65,7 +64,7 @@ public class LevelManagerImpl implements LevelManager {
      * @implNote newly added actions have higher priority
      */
     @Override
-    public void addOnLevelEnd(final Consumer<Level> action) {
+    public void addOnLevelEnd(final BiConsumer<Level, List<Integer>> action) {
         this.onEnd.add(0, action);
     }
 }

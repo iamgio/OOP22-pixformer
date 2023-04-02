@@ -2,9 +2,9 @@ package pixformer.controller.level;
 
 import pixformer.model.Level;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * Handler of playable levels.
@@ -38,7 +38,7 @@ public interface LevelManager {
 
     /**
      * Adds a callback to call when a level is stopped.
-     * @param action action to run when a level is stopped, with the level as an argument
+     * @param action action to run when a level is stopped, with the level and the leaderboard as args
      */
-    void addOnLevelEnd(Consumer<Level> action);
+    void addOnLevelEnd(BiConsumer<Level, List<Integer>> action);
 }

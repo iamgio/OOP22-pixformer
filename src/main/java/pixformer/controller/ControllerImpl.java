@@ -23,7 +23,6 @@ import pixformer.view.entity.SpritesGraphicsComponentFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -82,7 +81,7 @@ public final class ControllerImpl implements Controller {
             level.init(playersAmount);
             this.getGameLoopManager().start();
         });
-        getLevelManager().addOnLevelEnd(level -> this.getGameLoopManager().stop());
+        getLevelManager().addOnLevelEnd((level, leaderboard) -> this.getGameLoopManager().stop());
     }
 
     /**
