@@ -6,11 +6,8 @@ import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
-import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.dynamic.enemy.ai.GoombaInputComponent;
-import pixformer.model.entity.dynamic.enemy.ai.SimpleAIInputComponent;
 import pixformer.model.input.InputComponent;
-import pixformer.model.modelinput.HorizontalModelInput;
 import pixformer.model.physics.PhysicsComponent;
 
 import java.util.Optional;

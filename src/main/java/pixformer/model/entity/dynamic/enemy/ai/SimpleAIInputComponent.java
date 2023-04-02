@@ -1,11 +1,6 @@
 package pixformer.model.entity.dynamic.enemy.ai;
 
-import pixformer.model.World;
 import pixformer.model.entity.MutableEntity;
-import pixformer.model.entity.collision.CollisionReactor;
-import pixformer.model.entity.dynamic.OnlyXVelocitySetter;
-import pixformer.model.entity.dynamic.enemy.HorizontalModelInputImpl;
-import pixformer.model.input.AIInputComponent;
 import pixformer.model.modelinput.HorizontalModelInput;
 
 import java.util.function.Consumer;

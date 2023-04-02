@@ -7,7 +7,6 @@ import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.enemy.EnemyImpl;
-import pixformer.model.entity.dynamic.enemy.ai.GoombaAI;
 import pixformer.model.entity.dynamic.enemy.ai.SimpleAIInputComponent;
 import pixformer.model.entity.dynamic.enemy.koopa.Koopa;
 import pixformer.model.input.InputComponent;
