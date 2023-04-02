@@ -5,7 +5,7 @@ import pixformer.model.World;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Coin;
+import pixformer.model.entity.statics.coin.Coin;
 
 import java.util.Set;
 

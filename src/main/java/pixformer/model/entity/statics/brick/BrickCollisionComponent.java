@@ -1,6 +1,9 @@
-package pixformer.model.entity.collision;
+package pixformer.model.entity.statics.brick;
 
 import pixformer.model.entity.MutableEntity;
+import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.Set;
