@@ -11,6 +11,10 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * A collision reactor which moves the entity right when finding an obstacle at its left
+ * and moves left when finding an obstacle at its right.
+ */
 public class GeneralAICollisionReactor implements CollisionReactor {
 
     private Consumer<HorizontalModelInput> currentBehaviour;
