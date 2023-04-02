@@ -140,7 +140,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
             String text = lang.get("score.label");
             text = text.replace("{i}", i + 1 + "   ");
             text = text.replace("{p}", controller.getPlayerPointsByIndex(i) + "  ");
-            text = text.replace("{c}", controller.getPlayerCoinsByIndex(i) + "\n");
+            text = text.replace("{c}", controller.getPlayerCoinsByIndex(i) + "");
             this.infoLabel.setText(text);
         }
     }
