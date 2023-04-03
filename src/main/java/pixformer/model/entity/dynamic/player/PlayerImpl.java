@@ -1,5 +1,8 @@
 package pixformer.model.entity.dynamic.player;
 
+import pixformer.common.time.ChronometerImpl;
+import pixformer.common.time.Timer;
+import pixformer.common.time.TimerImpl;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
@@ -162,7 +165,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
             kill();
         } else {
             powerup = powerup.getPrevious().get();
-        }
+        }       
     }
 
     /**
@@ -201,8 +204,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void invulnerable(double invincibleTime) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Invulnerable'");
+    public void invulnerable(long invincibleTime) {
+        collisionComponent.invincibility(invincibleTime);
     }
 }

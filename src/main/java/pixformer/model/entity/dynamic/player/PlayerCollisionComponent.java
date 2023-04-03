@@ -1,7 +1,10 @@
 package pixformer.model.entity.dynamic.player;
 
 import pixformer.common.time.ChronometerImpl;
+import pixformer.common.time.Timer;
+import pixformer.common.time.TimerImpl;
 import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
@@ -22,7 +25,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     private boolean isOnGround;
     private boolean isTouchingAbove;
 
-    private final ChronometerImpl invulnerabilityChronometer = new ChronometerImpl();
+    private final Timer invulnerabilityTimer = new TimerImpl();
 
     /**
      * 
@@ -60,14 +63,10 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
         for (final var collisor : collisions) {
             if (collisor.entity() instanceof Enemy 
-                && collisor.side().isHorizontal()
-                && (invulnerabilityChronometer.getTimeElapsed() == 0
-                    || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME))) {
-
-                    this.player.damaged();
-
-                    invulnerabilityChronometer.reset();
-                    invulnerabilityChronometer.start();
+                && (collisor.side().isHorizontal() || collisor.side() == CollisionSide.TOP)
+                && invulnerabilityTimer.hasTimeLeft()) {
+                    player.damaged();
+                    invincibility(INVULNERABILITY_TIME);
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
@@ -86,5 +85,9 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         if (previousHeight != player.getHeight()) {
             player.setY(player.getY() + previousHeight - player.getHeight());
         }
+    }
+
+    public void invincibility(final long time) {
+        invulnerabilityTimer.start(time);
     }
 }

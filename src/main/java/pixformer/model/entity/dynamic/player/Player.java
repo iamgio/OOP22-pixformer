@@ -5,11 +5,24 @@ import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.Powerupable;
 
 public interface Player extends Powerupable, DrawableEntity, DefaultRectangleBoundingBoxEntity {
+    /**
+     * Make the player entity jump.
+     */
     void jump();
 
-    void invulnerable(double invincibleTime);
+    /**
+     * Make the player entity invincible for a while.
+     * @param invincibleTime how long the player is invincible.
+     */
+    void invulnerable(long invincibleTime);
 
+    /**
+     * @return true if the player is touching ground, false otherwise.
+     */
     boolean isOnGround();
 
+    /**
+     * @return true if the player is touching something above him, false otherwise.
+     */
     boolean isTouchingAbove();
 }
