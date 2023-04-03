@@ -63,9 +63,13 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         for (final var collisor : collisions) {
             if (collisor.entity() instanceof Enemy 
                 && (collisor.side().isHorizontal() || collisor.side() == CollisionSide.TOP)
-                && invulnerabilityTimer.hasTimeLeft()) {
+                && !invulnerabilityTimer.hasTimeLeft()) {
                     player.damaged();
                     invincibility(INVULNERABILITY_TIME);
+            }
+
+            if(collisor.entity() instanceof Enemy) {
+                System.out.println((collisor.side().isHorizontal() || collisor.side() == CollisionSide.TOP) + " " + invulnerabilityTimer.hasTimeLeft());
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
@@ -73,6 +77,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
         }
 
+        invulnerabilityTimer.update(Double.valueOf(dt).longValue());
         checkPlayerSize();
     }
 
