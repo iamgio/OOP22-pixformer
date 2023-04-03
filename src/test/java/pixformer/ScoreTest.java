@@ -8,7 +8,6 @@ import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 

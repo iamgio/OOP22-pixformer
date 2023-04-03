@@ -5,6 +5,9 @@ import pixformer.model.entity.MutableEntity;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.powerup.Powerupable;
 
+/**
+ * Interface representing a Player entity.
+ */
 public interface Player extends Powerupable, DrawableEntity, DefaultRectangleBoundingBoxEntity, MutableEntity {
 
     /**

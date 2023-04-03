@@ -1,8 +1,5 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.common.time.ChronometerImpl;
-import pixformer.common.time.Timer;
-import pixformer.common.time.TimerImpl;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
@@ -22,7 +19,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     static final double WIDTH = 0.94;
     static final double HEIGHT = 1;
 
-    final int playerIndex;
+    private final int playerIndex;
 
     // Current powerup
     private PowerUp powerup = new PowerUp();
@@ -63,7 +60,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public int getIndex() {        
+    public int getIndex() {
         return playerIndex;
     }
 
@@ -143,15 +140,17 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     /**
-     * @return true if the player is touching ground otherwise false.
+     * {@inheritDoc}
      */
+    @Override
     public boolean isOnGround() {
         return collisionComponent.isOnGround();
     }
 
     /**
-     * @return true if the player is touching ground otherwise false.
+     * {@inheritDoc}
      */
+    @Override
     public boolean isTouchingAbove() {
         return collisionComponent.isTouchingAbove();
     }
@@ -164,7 +163,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
             kill();
         } else {
             powerup = powerup.getPrevious().get();
-        }       
+        }
     }
 
     /**
@@ -194,15 +193,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void jump() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void invulnerable(long invincibleTime) {
+    public void invulnerable(final long invincibleTime) {
         collisionComponent.invincibility(invincibleTime);
     }
 }

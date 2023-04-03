@@ -8,7 +8,7 @@ import java.util.Optional;
 public class PowerUp {
 
     // Current powerup ability power
-    private PowerupBehaviour behaviour;
+    private final PowerupBehaviour behaviour;
 
     private final PowerUp previousPowerup;
 

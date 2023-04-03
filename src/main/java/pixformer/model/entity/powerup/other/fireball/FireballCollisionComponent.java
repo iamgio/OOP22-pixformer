@@ -54,8 +54,6 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
                     && collisionIgnoreEntities.stream().noneMatch(c -> c.isInstance(collisor.entity()))) {
                 world.queueEntityDrop(fireball);
             }
-
-            System.out.println(collisor.entity().getClass());
         }
 
     }

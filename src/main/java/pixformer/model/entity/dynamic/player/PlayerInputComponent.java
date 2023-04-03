@@ -114,9 +114,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void update(final World world) {
         // Jump management
-        if ((!jumpKey && isJumping())
-            || (!player.isOnGround() && !isJumping())
-            || (player.isTouchingAbove())) {
+        if (!jumpKey && isJumping()
+            || !player.isOnGround() && !isJumping()
+            || player.isTouchingAbove()) {
             stopJumping();
         }
 
@@ -134,8 +134,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         isSprinting = sprintKey;
 
         sprintKey = false;
-
-        System.out.println(player.getVelocity());
     }
 
      /**

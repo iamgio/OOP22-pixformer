@@ -1,6 +1,5 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.common.time.ChronometerImpl;
 import pixformer.common.time.Timer;
 import pixformer.common.time.TimerImpl;
 import pixformer.model.entity.collision.Collision;
@@ -87,6 +86,10 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         }
     }
 
+    /**
+     * Set a time during while the player is invincible.
+     * @param time how long the player is invincible.
+     */
     public void invincibility(final long time) {
         invulnerabilityTimer.start(time);
     }
