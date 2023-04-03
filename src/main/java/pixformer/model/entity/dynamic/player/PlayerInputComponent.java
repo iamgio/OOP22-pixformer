@@ -11,7 +11,7 @@ import pixformer.model.modelinput.CompleteModelInput;
  * Implementation of InputComponent for a Player entity.
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
-    private final Player player;
+    private final PlayerImpl player;
     private boolean jumpKey;
     private boolean sprintKey;
 
@@ -52,7 +52,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * 
      * @param entity Entity associated with current component
      */
-    protected PlayerInputComponent(final Player entity) {
+    protected PlayerInputComponent(final PlayerImpl entity) {
         super(entity);
         player = entity;
         abilityDelay.start();

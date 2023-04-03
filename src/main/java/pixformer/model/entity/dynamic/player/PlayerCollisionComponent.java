@@ -16,7 +16,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
     private static final double PLAYER_FRICTION = 0.96;
 
-    private final Player player;
+    private final PlayerImpl player;
     private final double baseHeight;
 
     private boolean isOnGround;
@@ -28,7 +28,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
      * 
      * @param player Player entity whose collisions will be managed.
      */
-    protected PlayerCollisionComponent(final Player player) {
+    protected PlayerCollisionComponent(final PlayerImpl player) {
         super(player, PLAYER_FRICTION);
         this.player = player;
         this.baseHeight = player.getHeight();
