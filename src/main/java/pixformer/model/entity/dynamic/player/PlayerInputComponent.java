@@ -15,39 +15,38 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private boolean jumpKey;
     private boolean sprintKey;
 
+    // State variable to check if player is sprinting
+    private boolean isSprinting;
+
     /**
      * Max speed limit of a walking player.
      */
-    public static final float BASE_SPEED_LIMIT = 0.01f;
+    public static final float BASE_SPEED_LIMIT = 0.008f;
 
     /**
      * Max speed limit of a sprinting player.
      */
-    public static final float SPRINT_SPEED_LIMIT = 0.02f;
+    public static final float SPRINT_SPEED_LIMIT = 0.013f;
 
     private static final float FALLING_SPEED_LIMIT = 0.014f;
 
-    private static final float SPEED = 0.000_25f;
+    private static final float SPEED = 0.000_3f;
+
+    private static final float SPRINT_SPEED = 0.000_6f;
 
     // Max duration of a jump
-    private static final float MAX_JUMP_DURATION = 0.023f;
+    private static final float MAX_JUMP_DURATION = 0.09f;
 
-    private static final float JUMP_FORCE = 0.0015f;
+    private static final float JUMP_FORCE = 0.0135f;
 
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
-
-    // Force multiplier applied to the jumpforce when jumping on an enemy
-    private static final int ON_ENEMY_JUMP_MULTIPLIER = 7;
 
     // Current jump state
     private float currentPlayerJump = MAX_JUMP_DURATION;
 
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
-
-    // Chronometer for the jump trigger on enemies
-    private final ChronometerImpl onEnemyJumpDelay = new ChronometerImpl();
 
     /**
      * 
@@ -57,7 +56,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         super(entity);
         player = entity;
         abilityDelay.start();
-        onEnemyJumpDelay.start();
     }
 
     /**
@@ -65,7 +63,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(-SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(isSprinting ? -SPRINT_SPEED : -SPEED, 0)));
     }
 
     /**
@@ -73,7 +71,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(isSprinting ? SPRINT_SPEED : SPEED, 0)));
     }
 
     /**
@@ -133,7 +131,11 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
         VelocitySetterFactory.limitFallingSpeed(player, FALLING_SPEED_LIMIT);
 
+        isSprinting = sprintKey;
+
         sprintKey = false;
+
+        System.out.println(player.getVelocity());
     }
 
      /**
@@ -148,7 +150,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * Apply jump force to the player.
      */
     private void forceJump() {
-        player.setVelocity(new Vector2D(player.getVelocity().x(), -JUMP_FORCE * ON_ENEMY_JUMP_MULTIPLIER));
+        player.setVelocity(new Vector2D(player.getVelocity().x(), -JUMP_FORCE));
     }
 
     /**

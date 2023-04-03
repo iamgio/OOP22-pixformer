@@ -11,7 +11,7 @@ import pixformer.model.entity.components.Component;
  */
 public class PhysicsComponent extends Component<MutableEntity> implements Updatable {
 
-    private static final double GRAVITY = 0.000_5; // gravity force
+    private static final double GRAVITY = 0.000_7; // gravity force
     private final Vector2D force;
 
     /**

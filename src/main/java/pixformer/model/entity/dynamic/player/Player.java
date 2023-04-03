@@ -25,9 +25,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
     // This playerIndex
     private final int playerIndex;
 
-    // State variable to check if player is sprinting
-    private boolean isSprinting;
-
     // Current powerup
     private PowerUp powerup = new PowerUp();
 
@@ -143,13 +140,6 @@ public class Player extends AbstractEntity implements DrawableEntity, DefaultRec
 
             powerup = new PowerUp(powerupBehaviour, powerup);
         }
-    }
-
-     /**
-     * @return True if is sprinting.
-     */
-    public boolean isSprinting() {
-        return isSprinting;
     }
 
     /**
