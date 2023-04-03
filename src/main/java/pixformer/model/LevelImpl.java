@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.modelinput.CompleteModelInput;
 
 import java.util.ArrayList;
@@ -126,6 +127,6 @@ public class LevelImpl implements Level {
      * @return a new player entity
      */
     private Entity createPlayer(final int playerIndex, final double startX, final double startY) {
-         return new Player(startX, startY, 1, 1, playerIndex);
+         return new PlayerImpl(startX, startY, playerIndex);
     }
 }

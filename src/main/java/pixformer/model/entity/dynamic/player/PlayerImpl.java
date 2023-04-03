@@ -60,10 +60,9 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     /**
-     * Return this entity player index.
-     * 
-     * @return playerIndex
+     * {@inheritDoc}
      */
+    @Override
     public int getIndex() {        
         return playerIndex;
     }
@@ -196,8 +195,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
      */
     @Override
     public void jump() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Jump'");
+
     }
 
     /**

@@ -6,6 +6,7 @@ import pixformer.model.entity.dynamic.enemy.goomba.Goomba;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
 import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.entity.dynamic.powerup.FlowerPowerupEntity;
 import pixformer.model.entity.dynamic.powerup.MovingPowerupEntity;
 import pixformer.model.entity.powerup.powerups.Mushroom;
@@ -140,7 +141,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     @EntityType("player")
     @Override
     public Player createMainCharacter(final int x, final int y) {
-        final Player player = new Player(x, y);
+        final PlayerImpl player = new PlayerImpl(x, y);
         player.setGraphicsComponent(graphicsComponentFactory.player(player));
         return player;
     }

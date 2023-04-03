@@ -9,6 +9,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,9 +32,9 @@ final class ScoreTest {
 
     @BeforeEach
     void setup() {
-        a = new Player(BASE_X, BASE_Y, 1, 1, 0);
-        b = new Player(this.a.getX() + 1, BASE_Y, 1, 1, 1);
-        c = new Player(this.b.getX() + 1, BASE_Y, 1, 1, 2);
+        a = new PlayerImpl(BASE_X, BASE_Y, 0);
+        b = new PlayerImpl(this.a.getX() + 1, BASE_Y, 1);
+        c = new PlayerImpl(this.b.getX() + 1, BASE_Y, 2);
         this.world.spawnEntity(a);
         this.world.spawnEntity(b);
         this.world.spawnEntity(c);

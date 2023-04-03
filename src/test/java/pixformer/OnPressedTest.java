@@ -12,6 +12,7 @@ import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
 import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
@@ -47,7 +48,7 @@ final class OnPressedTest {
          */
         Set.of(
                 entity,
-                new Player(0, 0, 1, 2, 0),
+                new PlayerImpl(0, 0, 0),
                 factory.createTileBlock(-1, 2),
                 factory.createTileBlock(1, 2),
                 factory.createTileBlock(0, 3)).forEach(world::spawnEntity);
