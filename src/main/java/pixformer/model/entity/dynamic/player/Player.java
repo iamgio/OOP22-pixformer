@@ -13,11 +13,6 @@ public interface Player extends Powerupable, DrawableEntity, DefaultRectangleBou
     int getIndex();
 
     /**
-     * Make the player entity jump.
-     */
-    void jump();
-
-    /**
      * Make the player entity invincible for a while.
      * @param invincibleTime how long the player is invincible.
      */
