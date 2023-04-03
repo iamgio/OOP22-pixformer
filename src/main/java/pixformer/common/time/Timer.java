@@ -22,4 +22,10 @@ public interface Timer {
      */
     long getTimeLeft();
 
+    /**
+     * Update internal timer.
+     * @param dt time passed.
+     */
+    void update(long dt);
+
 }
