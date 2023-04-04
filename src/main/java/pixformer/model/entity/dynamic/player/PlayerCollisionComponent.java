@@ -68,10 +68,6 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
                     invincibility(INVULNERABILITY_TIME);
             }
 
-            if(collisor.entity() instanceof Enemy) {
-                System.out.println((collisor.side().isHorizontal() || collisor.side() == CollisionSide.TOP) + " " + invulnerabilityTimer.hasTimeLeft());
-            }
-
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
                 player.setPowerup(powerup.getPowerupBehaviour());
             }

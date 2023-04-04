@@ -31,9 +31,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
 
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
-        physicsComponent = new FireballPhysicsComponent(this);
-
-        this.setVelocity(getVelocity().copyWithX(speed));
+        physicsComponent = new FireballPhysicsComponent(this, speed);
         this.shooter = entity;
     }
 
