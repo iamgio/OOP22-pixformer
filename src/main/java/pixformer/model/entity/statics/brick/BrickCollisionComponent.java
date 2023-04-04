@@ -33,7 +33,7 @@ public class BrickCollisionComponent extends CollisionComponent {
                 .forEach(collision -> {
                     if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()
                             && ((Player) collision.entity()).getPowerupBehaviour().isPresent()) {
-                        Player entity = (Player) collision.entity();
+                        final Player entity = (Player) collision.entity();
                         entity.setVelocity(entity.getVelocity().copyWithY(Math.abs(entity.getVelocity().y()) / 2));
                         super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
                     }
