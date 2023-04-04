@@ -20,7 +20,7 @@
     -fx-alignment: center;
 }
 
-.subtitle, .levels-text, .players-text, .players-amount {
+.subtitle, .levels-text, .players-text, .players-amount, .score-title {
     -fx-font-size: 25;
     -fx-alignment: center;
 }
@@ -28,6 +28,18 @@
 .subtitle {
     -fx-opacity: .7;
     -fx-text-alignment: center;
+}
+
+.score-title {
+    -fx-padding: 0 0 5 0;
+}
+
+.score-entry {
+    -fx-opacity: .85;
+}
+
+.score-entry {
+    -fx-font-size: 20;
 }
 
 .players-control {
@@ -61,4 +73,9 @@
 
 .levels-box .button:hover {
     -fx-background-color: rgba(255, 255, 255, .2);
+}
+
+.score {
+    -fx-padding: 20 0 0 20;
+    -fx-spacing: 4;
 }
