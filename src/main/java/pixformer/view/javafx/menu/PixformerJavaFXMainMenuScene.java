@@ -65,6 +65,9 @@ public final class PixformerJavaFXMainMenuScene extends JavaFXScene implements M
         playersSelector.prefWidthProperty().bind(mainBox.prefWidthProperty());
         this.playersAmount.bind(playersSelector.playersAmountProperty());
         mainBox.getChildren().add(playersSelector);
+
+        final var results = new MainMenuScoreResults(controller);
+        root.getChildren().add(results);
     }
 
     /**
