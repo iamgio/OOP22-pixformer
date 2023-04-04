@@ -16,14 +16,12 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.score.Score;
 import pixformer.view.View;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -137,7 +135,7 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public int getPlayerCoinsByIndex(int playerIndex) {
+    public int getPlayerCoinsByIndex(final int playerIndex) {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
             return level.getWorld().getScoreManager().getScoreByIndex(playerIndex).coinsNumber();
@@ -150,7 +148,7 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public List<Integer> getIndexedLeaderboard() {
-        if(this.levelManager.get().getCurrentLevel().isPresent()) {
+        if (this.levelManager.get().getCurrentLevel().isPresent()) {
             return this.levelManager.get().getCurrentLevel().get().getWorld().getIndexLeaderboard();
         }
         return List.of();

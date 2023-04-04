@@ -145,6 +145,9 @@ public class WorldImpl implements World {
         return this.collisionManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Integer> getIndexLeaderboard() {
         return this.lazyUserControlledEntity.stream()

@@ -2,7 +2,6 @@ package pixformer.model;
 
 import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.modelinput.CompleteModelInput;
 
