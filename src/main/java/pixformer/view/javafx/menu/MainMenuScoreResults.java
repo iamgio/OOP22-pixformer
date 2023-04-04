@@ -6,7 +6,7 @@ import pixformer.controller.Controller;
 import pixformer.view.engine.internationalization.Lang;
 
 /**
- * Player scoreboard for the main menu
+ * Player scoreboard for the main menu.
  */
 final class MainMenuScoreResults extends VBox {
 
