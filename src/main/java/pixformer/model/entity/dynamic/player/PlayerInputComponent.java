@@ -12,7 +12,6 @@ import pixformer.model.modelinput.CompleteModelInput;
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
     private final PlayerImpl player;
-    private boolean jumpKey;
     private boolean sprintKey;
 
     // State variable to check if player is sprinting
@@ -21,32 +20,33 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     /**
      * Max speed limit of a walking player.
      */
-    public static final float BASE_SPEED_LIMIT = 0.008f;
+    public static final double BASE_SPEED_LIMIT = 0.008;
 
     /**
      * Max speed limit of a sprinting player.
      */
-    public static final float SPRINT_SPEED_LIMIT = 0.013f;
+    public static final double SPRINT_SPEED_LIMIT = 0.013;
 
-    private static final float FALLING_SPEED_LIMIT = 0.014f;
+    private static final double FALLING_SPEED_LIMIT = 0.014;
 
-    private static final float SPEED = 0.000_3f;
+    private static final double SPEED = 0.000_3;
 
-    private static final float SPRINT_SPEED = 0.000_6f;
+    private static final double SPRINT_SPEED = 0.000_6;
 
     // Max duration of a jump
-    private static final float MAX_JUMP_DURATION = 0.09f;
+    private static final double INITIAL_JUMP_FORCE = -0.012;
 
-    private static final float JUMP_FORCE = 0.0135f;
+    private static final double REVERSE_JUMP_FORCE = 0.000_25;
 
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
 
-    // Current jump state
-    private float currentPlayerJump = MAX_JUMP_DURATION;
-
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
+
+
+    private double currentJumpForce;
+
 
     /**
      * 
@@ -56,6 +56,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
         super(entity);
         player = entity;
         abilityDelay.start();
+        resetJumping();
     }
 
     /**
@@ -92,11 +93,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
-        jumpKey = true;
-
-        if (currentPlayerJump > 0) {
-            forceJump();
-            currentPlayerJump -= JUMP_FORCE;
+        if (super.getEntity().getVelocity().y() <= 0) {
+            currentJumpForce += REVERSE_JUMP_FORCE;
+            forceJump(currentJumpForce);
         }
     }
 
@@ -114,20 +113,11 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void update(final World world) {
         // Jump management
-        if (!jumpKey && isJumping()
-            || !player.isOnGround() && !isJumping()
-            || player.isTouchingAbove()) {
-            stopJumping();
+        if (player.isOnGround() || player.isTouchingAbove()) {
+            this.resetJumping();
         }
-
-        if (player.isOnGround()) {
-            resetJumping();
-        }
-
-        jumpKey = false;
 
         // Player speed limit and sprint management
-
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
         VelocitySetterFactory.limitFallingSpeed(player, FALLING_SPEED_LIMIT);
 
@@ -141,27 +131,21 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping otherwise False.
      */
     public boolean isJumping() {
-        return currentPlayerJump < MAX_JUMP_DURATION;
+        return player.getVelocity().y() > 0;
     }
 
     /**
      * Apply jump force to the player.
+     * @param force jump force to be applied.
      */
-    private void forceJump() {
-        player.setVelocity(new Vector2D(player.getVelocity().x(), -JUMP_FORCE));
-    }
-
-    /**
-     * Stop player on jumping further.
-     */
-    private void stopJumping() {
-        this.currentPlayerJump = 0;
+    private void forceJump(final double force) {
+        player.setVelocity(player.getVelocity().copyWithY(force));
     }
 
     /**
      * Reset the "jumpCounter" variable.
      */
     private void resetJumping() {
-        this.currentPlayerJump = MAX_JUMP_DURATION;
+        this.currentJumpForce = INITIAL_JUMP_FORCE;
     }
 }
