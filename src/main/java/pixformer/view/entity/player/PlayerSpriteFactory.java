@@ -46,7 +46,7 @@ public class PlayerSpriteFactory {
      * @return animations for a player holding Fire-flower powerup.
      */
     public PlayerAnimation getFireFlowerPlayerAnimation() {
-        
+
         final List<String> idleFramesPaths = List.of(BASE_PATH + "powerups/fireflower/mario_flower_idle.png");
         final List<String> walkFramesPaths = List.of(BASE_PATH + "powerups/fireflower/mario_flower_walk_1.png",
                                                     BASE_PATH + "powerups/fireflower/mario_flower_walk_2.png",
