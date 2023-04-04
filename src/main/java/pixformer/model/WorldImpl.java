@@ -150,6 +150,10 @@ public class WorldImpl implements World {
      */
     @Override
     public List<Integer> getIndexLeaderboard() {
+        if (this.lazyUserControlledEntity == null) {
+            return List.of();
+        }
+
         return this.lazyUserControlledEntity.stream()
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
