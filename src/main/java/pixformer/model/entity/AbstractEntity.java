@@ -3,14 +3,19 @@ package pixformer.model.entity;
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.SolidEntity;
+import pixformer.model.sound.SoundEvent;
+import pixformer.model.sound.Soundable;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * The base class for a mutable entity.
  */
-public abstract class AbstractEntity implements MutableEntity {
+public abstract class AbstractEntity implements MutableEntity, Soundable {
 
     private World world;
     private double x;
@@ -18,6 +23,7 @@ public abstract class AbstractEntity implements MutableEntity {
     private double width;
     private double height;
     private Vector2D velocity;
+    private final List<SoundEvent> soundList = new LinkedList<>();
 
     /**
      * Constructor for the AbstractEntity.
@@ -163,5 +169,20 @@ public abstract class AbstractEntity implements MutableEntity {
                 world.queueEntityDrop(this);
             }
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addSound(final SoundEvent newSound) {
+        this.soundList.add(newSound);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<SoundEvent> getSounds() {
+        return this.soundList;
     }
 }
