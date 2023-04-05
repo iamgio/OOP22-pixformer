@@ -132,7 +132,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         isSprinting = sprintKey;
 
-        System.out.println(isJumping());
+        // System.out.println(isJumping());
 
         sprintKey = false;
         jumpKey = false;
