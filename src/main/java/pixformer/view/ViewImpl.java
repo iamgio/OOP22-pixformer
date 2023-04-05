@@ -7,6 +7,7 @@ import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
+import pixformer.model.sound.SoundEvent;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -18,8 +19,14 @@ import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
 import pixformer.view.engine.internationalization.Lang;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import javax.xml.namespace.QName;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * Implementation of the standard game view.
@@ -124,6 +131,8 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
                     }));
         }
 
+        playSounds(getMediaPlayers(this.controller.getSounds()));
+
         this.updateTextRenderer();
 
         scene.render();
@@ -154,5 +163,26 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;
+    }
+
+    /**
+     * Transform a list of SoundEvent to a list of MediaPlayers ready to be played
+     * @param soundList list of SoundEvents
+     * @return a list of playable MediaPlayers
+     */
+    private List<MediaPlayer> getMediaPlayers(final List<SoundEvent> soundList) {
+        return soundList.stream()
+                        .map(soundEvent -> new Media(soundEvent.audioFilePath()))
+                        .map(sound -> new MediaPlayer(sound))
+                        .toList();
+    }
+
+    /**
+     * Play a list of MediaPlayers.
+     * @param mediaPlayers the list of MediaPlayers to be played.
+     */
+    private void playSounds(final List<MediaPlayer> mediaPlayers) {
+        mediaPlayers.stream()
+                    .forEach(x -> x.play());
     }
 }
