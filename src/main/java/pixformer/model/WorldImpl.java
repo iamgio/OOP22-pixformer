@@ -157,7 +157,7 @@ public class WorldImpl implements World {
         return this.lazyUserControlledEntity.stream()
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
-                .sorted((a, b) -> scoreManager.getScore(a).points() - scoreManager.getScore(b).points())
+                .sorted((a, b) -> scoreManager.getScore(b).points() - scoreManager.getScore(a).points())
                 .map(Player::getIndex).toList();
     }
 
