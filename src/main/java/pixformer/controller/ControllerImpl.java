@@ -16,6 +16,7 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.sound.SoundEvent;
 import pixformer.view.View;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
@@ -222,5 +223,25 @@ public final class ControllerImpl implements Controller {
         } catch (IOException e) {
             throw new IllegalStateException("Could not get level data from file", e);
         }
+    }
+
+     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SoundEvent> getSounds() {
+        Optional<Level> level = this.getLevelManager()
+                                .getCurrentLevel();
+        if (level.isPresent()) {
+            return level.get()
+                .getWorld()
+                .getEntities()
+                .stream()
+                .map(entity -> entity.getSounds())
+                .flatMap(List::stream)
+                .toList();
+        }
+        
+        return List.of();
     }
 }
