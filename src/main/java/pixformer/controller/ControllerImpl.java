@@ -123,7 +123,7 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public int getPlayerPointsByIndex(final int playerIndex) {
+    public Integer getPlayerPointsByIndex(final int playerIndex) {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
             return level.getWorld().getScoreManager().getScoreByIndex(playerIndex).points();
@@ -135,7 +135,7 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public int getPlayerCoinsByIndex(final int playerIndex) {
+    public Integer getPlayerCoinsByIndex(final int playerIndex) {
         final Level level = this.levelManager.get().getCurrentLevel().orElse(null);
         if (level != null) {
             return level.getWorld().getScoreManager().getScoreByIndex(playerIndex).coinsNumber();
