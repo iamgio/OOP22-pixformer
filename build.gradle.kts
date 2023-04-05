@@ -26,7 +26,8 @@ val javaFXModules = listOf(
         "base",
         "controls",
         "fxml",
-        "graphics"
+        "graphics",
+        "media"
 )
 
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
