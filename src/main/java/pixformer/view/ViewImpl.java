@@ -136,11 +136,11 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         this.infoLabel.setText("");
         final var leaderboard = this.controller.getIndexedLeaderboard();
         final Lang lang = Lang.getInstance();
-        for (var i : leaderboard) {
-            String text = lang.get("score.label");
-            text = text.replace("{i}", i + 1 + "   ");
-            text = text.replace("{p}", controller.getPlayerPointsByIndex(i) + "  ");
-            text = text.replace("{c}", controller.getPlayerCoinsByIndex(i) + "");
+        for (final var i : leaderboard) {
+            final String text = lang.get("score.label")
+                    .replace("{i}", Integer.toString(i + 1))
+                    .replace("{p}", controller.getPlayerPointsByIndex(i).toString())
+                    .replace("{c}", controller.getPlayerCoinsByIndex(i).toString());
             this.infoLabel.setText(text);
         }
     }
