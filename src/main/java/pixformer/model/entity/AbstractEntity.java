@@ -4,7 +4,6 @@ import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.SolidEntity;
 import pixformer.model.sound.SoundEvent;
-import pixformer.model.sound.Soundable;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
@@ -15,7 +14,7 @@ import java.util.Optional;
 /**
  * The base class for a mutable entity.
  */
-public abstract class AbstractEntity implements MutableEntity, Soundable {
+public abstract class AbstractEntity implements MutableEntity {
 
     private World world;
     private double x;
