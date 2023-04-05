@@ -46,13 +46,13 @@ public interface Controller {
      * @param playerIndex index of the player
      * @return the points of the player with a certain index
      */
-    int getPlayerPointsByIndex(int playerIndex);
+    Integer getPlayerPointsByIndex(int playerIndex);
 
     /**
      * @param playerIndex index of the player
      * @return the coins of the player with a certain index
      */
-    int getPlayerCoinsByIndex(int playerIndex);
+    Integer getPlayerCoinsByIndex(int playerIndex);
 
     /**
      * @return the score-based sorted index list of all the player
