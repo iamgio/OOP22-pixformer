@@ -131,7 +131,7 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
                     }));
         }
 
-        playSounds(getMediaPlayers(this.controller.getSounds()));
+        this.scene.get().playSounds(controller.getSounds());
 
         this.updateTextRenderer();
 
@@ -163,26 +163,5 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
         controllerCommand = Optional.empty();
         return tmp;
-    }
-
-    /**
-     * Transform a list of SoundEvent to a list of MediaPlayers ready to be played
-     * @param soundList list of SoundEvents
-     * @return a list of playable MediaPlayers
-     */
-    private List<MediaPlayer> getMediaPlayers(final List<SoundEvent> soundList) {
-        return soundList.stream()
-                        .map(soundEvent -> new Media(soundEvent.audioFilePath()))
-                        .map(sound -> new MediaPlayer(sound))
-                        .toList();
-    }
-
-    /**
-     * Play a list of MediaPlayers.
-     * @param mediaPlayers the list of MediaPlayers to be played.
-     */
-    private void playSounds(final List<MediaPlayer> mediaPlayers) {
-        mediaPlayers.stream()
-                    .forEach(x -> x.play());
     }
 }

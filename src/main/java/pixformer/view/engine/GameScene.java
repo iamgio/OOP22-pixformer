@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+import pixformer.model.sound.SoundEvent;
+
 /**
  * A scene of the game that contains its drawable content.
  */
@@ -87,4 +89,9 @@ public abstract class GameScene {
     protected List<BiConsumer<Double, Double>> getOnResize() {
         return this.onResize;
     }
+
+    /**
+     * @param sounds list of sounds to be played.
+     */
+    public abstract void playSounds(List<SoundEvent> sounds);
 }

@@ -5,16 +5,20 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.SimpleWritableWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.common.wrap.WritableWrapper;
+import pixformer.model.sound.SoundEvent;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.Graphics;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.SceneRenderer;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -154,5 +158,16 @@ public class JavaFXScene extends GameScene {
      */
     public Optional<SceneInput<MouseButton>> getMouseInput() {
         return Optional.empty();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void playSounds(List<SoundEvent> sounds) {
+        sounds.stream()
+                        .map(soundEvent -> new Media(soundEvent.audioFilePath()))
+                        .map(media -> new MediaPlayer(media))
+                        .forEach(x -> x.play());
     }
 }
