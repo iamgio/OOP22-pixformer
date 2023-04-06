@@ -1,7 +1,8 @@
-package pixformer.model.entity.collision;
+package pixformer.model.entity.statics.pole;
 
+import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Pole;
 
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class PoleCollisionComponent extends CollisionComponent {
         collisions.stream()
                 .map(Collision::entity)
                 .filter(Player.class::isInstance)
-                .map(entity -> (Player) entity).forEach(player -> {
+                .map(Player.class::cast).forEach(player -> {
                     if (player.getWorld().isPresent()) {
                         player.setVelocity(player.getVelocity().copyWithX(0));
                         player.setVelocity(player.getVelocity().y() > 0

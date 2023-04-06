@@ -1,36 +1,36 @@
-package pixformer.model.entity.statics;
+package pixformer.model.entity.statics.brick;
 
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.GraphicsComponentRetriever;
-import pixformer.model.entity.collision.CoinCollisionComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
+import pixformer.model.entity.collision.SolidEntity;
 
 import java.util.Optional;
 
 /**
- * In-game coin, a simple entity that give points to the player.
+ * Brick block, common brick block which can be destroyed from the bottom.
  */
-public final class Coin extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, DrawableEntity  {
+public final class Brick extends AbstractEntity implements DefaultRectangleBoundingBoxEntity, SolidEntity, DrawableEntity {
 
-    private static final int HEIGHT = 1;
-    private static final int WIDTH = 1;
-
+    private static final double WIDTH = 1;
+    private static final double HEIGHT = 1;
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
 
     /**
-     * Simple constructor for a coin in the game.
+     * Simple constructor of the Block.
+     * 
      * @param x X coordinate
      * @param y Y coordinate
-     * @param graphicsComponent retriever for the graphics component for the entity
+     * @param graphicsComponent graphics component of the brick
      */
-    public Coin(final int x, final int y, final GraphicsComponentRetriever graphicsComponent) {
+    public Brick(final double x, final double y, final GraphicsComponentRetriever graphicsComponent) {
         super(x, y, WIDTH, HEIGHT);
+        this.collisionComponent = new BrickCollisionComponent(this);
         this.graphicsComponent = graphicsComponent.apply(this);
-        this.collisionComponent = new CoinCollisionComponent(this);
     }
 
     /**

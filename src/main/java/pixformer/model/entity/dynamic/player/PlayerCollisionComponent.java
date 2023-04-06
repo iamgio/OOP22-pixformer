@@ -1,7 +1,9 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.common.time.ChronometerImpl;
+import pixformer.common.time.Timer;
+import pixformer.common.time.TimerImpl;
 import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
@@ -14,20 +16,21 @@ import java.util.Set;
 public class PlayerCollisionComponent extends SolidCollisionComponent {
     private static final long INVULNERABILITY_TIME = 3000;
     private static final float BIG_PLAYER_SIZE_MULTIPLIER = 2;
-    private static final double PLAYER_FRICTION = 0.978;
+    private static final double PLAYER_FRICTION = 0.96;
 
-    private final Player player;
+    private final PlayerImpl player;
     private final double baseHeight;
 
     private boolean isOnGround;
+    private boolean isTouchingAbove;
 
-    private final ChronometerImpl invulnerabilityChronometer = new ChronometerImpl();
+    private final Timer invulnerabilityTimer = new TimerImpl();
 
     /**
      * 
      * @param player Player entity whose collisions will be managed.
      */
-    protected PlayerCollisionComponent(final Player player) {
+    protected PlayerCollisionComponent(final PlayerImpl player) {
         super(player, PLAYER_FRICTION);
         this.player = player;
         this.baseHeight = player.getHeight();
@@ -41,29 +44,28 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
     }
 
     /**
+     * @return true if player is touching ground, other false.
+     */
+    public boolean isTouchingAbove() {
+        return isTouchingAbove;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         super.update(dt, collisions);
 
-        isOnGround = false;
+        isTouchingAbove = isCollidingCeiling(collisions);
+        isOnGround = isCollidingGround(collisions);
 
         for (final var collisor : collisions) {
-
-            if (isCollidingGround(collisions)) {
-                isOnGround = true;
-            }
-
             if (collisor.entity() instanceof Enemy 
-                && collisor.side().isHorizontal()
-                && (invulnerabilityChronometer.getTimeElapsed() == 0
-                    || invulnerabilityChronometer.hasElapsed(INVULNERABILITY_TIME))) {
-
-                    this.player.damaged();
-
-                    invulnerabilityChronometer.reset();
-                    invulnerabilityChronometer.start();
+                && (collisor.side().isHorizontal() || collisor.side() == CollisionSide.TOP)
+                && !invulnerabilityTimer.hasTimeLeft()) {
+                    player.damaged();
+                    invincibility(INVULNERABILITY_TIME);
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
@@ -71,6 +73,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
         }
 
+        invulnerabilityTimer.update(Double.valueOf(dt).longValue());
         checkPlayerSize();
     }
 
@@ -82,5 +85,13 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
         if (previousHeight != player.getHeight()) {
             player.setY(player.getY() + previousHeight - player.getHeight());
         }
+    }
+
+    /**
+     * Set a time during while the player is invincible.
+     * @param time how long the player is invincible.
+     */
+    public void invincibility(final long time) {
+        invulnerabilityTimer.start(time);
     }
 }

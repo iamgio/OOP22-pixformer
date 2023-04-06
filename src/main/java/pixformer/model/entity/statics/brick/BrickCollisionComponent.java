@@ -1,6 +1,9 @@
-package pixformer.model.entity.collision;
+package pixformer.model.entity.statics.brick;
 
 import pixformer.model.entity.MutableEntity;
+import pixformer.model.entity.collision.Collision;
+import pixformer.model.entity.collision.CollisionComponent;
+import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.Set;
@@ -30,8 +33,8 @@ public class BrickCollisionComponent extends CollisionComponent {
                 .forEach(collision -> {
                     if (collision.side() == CollisionSide.BOTTOM && super.getEntity().getWorld().isPresent()
                             && ((Player) collision.entity()).getPowerupBehaviour().isPresent()) {
-                        Player entity = (Player) collision.entity();
-                        entity.setVelocity(entity.getVelocity().copyWithY(entity.getVelocity().y() / 2));
+                        final Player entity = (Player) collision.entity();
+                        entity.setVelocity(entity.getVelocity().copyWithY(Math.abs(entity.getVelocity().y()) / 2));
                         super.getEntity().getWorld().get().queueEntityDrop(this.getEntity());
                     }
         });

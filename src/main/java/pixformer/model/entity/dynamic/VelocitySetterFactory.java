@@ -14,7 +14,7 @@ public final class VelocitySetterFactory {
     /**
      * Method to limit the speed of the entity.
      *
-     * @param player entity to apply the limit
+     * @param entity entity to apply the limit
      * @param speedLimit limit of the speed
      */
     public static void limitSpeed(final MutableEntity entity, final double speedLimit) {
@@ -27,7 +27,7 @@ public final class VelocitySetterFactory {
     /**
      * Method to limit the vertical speed of the entity.
      *
-     * @param player entity to apply the limit
+     * @param entity entity to apply the limit
      * @param speedLimit limit of the speed
      */
     public static void limitFallingSpeed(final MutableEntity entity, final double speedLimit) {

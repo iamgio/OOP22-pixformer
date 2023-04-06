@@ -11,53 +11,54 @@ import pixformer.model.modelinput.CompleteModelInput;
  * Implementation of InputComponent for a Player entity.
  */
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
-    private final Player player;
-    private boolean jumpKey;
+    private final PlayerImpl player;
     private boolean sprintKey;
+    private boolean jumpKey;
+
+    // State variable to check if player is sprinting
+    private boolean isSprinting;
 
     /**
      * Max speed limit of a walking player.
      */
-    public static final float BASE_SPEED_LIMIT = 0.01f;
+    public static final double BASE_SPEED_LIMIT = 0.008;
 
     /**
      * Max speed limit of a sprinting player.
      */
-    public static final float SPRINT_SPEED_LIMIT = 0.02f;
+    public static final double SPRINT_SPEED_LIMIT = 0.013;
 
-    private static final float FALLING_SPEED_LIMIT = 0.014f;
+    private static final double FALLING_SPEED_LIMIT = 0.014;
 
-    private static final float SPEED = 0.000_25f;
+    private static final double SPEED = 0.000_3;
+
+    private static final double SPRINT_SPEED = 0.000_6;
 
     // Max duration of a jump
-    private static final float MAX_JUMP_DURATION = 0.023f;
+    private static final double INITIAL_JUMP_FORCE = -0.012;
 
-    private static final float JUMP_FORCE = 0.0015f;
+    private static final double REVERSE_JUMP_FORCE = 0.000_25;
 
     // Ability cooldown in milliseconds
     private static final long ABILITY_COOLDOWN = 500;
 
-    // Force multiplier applied to the jumpforce when jumping on an enemy
-    private static final int ON_ENEMY_JUMP_MULTIPLIER = 7;
-
-    // Current jump state
-    private float currentPlayerJump = MAX_JUMP_DURATION;
-
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
 
-    // Chronometer for the jump trigger on enemies
-    private final ChronometerImpl onEnemyJumpDelay = new ChronometerImpl();
+    private double currentJumpForce;
+
+    private boolean stopJumping;
+
 
     /**
      * 
      * @param entity Entity associated with current component
      */
-    protected PlayerInputComponent(final Player entity) {
+    protected PlayerInputComponent(final PlayerImpl entity) {
         super(entity);
         player = entity;
         abilityDelay.start();
-        onEnemyJumpDelay.start();
+        resetJumping();
     }
 
     /**
@@ -65,7 +66,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void left() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(-SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(isSprinting ? -SPRINT_SPEED : -SPEED, 0)));
     }
 
     /**
@@ -73,7 +74,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void right() {
-        player.setVelocity(player.getVelocity().sum(new Vector2D(SPEED, 0)));
+        player.setVelocity(player.getVelocity().sum(new Vector2D(isSprinting ? SPRINT_SPEED : SPEED, 0)));
     }
 
     /**
@@ -94,12 +95,12 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
-        jumpKey = true;
-
-        if (currentPlayerJump > 0) {
-            forceJump();
-            currentPlayerJump -= JUMP_FORCE;
+        if (super.getEntity().getVelocity().y() <= 0 && !stopJumping) {
+            currentJumpForce += REVERSE_JUMP_FORCE;
+            forceJump(currentJumpForce);
         }
+
+        jumpKey = true;
     }
 
     /**
@@ -116,26 +117,25 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void update(final World world) {
         // Jump management
-        if (!jumpKey && isJumping()) {
-            stopJumping();
+        if (player.isOnGround() 
+            || player.isTouchingAbove()) {
+            this.resetJumping();
         }
 
-        if (!player.isOnGround() && !isJumping()) {
-            stopJumping();
+        if (isJumping() && !jumpKey) {
+            stopJumping = true;
         }
-
-        if (player.isOnGround()) {
-            resetJumping();
-        }
-
-        jumpKey = false;
 
         // Player speed limit and sprint management
-
         VelocitySetterFactory.limitSpeed(player, sprintKey ? SPRINT_SPEED_LIMIT : BASE_SPEED_LIMIT);
         VelocitySetterFactory.limitFallingSpeed(player, FALLING_SPEED_LIMIT);
 
+        isSprinting = sprintKey;
+
+        // System.out.println(isJumping());
+
         sprintKey = false;
+        jumpKey = false;
     }
 
      /**
@@ -143,27 +143,22 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping otherwise False.
      */
     public boolean isJumping() {
-        return currentPlayerJump < MAX_JUMP_DURATION;
+        return player.getVelocity().y() < 0;
     }
 
     /**
      * Apply jump force to the player.
+     * @param force jump force to be applied.
      */
-    private void forceJump() {
-        player.setVelocity(new Vector2D(player.getVelocity().x(), -JUMP_FORCE * ON_ENEMY_JUMP_MULTIPLIER));
-    }
-
-    /**
-     * Stop player on jumping further.
-     */
-    private void stopJumping() {
-        this.currentPlayerJump = 0;
+    private void forceJump(final double force) {
+        player.setVelocity(player.getVelocity().copyWithY(force));
     }
 
     /**
      * Reset the "jumpCounter" variable.
      */
     private void resetJumping() {
-        this.currentPlayerJump = MAX_JUMP_DURATION;
+        this.currentJumpForce = INITIAL_JUMP_FORCE;
+        stopJumping = false;
     }
 }

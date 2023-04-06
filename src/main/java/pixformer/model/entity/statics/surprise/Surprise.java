@@ -1,4 +1,4 @@
-package pixformer.model.entity.statics;
+package pixformer.model.entity.statics.surprise;
 
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
@@ -9,7 +9,6 @@ import pixformer.model.entity.PowerUpFactory;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.entity.collision.SurpriseCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
 
 import java.util.Optional;

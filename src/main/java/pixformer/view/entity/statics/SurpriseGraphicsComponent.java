@@ -2,7 +2,7 @@ package pixformer.view.entity.statics;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.statics.Surprise;
+import pixformer.model.entity.statics.surprise.Surprise;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;

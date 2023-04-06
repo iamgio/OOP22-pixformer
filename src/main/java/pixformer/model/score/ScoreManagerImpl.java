@@ -2,7 +2,7 @@ package pixformer.model.score;
 
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Coin;
+import pixformer.model.entity.statics.coin.Coin;
 import pixformer.model.event.EventSubscriber;
 
 import java.util.HashMap;

@@ -96,6 +96,7 @@ public class JavaFXGameLoopManager implements GameLoopManager {
     public void stop() {
         if (currentTimer != null) {
             currentTimer.stop();
+            this.setLastFrameTime(0);
         }
     }
 

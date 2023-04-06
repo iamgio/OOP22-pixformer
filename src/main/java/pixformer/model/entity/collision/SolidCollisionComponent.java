@@ -84,9 +84,9 @@ public class SolidCollisionComponent extends CollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         final MutableEntity entity = super.getEntity();
-        if (this.isCollidingGround(collisions)) {
-            entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * this.friction));
-        }
+
+        entity.setVelocity(entity.getVelocity().copyWithX(entity.getVelocity().x() * this.friction));
+
         // Ground collision
         if (entity.getVelocity().y() > 0 && isCollidingGround(collisions)) {
             entity.setVelocity(entity.getVelocity().copyWithY(0));

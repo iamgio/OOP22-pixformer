@@ -5,7 +5,7 @@ import pixformer.model.World;
 import pixformer.model.entity.collision.Collision;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
-import pixformer.model.entity.statics.Coin;
+import pixformer.model.entity.statics.coin.Coin;
 
 import java.util.Set;
 
@@ -15,6 +15,7 @@ import java.util.Set;
 public class FireballCollisionComponent extends SolidCollisionComponent {
 
     static final long ALIVE_TIME = 3000;
+    private static final int FIREBALL_FRICTION = 1;
 
     private final Fireball fireball;
     private final World world;
@@ -29,7 +30,7 @@ public class FireballCollisionComponent extends SolidCollisionComponent {
      * @param world Instance of current world spawn.
      */
     protected FireballCollisionComponent(final Fireball fireball, final World world) {
-        super(fireball, 0);
+        super(fireball, FIREBALL_FRICTION);
         this.fireball = fireball;
         this.world = world;
 
