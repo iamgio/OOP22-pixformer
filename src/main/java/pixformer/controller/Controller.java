@@ -97,5 +97,5 @@ public interface Controller {
     /**
      * @return a list of SoundEvent from the game.
      */
-    List<SoundEvent> getSounds();
+    List<SoundEvent> getSounds(Set<Entity> entities);
 }

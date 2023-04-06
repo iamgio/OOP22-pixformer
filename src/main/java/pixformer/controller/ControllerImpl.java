@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The default implementation of a {@link Controller}.
@@ -229,19 +230,11 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public List<SoundEvent> getSounds() {
-        Optional<Level> level = this.getLevelManager()
-                                .getCurrentLevel();
-        if (level.isPresent()) {
-            return level.get()
-                .getWorld()
-                .getEntities()
-                .stream()
-                .map(entity -> entity.getSounds())
-                .flatMap(List::stream)
-                .toList();
-        }
-        
-        return List.of();
+    public List<SoundEvent> getSounds(final Set<Entity> entities) {
+        return entities.stream()
+                    .filter(x -> x.getSoundComponent().isPresent())
+                    .map(x -> x.getSoundComponent().get().getSounds())
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList());
     }
 }
