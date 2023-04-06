@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.model.sound.SoundComponent;
 
 import java.util.Optional;
 
@@ -87,6 +88,13 @@ public interface Entity extends Updatable {
      * @return the collision component of the entity
      */
     default Optional<CollisionComponent> getCollisionComponent() {
+        return Optional.empty();
+    }
+
+    /**
+     * @return the collision component of the entity
+     */
+    default Optional<SoundComponent> getSoundComponent() {
         return Optional.empty();
     }
 
