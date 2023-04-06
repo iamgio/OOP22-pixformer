@@ -7,14 +7,13 @@ import pixformer.model.entity.collision.BoundingBox;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
-import pixformer.model.sound.Soundable;
 
 import java.util.Optional;
 
 /**
  * In-Game entity.
  */
-public interface Entity extends Updatable, Soundable {
+public interface Entity extends Updatable {
 
     /**
      * @return the world this entity lives in, if it exists

@@ -22,7 +22,6 @@ public abstract class AbstractEntity implements MutableEntity {
     private double width;
     private double height;
     private Vector2D velocity;
-    private final List<SoundEvent> soundList = new LinkedList<>();
 
     /**
      * Constructor for the AbstractEntity.
@@ -168,20 +167,5 @@ public abstract class AbstractEntity implements MutableEntity {
                 world.queueEntityDrop(this);
             }
         });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addSound(final SoundEvent newSound) {
-        this.soundList.add(newSound);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<SoundEvent> getSounds() {
-        return this.soundList;
     }
 }
