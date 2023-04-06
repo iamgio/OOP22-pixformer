@@ -94,8 +94,10 @@ public interface Controller {
      */
     Level getLevelFromFile(File levelFile);
 
+
     /**
-     * @return a list of SoundEvent from the game.
+     * @param world game environment from which we want to take the sounds.
+     * @return a list of sound from the world.
      */
-    List<SoundEvent> getSounds(Set<Entity> entities);
+    List<SoundEvent> getSounds();
 }

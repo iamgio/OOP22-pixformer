@@ -230,11 +230,19 @@ public final class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
-    public List<SoundEvent> getSounds(final Set<Entity> entities) {
-        return entities.stream()
-                    .filter(x -> x.getSoundComponent().isPresent())
-                    .map(x -> x.getSoundComponent().get().getSounds())
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
+    public List<SoundEvent> getSounds() {
+        Optional<Level> level = levelManager.get().getCurrentLevel();
+        if (level.isPresent()) {
+            return level.get()
+                        .getWorld()
+                        .getEntities()
+                        .stream()
+                        .filter(entity -> entity.getSoundComponent().isPresent())
+                        .map(entity -> entity.getSoundComponent().get().getSounds())
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList());
+        }
+
+        return List.of();
     }
 }
