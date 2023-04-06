@@ -69,6 +69,7 @@ final class OnPressedTest {
         final World world = createPrisonAndFallingPlayer(koopa);
         assertTrue(world.getEntities().stream().anyMatch(WalkingKoopa.class::isInstance));
         world.update(DT);
+        world.update(DT);
         assertTrue(world.getEntities().stream().anyMatch(TurtleKoopa.class::isInstance));
     }
 }
