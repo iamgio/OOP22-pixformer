@@ -70,6 +70,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
                 player.setPowerup(powerup.getPowerupBehaviour());
+                powerup.consume();
             }
         }
 

@@ -11,4 +11,14 @@ public interface PhysicalPowerup {
      * @return the `PowerupBehaviour` instance that describes the behavior of the powerup contained within the physical object.
      */
     PowerupBehaviour getPowerupBehaviour();
+
+    /**
+     * @return whether this powerup has been used once
+     */
+    boolean isConsumed();
+
+    /**
+     * Marks this powerup as consumed.
+     */
+    void consume();
 }

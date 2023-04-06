@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.CollisionReactor;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.reactor.SingleCollisionReactor;
+import pixformer.model.entity.powerup.PhysicalPowerup;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -33,6 +34,8 @@ public final class PowerupCollisionComponent extends SolidCollisionComponent {
     @Override
     public void update(final double dt, final Set<Collision> collisions) {
         super.update(dt, collisions);
-        collisionReactor.react(collisions);
+        if (getEntity() instanceof PhysicalPowerup powerup && powerup.isConsumed()) {
+            collisionReactor.react(collisions);
+        }
     }
 }
