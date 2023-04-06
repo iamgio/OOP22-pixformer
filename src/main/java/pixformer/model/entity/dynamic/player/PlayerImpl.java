@@ -8,6 +8,7 @@ import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.model.sound.SoundComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 
 import java.util.Optional;
@@ -26,9 +27,10 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     // Player components
     private PlayerGraphicsComponent graphicsComponent;
+    private PlayerInputComponent inputComponent;
     private final PlayerPhysicsComponent physicsComponent;
     private final PlayerCollisionComponent collisionComponent;
-    private PlayerInputComponent inputComponent;
+    private final SoundComponent soundComponent;
 
     /**
      * @param x X position of the player.
@@ -42,6 +44,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
         physicsComponent = new PlayerPhysicsComponent(this);
         collisionComponent = new PlayerCollisionComponent(this);
         inputComponent = new PlayerInputComponent(this);
+        soundComponent = new PlayerSoundComponent(this);
 
         powerup = new PowerUp();
 
@@ -107,13 +110,19 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     /**
-     * Return current physics component.
-     * 
-     * @return player's physics component.
+     * {@inheritDoc}
      */
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<SoundComponent> getSoundComponent() {
+        return Optional.of(soundComponent);
     }
 
     /**
