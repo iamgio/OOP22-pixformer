@@ -70,13 +70,13 @@ public interface Controller {
 
     /**
      * @param entities entities to find a common point for
-     * @return X coordinate of the common point (possibly average) between the given entitites
+     * @return X coordinate of the common point (possibly average) between the given entities
      */
     double calcEntitiesCommonPointX(Set<Entity> entities);
 
     /**
      * @param entities entities to find a common point for
-     * @return Y coordinate of the common point (possibly average) between the given entitites
+     * @return Y coordinate of the common point (possibly average) between the given entities
      */
     double calcEntitiesCommonPointY(Set<Entity> entities);
 
