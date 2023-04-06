@@ -117,29 +117,6 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     /**
-     * Set the new Powerup for the player.
-     * 
-     * @param powerupBehaviour the new powerup.
-     */
-    public void setPowerup(final PowerupBehaviour powerupBehaviour) {
-
-        if (powerup.getBehaviour().isPresent()) {
-            if (powerup.getBehaviour().get().getPriority() == powerupBehaviour.getPriority()) {
-                powerup = new PowerUp(powerupBehaviour, powerup.getPrevious().get());
-            } else if (powerup.getBehaviour().get().getPriority() < powerupBehaviour.getPriority()) {
-                powerup = new PowerUp(powerupBehaviour, powerup);
-            }
-        } else {
-
-            if (powerupBehaviour.getPriority() > 1) {
-                powerup = new PowerUp(new Mushroom(), powerup);
-            }
-
-            powerup = new PowerUp(powerupBehaviour, powerup);
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -159,10 +136,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
      * Define what happens when Player get damaged.
      */
     public void damaged() {
-        if (powerup.getBehaviour().isEmpty()) {
+        if (!powerup.downgrade()) {
             kill();
-        } else {
-            powerup = powerup.getPrevious().get();
         }
     }
 
