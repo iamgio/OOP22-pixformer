@@ -14,6 +14,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private final PlayerImpl player;
     private boolean sprintKey;
     private boolean jumpKey;
+    private boolean jumpSound = true;
 
     // State variable to check if player is sprinting
     private boolean isSprinting;
@@ -95,6 +96,14 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
+        if (jumpSound && player.getSoundComponent().get() instanceof PlayerSoundComponent soundComponent) {
+            if (player.getPowerupBehaviour().isPresent()) {
+                soundComponent.bigJumpSound();
+            } else {
+                soundComponent.miniJumpSound();
+            }
+            jumpSound = false;
+        }
         if (super.getEntity().getVelocity().y() <= 0 && !stopJumping) {
             currentJumpForce += REVERSE_JUMP_FORCE;
             forceJump(currentJumpForce);
@@ -160,5 +169,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     private void resetJumping() {
         this.currentJumpForce = INITIAL_JUMP_FORCE;
         stopJumping = false;
+        jumpSound = true;
     }
 }

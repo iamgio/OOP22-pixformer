@@ -27,7 +27,7 @@ public class PlayerSoundComponent extends SoundComponent {
      * Add to the soundlist the bigJump sound.
      */
     public void bigJumpSound() {
-        this.addSound(new SoundEvent("sounds/entities/mario/common/jump_big.wav", false));
+        this.addSound(new SoundEvent("sounds/entities/mario/common/jump_super.wav", false));
     }
 
     /**
