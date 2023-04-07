@@ -140,7 +140,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
      */
     @EntityType("player")
     @Override
-    public Player createMainCharacter(final int x, final int y) {
+    public PlayerImpl createMainCharacter(final int x, final int y) {
         final PlayerImpl player = new PlayerImpl(x, y);
         player.setGraphicsComponent(graphicsComponentFactory.player(player));
         return player;
