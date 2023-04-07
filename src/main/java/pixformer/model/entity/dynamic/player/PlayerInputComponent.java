@@ -13,6 +13,7 @@ import pixformer.model.modelinput.CompleteModelInput;
 public class PlayerInputComponent extends UserInputComponent implements CompleteModelInput {
     private final PlayerImpl player;
     private boolean sprintKey;
+    private boolean jumpKey;
 
     // State variable to check if player is sprinting
     private boolean isSprinting;
@@ -44,8 +45,9 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     // Chronometer for ability cooldown
     private final ChronometerImpl abilityDelay = new ChronometerImpl();
 
-
     private double currentJumpForce;
+
+    private boolean stopJumping;
 
 
     /**
@@ -93,10 +95,12 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
-        if (super.getEntity().getVelocity().y() <= 0) {
+        if (super.getEntity().getVelocity().y() <= 0 && !stopJumping) {
             currentJumpForce += REVERSE_JUMP_FORCE;
             forceJump(currentJumpForce);
         }
+
+        jumpKey = true;
     }
 
     /**
@@ -113,8 +117,13 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void update(final World world) {
         // Jump management
-        if (player.isOnGround() || player.isTouchingAbove()) {
+        if (player.isOnGround() 
+            || player.isTouchingAbove()) {
             this.resetJumping();
+        }
+
+        if (isJumping() && !jumpKey) {
+            stopJumping = true;
         }
 
         // Player speed limit and sprint management
@@ -123,7 +132,10 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
         isSprinting = sprintKey;
 
+        // System.out.println(isJumping());
+
         sprintKey = false;
+        jumpKey = false;
     }
 
      /**
@@ -131,7 +143,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      * @return True if Player is jumping otherwise False.
      */
     public boolean isJumping() {
-        return player.getVelocity().y() > 0;
+        return player.getVelocity().y() < 0;
     }
 
     /**
@@ -147,5 +159,6 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     private void resetJumping() {
         this.currentJumpForce = INITIAL_JUMP_FORCE;
+        stopJumping = false;
     }
 }

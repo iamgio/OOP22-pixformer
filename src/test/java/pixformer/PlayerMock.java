@@ -1,9 +1,8 @@
 package pixformer;
 
-import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.entity.dynamic.player.Player;
+import pixformer.model.entity.powerup.AbstractPowerupableEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.physics.PhysicsComponent;
@@ -13,7 +12,7 @@ import java.util.Optional;
 /**
  * A mock for Player entity. Use this only for unit tests.
  */
-class PlayerMock extends AbstractEntity implements Player, DefaultRectangleBoundingBoxEntity {
+class PlayerMock extends AbstractPowerupableEntity implements Player {
     /**
      * Constructor for the AbstractEntity.
      *

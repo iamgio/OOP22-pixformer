@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ public class WorldImpl implements World {
     private final EntityCollisionManager collisionManager;
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
-    private final List<Runnable> commandQueue;
+    private final Queue<Runnable> commandQueue;
 
     private Set<Entity> lazyUserControlledEntity;
 
@@ -150,10 +151,14 @@ public class WorldImpl implements World {
      */
     @Override
     public List<Integer> getIndexLeaderboard() {
+        if (this.lazyUserControlledEntity == null) {
+            return List.of();
+        }
+
         return this.lazyUserControlledEntity.stream()
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
-                .sorted((a, b) -> scoreManager.getScore(a).points() - scoreManager.getScore(b).points())
+                .sorted((a, b) -> scoreManager.getScore(b).points() - scoreManager.getScore(a).points())
                 .map(Player::getIndex).toList();
     }
 
@@ -182,7 +187,10 @@ public class WorldImpl implements World {
 
             entity.update(dt);
         });
-        this.commandQueue.forEach(Runnable::run);
-        this.commandQueue.clear();
+
+        final var command = this.commandQueue.poll();
+        if (command != null) {
+            command.run();
+        }
     }
 }

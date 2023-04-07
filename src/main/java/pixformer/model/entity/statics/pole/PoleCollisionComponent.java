@@ -29,7 +29,7 @@ public class PoleCollisionComponent extends CollisionComponent {
         collisions.stream()
                 .map(Collision::entity)
                 .filter(Player.class::isInstance)
-                .map(entity -> (Player) entity).forEach(player -> {
+                .map(Player.class::cast).forEach(player -> {
                     if (player.getWorld().isPresent()) {
                         player.setVelocity(player.getVelocity().copyWithX(0));
                         player.setVelocity(player.getVelocity().y() > 0

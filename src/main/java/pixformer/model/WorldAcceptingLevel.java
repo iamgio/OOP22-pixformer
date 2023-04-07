@@ -1,8 +1,5 @@
 package pixformer.model;
 
-import pixformer.model.modelinput.CompleteModelInput;
-
-import java.util.Optional;
 import java.util.function.Supplier;
 
 /**

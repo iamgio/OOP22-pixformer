@@ -21,6 +21,8 @@ public class PixformerJavaFXMouseInputMapper implements InputMapper<MouseButton>
     public Optional<Consumer<Level>> map(final MouseButton input) {
         final Consumer<Level> action = switch (input) {
             case PRIMARY -> level -> level.getPlayer1().ifPresent(CompleteModelInput::jump);
+            case SECONDARY -> level -> level.getPlayer2().ifPresent(CompleteModelInput::jump);
+            case MIDDLE -> level -> level.getPlayer3().ifPresent(CompleteModelInput::jump);
             default -> null;
         };
         return Optional.ofNullable(action);

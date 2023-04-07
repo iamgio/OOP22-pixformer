@@ -29,9 +29,9 @@ final class MainMenuLevelSelector extends VBox {
         final var levelsBox = new FlowPane(Orientation.HORIZONTAL);
         levelsBox.getStyleClass().add("levels-box");
 
-        controller.getLevelFiles().forEach(file -> {
-            levelsBox.getChildren().add(createLevelButton(file));
-        });
+        controller.getLevelFiles().stream()
+                .map(this::createLevelButton)
+                .forEach(levelsBox.getChildren()::add);
 
         getChildren().addAll(title, levelsBox);
     }
@@ -41,7 +41,7 @@ final class MainMenuLevelSelector extends VBox {
         final var button = new Button(name);
         button.getStyleClass().add("level-button");
 
-        button.setOnAction(e -> {
+        button.setOnMouseClicked(e -> {
             if (this.onSelect != null) {
                 this.onSelect.accept(levelFile);
             }
