@@ -1,11 +1,8 @@
 package pixformer.model.entity.dynamic.player;
 
-import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
-import pixformer.model.entity.powerup.PowerUp;
-import pixformer.model.entity.powerup.PowerupBehaviour;
-import pixformer.model.entity.powerup.powerups.Mushroom;
+import pixformer.model.entity.powerup.AbstractPowerupableEntity;
 import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
@@ -15,14 +12,11 @@ import java.util.Optional;
 /**
  * The class manages the character used by the player.
  */
-public class PlayerImpl extends AbstractEntity implements Player {
+public class PlayerImpl extends AbstractPowerupableEntity implements Player {
     static final double WIDTH = 0.94;
     static final double HEIGHT = 1;
 
     private final int playerIndex;
-
-    // Current powerup
-    private PowerUp powerup = new PowerUp();
 
     // Player components
     private PlayerGraphicsComponent graphicsComponent;
@@ -42,9 +36,6 @@ public class PlayerImpl extends AbstractEntity implements Player {
         physicsComponent = new PlayerPhysicsComponent(this);
         collisionComponent = new PlayerCollisionComponent(this);
         inputComponent = new PlayerInputComponent(this);
-
-        powerup = new PowerUp();
-
         this.playerIndex = playerIndex;
     }
 
@@ -136,7 +127,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
      * Define what happens when Player get damaged.
      */
     public void damaged() {
-        if (!powerup.downgrade()) {
+        if (!downgrade()) {
             kill();
         }
     }
@@ -146,22 +137,6 @@ public class PlayerImpl extends AbstractEntity implements Player {
      */
     private void kill() {
         getWorld().get().queueEntityDrop(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<PowerupBehaviour> getPowerupBehaviour() {
-        return powerup.getBehaviour();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public PowerUp getPowerup() {
-        return powerup;
     }
 
     /**
