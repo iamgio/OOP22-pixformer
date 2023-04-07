@@ -19,6 +19,7 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     private final GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
     private final PhysicsComponent physicsComponent;
+    private final FireballSoundComponent soundComponent;
     private final Entity shooter;
 
     /**
@@ -32,7 +33,10 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
         physicsComponent = new FireballPhysicsComponent(this, speed);
+        soundComponent = new FireballSoundComponent(this);
         this.shooter = entity;
+
+        soundComponent.fired();
     }
 
     /**
