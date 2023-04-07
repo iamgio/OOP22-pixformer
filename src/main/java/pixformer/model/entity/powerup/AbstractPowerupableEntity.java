@@ -61,7 +61,7 @@ public abstract class AbstractPowerupableEntity extends AbstractEntity implement
             return true;
         }
 
-        powerup = new PowerUp(powerup.getPrevious().get().getBehaviour().get(), powerup.getPrevious().get());
+        powerup = powerup.getPrevious().get();
         return true;
     }
 
