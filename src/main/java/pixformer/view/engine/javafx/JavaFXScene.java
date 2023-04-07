@@ -5,8 +5,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.SimpleWritableWrapper;
 import pixformer.common.wrap.Wrapper;
@@ -18,7 +16,6 @@ import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.SceneRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -34,7 +31,7 @@ public class JavaFXScene extends GameScene {
     private final Wrapper<SceneRenderer> renderer;
     private final Wrapper<Graphics> graphics;
     private final RendererFactory rendererFactory;
-    private List<MediaPlayer> songsCache = new ArrayList<>();
+    private final JavaFXPlayer soundPlayer = new JavaFXPlayer();
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -167,22 +164,6 @@ public class JavaFXScene extends GameScene {
      */
     @Override
     public void playSounds(List<SoundEvent> sounds) {
-        clearFinishedSongs();
-        sounds.stream()
-                .map(soundEvent -> new Media(soundEvent.audioFilePath()))
-                .map(media -> new MediaPlayer(media))
-                .forEach(x -> songsCache.add(x));
-
-        songsCache.stream()
-                    .filter(x -> x.getStatus() == MediaPlayer.Status.READY)
-                    .forEach(x -> x.play());
-    }
-
-    private void clearFinishedSongs() {
-        List<MediaPlayer> stoppedSongs = songsCache.stream()
-                                                    .filter(x -> x.getStatus() == MediaPlayer.Status.STOPPED)
-                                                    .toList();
-        stoppedSongs.stream()
-                    .forEach(x -> songsCache.remove(x));
+        soundPlayer.play(sounds);        
     }
 }
