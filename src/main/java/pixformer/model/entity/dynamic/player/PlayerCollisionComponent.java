@@ -69,6 +69,9 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
+                if (player.getSoundComponent().get() instanceof PlayerSoundComponent soundComponent) {
+                    soundComponent.upgrade();
+                }
                 player.setPowerup(powerup.getPowerupBehaviour());
                 powerup.consume();
             }

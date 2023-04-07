@@ -182,7 +182,7 @@ public class WorldImpl implements World {
      */
     @Override
     public List<SoundEvent> getSounds() {
-        List<SoundEvent> soundsCopy = new ArrayList<SoundEvent>(soundList);
+        final List<SoundEvent> soundsCopy = new ArrayList<>(soundList);
         soundList.clear();
         return soundsCopy;
     }

@@ -96,7 +96,6 @@ public interface Controller {
 
 
     /**
-     * @param world game environment from which we want to take the sounds.
      * @return a list of sound from the world.
      */
     List<SoundEvent> getSounds();

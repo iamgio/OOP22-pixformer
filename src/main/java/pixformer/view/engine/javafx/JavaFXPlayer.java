@@ -12,7 +12,7 @@ import pixformer.model.sound.SoundEvent;
  * A sound player using JavaFX library.
  */
 public class JavaFXPlayer {
-    private Map<String, MediaPlayer> songsCache = new HashMap<>();
+    private final Map<String, MediaPlayer> songsCache = new HashMap<>();
 
     /**
      * Play a list sounds.
@@ -20,9 +20,9 @@ public class JavaFXPlayer {
      */
     public void play(final List<SoundEvent> sounds) {
 
-        for (var sound : sounds) {
+        for (final var sound : sounds) {
             if (!songsCache.containsKey(sound.audioFilePath())) {
-                MediaPlayer player = new MediaPlayer(new Media(sound.audioFilePath()));
+                final MediaPlayer player = new MediaPlayer(new Media(sound.audioFilePath()));
                 player.setOnEndOfMedia(new Runnable() {
                     @Override
                     public void run() {

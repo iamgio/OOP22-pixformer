@@ -3,12 +3,9 @@ package pixformer.model.entity;
 import pixformer.common.Vector2D;
 import pixformer.model.World;
 import pixformer.model.entity.collision.SolidEntity;
-import pixformer.model.sound.SoundEvent;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 /**

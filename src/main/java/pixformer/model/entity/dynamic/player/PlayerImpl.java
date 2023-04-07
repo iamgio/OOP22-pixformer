@@ -108,7 +108,7 @@ public class PlayerImpl extends AbstractPowerupableEntity implements Player {
         return Optional.of(physicsComponent);
     }
 
-    
+
     /**
      * {@inheritDoc}
      */

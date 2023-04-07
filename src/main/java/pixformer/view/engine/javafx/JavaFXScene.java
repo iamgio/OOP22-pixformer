@@ -163,7 +163,7 @@ public class JavaFXScene extends GameScene {
      * {@inheritDoc}
      */
     @Override
-    public void playSounds(List<SoundEvent> sounds) {
-        soundPlayer.play(sounds);        
+    public void playSounds(final List<SoundEvent> sounds) {
+        soundPlayer.play(sounds);
     }
 }
