@@ -18,6 +18,7 @@ import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.SceneInput;
 import pixformer.view.engine.SceneRenderer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class JavaFXScene extends GameScene {
     private final Wrapper<SceneRenderer> renderer;
     private final Wrapper<Graphics> graphics;
     private final RendererFactory rendererFactory;
+    private List<MediaPlayer> songsCache = new ArrayList<>();
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -165,9 +167,22 @@ public class JavaFXScene extends GameScene {
      */
     @Override
     public void playSounds(List<SoundEvent> sounds) {
+        clearFinishedSongs();
         sounds.stream()
-                        .map(soundEvent -> new Media(soundEvent.audioFilePath()))
-                        .map(media -> new MediaPlayer(media))
-                        .forEach(x -> x.play());
+                .map(soundEvent -> new Media(soundEvent.audioFilePath()))
+                .map(media -> new MediaPlayer(media))
+                .forEach(x -> songsCache.add(x));
+
+        songsCache.stream()
+                    .filter(x -> x.getStatus() == MediaPlayer.Status.READY)
+                    .forEach(x -> x.play());
+    }
+
+    private void clearFinishedSongs() {
+        List<MediaPlayer> stoppedSongs = songsCache.stream()
+                                                    .filter(x -> x.getStatus() == MediaPlayer.Status.STOPPED)
+                                                    .toList();
+        stoppedSongs.stream()
+                    .forEach(x -> songsCache.remove(x));
     }
 }
