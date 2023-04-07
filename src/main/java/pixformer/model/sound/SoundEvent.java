@@ -10,7 +10,7 @@ public record SoundEvent(String audioFilePath, boolean isLooping) {
      * @param isLooping true if the sound have to loop, false otherwise
      */
     public SoundEvent(final String audioFilePath, boolean isLooping) {
-        this.audioFilePath = audioFilePath;
+        this.audioFilePath = Thread.currentThread().getContextClassLoader().getResource(audioFilePath).toString();
         this.isLooping = isLooping;
     }
 }
