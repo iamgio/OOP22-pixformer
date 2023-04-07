@@ -26,7 +26,7 @@ public abstract class AbstractPowerupableEntity extends AbstractEntity implement
      * {@inheritDoc}
      */
     @Override
-    public void setPowerup(final PowerupBehaviour powerupBehaviour) {
+    public boolean setPowerup(final PowerupBehaviour powerupBehaviour) {
 
         if (getPowerupBehaviour().isEmpty()) {
             if (powerupBehaviour.getPriority() > 1) {
@@ -43,8 +43,13 @@ public abstract class AbstractPowerupableEntity extends AbstractEntity implement
                 powerup = new PowerUp(powerupBehaviour, powerup);
             } else if (powerup.getBehaviour().get().getPriority() < powerupBehaviour.getPriority()) {
                 powerup = new PowerUp(powerupBehaviour, powerup);
+            } else {
+                return false;
             }
+            
         }
+
+        return true;
     }
 
     /**

@@ -20,8 +20,9 @@ public interface Powerupable {
      /**
      * Set the new Powerup for the player.
      * @param powerupBehaviour the new powerup.
+     * @return true if the player changed powerup state, false otherwise.
      */
-    void setPowerup(PowerupBehaviour powerupBehaviour);
+    boolean setPowerup(PowerupBehaviour powerupBehaviour);
 
      /**
      * If possible substitute current powerup with the older one. 
