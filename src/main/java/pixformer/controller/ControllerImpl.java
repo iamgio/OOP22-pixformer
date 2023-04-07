@@ -231,18 +231,6 @@ public final class ControllerImpl implements Controller {
      */
     @Override
     public List<SoundEvent> getSounds() {
-        Optional<Level> level = levelManager.get().getCurrentLevel();
-        if (level.isPresent()) {
-            return level.get()
-                        .getWorld()
-                        .getEntities()
-                        .stream()
-                        .filter(entity -> entity.getSoundComponent().isPresent())
-                        .map(entity -> entity.getSoundComponent().get().getSounds())
-                        .flatMap(List::stream)
-                        .collect(Collectors.toList());
-        }
-
-        return List.of();
+        return levelManager.get().getCurrentLevel().get().getWorld().getSounds();
     }
 }
