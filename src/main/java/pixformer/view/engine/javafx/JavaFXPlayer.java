@@ -1,6 +1,5 @@
 package pixformer.view.engine.javafx;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +12,7 @@ import pixformer.model.sound.SoundEvent;
  * A sound player using JavaFX library.
  */
 public class JavaFXPlayer {
-    private Map<String, Media> songsCache = new HashMap<>();
-    private List<MediaPlayer> playingSongs = new ArrayList<>();
+    private Map<String, MediaPlayer> songsCache = new HashMap<>();
 
     /**
      * Play a list sounds.
@@ -24,27 +22,18 @@ public class JavaFXPlayer {
 
         for (var sound : sounds) {
             if (!songsCache.containsKey(sound.audioFilePath())) {
-                songsCache.put(sound.audioFilePath(), new Media(sound.audioFilePath()));
+                MediaPlayer player = new MediaPlayer(new Media(sound.audioFilePath()));
+                player.setOnEndOfMedia(new Runnable() {
+                    @Override
+                    public void run() {
+                        player.stop();
+                    }
+                });
+
+                songsCache.put(sound.audioFilePath(), player);
             }
 
-            playingSongs.add(new MediaPlayer(songsCache.get(sound.audioFilePath())));
+            songsCache.get(sound.audioFilePath()).play();
         }
-
-        playingSongs.stream()
-                    .filter(x -> x.getStatus() == MediaPlayer.Status.READY)
-                    .forEach(x -> x.play());
-
-        clearFinishedSongs();
-    }
-
-    /**
-     * Clear the list of current sounds from already stopped sounds.
-     */
-    private void clearFinishedSongs() {
-        List<MediaPlayer> stoppedSongs = playingSongs.stream()
-                                                    .filter(x -> x.getStatus() == MediaPlayer.Status.STOPPED)
-                                                    .toList();
-        stoppedSongs.stream()
-                    .forEach(x -> songsCache.remove(x));
     }
 }
