@@ -5,7 +5,6 @@ import pixformer.model.World;
 import pixformer.model.entity.dynamic.enemy.goomba.Goomba;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
 import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.entity.dynamic.powerup.FlowerPowerupEntity;
 import pixformer.model.entity.dynamic.powerup.MovingPowerupEntity;
