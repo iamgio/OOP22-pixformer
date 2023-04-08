@@ -170,6 +170,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
      */
     @Override
     public Entity createFireball(final Entity shooter) {
-        return new Fireball(shooter, graphicsComponentFactory::fireball);
+        final Fireball fireball = new Fireball(shooter);
+        fireball.setGraphicsComponent(graphicsComponentFactory::fireball);
+        return fireball;
     }
 }

@@ -9,6 +9,7 @@ import pixformer.model.entity.Projectile;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 
 import java.util.Optional;
 
@@ -29,12 +30,11 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     /**
      * 
      * @param entity Entity who spawned the fireball.
-     * @param graphicsComponent graphicsComponent of the Fireball entity.
      */
-    public Fireball(final Entity entity, final GraphicsComponentRetriever graphicsComponent) {
+    public Fireball(final Entity entity) {
         super(entity.getX(), entity.getY(), entity.getHeight() / 3, entity.getHeight() / 3);
 
-        this.graphicsComponent = graphicsComponent.apply(this);
+        this.graphicsComponent = new FireballGraphicsComponent(this);
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
         final float fireballSpeed = entity.getVelocity().x() >= 0 ? FIREBALL_BASE_SPEED : -FIREBALL_BASE_SPEED;
         physicsComponent = new FireballPhysicsComponent(this, fireballSpeed);
@@ -47,6 +47,14 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     @Override
     public GraphicsComponent getGraphicsComponent() {
         return graphicsComponent;
+    }
+
+    /**
+     * Set the new physics component.
+     * @param graphicsComponent new graphics component
+     */
+    public void setGraphicsComponent(final GraphicsComponentRetriever graphicsComponent) {
+        graphicsComponent.apply(this);
     }
 
     /**
