@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests to check if the
- * {@link pixformer.model.entity.dynamic.ActionOnPressedCollisionComponent}
+ * {@link pixformer.model.entity.dynamic.reactor.ActionOnPressedCollisionReactor}
  * works.
  */
 final class OnPressedTest {
