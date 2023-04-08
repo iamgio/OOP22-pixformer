@@ -67,7 +67,7 @@ public class JsonLevelDataDeserializer implements LevelDataDeserializer, JsonDes
             this.appendEntity(entities, entityElement.getAsJsonObject(), lookup);
         }
 
-        return new LevelData(name, entities, spawnPointX, spawnPointY);
+        return new LevelData(name, factory, entities, spawnPointX, spawnPointY);
     }
 
     private void appendEntity(final Set<Entity> entities, final JsonObject json, final EntityFactoryLookupDecorator lookup) {

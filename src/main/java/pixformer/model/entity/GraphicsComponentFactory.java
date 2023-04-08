@@ -79,4 +79,10 @@ public interface GraphicsComponentFactory {
      * @return a new player graphics component
      */
     PlayerGraphicsComponent player(Player player);
+
+    /**
+     * @param entity target of the graphics component
+     * @return a new fireball graphics component
+     */
+    GraphicsComponent fireball(Entity entity);
 }
