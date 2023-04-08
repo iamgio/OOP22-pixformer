@@ -17,4 +17,16 @@ public interface Powerupable {
      */
     PowerUp getPowerup();
 
+     /**
+     * Set the new Powerup for the player.
+     * @param powerupBehaviour the new powerup.
+     */
+    void setPowerup(PowerupBehaviour powerupBehaviour);
+
+     /**
+     * If possible substitute current powerup with the older one. 
+     * @return true if the substitution happened successfully, false otherwise.
+     */
+    boolean downgrade();
+
 }
