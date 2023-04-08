@@ -1,6 +1,7 @@
 package pixformer.model.entity.powerup.powerups;
 
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 /**
  * Class representing the Mushroom powerup.
@@ -13,7 +14,7 @@ public class Mushroom implements PowerupBehaviour {
      * {@inheritDoc}}
      */
     @Override
-    public void ability(final Entity entity) {
+    public void ability(final Entity entity, final EntityFactory entityFactory) {
 
     }
 
@@ -24,5 +25,4 @@ public class Mushroom implements PowerupBehaviour {
     public int getPriority() {
         return PRIORITY;
     }
-
 }

@@ -3,6 +3,7 @@ package pixformer.model.entity.dynamic.player;
 import pixformer.common.Vector2D;
 import pixformer.common.time.ChronometerImpl;
 import pixformer.model.World;
+import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.dynamic.VelocitySetterFactory;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
@@ -50,14 +51,19 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
 
     private boolean stopJumping;
 
+    private final EntityFactory entityFactory;
+
 
     /**
      * 
      * @param entity Entity associated with current component
+     * @param entityFactory Factory who generate entities
      */
-    protected PlayerInputComponent(final PlayerImpl entity) {
+    protected PlayerInputComponent(final PlayerImpl entity, final EntityFactory entityFactory) {
         super(entity);
         player = entity;
+        this.entityFactory = entityFactory;
+
         abilityDelay.start();
         resetJumping();
     }
@@ -84,7 +90,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
     @Override
     public void ability() {
         if (player.getPowerup().getBehaviour().isPresent() && abilityDelay.hasElapsed(ABILITY_COOLDOWN)) {
-            player.getPowerup().getBehaviour().get().ability(player);
+            player.getPowerup().getBehaviour().get().ability(player, entityFactory);
 
             abilityDelay.reset();
             abilityDelay.start();

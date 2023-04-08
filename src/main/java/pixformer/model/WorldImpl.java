@@ -31,6 +31,7 @@ public class WorldImpl implements World {
     private final EventManager eventManager;
     private final ScoreManager scoreManager;
     private final Queue<Runnable> commandQueue;
+
     private final List<SoundEvent> soundList;
 
     private Set<Entity> lazyUserControlledEntity;

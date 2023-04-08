@@ -120,4 +120,9 @@ public final class NullGraphicsComponentFactory implements GraphicsComponentFact
     public PlayerGraphicsComponent player(final Player player) {
         return new PlayerGraphicsComponent(player);
     }
+
+    @Override
+    public GraphicsComponent fireball(final Entity entity) {
+        return NULL_COMPONENT;
+    }
 }

@@ -18,4 +18,10 @@ public interface PowerUpFactory {
      * @return a mushroom powerup.
      */
     Entity createMushroom(int x, int y);
+
+    /**
+     * @param shooter entity who shoot the fireball
+     * @return a fireball.
+     */
+    Entity createFireball(Entity shooter);
 }

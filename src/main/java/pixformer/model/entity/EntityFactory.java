@@ -71,7 +71,14 @@ public interface EntityFactory {
     /**
      * @param x X coordinate
      * @param y Y coordinate
+     * @param playerIndex index of the player
      * @return a main character
      */
-    Entity createMainCharacter(int x, int y);
+    Entity createMainCharacter(double x, double y, int playerIndex);
+
+    /**
+     * @param shooter entity who shoot the fireball
+     * @return a fireball
+     */
+    Entity createFireball(Entity shooter);
 }

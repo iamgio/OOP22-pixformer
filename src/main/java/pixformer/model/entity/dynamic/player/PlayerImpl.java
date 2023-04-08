@@ -1,5 +1,6 @@
 package pixformer.model.entity.dynamic.player;
 
+import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.GraphicsComponent;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.powerup.AbstractPowerupableEntity;
@@ -27,27 +28,30 @@ public class PlayerImpl extends AbstractPowerupableEntity implements Player {
     private final SoundComponent soundComponent;
 
     /**
-     * @param x X position of the player.
-     * @param y Y position of the player.
-     * @param playerIndex Index of this player istance.
+     * 
+     * @param x inital x position
+     * @param y inital y position
+     * @param entityFactory factory that creates entities
      */
-    public PlayerImpl(final double x, final double y, final int playerIndex) {
+    public PlayerImpl(final double x, final double y, final EntityFactory entityFactory) {
+        this(x, y, 0, entityFactory);
+    }
+    /**
+     * 
+     * @param x inital x position
+     * @param y inital y position
+     * @param playerIndex index of the player
+     * @param entityFactory factory that creates entities
+     */
+    public PlayerImpl(final double x, final double y, final int playerIndex, final EntityFactory entityFactory) {
         super(x, y, WIDTH, HEIGHT);
 
         graphicsComponent = new PlayerGraphicsComponent(this);
         physicsComponent = new PlayerPhysicsComponent(this);
         collisionComponent = new PlayerCollisionComponent(this);
-        inputComponent = new PlayerInputComponent(this);
+        inputComponent = new PlayerInputComponent(this, entityFactory);
         soundComponent = new PlayerSoundComponent(this);
         this.playerIndex = playerIndex;
-    }
-
-    /**
-     * @param x X position of the player.
-     * @param y Y position of the player.
-     */
-    public PlayerImpl(final double x, final double y) {
-        this(x, y, 0);
     }
 
     /**
@@ -106,15 +110,6 @@ public class PlayerImpl extends AbstractPowerupableEntity implements Player {
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(physicsComponent);
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<SoundComponent> getSoundComponent() {
-        return Optional.of(soundComponent);
     }
 
     /**

@@ -8,7 +8,6 @@ import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.collision.Collision;
-import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
@@ -18,35 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test for collisions.
  */
-public final class CollisionsTest {
+final class CollisionsTest {
 
-    private static class TestEntity extends AbstractEntity implements DefaultRectangleBoundingBoxEntity {
-
-        private static final int WIDTH = 2;
-        private static final int HEIGHT = 2;
-
-        TestEntity(final double x, final double y) {
-            super(x, y, WIDTH, HEIGHT);
-        }
-    }
-
-    private World world;
-    private AbstractEntity entity;
-    private EntityFactoryImpl entityFactory;
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
+    private final AbstractEntity entity = new PlayerMock(0, 0, 2, 2);
+    private final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
 
     @BeforeEach
     void setup() {
-        this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        this.entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
-        this.entity = new TestEntity(0, 0);
         world.spawnEntity(entity);
     }
 
     private void entityForward() {
-        entity.setX(entity.getX() + 1);
-    }
-
-    private void blockBackward() {
         entity.setX(entity.getX() + 1);
     }
 

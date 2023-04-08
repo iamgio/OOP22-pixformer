@@ -31,9 +31,9 @@ final class ScoreTest {
 
     @BeforeEach
     void setup() {
-        a = new PlayerImpl(BASE_X, BASE_Y, 0);
-        b = new PlayerImpl(this.a.getX() + 1, BASE_Y, 1);
-        c = new PlayerImpl(this.b.getX() + 1, BASE_Y, 2);
+        a = new PlayerImpl(BASE_X, BASE_Y, 0, entityFactory);
+        b = new PlayerImpl(this.a.getX() + 1, BASE_Y, 1, entityFactory);
+        c = new PlayerImpl(this.b.getX() + 1, BASE_Y, 2, entityFactory);
         this.world.spawnEntity(a);
         this.world.spawnEntity(b);
         this.world.spawnEntity(c);

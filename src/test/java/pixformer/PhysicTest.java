@@ -20,11 +20,10 @@ final class PhysicTest {
     private static final double DELTA = 0.001;
 
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private Entity entity;
+    private final Entity entity = new PlayerMock(0, PLAYER_SPAWN_Y, 1, 1);
 
     @BeforeEach
     void setup() {
-        this.entity = new PlayerMock(0, PLAYER_SPAWN_Y, 1, 1);
         world.spawnEntity(this.entity);
     }
 

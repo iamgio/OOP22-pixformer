@@ -5,10 +5,10 @@ import pixformer.model.World;
 import pixformer.model.entity.dynamic.enemy.goomba.Goomba;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
 import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
-import pixformer.model.entity.dynamic.player.Player;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.entity.dynamic.powerup.FlowerPowerupEntity;
 import pixformer.model.entity.dynamic.powerup.MovingPowerupEntity;
+import pixformer.model.entity.powerup.other.fireball.Fireball;
 import pixformer.model.entity.powerup.powerups.Mushroom;
 import pixformer.model.entity.statics.Barrier;
 import pixformer.model.entity.statics.Block;
@@ -140,8 +140,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
      */
     @EntityType("player")
     @Override
-    public Player createMainCharacter(final int x, final int y) {
-        final PlayerImpl player = new PlayerImpl(x, y);
+    public PlayerImpl createMainCharacter(final double x, final double y, final int playerIndex) {
+        final PlayerImpl player = new PlayerImpl(x, y, playerIndex, this);
         player.setGraphicsComponent(graphicsComponentFactory.player(player));
         return player;
     }
@@ -163,5 +163,15 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     public Entity createMushroom(final int x, final int y) {
         return new MovingPowerupEntity(x, y, removeEntityFromWorld, new Mushroom(),
                 graphicsComponentFactory::redMushroom);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Entity createFireball(final Entity shooter) {
+        final Fireball fireball = new Fireball(shooter);
+        fireball.setGraphicsComponent(graphicsComponentFactory::fireball);
+        return fireball;
     }
 }

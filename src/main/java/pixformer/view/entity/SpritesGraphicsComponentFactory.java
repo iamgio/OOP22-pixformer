@@ -10,6 +10,7 @@ import pixformer.view.entity.enemies.WalkingKoopaGraphicsComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
 import pixformer.view.entity.powerup.FireFlowerGraphicsComponent;
 import pixformer.view.entity.powerup.MushroomGraphicsComponent;
+import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
 import pixformer.view.entity.statics.BlockGraphicsComponent;
 import pixformer.view.entity.statics.BrickGraphicsComponent;
 import pixformer.view.entity.statics.CoinGraphicsComponent;
@@ -116,5 +117,13 @@ public class SpritesGraphicsComponentFactory implements GraphicsComponentFactory
     @Override
     public PlayerGraphicsComponent player(final Player player) {
         return new PlayerGraphicsComponent(player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphicsComponent fireball(final Entity entity) {
+        return new FireballGraphicsComponent(entity);
     }
 }

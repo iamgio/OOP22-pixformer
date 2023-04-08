@@ -2,7 +2,7 @@ package pixformer.view.entity.powerups.fireball;
 
 import java.util.List;
 
-import pixformer.model.entity.powerup.other.fireball.Fireball;
+import pixformer.model.entity.Entity;
 import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.entity.CachedAnimatedGraphicsComponent;
@@ -14,10 +14,10 @@ public class FireballGraphicsComponent extends CachedAnimatedGraphicsComponent {
     private static final long SWITCH_TIME = 200;
 
     /**
-     * @param fireball Entity that will be displayed.
+     * @param entity Entity that will be displayed.
      */
-    public FireballGraphicsComponent(final Fireball fireball) {
-        super(fireball, SWITCH_TIME);
+    public FireballGraphicsComponent(final Entity entity) {
+        super(entity, SWITCH_TIME);
     }
 
     /**

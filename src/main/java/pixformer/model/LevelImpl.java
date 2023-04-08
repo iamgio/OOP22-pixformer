@@ -2,7 +2,7 @@ package pixformer.model;
 
 import pixformer.controller.input.ModelInputAdapter;
 import pixformer.model.entity.Entity;
-import pixformer.model.entity.dynamic.player.PlayerImpl;
+import pixformer.model.entity.EntityFactory;
 import pixformer.model.modelinput.CompleteModelInput;
 
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class LevelImpl implements Level {
         this.data.entities().forEach(this.world::spawnEntity);
 
         IntStream.range(0, playersAmount).forEach(i -> {
-            final Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY());
+            final Entity player = this.createPlayer(i, data.spawnPointX(), data.spawnPointY(), data.entityFactory());
             this.world.spawnEntity(player);
 
             player.getInputComponent().ifPresent(inputComponent -> {
@@ -121,11 +121,12 @@ public class LevelImpl implements Level {
 
     /**
      * @param playerIndex index of the player, starting from 0
-     * @param startX x coordinate start position
-     * @param startY y coordinate start position
+     * @param x x coordinate start position
+     * @param y y coordinate start position
+     * @param entityFactory factory who create entities
      * @return a new player entity
      */
-    private Entity createPlayer(final int playerIndex, final double startX, final double startY) {
-         return new PlayerImpl(startX, startY, playerIndex);
+    private Entity createPlayer(final int playerIndex, final double x, final double y, final EntityFactory entityFactory) {
+         return entityFactory.createMainCharacter(x, y, playerIndex);
     }
 }
