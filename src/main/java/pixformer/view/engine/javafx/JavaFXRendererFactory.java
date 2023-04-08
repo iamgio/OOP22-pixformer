@@ -8,6 +8,8 @@ import pixformer.view.engine.Renderer;
 import pixformer.view.engine.RendererFactory;
 import pixformer.view.engine.TextRenderer;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -45,7 +47,10 @@ public class JavaFXRendererFactory implements RendererFactory {
     @Override
     public PositionableRenderer newImage(final String resourcePath,
                                          final double width, final double height, final boolean flipX) {
-        final var inputStream = Objects.requireNonNull(getClass().getResourceAsStream(resourcePath));
-        return new JavaFXImageRenderer(new Image(inputStream), width, height, flipX);
+        try (InputStream inputStream = Objects.requireNonNull(RendererFactory.class.getResourceAsStream(resourcePath))) {
+            return new JavaFXImageRenderer(new Image(inputStream), width, height, flipX);
+        } catch (IOException e) {
+            return null;
+        }
     }
 }
