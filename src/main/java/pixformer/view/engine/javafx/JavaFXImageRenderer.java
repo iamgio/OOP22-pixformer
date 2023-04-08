@@ -1,5 +1,6 @@
 package pixformer.view.engine.javafx;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.scene.image.Image;
 import pixformer.view.engine.Graphics;
 import pixformer.view.engine.PositionableRenderer;
@@ -21,6 +22,7 @@ public class JavaFXImageRenderer extends PositionableRenderer {
      * @param height image height
      * @param flipX whether the image should be flipped horizontally
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "JavaFX Image is mutable but is used as immutable here")
     public JavaFXImageRenderer(
             final Image image,
             final double width, final double height, final boolean flipX

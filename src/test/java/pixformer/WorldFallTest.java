@@ -15,17 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Test for the fall from the world of the entities.
  */
-public final class WorldFallTest {
+final class WorldFallTest {
 
     private static final double DT = 5000;
 
-    private World world;
+    private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
 
     @BeforeEach
     void setup() {
-        this.world = new WorldImpl(WorldOptionsFactory.testOptions());
-        EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
-        Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
+        final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+        final Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
         world.spawnEntity(entity);
     }
 

@@ -14,7 +14,7 @@ Cesena.
 | **Player 1** | W, Space         | A                | D               | Shift       | CTRL       |
 | **Player 2** | :arrow_up_small: | :arrow_backward: | :arrow_forward: | M           | N          |
 | **Player 3** | Y                | G                | J               | C           | X          |
-| **Player 4** | Numpad 4         | Numpad 6         | Numpad 8        | Numpad 2    | Numpad 1   |
+| **Player 4** | Numpad 8         | Numpad 4         | Numpad 6        | Numpad 2    | Numpad 1   |
 
 ## Screenshots
 
