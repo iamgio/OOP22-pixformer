@@ -8,6 +8,7 @@ import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.collision.Collision;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
@@ -21,7 +22,8 @@ final class CollisionsTest {
 
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
     private final AbstractEntity entity = new PlayerMock(0, 0, 2, 2);
-    private final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+    private final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(),
+                                                                             new NullSoundComponentFactory(), world);
 
     @BeforeEach
     void setup() {

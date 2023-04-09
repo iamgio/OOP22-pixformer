@@ -6,6 +6,8 @@ import pixformer.model.entity.powerup.AbstractPowerupableEntity;
 import pixformer.model.entity.powerup.PowerUp;
 import pixformer.model.entity.powerup.PowerupBehaviour;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.model.sound.SoundComponent;
+import pixformer.view.entity.player.PlayerSoundComponent;
 
 import java.util.Optional;
 
@@ -63,5 +65,10 @@ class PlayerMock extends AbstractPowerupableEntity implements Player {
     @Override
     public Optional<PhysicsComponent> getPhysicsComponent() {
         return Optional.of(new PhysicsComponent(this));
+    }
+
+    @Override
+    public SoundComponent getSoundComponent() {
+        return new PlayerSoundComponent(this);
     }
 }

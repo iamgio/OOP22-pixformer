@@ -8,9 +8,7 @@ import pixformer.model.event.EventManager;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.score.ScoreManager;
 import pixformer.model.score.ScoreManagerImpl;
-import pixformer.model.sound.SoundEvent;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -32,8 +30,6 @@ public class WorldImpl implements World {
     private final ScoreManager scoreManager;
     private final Queue<Runnable> commandQueue;
 
-    private final List<SoundEvent> soundList;
-
     private Set<Entity> lazyUserControlledEntity;
 
     /**
@@ -48,9 +44,6 @@ public class WorldImpl implements World {
         this.collisionManager = new EntityCollisionManagerImpl(this);
         this.eventManager = new EventManager();
         this.scoreManager = new ScoreManagerImpl(this.eventManager);
-        this.soundList = new ArrayList<>();
-
-        this.soundList.add(new SoundEvent("sounds/soundtrack/maintheme.mp3", true));
     }
 
     /**
@@ -182,16 +175,6 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public List<SoundEvent> getSounds() {
-        final List<SoundEvent> soundsCopy = new ArrayList<>(soundList);
-        soundList.clear();
-        return soundsCopy;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void update(final double dt) {
         this.getUpdatableEntities().forEach(entity -> {
             entity.getPhysicsComponent().ifPresent(physicsComponent -> {
@@ -201,10 +184,6 @@ public class WorldImpl implements World {
                 collisionComponent.update(dt, this.collisionManager.findCollisionsFor(entity));
             });
             entity.getInputComponent().ifPresent(ai -> ai.update(this));
-
-            entity.getSoundComponent().ifPresent(soundComponent -> {
-                soundList.addAll(soundComponent.getSounds());
-            });
 
             entity.update(dt);
         });

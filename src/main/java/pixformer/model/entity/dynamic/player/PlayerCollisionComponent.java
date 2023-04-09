@@ -7,6 +7,7 @@ import pixformer.model.entity.collision.CollisionSide;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.enemy.Enemy;
 import pixformer.model.entity.powerup.PhysicalPowerup;
+import pixformer.view.entity.player.PlayerSoundComponent;
 
 import java.util.Set;
 
@@ -69,7 +70,7 @@ public class PlayerCollisionComponent extends SolidCollisionComponent {
             }
 
             if (collisor.entity() instanceof PhysicalPowerup powerup) {
-                if (player.getSoundComponent().get() instanceof PlayerSoundComponent soundComponent) {
+                if (player.getSoundComponent() instanceof PlayerSoundComponent soundComponent) {
                     soundComponent.upgrade();
                 }
                 player.setPowerup(powerup.getPowerupBehaviour());

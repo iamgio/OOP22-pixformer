@@ -16,6 +16,7 @@ import pixformer.model.entity.statics.brick.Brick;
 import pixformer.model.entity.statics.coin.Coin;
 import pixformer.model.entity.statics.pole.Pole;
 import pixformer.model.entity.statics.surprise.Surprise;
+import pixformer.model.sound.SoundComponentFactory;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -26,6 +27,7 @@ import java.util.function.Consumer;
 public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleKoopaFactory {
 
     private final GraphicsComponentFactory graphicsComponentFactory;
+    private final SoundComponentFactory soundComponentFactory;
     private final Consumer<Entity> addEntityToWorld;
     private final BiConsumer<Entity, Entity> removeEntityFromWorld;
 
@@ -33,10 +35,13 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
      * Simple constructor for the Entity factory.
      *
      * @param graphicsComponentFactory the factory to get the graphics components from
+     * @param soundComponentFactory the factory to get the sound components from
      * @param world                    world where the entities live in
      */
-    public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory, final World world) {
+    public EntityFactoryImpl(final GraphicsComponentFactory graphicsComponentFactory, 
+                                    final SoundComponentFactory soundComponentFactory, final World world) {
         this.graphicsComponentFactory = graphicsComponentFactory;
+        this.soundComponentFactory = soundComponentFactory;
         this.addEntityToWorld = world::queueEntitySpawn;
         this.removeEntityFromWorld = world::queueEntityKill;
     }
@@ -143,6 +148,7 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     public PlayerImpl createMainCharacter(final double x, final double y, final int playerIndex) {
         final PlayerImpl player = new PlayerImpl(x, y, playerIndex, this);
         player.setGraphicsComponent(graphicsComponentFactory.player(player));
+        player.setSoundComponent(soundComponentFactory.player(player));
         return player;
     }
 
@@ -171,7 +177,8 @@ public class EntityFactoryImpl implements EntityFactory, PowerUpFactory, TurtleK
     @Override
     public Entity createFireball(final Entity shooter) {
         final Fireball fireball = new Fireball(shooter);
-        fireball.setGraphicsComponent(graphicsComponentFactory::fireball);
+        fireball.setGraphicsComponent(graphicsComponentFactory.fireball(fireball));
+        fireball.setSoundComponent(soundComponentFactory.fireball(fireball));
         return fireball;
     }
 }

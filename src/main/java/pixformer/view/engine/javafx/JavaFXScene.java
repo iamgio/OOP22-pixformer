@@ -31,7 +31,7 @@ public class JavaFXScene extends GameScene {
     private final Wrapper<SceneRenderer> renderer;
     private final Wrapper<Graphics> graphics;
     private final RendererFactory rendererFactory;
-    private final JavaFXPlayer soundPlayer = new JavaFXPlayer();
+    private final JavaFXPlayer soundPlayer;
 
     /**
      * Creates a JavaFX {@link Canvas}-based game scene.
@@ -48,6 +48,7 @@ public class JavaFXScene extends GameScene {
         this.renderer = new SimpleWrapper<>(new SceneRenderer());
         this.graphics = new SimpleWrapper<>(new JavaFXGraphics(canvas.getGraphicsContext2D()));
         this.rendererFactory = new JavaFXRendererFactory();
+        this.soundPlayer = new JavaFXPlayer();
 
         // Makes the canvas resizable by resizing the window
 
@@ -165,5 +166,13 @@ public class JavaFXScene extends GameScene {
     @Override
     public void playSounds(final List<SoundEvent> sounds) {
         soundPlayer.play(sounds);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stopSounds() {
+        soundPlayer.stopAll();
     }
 }

@@ -17,6 +17,7 @@ import pixformer.model.entity.collision.RectangleBoundingBox;
 import pixformer.model.entity.collision.SolidCollisionComponent;
 import pixformer.model.entity.dynamic.enemy.ai.GoombaInputComponent;
 import pixformer.model.input.InputComponent;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Optional;
@@ -34,7 +35,8 @@ final class GoombaAITest {
     private static final double STEP = 0.002;
     private static final double DT = 1;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
+    private EntityFactory entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(),
+                                                                        new NullSoundComponentFactory(), world);
     private final Function<Vector2D, MutableEntity> goombaFactory = v -> new AbstractEntity(v.x(), v.y(), 1, 1) {
 
         private final Optional<InputComponent> ai = Optional.of(new GoombaInputComponent(this));
@@ -60,7 +62,7 @@ final class GoombaAITest {
     void setup() {
         goomba = goombaFactory.apply(new Vector2D(0, 0));
         world.spawnEntity(goomba);
-        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world);
+        this.entityFactory = new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), new NullSoundComponentFactory(), world);
     }
 
     @Test

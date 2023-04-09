@@ -3,6 +3,7 @@ package pixformer.model;
 import pixformer.controller.deserialization.level.JsonLevelDataDeserializer;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.view.entity.SoundComponentFactoryImpl;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.util.Optional;
@@ -21,7 +22,7 @@ public final class LevelMock implements Level {
     public LevelMock() {
         final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
         inner = new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
-                new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), new SoundComponentFactoryImpl(), world))
                 .deserialize(Level.class.getResourceAsStream("/levels/Level 1.json")), world);
     }
 

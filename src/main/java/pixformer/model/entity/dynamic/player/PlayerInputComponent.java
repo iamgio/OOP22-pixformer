@@ -7,6 +7,7 @@ import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.dynamic.VelocitySetterFactory;
 import pixformer.model.input.UserInputComponent;
 import pixformer.model.modelinput.CompleteModelInput;
+import pixformer.view.entity.player.PlayerSoundComponent;
 
 /**
  * Implementation of InputComponent for a Player entity.
@@ -102,7 +103,7 @@ public class PlayerInputComponent extends UserInputComponent implements Complete
      */
     @Override
     public void jump() {
-        if (jumpSound && player.getSoundComponent().get() instanceof PlayerSoundComponent soundComponent) {
+        if (jumpSound && player.getSoundComponent() instanceof PlayerSoundComponent soundComponent) {
             if (player.getPowerupBehaviour().isPresent()) {
                 soundComponent.bigJumpSound();
             } else {

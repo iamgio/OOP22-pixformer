@@ -9,6 +9,7 @@ import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,8 @@ final class ScoreTest {
     private static final int BASE_Y = 10;
     private static final int BASE_X = 10;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private final EntityFactory entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+    private final EntityFactory entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(),
+                                                                        new NullSoundComponentFactory(), world);
     private Entity a;
     private Entity b;
     private Entity c;

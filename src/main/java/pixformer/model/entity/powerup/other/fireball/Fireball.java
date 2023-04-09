@@ -4,32 +4,34 @@ import pixformer.model.entity.AbstractEntity;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.GraphicsComponent;
-import pixformer.model.entity.GraphicsComponentRetriever;
 import pixformer.model.entity.Projectile;
+import pixformer.model.entity.SoundableEntity;
 import pixformer.model.entity.collision.CollisionComponent;
 import pixformer.model.entity.collision.DefaultRectangleBoundingBoxEntity;
 import pixformer.model.physics.PhysicsComponent;
+import pixformer.model.sound.SoundComponent;
 import pixformer.view.entity.powerups.fireball.FireballGraphicsComponent;
+import pixformer.view.entity.powerups.fireball.FireballSoundComponent;
 
 import java.util.Optional;
 
 /**
  * Rapresenting fireball object spawned by player with FireFlower powerup.
  */
-public class Fireball extends AbstractEntity implements DrawableEntity, DefaultRectangleBoundingBoxEntity, Projectile {
+public class Fireball extends AbstractEntity implements DrawableEntity, SoundableEntity,
+                                             DefaultRectangleBoundingBoxEntity, Projectile {
     /**
      * Base fireaball movement speed.
      */
     public static final float FIREBALL_BASE_SPEED = 0.01f;
 
-    private final GraphicsComponent graphicsComponent;
+    private GraphicsComponent graphicsComponent;
     private final CollisionComponent collisionComponent;
     private final PhysicsComponent physicsComponent;
-    private final FireballSoundComponent soundComponent;
+    private SoundComponent soundComponent;
     private final Entity shooter;
 
     /**
-     * 
      * @param entity Entity who spawned the fireball.
      */
     public Fireball(final Entity entity) {
@@ -39,10 +41,12 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
         collisionComponent = new FireballCollisionComponent(this, entity.getWorld().get());
         final float fireballSpeed = entity.getVelocity().x() >= 0 ? FIREBALL_BASE_SPEED : -FIREBALL_BASE_SPEED;
         physicsComponent = new FireballPhysicsComponent(this, fireballSpeed);
-        soundComponent = new FireballSoundComponent(this);
+        this.soundComponent = new FireballSoundComponent(this);
         this.shooter = entity;
 
-        soundComponent.fired();
+        if (this.soundComponent instanceof FireballSoundComponent fireballSoundComponent) {
+            fireballSoundComponent.fired();
+        }
     }
 
     /**
@@ -54,11 +58,27 @@ public class Fireball extends AbstractEntity implements DrawableEntity, DefaultR
     }
 
     /**
-     * Set the new physics component.
+     * Set the new graphics component.
      * @param graphicsComponent new graphics component
      */
-    public void setGraphicsComponent(final GraphicsComponentRetriever graphicsComponent) {
-        graphicsComponent.apply(this);
+    public void setGraphicsComponent(final GraphicsComponent graphicsComponent) {
+        this.graphicsComponent = graphicsComponent;
+    }
+
+     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SoundComponent getSoundComponent() {
+        return this.soundComponent;
+    }
+
+     /**
+     * Set the new sound component.
+     * @param soundComponent new sound component
+     */
+    public void setSoundComponent(final SoundComponent soundComponent) {
+        this.soundComponent = soundComponent;
     }
 
     /**

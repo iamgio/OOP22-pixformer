@@ -7,6 +7,7 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,7 +24,8 @@ final class WorldFallTest {
 
     @BeforeEach
     void setup() {
-        final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+        final EntityFactoryImpl entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(),
+                                                                    new NullSoundComponentFactory(), world);
         final Entity entity = entityFactory.createGoomba(0, world.getOptions().yFallThreshold() - 1);
         world.spawnEntity(entity);
     }

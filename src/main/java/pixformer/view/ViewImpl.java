@@ -7,6 +7,7 @@ import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
 import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
+import pixformer.model.sound.SoundEvent;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.RendererFactory;
@@ -18,6 +19,7 @@ import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
 import pixformer.view.engine.internationalization.Lang;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -76,6 +78,9 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
         this.infoLabel.setFontFamily("Impact");
         this.infoLabel.setFontSize(1);
         this.getScene().add(infoLabel.at(1, 1));
+
+        this.controller.getLevelManager().addOnLevelEnd((level, leaderboard) -> this.scene.get().stopSounds());
+        scene.get().playSounds(List.of(new SoundEvent("sounds/soundtrack/maintheme.mp3", true)));
     }
 
     /**
@@ -123,8 +128,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
                         this.controller.getLevelManager().getCurrentLevel().ifPresent(action);
                     }));
         }
-
-        this.scene.get().playSounds(controller.getSounds());
 
         this.updateTextRenderer();
 

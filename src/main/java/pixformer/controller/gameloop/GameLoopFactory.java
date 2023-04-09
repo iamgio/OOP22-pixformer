@@ -5,6 +5,7 @@ import pixformer.model.Level;
 import pixformer.model.World;
 import pixformer.model.entity.DrawableEntity;
 import pixformer.model.entity.Entity;
+import pixformer.model.entity.SoundableEntity;
 import pixformer.view.View;
 
 import java.util.Optional;
@@ -14,7 +15,6 @@ import java.util.Set;
  * Factory of available game loops.
  */
 public final class GameLoopFactory {
-
     private final Level level;
     private final Controller controller;
     private final View view;
@@ -62,6 +62,13 @@ public final class GameLoopFactory {
                     .forEach(entity -> {
                         view.getScene().getGraphics().setTranslate(entity.getX(), entity.getY());
                         entity.getGraphicsComponent().update(view.getScene());
+                    });
+
+                    world.getUpdatableEntities()
+                    .filter(SoundableEntity.class::isInstance)
+                    .map(SoundableEntity.class::cast)
+                    .forEach(entity -> {
+                        entity.getSoundComponent().update(view.getScene());
                     });
         };
     }

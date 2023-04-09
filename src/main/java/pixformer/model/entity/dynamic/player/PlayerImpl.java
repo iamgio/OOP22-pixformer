@@ -8,6 +8,7 @@ import pixformer.model.input.InputComponent;
 import pixformer.model.physics.PhysicsComponent;
 import pixformer.model.sound.SoundComponent;
 import pixformer.view.entity.player.PlayerGraphicsComponent;
+import pixformer.view.entity.player.PlayerSoundComponent;
 
 import java.util.Optional;
 
@@ -21,11 +22,11 @@ public class PlayerImpl extends AbstractPowerupableEntity implements Player {
     private final int playerIndex;
 
     // Player components
-    private PlayerGraphicsComponent graphicsComponent;
+    private GraphicsComponent graphicsComponent;
     private PlayerInputComponent inputComponent;
     private final PlayerPhysicsComponent physicsComponent;
     private final PlayerCollisionComponent collisionComponent;
-    private final SoundComponent soundComponent;
+    private SoundComponent soundComponent;
 
     /**
      * 
@@ -150,5 +151,20 @@ public class PlayerImpl extends AbstractPowerupableEntity implements Player {
     @Override
     public void invulnerable(final long invincibleTime) {
         collisionComponent.invincibility(invincibleTime);
+    }
+
+    /**
+     * @param soundComponent the new sound component
+     */
+    public void setSoundComponent(final SoundComponent soundComponent) {
+        this.soundComponent = soundComponent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SoundComponent getSoundComponent() {
+        return this.soundComponent;
     }
 }

@@ -19,7 +19,6 @@ public class JavaFXPlayer {
      * @param sounds list of new sounds to play.
      */
     public void play(final List<SoundEvent> sounds) {
-
         for (final var sound : sounds) {
             if (!songsCache.containsKey(sound.audioFilePath())) {
                 final MediaPlayer player = new MediaPlayer(new Media(sound.audioFilePath()));
@@ -35,5 +34,13 @@ public class JavaFXPlayer {
 
             songsCache.get(sound.audioFilePath()).play();
         }
+    }
+
+    /**
+     * Stop all current playing sounds and clear the cache.
+     */
+    public void stopAll() {
+        songsCache.values().stream().forEach(x -> x.stop());
+        songsCache.clear();
     }
 }

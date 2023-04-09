@@ -5,7 +5,6 @@ import pixformer.controller.level.LevelManager;
 import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;
-import pixformer.model.sound.SoundEvent;
 import pixformer.view.View;
 
 import java.io.File;
@@ -93,10 +92,4 @@ public interface Controller {
      * @throws IllegalStateException if the file could not be turned into a level
      */
     Level getLevelFromFile(File levelFile);
-
-
-    /**
-     * @return a list of sound from the world.
-     */
-    List<SoundEvent> getSounds();
 }

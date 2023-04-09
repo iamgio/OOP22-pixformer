@@ -11,6 +11,7 @@ import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.enemy.koopa.KoopaState;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
 import pixformer.model.entity.dynamic.enemy.koopa.walking.WalkingKoopa;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import java.util.Set;
@@ -34,7 +35,7 @@ final class OnPressedTest {
     @BeforeEach
     void setup() {
         world = new WorldImpl(WorldOptionsFactory.testOptions());
-        factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+        factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), new NullSoundComponentFactory(), world);
     }
 
     private World createPrisonAndFallingPlayer(final Entity entity) {

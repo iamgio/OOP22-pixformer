@@ -16,8 +16,8 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
-import pixformer.model.sound.SoundEvent;
 import pixformer.view.View;
+import pixformer.view.entity.SoundComponentFactoryImpl;
 import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.io.File;
@@ -218,18 +218,10 @@ public final class ControllerImpl implements Controller {
         try (FileInputStream inputStream = new FileInputStream(levelFile)) {
             final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
             return new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
-                    new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                    new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), new SoundComponentFactoryImpl(), world))
                     .deserialize(inputStream), world);
         } catch (IOException e) {
             throw new IllegalStateException("Could not get level data from file", e);
         }
-    }
-
-     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<SoundEvent> getSounds() {
-        return levelManager.get().getCurrentLevel().get().getWorld().getSounds();
     }
 }

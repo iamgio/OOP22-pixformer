@@ -4,7 +4,6 @@ import pixformer.common.Updatable;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.collision.EntityCollisionManager;
 import pixformer.model.score.ScoreManager;
-import pixformer.model.sound.SoundEvent;
 
 import java.util.List;
 import java.util.Set;
@@ -89,9 +88,4 @@ public interface World extends Updatable {
      * @param winner player who won the game
      */
     void endGame(Entity winner);
-
-    /**
-     * @return a list of sounds to be played.
-     */
-    List<SoundEvent> getSounds();
 }

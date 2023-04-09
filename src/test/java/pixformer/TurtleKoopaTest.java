@@ -7,6 +7,7 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.enemy.koopa.turtle.TurtleKoopa;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,8 @@ class TurtleKoopaTest {
 
     private void testTurtleMovesBecauseOfPlayer(final Vector2D playerPos, final double sign) {
         final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-        final EntityFactoryImpl factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+        final EntityFactoryImpl factory = new EntityFactoryImpl(new NullGraphicsComponentFactory(),
+                                                                 new NullSoundComponentFactory(), world);
         final TurtleKoopa koopa = (TurtleKoopa) factory.createTurtleKoopa(1, 0, null);
         for (int i = 0; i < 10; i++) {
             world.spawnEntity(factory.createTileBlock(i, FLOOR_HEIGHT));

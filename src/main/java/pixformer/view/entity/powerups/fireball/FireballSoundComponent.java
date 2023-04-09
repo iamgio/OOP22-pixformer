@@ -1,18 +1,18 @@
-package pixformer.model.entity.powerup.other.fireball;
+package pixformer.view.entity.powerups.fireball;
 
 import pixformer.model.entity.Entity;
-import pixformer.model.sound.SoundComponent;
 import pixformer.model.sound.SoundEvent;
+import pixformer.view.entity.CachedSoundComponent;
 
 /**
  * Represent the SoundComponent of a Fireball entity.
  */
-public class FireballSoundComponent extends SoundComponent {
+public class FireballSoundComponent extends CachedSoundComponent {
 
     /**
      * @param entity entity linked to this SoundComponent.
      */
-    protected FireballSoundComponent(final Entity entity) {
+    public FireballSoundComponent(final Entity entity) {
         super(entity);
     }
 
@@ -20,6 +20,6 @@ public class FireballSoundComponent extends SoundComponent {
      * Add to the soundlist the miniJump sound.
      */
     public void fired() {
-        this.addSound(new SoundEvent("sounds/entities/mario/fire/fireball.wav", false));
+        this.play(new SoundEvent("sounds/entities/mario/fire/fireball.wav", false));
     }
 }

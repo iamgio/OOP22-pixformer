@@ -14,6 +14,7 @@ import pixformer.model.entity.EntityFactoryImpl;
 import pixformer.model.entity.dynamic.player.PlayerImpl;
 import pixformer.model.entity.powerup.powerups.FireFlower;
 import pixformer.model.entity.powerup.powerups.Mushroom;
+import pixformer.view.entity.NullSoundComponentFactory;
 import pixformer.view.entity.NullGraphicsComponentFactory;
 
 /**
@@ -23,7 +24,8 @@ class PlayerPowerupsTest {
 
     private PlayerImpl player;
     private final World world = new WorldImpl(WorldOptionsFactory.testOptions());
-    private final EntityFactory entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(), world);
+    private final EntityFactory entityFactory = new EntityFactoryImpl(new NullGraphicsComponentFactory(),
+                                                                        new NullSoundComponentFactory(), world);
 
     /**
      * Reset player status.

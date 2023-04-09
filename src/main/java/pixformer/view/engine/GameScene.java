@@ -94,4 +94,9 @@ public abstract class GameScene {
      * @param sounds list of sounds to be played.
      */
     public abstract void playSounds(List<SoundEvent> sounds);
+
+    /**
+     * Stop all current playing sounds.
+     */
+    public abstract void stopSounds();
 }
