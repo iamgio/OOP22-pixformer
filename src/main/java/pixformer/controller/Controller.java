@@ -2,7 +2,6 @@ package pixformer.controller;
 
 import pixformer.controller.gameloop.GameLoop;
 import pixformer.controller.level.LevelManager;
-import pixformer.model.GameSettings;
 import pixformer.model.Level;
 import pixformer.model.entity.Entity;
 import pixformer.view.View;
@@ -20,11 +19,6 @@ public interface Controller {
      * Performs the actions required by the controller to work.
      */
     void init();
-
-    /**
-     * @return current game mechanics settings
-     */
-    GameSettings getSettings();
 
     /**
      * @return the handler for playable levels
