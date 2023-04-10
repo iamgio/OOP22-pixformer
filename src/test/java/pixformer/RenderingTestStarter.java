@@ -13,7 +13,7 @@ public final class RenderingTestStarter {
 
     /**
      * Main method to launch the test.
-     * @param args
+     * @param args program arguments
      */
     public static void main(final String[] args) {
         Application.launch(RenderingTest.class, args);
