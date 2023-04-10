@@ -20,8 +20,7 @@ public class PixformerJavaFXViewLauncher extends JavaFXViewLauncher {
     public GameScene createGameScene() {
         final var scene = new PixformerJavaFXGameScene();
         scene.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            // TODO remove
-            if (e.getCode() == KeyCode.ENTER) {
+            if (e.getCode() == KeyCode.ESCAPE) {
                 this.getController().getLevelManager().endCurrentLevel();
             }
         });
