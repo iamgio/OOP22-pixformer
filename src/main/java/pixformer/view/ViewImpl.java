@@ -5,7 +5,6 @@ import pixformer.common.wrap.SimpleObservableWritableWrapper;
 import pixformer.common.wrap.SimpleWrapper;
 import pixformer.common.wrap.Wrapper;
 import pixformer.controller.Controller;
-import pixformer.controller.input.ControllerInput;
 import pixformer.controller.input.ControllerInputImpl;
 import pixformer.view.engine.Color;
 import pixformer.view.engine.GameScene;
@@ -18,13 +17,10 @@ import pixformer.view.engine.camera.SimpleCamera;
 import pixformer.view.engine.camera.SimpleCameraBuilder;
 import pixformer.view.engine.internationalization.Lang;
 
-import java.util.Optional;
-import java.util.function.Consumer;
-
 /**
  * Implementation of the standard game view.
  */
-public final class ViewImpl implements View, ControllerCommandSupplier<ControllerInput> {
+public final class ViewImpl implements View {
 
     private static final double CAMERA_X_OFFSET = -10;
     private static final double CAMERA_Y_OFFSET = 5;
@@ -39,7 +35,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
     private final Wrapper<GameScene> scene;
     private final ObservableWritableWrapper<Camera> camera;
     private TextRenderer infoLabel;
-    private Optional<Consumer<ControllerInput>> controllerCommand = Optional.empty();
 
     /**
      * Initializes the default view.
@@ -91,7 +86,6 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
      */
     @Override
     public void updateCamera(final double pivotX, final double pivotY) {
-        // TODO needs better scaling for 4K
         final double scale = CAMERA_SCALE_OFFSET + getScene().getWidth() / CAMERA_SCALE_WIDTH_DIVISOR;
         final Camera camera = new SimpleCameraBuilder()
                 .withPivot(pivotX, pivotY)
@@ -145,16 +139,5 @@ public final class ViewImpl implements View, ControllerCommandSupplier<Controlle
             builder.append(text);
         }
         this.infoLabel.setText(builder.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<Consumer<ControllerInput>> supplyControllerCommand() {
-        // TODO should be removed?
-        final var tmp = Optional.ofNullable(controllerCommand.orElseGet(() -> null));
-        controllerCommand = Optional.empty();
-        return tmp;
     }
 }
