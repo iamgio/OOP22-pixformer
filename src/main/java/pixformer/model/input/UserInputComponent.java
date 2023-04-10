@@ -14,14 +14,5 @@ public abstract class UserInputComponent extends InputComponent {
      */
     public UserInputComponent(final AbstractEntity entity) {
         super(entity);
-        // TODO add hooks: player.addOnX(() -> ...)
-        // e.g.: player.addOnJump(entity::jump)
     }
-
-    /*
-     * @Override
-     * public void update(final double dt) {
-     * // Empty
-     * }
-     */
 }

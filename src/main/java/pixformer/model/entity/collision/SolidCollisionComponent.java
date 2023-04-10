@@ -66,7 +66,7 @@ public class SolidCollisionComponent extends CollisionComponent {
      * @return whether the entity is colliding a solid entity on the left side.
      */
     protected boolean isCollidingLeftWall(final Set<Collision> collisions) {
-        return this.isCollingSolidEntity(collisions, CollisionSide.RIGHT); // TODO swap
+        return this.isCollingSolidEntity(collisions, CollisionSide.RIGHT);
     }
 
     /**
