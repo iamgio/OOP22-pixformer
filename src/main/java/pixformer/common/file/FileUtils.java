@@ -25,8 +25,8 @@ public final class FileUtils {
      * @return whether the operation was successful
      */
     public static boolean copyDirectory(final String inputDir, final File outputDir) {
-        final InputStream dirInputStream = FileUtils.class.getResourceAsStream(inputDir);
-        if (dirInputStream == null) {
+        final InputStream assetsList = FileUtils.class.getResourceAsStream(inputDir + "/assets-list.txt");
+        if (assetsList == null) {
             throw new IllegalStateException("Cannot read internal data");
         }
 
@@ -34,7 +34,7 @@ public final class FileUtils {
             throw new IllegalStateException("Cannot create path");
         }
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(dirInputStream, Charset.defaultCharset()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(assetsList, Charset.defaultCharset()))) {
             while (reader.ready()) {
                 final String name = reader.readLine();
                 if (name == null) {
