@@ -8,6 +8,7 @@ import pixformer.controller.Controller;
 import pixformer.controller.ControllerImpl;
 import pixformer.view.engine.GameScene;
 import pixformer.view.engine.ViewLauncher;
+import pixformer.view.entity.SpritesGraphicsComponentFactory;
 import pixformer.view.javafx.JavaFXGameLoopManager;
 
 import java.util.Objects;
@@ -39,7 +40,7 @@ public abstract class JavaFXViewLauncher extends Application implements ViewLaun
     }
 
     private Controller createController() {
-        return new ControllerImpl(new JavaFXGameLoopManager(this));
+        return new ControllerImpl(new JavaFXGameLoopManager(this), new SpritesGraphicsComponentFactory());
     }
 
     /**

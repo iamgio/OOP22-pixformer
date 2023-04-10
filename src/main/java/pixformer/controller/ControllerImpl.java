@@ -16,8 +16,8 @@ import pixformer.model.WorldImpl;
 import pixformer.model.WorldOptionsFactory;
 import pixformer.model.entity.Entity;
 import pixformer.model.entity.EntityFactoryImpl;
+import pixformer.model.entity.GraphicsComponentFactory;
 import pixformer.view.View;
-import pixformer.view.entity.SpritesGraphicsComponentFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,25 +41,30 @@ public final class ControllerImpl implements Controller {
     private final GameSettings settings;
     private final Wrapper<LevelManager> levelManager;
     private final Wrapper<GameLoopManager> gameLoopManager;
+    private final GraphicsComponentFactory graphicsComponentFactory;
 
     /**
      * @param settings game settings
      * @param levelManager handler of playable levels
      * @param gameLoopManager game loop handler
+     * @param graphicsComponentFactory factory of graphics components
      */
-    public ControllerImpl(final GameSettings settings, final LevelManager levelManager, final GameLoopManager gameLoopManager) {
+    public ControllerImpl(final GameSettings settings, final LevelManager levelManager,
+                          final GameLoopManager gameLoopManager, final GraphicsComponentFactory graphicsComponentFactory) {
         this.settings = settings;
         this.levelManager = new SimpleWrapper<>(levelManager);
         this.gameLoopManager = new SimpleWrapper<>(gameLoopManager);
+        this.graphicsComponentFactory = graphicsComponentFactory;
     }
 
     /**
      * Instantiates a new implementation with default values.
      * @param gameLoopManager game loop handler
+     * @param graphicsComponentFactory factory of graphics components
      */
-    public ControllerImpl(final GameLoopManager gameLoopManager) {
+    public ControllerImpl(final GameLoopManager gameLoopManager, final GraphicsComponentFactory graphicsComponentFactory) {
         // TODO implement GameSettings
-        this(null, new LevelManagerImpl(), gameLoopManager);
+        this(null, new LevelManagerImpl(), gameLoopManager, graphicsComponentFactory);
     }
 
     /**
@@ -217,7 +222,7 @@ public final class ControllerImpl implements Controller {
         try (FileInputStream inputStream = new FileInputStream(levelFile)) {
             final World world = new WorldImpl(WorldOptionsFactory.defaultOptions());
             return new WorldAcceptingLevel(() -> new JsonLevelDataDeserializer(
-                    new EntityFactoryImpl(new SpritesGraphicsComponentFactory(), world))
+                    new EntityFactoryImpl(this.graphicsComponentFactory, world))
                     .deserialize(inputStream), world);
         } catch (IOException e) {
             throw new IllegalStateException("Could not get level data from file", e);
