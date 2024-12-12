@@ -2,6 +2,8 @@ plugins {
     // Apply the java plugin to add support for Java
     java
 
+    kotlin("jvm") version "2.0.20"
+
     // Apply the application plugin to add support for building a CLI application
     // You can run your app via task "run": ./gradlew run
     application
@@ -13,6 +15,8 @@ plugins {
      */
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("org.danilopianini.gradle-java-qa") version "0.41.0"
+
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
 group = "pixformer"
@@ -22,12 +26,13 @@ repositories {
     mavenCentral()
 }
 
-val javaFXModules = listOf(
+val javaFXModules =
+    listOf(
         "base",
         "controls",
         "fxml",
-        "graphics"
-)
+        "graphics",
+    )
 
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 
@@ -49,7 +54,18 @@ dependencies {
     val jUnitVersion = "5.9.1"
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
+    testImplementation(kotlin("test"))
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+
+    // Ktor
+
+    val ktorVersion = "3.0.2"
+
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-server-websockets:$ktorVersion")
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
 }
 
 tasks.getByName<Test>("test") {
